@@ -83,8 +83,9 @@
       <div class="container-fluid">
         <div class="footer__bottom">
           <p>
-            ©2022 xTradeSecurity.com. All rights reserved. Terms of Service | Privacy
-            Terms
+           <small>xTradeSecurity does not provide recommendations regarding the merits of any digital asset or financial product mentioned on our platform, including in advertisements, emails, or related websites. The information provided does not consider your individual objectives, financial situation, or needs. You should assess whether these products align with your personal goals and financial circumstances, and carefully consider the risks involved. We recommend reviewing our Client Agreement before making any decisions related to xTradeSecurity’s products. Trading digital assets involves significant risk of loss. Only invest money that you can afford to lose. xTradeSecurity is operated by xTradeSecurity Ltd, which is regulated by the Financial Services Commission of Belize (License Number FSC000281/20). Client transactions are processed through Reituca Marketing Ltd, registered at 17 Stasinou, Floor 11 – 12, 1060, Nicosia, Cyprus (Registration No. HE231803). Our subsidiaries are also licensed in South Africa by the Financial Sector Conduct Authority (FSCA) under Peak Wealth PTY Ltd (License Number FSP44681) and in Belize by the Financial Services Commission of Belize under xTradeSecurity Ltd (License Number FSC000281/20).<br>
+            <center><a href="terms-of-use.php" title="Read the terms of use">Terms of Service</a> | <a href="privacy-policy.php" title="Read the terms of use">Privacy policy</a></center></small>
+            &copy; <?php echo date('Y');?>&nbsp;xTradeSecurity.com. All rights reserved. 
           </p>
         </div>
       </div>

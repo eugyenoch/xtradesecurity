@@ -39,9 +39,9 @@
           </div>
           <div class="col-md-6">
             <ul class="breadcrumb">
-              <li><a href="index.html">Home</a></li>
+              <li><a href="index.php">Home</a></li>
               <li><p class="fs-18">/</p></li>
-              <li><p class="fs-18">Contact</p></li>
+              <li><p class="fs-18">Contact page</p></li>
             </ul>
           </div>
         </div>
@@ -54,49 +54,73 @@
         <div class="row">
           <div class="col-xl-6 col-md-12">
             <div class="image">
-              <img src="assets/images/layout/contact.jpg" alt="" />
+              <img src="assets/images/layout/testimonials.png" alt="xTradeSecurity support representation image" title="xTradeSecurity Support" />
             </div>
           </div>
           <div class="col-xl-6 col-md-12">
             <div class="contact-main">
               <div class="block-text center">
                 <h3 class="heading">Leave a message for us</h3>
-                <p class="desc fs-20">Get in touch with Rockie</p>
+                <p class="desc fs-20">Get in touch with xTradeSecurity</p>
               </div>
 
               <form>
                 <div class="form-group">
-                  <label>Your name</label>
+                  <label>Your firstname<span class="text-danger">*</span></label>
                   <input
                     type="text"
                     class="form-control"
-                    placeholder="Enter your name"
+                    placeholder="Enter your first name"
+                    required
                   />
                 </div>
                 <div class="form-group">
-                  <label>Email </label>
+                  <label>Your lastname<span class="text-danger">*</span></label>
                   <input
                     type="text"
                     class="form-control"
+                    placeholder="Enter your last name"
+                    required
+                  />
+                </div>
+                 <div class="form-group">
+                  <label>Your Phone number<br><small>Format: 123-456-7890000</small></label>
+                  <input
+                    type="tel"
+                    class="form-control"
+                    placeholder="Enter your phone number"
+                    pattern="[0-9]{3}-[0-9]{3}-[0-9]{4,7}"
+                  />
+                </div>
+                <div class="form-group">
+                  <label>Email <span class="text-danger">*</span></label>
+                  <input
+                    type="email"
+                    class="form-control"
                     placeholder="Enter mail"
+                    required
                   />
                 </div>
 
                 <div class="form-group">
-                  <label>Subject </label>
-                  <select class="form-control" id="exampleFormControlSelect1">
-                    <option>NFT Items</option>
-                    <option>NFT Items 1</option>
-                    <option>NFT Items 1</option>
+                  <label>Subject <span class="text-danger">*</span></label>
+                  <select class="form-control" id="exampleFormControlSelect1" required>
+                    <option value="general">General Enquiry</option>
+                    <option value="account">Account issues</option>
+                    <option value="technical">Technical</option>
+                    <option value="markets">Markets and Exchange</option>
+                    <option value="affiliates">Affiliates and third-party</option>
+                    <option value="wallet">Wallet and Finance</option>
                   </select>
                 </div>
                 <div class="form-group">
-                  <label>Message </label>
+                  <label>Message <span class="text-danger">*</span></label>
                   <textarea
                     cols="30"
                     rows="10"
                     class="form-control"
-                    placeholder="Enter your message"
+                    placeholder="Enter your message in details"
+                    required
                   ></textarea>
                 </div>
 
@@ -113,16 +137,15 @@
         <div class="row">
           <div class="col-md-7">
             <div class="block-text">
-              <h4 class="heading">Earn up to $25 worth of crypto</h4>
+              <h4 class="heading">Check out the FAQs for additional support.</h4>
               <p class="desc">
-                Discover how specific cryptocurrencies work — and get a bit of
-                each crypto to try out for yourself.
+                Discover more about what we can do for you by looking at our frequently asked questions: some of the issues faced by customers have been treated at the FAQs.<br>Find answers to the most common questions about xTradeSecurity’s services, security features, and account management to enhance your experience with our platform.
               </p>
             </div>
           </div>
           <div class="col-md-5">
             <div class="button">
-              <a href="#">Create Account</a>
+              <a href="faq.php">Get additional support</a>
             </div>
           </div>
         </div>
