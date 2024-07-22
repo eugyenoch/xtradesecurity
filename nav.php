@@ -14,12 +14,12 @@
                               fill="#3772FF"
                             />
                           </svg> </a>
-                      </li>
-                      <li class="menu-item-has-children">
-                        <a href="#platforms">Platforms</a>
-                      </li>
+                        </li>
                       <li class="menu-item">
-                        <a href="exchange.php">Markets</a>
+                        <a href="exchange.php">Exchange</a>
+                      </li>
+                       <li class="menu-item">
+                        <a href="market.php">Markets</a>
                       </li>
 
                       <li class="menu-item-has-children">
@@ -29,6 +29,8 @@
                           </li>
                           <li class="menu-item">
                             <a href="blog-grid-v1.php">Sell Assets</a>
+                          </li><li class="menu-item">
+                            <a href="#platforms">Platform</a>
                           </li></ul>
 
                       </li>
@@ -66,15 +68,15 @@
                         <a href="#"> Account Pages <i class="fas fa-sort-desc" aria-hidden="true"></i></a>
                         <ul class="sub-menu">
                           <li class="menu-item">
-                            <a href="user-profile.php">User Profile</a>
+                            <a href="user/dashboard.php">User Profile</a>
                           </li>
 
                           <li class="menu-item">
-                            <a href="user-login.php">Login</a>
+                            <a href="user/login.php">Login</a>
                           </li>
 
                           <li class="menu-item">
-                            <a href="user-register.php">Register</a>
+                            <a href="user/register.php">Register</a>
                           </li>
                         </ul>
                       </li>

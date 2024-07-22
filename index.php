@@ -11,9 +11,9 @@
           <div class="col-12">
             <div class="header__body d-flex justify-content-between">
               <div class="header__left">
-                <!-- insert the logo -->
-               
-               <?php include "logo.php"; ?>
+                
+               <!-- insert the logo --> 
+               <?php include "include/logo.php"; ?>
 
                 <!-- Main Navbar -->
                 <div class="left__main">
@@ -294,7 +294,7 @@
                 </div>
                 <a href="" class="h6 title">Mobile Apps</a>
                 <p>
-                  Stay on top of the markets with the Cryptolly app for Android
+                  Stay on top of the markets with the XTradeSecurity app for Android
                   or iOS.
                 </p>
               </div>
@@ -302,9 +302,9 @@
           </div>
           <div class="col-xl-6 col-md-12">
             <div class="block-text" data-aos="fade-up" data-aos-duration="1000">
-              <h3 class="heading">The most trusted cryptocurrency platform.</h3>
+              <h3 class="heading">The most trusted digital assets platform.</h3>
               <p class="desc">
-                XTradeSecurity has a variety of features that make it the best place to start trading. The steps are as clear-cut as anything. Turn your fiat money into cryptomoney in seconds. <br> Trade cryptocurrencies with up to 1:5 leverage. You can start with as little as $100 to gain the effect of $500 capital!
+                XTradeSecurity has a variety of features that make it the best place to start trading. The steps are as clear-cut as anything. Turn your fiat money into digital money in seconds. <br> Trade digital assets with up to 1:5 leverage. You can start with as little as $100 to gain the effect of $500 capital!
               </p>
               <a href="#" class="btn-action">Let’s Trade Now</a>
             </div>
@@ -445,7 +445,7 @@
                   <div class="content">
                     <h6 class="title">Recurring buys</h6>
                     <p>
-                      Invest in cryptocurrency slowly over time by scheduling
+                      Invest in digital assets slowly over time by scheduling
                       buys daily, weekly, or monthly.
                     </p>
                   </div>
@@ -480,7 +480,7 @@
                   <div class="content">
                     <h6 class="title">Mobile apps</h6>
                     <p>
-                      Stay on top of the markets with the Coinbase app for
+                      Stay on top of the markets with the XTradeSecurity app for
                       Android or iOS.
                     </p>
                   </div>
@@ -924,7 +924,7 @@
                 We are the most trusted cryptocurrency platform.
               </h3>
               <p class="fs-20 desc">
-                We believe Cryptolly is here to stay — and that a future worth
+                We believe XTradeSecurity is here to stay — and that a future worth
                 building is one which opens its doors and invites everyone in.
               </p>
               <ul class="list">
@@ -1060,8 +1060,7 @@
                   <div class="content">
                     <h6 class="title">Community</h6>
                     <p>
-                      We supports the crypto community, putting data in the
-                      hands which need it most.
+                      We supports the crypto community, putting data in the hands which need it most.
                     </p>
                   </div>
                 </li>
@@ -1077,24 +1076,22 @@
         <div class="row">
           <div class="col-md-12">
             <div class="block-text center">
-              <h3 class="heading">How It Work</h3>
+              <h3 class="heading">How It Works</h3>
               <p class="fs-20 desc">
-                Stacks is a production-ready library of stackable content blocks
-                built in React Native.
+                Trade the world’s most popular markets. Start trading with one-click trading (demo and live), fast trade executions, real-time market data, in-depth market analysis, trader support, and advanced trading tools.
               </p>
             </div>
 
             <div class="work__main" data-aos="fade-up" data-aos-duration="1000">
               <div class="work-box">
                 <div class="image">
-                  <img src="assets/images/icon/Cloud.png" alt="" />
+                  <img src="assets/images/icon/feat1.png" alt="" />
                 </div>
                 <div class="content">
                   <p class="step">Step 1</p>
-                  <a href="#" class="title">Download</a>
+                  <a href="#" class="title">Register Account</a>
                   <p class="text">
-                    Stacks is a production-ready library of stackable content
-                    blocks built in React Native.
+                    Create your xTradeSecurity account to unlock all the features and start managing your digital assets.
                   </p>
                 </div>
                 <img
@@ -1105,15 +1102,13 @@
               </div>
               <div class="work-box">
                 <div class="image">
-                  <img src="assets/images/icon/Wallet.png" alt="" />
+                  <img src="assets/images/icon/feat3.png" alt="" />
                 </div>
                 <div class="content">
                   <p class="step">Step 2</p>
                   <a href="#" class="title">Connect wallet</a>
                   <p class="text">
-                    Stacks is a production-ready library of stackable content
-                    blocks built in React Native.
-                  </p>
+                    Seamlessly connect your digital wallet to xTradeSecurity for easy access to trading and wallet services.
                 </div>
                 <img
                   class="line"
@@ -1123,14 +1118,13 @@
               </div>
               <div class="work-box">
                 <div class="image">
-                  <img src="assets/images/icon/Mining.png" alt="" />
+                  <img src="assets/images/icon/feat6.png" alt="" />
                 </div>
                 <div class="content">
                   <p class="step">Step 3</p>
                   <a href="#" class="title">Start trading</a>
                   <p class="text">
-                    Stacks is a production-ready library of stackable content
-                    blocks built in React Native.
+                    Begin trading, anytime, on the wide variety of digital assets on xTradeSecurity's secure and user-friendly platform.
                   </p>
                 </div>
                 <img
@@ -1141,14 +1135,13 @@
               </div>
               <div class="work-box">
                 <div class="image">
-                  <img src="assets/images/icon/Comparison.png" alt="" />
+                  <img src="assets/images/icon/feat4.png" alt="" />
                 </div>
                 <div class="content">
                   <p class="step">Step 4</p>
                   <a href="#" class="title">Earn money</a>
                   <p class="text">
-                    Stacks is a production-ready library of stackable content
-                    blocks built in React Native.
+                    Utilize xTradeSecurity's earning programs to generate income through staking, lending, and bonuses.
                   </p>
                 </div>
               </div>
@@ -1167,116 +1160,63 @@
               <p class="desc">
                 XTradeSecurity is available to be enjoyed on most platforms and is the easiest place to buy and sell cryptocurrency. Sign up and get started today.
               </p>
+               <div class="blog-box">
+                <img class="img-fluid" style="max-width: 100%; height: auto;" src="assets/images/layout/laptop-copy.png" alt="web trader image" title="A Web trader is available on xTradeSecurity" />
+            </div>      
             </div>
           </div>
 
           <div class="col-md-4">
             <div class="blog-box">
-              <div class="box-image">
-                <img src="assets/images/blog/blog-01.jpg" alt="" />
-                <div class="wrap-video">
-                  <a
-                    href=""
-                    class="popup-youtube"
-                  >
-                    <svg
-                      width="13"
-                      height="16"
-                      viewBox="0 0 13 16"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M0.466675 2.92407C0.466675 1.35705 2.187 0.398733 3.51938 1.22354L11.7197 6.2999C12.9827 7.0818 12.9827 8.91907 11.7197 9.70096L3.51938 14.7773C2.187 15.6021 0.466675 14.6438 0.466675 13.0768V2.92407Z"
-                        fill="#777E90"
-                      />
-                    </svg>
-                  </a>
-                </div>
-              </div>
+             <!-- <div class="box-image">
+                <img width="" height="" src="assets/images/layout/web-trader.png" alt="web trader image" title="A Web trader is available on xTradeSecurity" />
+              </div>  -->
 
               <div class="box-content">
-                <a href="#" class="category btn-action">Web Trader</a>
-                <a href="" class="lead"
-                  >Our browser-based web platform offers a rich set of features and trading tools to ensure an optimized trading experience. Easily access the best market analyses available and speedily execute trades and orders. No download required.</a
+                <p href="#" class="category btn-action">Web Trader</p>
+                <p href=""
+                  >Our browser-based web platform offers a rich set of features and trading tools to ensure an optimized trading experience. Easily access the best market analyses available and speedily execute trades and orders. No download required.</p
                 >
 
                 <div class="meta">
-                  <a href="#" class="name"><span></span>XTradeSecurity</a>
-                  <a href="#" class="time">24/7 Availability</a>
+                  <a href="#" class="name"><span></span>24/7 Availability</a>
+                  <a href="#" class="time">XTradeSecurity</a>
                 </div>
               </div>
             </div>
           </div>
           <div class="col-md-4">
             <div class="blog-box">
-              <div class="box-image">
-                <img src="assets/images/blog/blog-02.jpg" alt="" />
-                <div class="wrap-video">
-                  <a
-                    href="https://www.youtube.com/watch?v=i7EMACWuErA"
-                    class="popup-youtube"
-                  >
-                    <svg
-                      width="13"
-                      height="16"
-                      viewBox="0 0 13 16"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M0.466675 2.92407C0.466675 1.35705 2.187 0.398733 3.51938 1.22354L11.7197 6.2999C12.9827 7.0818 12.9827 8.91907 11.7197 9.70096L3.51938 14.7773C2.187 15.6021 0.466675 14.6438 0.466675 13.0768V2.92407Z"
-                        fill="#777E90"
-                      />
-                    </svg>
-                  </a>
-                </div>
-              </div>
+           <!--    <div class="box-image">
+                <img width="100.33px" height="400.15px" src="assets/images/layout/mobile-phone-trader.png" alt="mobile trader image" title="A Mobile trader is available on xTradeSecurity" />
+
+              </div> -->
 
               <div class="box-content">
-                <a href="#" class="category btn-action">Mobile Trader</a>
-                <a href="" class="lead">Our intuitive multi-asset trading app includes full-featured functionality, real-time charting with all the leading technical indicators and extensive trading tools.
-                Enjoy alerts, notifications, friendly one-click navigation and professional charting tools at your fingertips.</a>
+                <p href="#" class="category btn-action">Mobile Trader</p>
+                <p href="">Our intuitive multi-asset trading app includes full-featured functionality, real-time charting with all the leading technical indicators and extensive trading tools.
+                Enjoy alerts, notifications, friendly one-click navigation and professional charting tools at your fingertips.</p>
 
                  <div class="meta">
-                  <a href="#" class="name"><span></span>XTradeSecurity</a>
-                  <a href="#" class="time">24/7 Availability</a>
+                  <a href="#" class="name"><span></span>24/7 Availability</a>
+                  <a href="#" class="time">XTradeSecurity</a>
                 </div>
               </div>
             </div>
           </div>
           <div class="col-md-4">
             <div class="blog-box">
-              <div class="box-image">
-                <img src="assets/images/blog/blog-02.jpg" alt="" />
-                <div class="wrap-video">
-                  <a
-                    href="https://www.youtube.com/watch?v=i7EMACWuErA"
-                    class="popup-youtube"
-                  >
-                    <svg
-                      width="13"
-                      height="16"
-                      viewBox="0 0 13 16"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M0.466675 2.92407C0.466675 1.35705 2.187 0.398733 3.51938 1.22354L11.7197 6.2999C12.9827 7.0818 12.9827 8.91907 11.7197 9.70096L3.51938 14.7773C2.187 15.6021 0.466675 14.6438 0.466675 13.0768V2.92407Z"
-                        fill="#777E90"
-                      />
-                    </svg>
-                  </a>
-                </div>
-              </div>
+             <!--  <div class="box-image">
+                <img width="100.33px" height="400.15px" src="assets/images/layout/tablet-mobile-view.png" alt="" title="A trader for tablets is available on xTradeSecurity" />
+              </div> -->
 
               <div class="box-content">
-                <a href="#" class="category btn-action">Tab Trader</a>
-                <a href="" class="lead">Experience our ultimate portable trading platform on your tablet: advanced graphical interface, quick transactions and deposit, full activity report, intuitive navigation and alerts setting. Our user-friendly platform offers all the leading functionality to suit your needs.</a>
+                <p href="#" class="category btn-action">Tab Trader</p>
+                <p href="">Experience our ultimate portable trading platform on your tablet: advanced graphical interface, quick transactions and deposit, full activity report, intuitive navigation and alerts setting. Our user-friendly platform offers all the leading functionality to suit your needs.</p>
 
                  <div class="meta">
-                  <a href="#" class="name"><span></span>XTradeSecurity</a>
-                  <a href="#" class="time">24/7 Availability</a>
+                  <a href="#" class="name"><span></span>24/7 Availability</a>
+                  <a href="#" class="time">XTradeSecurity</a>
                 </div>
               </div>
             </div>
@@ -1324,7 +1264,7 @@
                     fill="#23262F"
                   />
                 </svg>
-                Get Started on all Platforms</a
+                Get Started</a
               >
             </div>
           </div>
@@ -1333,7 +1273,7 @@
     </section>
 
     <!-- Footer section -->
-    <?php include "footer.php"; ?>
+    <?php include "include/footer.php"; ?>
 
     <script src="app/js/aos.js"></script>
     <script src="app/js/jquery.min.js"></script>

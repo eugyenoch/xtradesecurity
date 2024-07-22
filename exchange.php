@@ -11,9 +11,9 @@
           <div class="col-12">
             <div class="header__body d-flex justify-content-between">
               <div class="header__left">
-               <!-- insert the logo -->
                
-               <?php include "logo.php"; ?>
+               <!-- insert the logo --> 
+               <?php include "include/logo.php"; ?>
 
                 <!-- Main Navbar -->
                 <div class="left__main">
@@ -147,7 +147,7 @@
       });
     </script>
 
-     <!-- Footer section -->
-    <?php include "footer.php"; ?>
+ <!-- Footer section -->
+    <?php include "include/footer.php"; ?>
   </body>
 </html>
