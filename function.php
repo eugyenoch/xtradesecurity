@@ -6,6 +6,20 @@ function fetchCryptoData($url) {
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     $data = curl_exec($ch);
+    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+    // Check for curl errors
+    if (curl_errno($ch)) {
+        echo 'Curl error: ' . curl_error($ch);
+        return null;
+    }
+
+    // Check for HTTP response code
+    if ($httpCode != 200) {
+        echo "Failed to fetch data. HTTP Status Code: $httpCode";
+        return null;
+    }
+
     curl_close($ch);
     return json_decode($data, true);
 }

@@ -1,3 +1,4 @@
+<script src="https://widget.coincodex.com/include.js?type=4&ticker=top50&period=1D&textColor=000000&borderColor=dddddd&backgroundColor=ffffff&hoverColor=transparent&currency=USD&range=1D"></script>
 <footer class="footer style-2">
       <div class="container">
         <div class="footer__main">

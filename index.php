@@ -6,6 +6,17 @@ include "header.php";
 $currentPrices = fetchCryptoData('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,tether,binancecoin&vs_currencies=usd');
 // Fetch historical price data for the past 30 days
 $historicalData = fetchCryptoData('https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=30');
+
+// Fetch data for multiple cryptocurrencies
+// $cryptos = ['bitcoin', 'ethereum', 'ripple']; // Add more cryptocurrencies as needed
+// $vs_currency = 'usd';
+// $cryptoData = fetchCryptoData('https://api.coingecko.com/api/v3/coins/markets?vs_currency=' . $vs_currency . '&ids=' . implode(',', $cryptos) . '&order=market_cap_desc&per_page=100&page=1&sparkline=true');
+
+// Check if the data was fetched successfully
+// if ($cryptoData === null) {
+//     echo "Failed to fetch cryptocurrency data.";
+//     exit;
+//}
 ?>
   <body class="body header-fixed home-2">
     <!-- Header -->
@@ -30,10 +41,11 @@ $historicalData = fetchCryptoData('https://api.coingecko.com/api/v3/coins/bitcoi
             </div>
           </div>
         </div>
-      </div>
+      </div> 
     </header>
     <!-- end Header -->
-
+    <script src="https://widget.coincodex.com/include.js?type=4&ticker=top50&period=1D&textColor=000000&borderColor=000000&backgroundColor=ffffff&hoverColor=transparent&currency=USD&range=1D"></script>
+    
     <!-- Banner Top -->
     <section class="banner">
       <div class="container">
@@ -61,12 +73,13 @@ $historicalData = fetchCryptoData('https://api.coingecko.com/api/v3/coins/bitcoi
         </div>
       </div>
     </section>
+    
     <!-- End Banner Top -->
-
     <section class="crypto" data-aos="fade-up" data-aos-duration="1000">
       <div class="container">
         <div class="row">
           <div class="col-md-12">
+            
             <div class="crypto__main">
               <div class="crypto-box">
                 <div class="left">
@@ -75,7 +88,7 @@ $historicalData = fetchCryptoData('https://api.coingecko.com/api/v3/coins/bitcoi
                   ></span>
                   <h6>Bitcoin price</h6>
                   <!-- cryptoprice BEGIN -->
-                  <h6 class="price"> $&nbsp;<?php echo $currentPrices['bitcoin']['usd']; ?> </h6>
+                  <h6 class="price"> $&nbsp;<?php if ($currentPrices !== null){echo $currentPrices['bitcoin']['usd'];} ?> </h6>
                   <!-- cryptoprice END -->
                 </div>
                 <div class="right">
@@ -92,7 +105,7 @@ $historicalData = fetchCryptoData('https://api.coingecko.com/api/v3/coins/bitcoi
                   ></span>
                   <h6>Ethereum price</h6>
                     <!-- cryptoprice BEGIN -->
-                    <h6 class="price"> $&nbsp;<?php echo $currentPrices['ethereum']['usd']; ?> </h6>
+                    <h6 class="price"> $&nbsp;<?php if ($currentPrices !== null){echo $currentPrices['ethereum']['usd'];} ?> </h6>
                   <!-- cryptoprice END -->
                 </div>
 
@@ -108,7 +121,7 @@ $historicalData = fetchCryptoData('https://api.coingecko.com/api/v3/coins/bitcoi
                   ></span>
                   <h6>Tether Price</h6>
                     <!-- cryptoprice BEGIN -->
-                    <h6 class="price"> $&nbsp;<?php echo $currentPrices['tether']['usd']; ?> </h6>
+                    <h6 class="price"> $&nbsp;<?php if ($currentPrices !== null){echo $currentPrices['tether']['usd'];} ?> </h6>
                   <!-- cryptoprice END -->
                 </div>
 
@@ -126,7 +139,7 @@ $historicalData = fetchCryptoData('https://api.coingecko.com/api/v3/coins/bitcoi
                   ></span>
                   <h6>BNB price</h6>
                     <!-- cryptoprice BEGIN -->
-                    <h6 class="price"> $&nbsp;<?php echo $currentPrices['binancecoin']['usd']; ?> </h6>
+                    <h6 class="price"> $&nbsp;<?php if ($currentPrices !== null){echo $currentPrices['binancecoin']['usd'];} ?> </h6>
                   <!-- cryptoprice END -->
                 </div>
 
@@ -555,185 +568,25 @@ $historicalData = fetchCryptoData('https://api.coingecko.com/api/v3/coins/bitcoi
                   <li><h6 class="fs-16">Music</h6></li>
                 </ul>
                 <div class="content-tab">
-                  <div class="content-inner">
-                    <table class="table">
-                      <thead>
-                        <tr>
-                          <th scope="col"></th>
-                          <th scope="col">#</th>
-                          <th scope="col">Name</th>
-                          <th scope="col">Last Price</th>
-                          <th scope="col">24h %</th>
-                          <th scope="col">Market Cap</th>
-                          <th scope="col">Last 7 Days</th>
-                          <th scope="col"></th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <th scope="row"><span class="icon-star"></span></th>
-                          <td>1</td>
-                          <td>
-                            <a href="#"
-                              ><span class="icon-btc"
-                                ><span class="path1"></span
-                                ><span class="path2"></span
-                              ></span>
-                              <span>Bitcoin</span>
-                              <span class="unit">BTC</span></a
-                            >
-                          </td>
-                          <td class="boild">$56,623.54</td>
-                          <td class="up">+1.45%</td>
-                          <td class="boild">$880,423,640,582</td>
-                          <td><div id="total-revenue-chart-45"></div></td>
-                          <td><a href="#" class="btn">Trade</a></td>
-                        </tr>
-                        <tr>
-                          <th scope="row"><span class="icon-star"></span></th>
-                          <td>2</td>
-                          <td>
-                            <a href="#"
-                              ><span class="icon-eth"
-                                ><span class="path1"></span
-                                ><span class="path2"></span
-                                ><span class="path3"></span
-                                ><span class="path4"></span></span
-                              ><span>Ethereum</span>
-                              <span class="unit">ETH</span></a
-                            >
-                          </td>
-                          <td class="boild">$56,623.54</td>
-                          <td class="down">-5.12%</td>
-                          <td class="boild">$880,423,640,582</td>
-                          <td><div id="total-revenue-chart-6"></div></td>
-                          <td><a href="#" class="btn">Trade</a></td>
-                        </tr>
-                        <tr>
-                          <th scope="row"><span class="icon-star"></span></th>
-                          <td>3</td>
-                          <td>
-                            <a href="#"
-                              ><span class="icon-bnb"
-                                ><span class="path1"></span
-                                ><span class="path2"></span
-                                ><span class="path3"></span
-                                ><span class="path4"></span
-                                ><span class="path5"></span
-                                ><span class="path6"></span></span
-                              ><span>BNB</span>
-                              <span class="unit">BNB/USD</span></a
-                            >
-                          </td>
-                          <td class="boild">$56,623.54</td>
-                          <td class="down">-3.75%</td>
-                          <td class="boild">$880,423,640,582</td>
-                          <td><div id="total-revenue-chart-7"></div></td>
-                          <td><a href="#" class="btn">Trade</a></td>
-                        </tr>
-                        <tr>
-                          <th scope="row"><span class="icon-star"></span></th>
-                          <td>4</td>
-                          <td>
-                            <a href="#"
-                              ><span class="icon-tether"
-                                ><span class="path1"></span
-                                ><span class="path2"></span></span
-                              ><span>Tether</span>
-                              <span class="unit">USDT/USD</span></a
-                            >
-                          </td>
-                          <td class="boild">$56,623.54</td>
-                          <td class="up">+1.45%</td>
-                          <td class="boild">$880,423,640,582</td>
-                          <td><div id="total-revenue-chart-8"></div></td>
-                          <td><a href="#" class="btn">Trade</a></td>
-                        </tr>
-                        <tr>
-                          <th scope="row"><span class="icon-star"></span></th>
-                          <td>5</td>
-                          <td>
-                            <a href="#"
-                              ><span class="icon-sol"
-                                ><span class="path1"></span
-                                ><span class="path2"></span
-                                ><span class="path3"></span
-                                ><span class="path4"></span
-                                ><span class="path5"></span></span
-                              ><span>Solana</span>
-                              <span class="unit">SOL</span></a
-                            >
-                          </td>
-                          <td class="boild">$56,623.54</td>
-                          <td class="up">+1.45%</td>
-                          <td class="boild">$880,423,640,582</td>
-                          <td><div id="total-revenue-chart-9"></div></td>
-                          <td><a href="#" class="btn">Trade</a></td>
-                        </tr>
-                        <tr>
-                          <th scope="row"><span class="icon-star"></span></th>
-                          <td>6</td>
-                          <td>
-                            <a href="#"
-                              ><span class="icon-btc"
-                                ><span class="path1"></span
-                                ><span class="path2"></span></span
-                              ><span>XRP</span> <span class="unit">XRP</span></a
-                            >
-                          </td>
-                          <td class="boild">$56,623.54</td>
-                          <td class="down">-2.22%</td>
-                          <td class="boild">$880,423,640,582</td>
-                          <td><div id="total-revenue-chart-10"></div></td>
-                          <td><a href="#" class="btn">Trade</a></td>
-                        </tr>
-                        <tr>
-                          <th scope="row"><span class="icon-star"></span></th>
-                          <td>7</td>
-                          <td>
-                            <a href="#"
-                              ><span class="icon-ada"
-                                ><span class="path1"></span
-                                ><span class="path2"></span
-                                ><span class="path3"></span
-                                ><span class="path4"></span
-                                ><span class="path5"></span
-                                ><span class="path6"></span
-                                ><span class="path7"></span
-                                ><span class="path8"></span
-                                ><span class="path9"></span></span
-                              ><span>Cardano</span>
-                              <span class="unit">ADA</span></a
-                            >
-                          </td>
-                          <td class="boild">$56,623.54</td>
-                          <td class="up">+0.8%</td>
-                          <td class="boild">$880,423,640,582</td>
-                          <td><div id="total-revenue-chart-11"></div></td>
-                          <td><a href="#" class="btn">Trade</a></td>
-                        </tr>
-                        <tr>
-                          <th scope="row"><span class="icon-star"></span></th>
-                          <td>8</td>
-                          <td>
-                            <a href="#"
-                              ><span class="icon-avax"
-                                ><span class="path1"></span
-                                ><span class="path2"></span
-                                ><span class="path3"></span
-                                ><span class="path4"></span></span
-                              ><span>Avalanche</span>
-                              <span class="unit">AVAX</span></a
-                            >
-                          </td>
-                          <td class="boild">$56,623.54</td>
-                          <td class="up">+1.41%</td>
-                          <td class="boild">$880,423,640,582</td>
-                          <td><div id="total-revenue-chart-12"></div></td>
-                          <td><a href="#" class="btn">Trade</a></td>
-                        </tr>
-                      </tbody>
-                    </table>
+                  <div class="content-inner" style="height:512px !important;">
+              <!-- TradingView Widget BEGIN -->
+                <div class="tradingview-widget-container">
+                  <div class="tradingview-widget-container__widget"></div>
+                  <!-- <div class="tradingview-widget-copyright"><a href="" rel="noopener nofollow" target="_blank"><span class="blue-text">Track all markets on TradingView</span></a></div> -->
+                  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-screener.js" async>
+                  {
+                  "width": "100%",
+                  "height": "100%",
+                  "defaultColumn": "oscillators",
+                  "screener_type": "crypto_mkt",
+                  "displayCurrency": "USD",
+                  "colorTheme": "dark",
+                  "locale": "en",
+                  "isTransparent": true
+                }
+                  </script>
+                </div>
+                <!-- TradingView Widget END -->
                   </div>
                 </div>
               </div>
@@ -1291,6 +1144,7 @@ $historicalData = fetchCryptoData('https://api.coingecko.com/api/v3/coins/bitcoi
         slidesPerView: 4,
       });
     </script>
+
     
     <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
