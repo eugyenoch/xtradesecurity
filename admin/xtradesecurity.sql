@@ -65,10 +65,10 @@ CREATE TABLE `fund` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `newsletter_subscription`
+-- Table structure for table `newsletter`
 --
 
-CREATE TABLE `newsletter_subscription` (
+CREATE TABLE `newsletter` (
   `id` int(19) NOT NULL,
   `email_address` varchar(255) DEFAULT NULL,
   `registration_date` date NOT NULL DEFAULT current_timestamp()
