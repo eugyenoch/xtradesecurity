@@ -1,29 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Rockie | Crypto Exchange HTML Template</title>
 
-    <!-- Style CSS -->
-    <link rel="stylesheet" href="app/dist/app.css" />
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/swiper/swiper-bundle.min.css"
-    />
-    <link
-      href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css"
-      rel="stylesheet"
-    />
-    <!-- End Style CSS -->
+<?php include "header.php"; ?>
 
-    <link rel="shortcut icon" href="assets/images/logo/favicon.png" />
-    <link
-      rel="apple-touch-icon-precomposed"
-      href="assets/images/logo/favicon.png"
-    />
-  </head>
   <body class="body header-fixed">
     <!-- Header -->
     <header id="header_main" class="header">

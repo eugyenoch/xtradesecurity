@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <?php include "header.php"; ?>
   
   <body class="body header-fixed home-2">
@@ -11,7 +10,7 @@
           <div class="col-12">
             <div class="header__body d-flex justify-content-between">
               <div class="header__left">
-                
+
                <!-- insert the logo --> 
                <?php include "include/logo.php"; ?>
 
@@ -66,30 +65,18 @@
                   <span class="icon-btc"
                     ><span class="path1"></span><span class="path2"></span
                   ></span>
-                  <h6>Bitcoin</h6>
-                  <h6 class="price">USD 53,260.20</h6>
-                </div>
+                  <h6>BTC</h6>
+                  
+                  <!-- TradingView Widget BEGIN -->
+                                 <!-- TradingView Widget END -->
 
+                  <h6>Bitcoin Prices on XTradeSecurity</h6>
+                </div>
                 <div class="right">
-                  <div id="total-revenue-chart-1"></div>
-                  <p class="sale success">
-                    <svg
-                      width="8"
-                      height="12"
-                      viewBox="0 0 8 12"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M0.393244 5.90568C0.477403 6.06168 0.637433 6.15893 0.811488 6.15893H3.52179V11.5105C3.52179 11.7807 3.73601 12 3.99996 12C4.26392 12 4.47814 11.7807 4.47814 11.5105V6.15893H7.18844C7.36313 6.15893 7.52316 6.06168 7.60668 5.90568C7.69148 5.74969 7.68574 5.5591 7.59329 5.40832L4.40482 0.228447C4.31683 0.0861572 4.16445 0 3.99996 0C3.83547 0 3.68309 0.0861572 3.59511 0.228447L0.406633 5.40832C0.358178 5.48795 0.333313 5.57868 0.333313 5.6694C0.333313 5.75034 0.353715 5.83193 0.393244 5.90568Z"
-                        fill="white"
-                      />
-                    </svg>
-                    7.2%
-                  </p>
-                  <p class="unit">BTC</p>
+                  <p class="unit">₿</p>
                 </div>
               </div>
+
               <div class="crypto-box">
                 <div class="left">
                   <span class="icon-eth"
@@ -97,7 +84,7 @@
                     ><span class="path3"></span><span class="path4"></span
                   ></span>
                   <h6>Bitcoin</h6>
-                  <h6 class="price">USD 53,260.20</h6>
+                  <h6 class="price">BTC price</h6>
                 </div>
 
                 <div class="right">
@@ -1275,6 +1262,12 @@
     <!-- Footer section -->
     <?php include "include/footer.php"; ?>
 
+    <!-- Cookie Policy Banner -->
+    <div id="cookie-banner" class="cookie-banner">
+        <p>We use cookies to ensure you get the best experience on our website. <a href="cookie-policy.php" style="color: #00f;">Learn more</a></p>
+        <button onclick="closeCookieBanner()">Got it!</button>
+    </div>
+
     <script src="app/js/aos.js"></script>
     <script src="app/js/jquery.min.js"></script>
     <script src="app/js/jquery.easing.js"></script>
@@ -1288,6 +1281,7 @@
     <script src="app/js/jquery.magnific-popup.min.js"></script>
 
     <script src="app/js/chart.js"></script>
+    <script src="https://www.livecoinwatch.com/static/lcw-widget.js"></script> 
 
     <!-- Swiper JS -->
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
@@ -1329,5 +1323,58 @@
     <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
+
+    <script>
+        // function closeCookieBanner() {
+        //     document.getElementById('cookie-banner').style.display = 'none';
+        //     document.cookie = "cookieConsent=true; path=/; max-age=" + (60*60*24*365);
+        // }
+
+        // function checkCookieConsent() {
+        //     const cookies = document.cookie.split(';');
+        //     for(let cookie of cookies) {
+        //         if(cookie.trim().startsWith("cookieConsent=")) {
+        //             return true;
+        //         }
+        //     }
+        //     return false;
+        // }
+
+        // window.onload = function() {
+        //     if (!checkCookieConsent()) {
+        //         document.getElementById('cookie-banner').style.display = 'flex';
+        //         setTimeout(() => {
+        //             document.getElementById('cookie-banner').style.display = 'none';
+        //         }, 300000); // 5 minutes
+        //     } else {
+        //         document.getElementById('cookie-banner').style.display = 'none';
+        //     }
+        // };
+        function closeCookieBanner() {
+            document.getElementById('cookie-banner').style.display = 'none';
+            document.cookie = "cookieConsent=true; path=/; max-age=" + (60*60*24*3); // Set cookie for 3 days
+        }
+
+        function checkCookieConsent() {
+            const cookies = document.cookie.split(';');
+            for(let cookie of cookies) {
+                if(cookie.trim().startsWith("cookieConsent=")) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        window.onload = function() {
+            if (!checkCookieConsent()) {
+                document.getElementById('cookie-banner').style.display = 'flex';
+                setTimeout(() => {
+                    document.getElementById('cookie-banner').style.display = 'none';
+                }, 300000); // 5 minutes
+            } else {
+                document.getElementById('cookie-banner').style.display = 'none';
+            }
+        };
+    </script>
   </body>
 </html>
