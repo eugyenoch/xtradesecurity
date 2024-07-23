@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 23, 2024 at 11:54 AM
+-- Generation Time: Jul 23, 2024 at 06:32 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -60,6 +60,18 @@ CREATE TABLE `fund` (
   `fund_comment` varchar(1024) DEFAULT NULL,
   `fund_status` varchar(255) NOT NULL DEFAULT 'pending',
   `fund_request_date` date DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `newsletter_subscription`
+--
+
+CREATE TABLE `newsletter_subscription` (
+  `id` int(19) NOT NULL,
+  `email_address` varchar(255) DEFAULT NULL,
+  `registration_date` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -207,6 +219,12 @@ ALTER TABLE `fund`
   ADD PRIMARY KEY (`id_no`);
 
 --
+-- Indexes for table `newsletter_subscription`
+--
+ALTER TABLE `newsletter_subscription`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `peer_transfer`
 --
 ALTER TABLE `peer_transfer`
@@ -263,6 +281,12 @@ ALTER TABLE `admin`
 --
 ALTER TABLE `fund`
   MODIFY `id_no` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `newsletter_subscription`
+--
+ALTER TABLE `newsletter_subscription`
+  MODIFY `id` int(19) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `peer_transfer`
