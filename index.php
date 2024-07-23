@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php include "header.php"; ?>
-  
+<?php 
+include "header.php"; 
+// Fetch current prices
+$currentPrices = fetchCryptoData('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,tether,binancecoin&vs_currencies=usd');
+// Fetch historical price data for the past 30 days
+$historicalData = fetchCryptoData('https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=30');
+?>
   <body class="body header-fixed home-2">
     <!-- Header -->
     <header id="header_main" class="header">
@@ -21,7 +26,6 @@
                   <!-- /#main-nav -->
                 </div>
               </div>
-
              <?php include "headerRight.php"; ?>
             </div>
           </div>
@@ -44,6 +48,10 @@
               </p>
               <a href="#" class="btn-action"><span>Get Started Here</span></a>
             </div>
+            <p>
+            <center><span><img src="assets/images/icon/googleplay.png" title="Android app for xTradeSecurity (in Beta)" alt="Google playstore image" /></span>&nbsp;
+            <span><img src="assets/images/icon/appstore.png" title="iOS app for xTradeSecurity (in Beta)" alt="Apple iStore image" /></span></center>
+          </p>
           </div>
           <div class="col-xl-6 col-md-12">
             <div class="banner__image">
@@ -65,15 +73,14 @@
                   <span class="icon-btc"
                     ><span class="path1"></span><span class="path2"></span
                   ></span>
-                  <h6>BTC</h6>
-                  
-                  <!-- TradingView Widget BEGIN -->
-                                 <!-- TradingView Widget END -->
-
-                  <h6>Bitcoin Prices on XTradeSecurity</h6>
+                  <h6>Bitcoin price</h6>
+                  <!-- cryptoprice BEGIN -->
+                  <h6 class="price"> $&nbsp;<?php echo $currentPrices['bitcoin']['usd']; ?> </h6>
+                  <!-- cryptoprice END -->
                 </div>
                 <div class="right">
-                  <p class="unit">₿</p>
+                <!-- <div id="total-revenue-chart-1"></div> -->
+                  <p class="unit">BTC &#8646; USD</p>
                 </div>
               </div>
 
@@ -83,29 +90,15 @@
                     ><span class="path1"></span><span class="path2"></span
                     ><span class="path3"></span><span class="path4"></span
                   ></span>
-                  <h6>Bitcoin</h6>
-                  <h6 class="price">BTC price</h6>
+                  <h6>Ethereum price</h6>
+                    <!-- cryptoprice BEGIN -->
+                    <h6 class="price"> $&nbsp;<?php echo $currentPrices['ethereum']['usd']; ?> </h6>
+                  <!-- cryptoprice END -->
                 </div>
 
                 <div class="right">
-                  <div id="total-revenue-chart-2"></div>
-                  <p class="sale critical">
-                    <svg
-                      width="8"
-                      height="12"
-                      viewBox="0 0 8 12"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M7.60673 6.09432C7.52257 5.93832 7.36254 5.84107 7.18848 5.84107H4.47818L4.47818 0.48953C4.47818 0.219309 4.26396 0 4.00001 0C3.73605 0 3.52183 0.219309 3.52183 0.48953L3.52183 5.84107H0.811533C0.636839 5.84107 0.47681 5.93832 0.393288 6.09432C0.308492 6.25031 0.31423 6.4409 0.406677 6.59168L3.59515 11.7716C3.68314 11.9138 3.83551 12 4.00001 12C4.1645 12 4.31688 11.9138 4.40486 11.7716L7.59334 6.59168C7.64179 6.51205 7.66666 6.42132 7.66666 6.3306C7.66666 6.24966 7.64625 6.16807 7.60673 6.09432Z"
-                        fill="white"
-                      />
-                    </svg>
-
-                    1.8%
-                  </p>
-                  <p class="unit">ETH</p>
+            
+                  <p class="unit">ETH &#8646; USD</p>
                 </div>
               </div>
               <div class="crypto-box">
@@ -113,28 +106,15 @@
                   <span class="icon-tether"
                     ><span class="path1"></span><span class="path2"></span
                   ></span>
-                  <h6>Bitcoin</h6>
-                  <h6 class="price">USD 53,260.20</h6>
+                  <h6>Tether Price</h6>
+                    <!-- cryptoprice BEGIN -->
+                    <h6 class="price"> $&nbsp;<?php echo $currentPrices['tether']['usd']; ?> </h6>
+                  <!-- cryptoprice END -->
                 </div>
 
                 <div class="right">
-                  <div id="total-revenue-chart-5"></div>
-                  <p class="sale success">
-                    <svg
-                      width="8"
-                      height="12"
-                      viewBox="0 0 8 12"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M0.393244 5.90568C0.477403 6.06168 0.637433 6.15893 0.811488 6.15893H3.52179V11.5105C3.52179 11.7807 3.73601 12 3.99996 12C4.26392 12 4.47814 11.7807 4.47814 11.5105V6.15893H7.18844C7.36313 6.15893 7.52316 6.06168 7.60668 5.90568C7.69148 5.74969 7.68574 5.5591 7.59329 5.40832L4.40482 0.228447C4.31683 0.0861572 4.16445 0 3.99996 0C3.83547 0 3.68309 0.0861572 3.59511 0.228447L0.406633 5.40832C0.358178 5.48795 0.333313 5.57868 0.333313 5.6694C0.333313 5.75034 0.353715 5.83193 0.393244 5.90568Z"
-                        fill="white"
-                      />
-                    </svg>
-                    3.54%
-                  </p>
-                  <p class="unit">USDT</p>
+                 
+                  <p class="unit">USDT &#8646; USD</p>
                 </div>
               </div>
               <div class="crypto-box">
@@ -144,28 +124,14 @@
                     ><span class="path3"></span><span class="path4"></span
                     ><span class="path5"></span><span class="path6"></span
                   ></span>
-                  <h6>Bitcoin</h6>
-                  <h6 class="price">USD 53,260.20</h6>
+                  <h6>BNB price</h6>
+                    <!-- cryptoprice BEGIN -->
+                    <h6 class="price"> $&nbsp;<?php echo $currentPrices['binancecoin']['usd']; ?> </h6>
+                  <!-- cryptoprice END -->
                 </div>
 
                 <div class="right">
-                  <div id="total-revenue-chart-4"></div>
-                  <p class="sale success">
-                    <svg
-                      width="8"
-                      height="12"
-                      viewBox="0 0 8 12"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M0.393244 5.90568C0.477403 6.06168 0.637433 6.15893 0.811488 6.15893H3.52179V11.5105C3.52179 11.7807 3.73601 12 3.99996 12C4.26392 12 4.47814 11.7807 4.47814 11.5105V6.15893H7.18844C7.36313 6.15893 7.52316 6.06168 7.60668 5.90568C7.69148 5.74969 7.68574 5.5591 7.59329 5.40832L4.40482 0.228447C4.31683 0.0861572 4.16445 0 3.99996 0C3.83547 0 3.68309 0.0861572 3.59511 0.228447L0.406633 5.40832C0.358178 5.48795 0.333313 5.57868 0.333313 5.6694C0.333313 5.75034 0.353715 5.83193 0.393244 5.90568Z"
-                        fill="white"
-                      />
-                    </svg>
-                    3.24%
-                  </p>
-                  <p class="unit">BNB</p>
+                  <p class="unit">BNB &#8646; USD</p>
                 </div>
               </div>
             </div>
@@ -279,10 +245,10 @@
                     />
                   </svg>
                 </div>
-                <a href="" class="h6 title">Mobile Apps</a>
+                <a href="" class="h6 title">Diverse platforms</a>
                 <p>
                   Stay on top of the markets with the XTradeSecurity app for Android
-                  or iOS.
+                  or iOS, on your tab and desktop devices.
                 </p>
               </div>
             </div>
@@ -465,10 +431,9 @@
                     </svg>
                   </div>
                   <div class="content">
-                    <h6 class="title">Mobile apps</h6>
+                    <h6 class="title">Get Support</h6>
                     <p>
-                      Stay on top of the markets with the XTradeSecurity app for
-                      Android or iOS.
+                      Get support in your journey with us irrespective of preferred platform used.
                     </p>
                   </div>
                 </li>
@@ -478,7 +443,7 @@
           <div class="col-xl-6 col-md-12">
             <div class="services_image">
               <div class="experience">
-                <h6 class="fs-18">How was your experience?</h6>
+                <h6 class="fs-18">Continue with your experience here</h6>
 
                 <ul class="list-felling">
                   <li class="icon">
@@ -511,15 +476,16 @@
               <div class="crypto-box">
                 <img class="arrow" src="assets/images/icon/Arrow.png" alt="" />
                 <div class="left">
-                  <img src="assets/images/icon/bitcoin.png" alt="" />
+                  <img src="assets/images/logo/favicon.png" alt="" title="Bitcoin currency logo" />
+                  <span class="icon-btc"></span>
                   <div>
                     <h6>BTC</h6>
-                    <p>+1.46%</p>
+                    <p>XTradeSecurity</p>
                   </div>
                 </div>
 
                 <div class="right">
-                  <h6 class="price">$56,623.54</h6>
+                  <h6 class="price">$&nbsp;<?php echo $currentPrices['bitcoin']['usd']; ?></h6>
                   <div id="total-revenue-chart-1"></div>
                 </div>
               </div>
@@ -1279,9 +1245,14 @@
     <script src="app/js/apexcharts.js"></script>
     <script src="app/js/switchmode.js"></script>
     <script src="app/js/jquery.magnific-popup.min.js"></script>
-
     <script src="app/js/chart.js"></script>
-    <script src="https://www.livecoinwatch.com/static/lcw-widget.js"></script> 
+
+    <!-- Custom JS -->
+    <script src="app/js/cookie.js"></script>
+    <script src="app/js/coindata.js"></script>
+
+    <!-- Chart JS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <!-- Swiper JS -->
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
@@ -1320,61 +1291,9 @@
         slidesPerView: 4,
       });
     </script>
+    
     <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
-
-    <script>
-        // function closeCookieBanner() {
-        //     document.getElementById('cookie-banner').style.display = 'none';
-        //     document.cookie = "cookieConsent=true; path=/; max-age=" + (60*60*24*365);
-        // }
-
-        // function checkCookieConsent() {
-        //     const cookies = document.cookie.split(';');
-        //     for(let cookie of cookies) {
-        //         if(cookie.trim().startsWith("cookieConsent=")) {
-        //             return true;
-        //         }
-        //     }
-        //     return false;
-        // }
-
-        // window.onload = function() {
-        //     if (!checkCookieConsent()) {
-        //         document.getElementById('cookie-banner').style.display = 'flex';
-        //         setTimeout(() => {
-        //             document.getElementById('cookie-banner').style.display = 'none';
-        //         }, 300000); // 5 minutes
-        //     } else {
-        //         document.getElementById('cookie-banner').style.display = 'none';
-        //     }
-        // };
-        function closeCookieBanner() {
-            document.getElementById('cookie-banner').style.display = 'none';
-            document.cookie = "cookieConsent=true; path=/; max-age=" + (60*60*24*3); // Set cookie for 3 days
-        }
-
-        function checkCookieConsent() {
-            const cookies = document.cookie.split(';');
-            for(let cookie of cookies) {
-                if(cookie.trim().startsWith("cookieConsent=")) {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        window.onload = function() {
-            if (!checkCookieConsent()) {
-                document.getElementById('cookie-banner').style.display = 'flex';
-                setTimeout(() => {
-                    document.getElementById('cookie-banner').style.display = 'none';
-                }, 300000); // 5 minutes
-            } else {
-                document.getElementById('cookie-banner').style.display = 'none';
-            }
-        };
-    </script>
   </body>
 </html>

@@ -1,3 +1,6 @@
+<?php 
+include "function.php"; 
+?>
   <head>
     <!-- Meta Tags -->
     <meta charset="UTF-8" />

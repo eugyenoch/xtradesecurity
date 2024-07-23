@@ -65,7 +65,7 @@
                       </li>
 
                       <li class="menu-item-has-children">
-                        <a href="#"> Account Pages <i class="fas fa-sort-desc" aria-hidden="true"></i></a>
+                        <a href="#"> Account pages <i class="fas fa-sort-desc" aria-hidden="true"></i></a>
                         <ul class="sub-menu">
                           <li class="menu-item">
                             <a href="user/dashboard.php">User Profile</a>
@@ -82,8 +82,4 @@
                       </li>
                     </ul>
                   </nav>
-
-
-
-
 

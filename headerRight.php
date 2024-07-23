@@ -40,7 +40,7 @@
                     <a class="dropdown-item" href="#">P2P</a>
                   </div>
                 </div>
-                <div class="dropdown">
+                <!-- <div class="dropdown">
                   <button
                     class="btn dropdown-toggle"
                     type="button"
@@ -125,7 +125,7 @@
                       <span class="align-middle">Russian</span>
                     </a>
                   </div>
-                </div>
+                </div> -->
                 <div class="mode-switcher">
                   <a class="sun" href="#" onclick="switchTheme()">
                     <svg
@@ -390,7 +390,7 @@
                 </div>
                 <div class="mobile-button"><span></span></div>
                 <div class="wallet">
-                  <a href="wallet.html"> Wallet </a>
+                  <a href="wallet.php"> Wallet </a>
                 </div>
                 <div class="dropdown user">
                   <button
