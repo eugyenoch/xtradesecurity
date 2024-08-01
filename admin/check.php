@@ -1,97 +1,190 @@
 <?php
-//Require my functions.php file
-include('../function.php');
+// Include required files
+include "../function.php";
+include "../cookie.php";
 
-//Build the login script
-if(isset($_POST['confirm'])){
-//Extract the user input and assign to variables
-$user = sanitize($_POST['user']);
+// Initialize the toast variable
+$toast = '';
 
-//Search DB for the entered data above
-$sql_check = "SELECT * FROM admin WHERE user_email = '$user'";
+if (isset($_POST['confirm'])) {
+    $admin_email = sanitize($_POST['adminEmail']);
+    $admin_phone = $_POST['dialCode'] . sanitize($_POST['adminPhone']);
+    
+    // Use prepared statements to prevent SQL injection
+    $stmt = $con->prepare("SELECT * FROM admin WHERE user_email = ? AND phone = ?");
+    $stmt->bind_param("ss", $admin_email, $admin_phone);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    if ($result->num_rows > 0) {
+        $toast='success';
+        $_SESSION['admin_email'] = $admin_email;
+        header("Location: reset-password.php");
+        exit;
+    } else {
+        $toast='fail';
+        echo "<script>alert('Invalid email or phone number.'); window.location.href = 'login.php';</script>";
+    }
 
-//Execute the mysqli query
-$sqlDo = $con->query($sql_check);
-
-//count the number of rows that contain the data
-$rowCount = mysqli_num_rows($sqlDo);
-
-//Check if there is no matching row with the user data
-if($rowCount<=0){
-$toast = "fail";
-}
-else{
-$toast = "success";
-header("Refresh:2,url=change-password.php?em=$user");
-}
-}
-else{
-//header('Location:login.php');
+    $stmt->close();
 }
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="utf-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<meta name="description" content="" />
-<meta name="author" content="" />
-<title>Admin Area | Confirm Email Address</title>
-<link href="css/styles.css" rel="stylesheet" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
-</head>
-<body class="bg-primary">
-<div id="layoutAuthentication">
-<div id="layoutAuthentication_content">
-<main>
-<div class="container">
-<div class="row justify-content-center">
-<div class="col-lg-5">
-<div class="card shadow-lg border-0 rounded-lg mt-5">
-<div class="card-header"><h4 class="text-center font-weight-light my-4">Admin Password Recovery</h4></div>
-<div class="card-body">
-    <div class="small mb-3 text-muted"><p><small>Confirm your registered email address and if found, you will be re-directed to update your password effectively.</small></p></div>
-    <form action="<?php htmlentities($_SERVER['PHP_SELF']);?>" method="post" name="adminCheckForm">
-        <div class="form-floating mb-3">
-            <input class="form-control" id="inputEmail" type="email" placeholder="username" name="user" title="Enter your registered email address" required />
-            <label for="inputEmail">Email address</label>
+
+<?php include "header.php"; ?>
+
+  <body class="body header-fixed">
+    <!-- Header -->
+    <header id="header_main" class="header">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="header__body d-flex justify-content-between">
+
+              <div class="header__left">
+               <?php include "logo.php"; ?>
+               
+                <div class="left__main">
+                <?php include "nav.php";?>
+                  <!-- /#main-nav -->
+                </div>
+              </div>
+
+              <?php include "headerRight.php";?>
+            </div>
+          </div>
         </div>
-        <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-            <a class="small" href="login.php">Return to login</a>
-            <a type="submit" class="btn btn-primary" name="confirm" role="button">Confirm</a>
+      </div>
+    </header>
+    <!-- end Header -->
+
+    <!-- PageTitle -->
+    <section class="page-title">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <h3 class="heading">Admin Verification</h3>
+          </div>
+          <div class="col-md-6">
+            <ul class="breadcrumb">
+              <li><a href="../index.php">Home</a></li>
+              <li><p class="fs-18">/</p></li>
+              <li><p class="fs-18">Admin verification</p></li>
+            </ul>
+          </div>
         </div>
-    </form>
-</div>
-<div class="card-footer text-center py-3">
-    <div class="small">Not admin? <a href="../login.php">Login Here!</a></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</main>
-</div>
-<div id="layoutAuthentication_footer">
-<footer class="py-4 bg-light mt-auto">
-<div class="container-fluid px-4">
-<?php include "adminFooter.php";?>
-</div>
-</div>
-</footer>
-</div>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-<script src="js/scripts.js"></script>
-</body>
+      </div>
+    </section>
+    <!-- End PageTitle -->
+
+    <section class="register">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="block-text center">
+              <h3 class="heading">Password Recovery</h3>
+              <p class="desc fs-20">
+             <small> Confirm your registered email address and phone number. If found, you will be re-directed to update your password effectively</small>
+              </p>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="flat-tabs">
+              <!-- <ul class="menu-tab">
+                <li class="active"><h6 class="fs-16">Email</h6></li>
+                <li><h6 class="fs-16">Mobile</h6></li>
+              </ul> -->
+              <div class="col-md-12">
+            <div class="flat-tabs">
+              <!-- <ul class="menu-tab"></ul> -->
+              <div class="content-tab">
+                <div class="content-inner">
+                    <form action="<?php htmlentities($_SERVER['PHP_SELF']);?>" method="post" name="adminCheckForm">
+                        <div class="form-floating mb-3">
+                        <label for="inputEmail">Email address</label>
+                            <input class="form-control" id="inputEmail" type="email" placeholder="username" name="adminEmail" title="Enter your registered email address" required />
+                        </div>
+                        <div class="form-group">
+                      <label for="InputEmail1">Phone</label>
+                      <div>
+                        <select  class="form-control" id="exampleFormControlSelect1" name="dialCode">
+                        <?php include "../include/selectDialingCode.html";?>
+                        </select>
+                        <input type="tel" class="form-control"  placeholder="Your Phone number" name="adminPhone" required />
+                      </div>
+                    </div>
+                            <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
+                            <a class="small" href="login.php">Return to login?</a>
+                            <button type="submit" class="btn-action" name="confirm">Confirm Credentials</button>
+                        </div>
+                    </form>
+                </div>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  <?php include "footer.php"; ?>
+
+    <script src="../app/js/aos.js"></script>
+    <script src="../app/js/jquery.min.js"></script>
+    <script src="../app/js/jquery.easing.js"></script>
+    <script src="../app/js/popper.min.js"></script>
+    <script src="../app/js/bootstrap.min.js"></script>
+    <script src="../app/js/app.js"></script>
+    <script src="../app/js/jquery.peity.min.js"></script>
+
+    <script src="../app/js/switchmode.js"></script>
+    <script src="https://unpkg.com/boxicons@2.1.2/dist/boxicons.js"></script>
+
+    
+
+    <script>
+      function Convert() {
+        let dollarInput = document.getElementByClass("dollar").value;
+        let bitcoinInput = document.getElementByClass("bitcoin").value;
+
+        if ((dollarInput != "") & (bitcoinInput == "")) {
+          let parsedDollar = parseFloat(dollarInput);
+          let fromDollarToBitcoin = parsedDollar * 0.000022;
+
+          let output = document.getElementByClass("bitcoin");
+          output.value = fromDollarToBitcoin;
+          console.log("Bitcoin", fromDollarToBitcoin);
+
+          clearMessage();
+          clearAlert();
+        }
+
+        if ((bitcoinInput != "") & (dollarInput == "")) {
+          let parsedBitcoin = parseFloat(bitcoinInput);
+          let fromBitcoinToDollar = parsedBitcoin * 46403.5;
+
+          let output = document.getElementByClass("dollar");
+          output.value = fromBitcoinToDollar;
+          console.log("US$", fromBitcoinToDollar);
+
+          clearMessage();
+          clearAlert();
+        }
+
+        if ((bitcoinInput == "") & (dollarInput == "")) {
+          showMessage();
+        }
+      }
+    </script>
+  </body>
 </html>
 <?php
-if(isset($toast) && $toast==='success'){
-echo "<script>toastr.success('You will be redirected shortly', 'Success')</script>";
-}
+        if(isset($toast) && $toast==='success'){
+          echo "<script>toastr.success('You will be redirected shortly', 'Success')</script>";
+        }
 
-if(isset($toast) && $toast==='fail'){
-echo "<script>toastr.error('We cannot log you in', 'Wrong credentials')</script>";
-}
-$con->close();
-?>
+        if(isset($toast) && $toast==='fail'){
+          echo "<script>toastr.error('We cannot verify you', 'Wrong credentials')</script>";
+        }
+        ?>

@@ -401,13 +401,13 @@
                     aria-haspopup="true"
                     aria-expanded="false"
                   >
-                    <img src="assets/images/avt/avt-01.jpg" alt="" />
+                    <img src="<?php echo htmlspecialchars($profilePicUrl); ?>" alt="no file" title="Admin profile photo" /> 
                   </button>
                   <div
                     class="dropdown-menu"
                     aria-labelledby="dropdownMenuButton5"
                   >
-                    <a class="dropdown-item" href="#"
+                    <a class="dropdown-item" href="user-profile.php"
                       ><i class="bx bx-user font-size-16 align-middle me-1"></i>
                       <span>Profile</span></a
                     >
@@ -431,7 +431,7 @@
                       <span>Lock screen</span></a
                     >
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item text-danger" href="user-login.html"
+                    <a class="dropdown-item text-danger" href="../logout.php"
                       ><i
                         class="bx bx-power-off font-size-16 align-middle me-1 text-danger"
                       ></i>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 23, 2024 at 06:32 PM
+-- Generation Time: Jul 30, 2024 at 01:19 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -32,13 +32,14 @@ CREATE TABLE `admin` (
   `firstname` varchar(255) DEFAULT NULL,
   `lastname` varchar(255) DEFAULT NULL,
   `user_email` varchar(255) NOT NULL,
+  `userName` varchar(255) NOT NULL,
   `user_pass` varchar(255) NOT NULL,
   `address` varchar(255) DEFAULT NULL,
   `city` varchar(255) DEFAULT NULL,
   `country` varchar(255) DEFAULT NULL,
   `phone` varchar(55) DEFAULT NULL,
   `photo` varchar(255) DEFAULT NULL,
-  `reg_date` date NOT NULL DEFAULT current_timestamp()
+  `reg_date` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -59,7 +60,7 @@ CREATE TABLE `fund` (
   `fund_proof` varchar(255) DEFAULT NULL,
   `fund_comment` varchar(1024) DEFAULT NULL,
   `fund_status` varchar(255) NOT NULL DEFAULT 'pending',
-  `fund_request_date` date DEFAULT current_timestamp()
+  `fund_request_date` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -71,7 +72,7 @@ CREATE TABLE `fund` (
 CREATE TABLE `newsletter` (
   `id` int(19) NOT NULL,
   `email_address` varchar(255) DEFAULT NULL,
-  `registration_date` date NOT NULL DEFAULT current_timestamp()
+  `registration_date` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -94,7 +95,7 @@ CREATE TABLE `peer_transfer` (
   `buyer_amount` decimal(18,9) DEFAULT NULL,
   `prole` varchar(512) DEFAULT NULL,
   `pstatus` varchar(255) NOT NULL DEFAULT 'pending',
-  `peer_transact_date` date NOT NULL DEFAULT current_timestamp()
+  `peer_transact_date` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -144,7 +145,7 @@ CREATE TABLE `transaction` (
   `tinterest` decimal(8,2) DEFAULT NULL,
   `trole` varchar(512) DEFAULT 'trader',
   `tstatus` varchar(255) NOT NULL DEFAULT 'pending',
-  `transact_date` date NOT NULL DEFAULT current_timestamp()
+  `transact_date` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -166,7 +167,7 @@ CREATE TABLE `users` (
   `phone` varchar(55) DEFAULT NULL,
   `photo` varchar(255) DEFAULT NULL,
   `affid` int(255) DEFAULT NULL,
-  `reg_date` date NOT NULL DEFAULT current_timestamp()
+  `reg_date` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -180,7 +181,7 @@ CREATE TABLE `wallet_addresses` (
   `wallet` varchar(255) DEFAULT NULL,
   `address` varchar(2048) DEFAULT NULL,
   `qrcode` varchar(4096) DEFAULT NULL,
-  `date_created` datetime DEFAULT curdate()
+  `date_created` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -199,7 +200,7 @@ CREATE TABLE `withdraw` (
   `wthdraw_amount` decimal(19,9) DEFAULT NULL,
   `withdraw_address` varchar(512) DEFAULT NULL,
   `wthdraw_status` varchar(255) NOT NULL DEFAULT 'pending',
-  `withdraw_request_date` date DEFAULT current_timestamp()
+  `withdraw_request_date` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -219,9 +220,9 @@ ALTER TABLE `fund`
   ADD PRIMARY KEY (`id_no`);
 
 --
--- Indexes for table `newsletter_subscription`
+-- Indexes for table `newsletter`
 --
-ALTER TABLE `newsletter_subscription`
+ALTER TABLE `newsletter`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -283,9 +284,9 @@ ALTER TABLE `fund`
   MODIFY `id_no` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `newsletter_subscription`
+-- AUTO_INCREMENT for table `newsletter`
 --
-ALTER TABLE `newsletter_subscription`
+ALTER TABLE `newsletter`
   MODIFY `id` int(19) NOT NULL AUTO_INCREMENT;
 
 --

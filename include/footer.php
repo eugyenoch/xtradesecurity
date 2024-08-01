@@ -10,8 +10,8 @@
                 </a>
                 <h6>Let's connect! 🤙</h6>
                 <ul class="list">
-                  <li><p>+12 345 678 9101</p></li>
-                  <li><p>support@xtradesecurity.com</p></li>
+                  <li><p<a href="tel:+123456789101" title="send an email">+12 345 678 9101</a></p></li>
+                  <li><p><a href="mailto:support@xtradesecurity.com" title="send an email">support@xtradesecurity.com</a></p></li>
                   <li>
                     <p>
                      Telegr<i class="fab fa-telegram" aria-hidden="true" title="join our telegram channel"></i>m: @xtradesecurity
@@ -25,13 +25,13 @@
                 <div class="widget-link">
                   <h6 class="title">HELP PAGES</h6>
                   <ul>
-                    <li><a href="about.php">About us</a></li>
-                    <li><a href="faq.php">FAQs</a></li>
-                    <li><a href="privacy-policy.php">Privacy policy</a></li>
-                    <li><a href="terms-of-use.php">Terms of use</a></li>
-                    <li><a href="cookie-policy.php.php">Cookie policy</a></li>
-                    <li><a href="affiliate-policy.php">Affiliate policy</a></li>
-                    <li><a href="contact.php">Support</a></li>
+                    <li><a href="../about.php">About us</a></li>
+                    <li><a href="../faq.php">FAQs</a></li>
+                    <li><a href="../privacy-policy.php">Privacy policy</a></li>
+                    <li><a href="../terms-of-use.php">Terms of use</a></li>
+                    <li><a href="../cookie-policy.php.php">Cookie policy</a></li>
+                    <li><a href="../affiliate-policy.php">Affiliate policy</a></li>
+                    <li><a href="../contact.php">Support</a></li>
                   </ul>
                 </div>
                 <div class="widget-link s2">
@@ -40,7 +40,7 @@
                     <li><a href="">Buy</a></li>
                     <li><a href="#">Sell</a></li>
                     <li><a href="#">Transfer</a></li>
-                    <li><a href="market.php">Markets</a></li>
+                    <li><a href="../market.php">Markets</a></li>
                     <li><a href="#">Trading Fees</a></li>
                     <li><a href="#">Wallet</a></li>
                     <li><a href="#">API</a></li>
@@ -55,27 +55,26 @@
                   Subscribe our newsletter to get more free tips and
                   resources.
                 </p>
-                <form action="#">
-                  <input
-                    type="email"
-                    placeholder="Enter your email"
-                    required=""
-                  />
-                  <button type="submit" class="btn-action">Submit</button>
+                <form action="newletter.php" method="post">
+                  <input type="email" placeholder="Enter your email" required />
+                  <button type="submit" class="btn-action" onclick="" name="subscribe">Subscribe</button>
                 </form>
                 <ul class="list-social">
                   <!-- <li>
                     <a href="#"><span class="icon-facebook-f"></span></a>
                   </li> -->
                   <li>
+                    <a href="#"><span class="fab fa-telegram"></span></a>
+                  </li>
+                  <li>
                     <a href="#"><span class="icon-instagram"></span></a>
                   </li>
                  <!--  <li>
                     <a href="#"><span class="icon-youtube"></span></a>
                   </li> -->
-                  <li>
+                  <!-- <li>
                     <a href="#"><span class="icon-twitter"></span></a>
-                  </li>
+                  </li> -->  
                 </ul>
               </div>
             </div>
@@ -91,8 +90,8 @@
             <hr>
             &copy; <?php echo date('Y');?>&nbsp;xTradeSecurity.com. All rights reserved. <br><br></p>
             <p>
-            <center><span><img src="assets/images/icon/googleplay.png" title="Android app for xTradeSecurity (in Beta)" alt="Google playstore image" /></span>&nbsp;
-            <span><img src="assets/images/icon/appstore.png" title="iOS app for xTradeSecurity (in Beta)" alt="Apple iStore image" /></span></center>
+            <center><span><img src="../assets/images/icon/googleplay.png" title="Android app for xTradeSecurity (in Beta)" alt="Google playstore image" /></span>&nbsp;
+            <span><img src="../assets/images/icon/appstore.png" title="iOS app for xTradeSecurity (in Beta)" alt="Apple iStore image" /></span></center>
           </p>
         </div>
       </div>

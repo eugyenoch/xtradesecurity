@@ -1,6 +1,6 @@
 <?php
 //Begin session and include the session file
-//include('session.php');
+include 'session.php';
 
 define('SERVER', 'localhost');
 define('USER', 'root');
@@ -21,4 +21,5 @@ $expiration_filename = "expiration.txt";
 $file = fopen($expiration_filename, "w") or die("Unable to open file!");
 fwrite($file, $expiration_time);
 fclose($file);
+
 ?>

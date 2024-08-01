@@ -25,14 +25,16 @@
     <title>xTradeSecurity | Digital Assets Exchange, Wallet, and Trading Platform</title>
 
     <!-- Style CSS -->
-    <link rel="stylesheet" href="app/dist/app.css" />
-    <link rel="stylesheet" href="app/dist/magnific-popup.css" />
-    <link rel="stylesheet" type="text/css" href="assets/cookie-banner.css">
+    <link rel="stylesheet" href="../app/dist/app.css" />
+    <link rel="stylesheet" href="../app/dist/magnific-popup.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/cookie-banner.css">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
+      <!--Toastr-->
+      <link rel="stylesheet" type="text/css" href="../app/dist/toastr.min.css">
     <!-- End Style CSS -->
 
-    <link rel="shortcut icon" href="assets/images/logo/favicon.png" />
-    <link rel="apple-touch-icon-precomposed" href="assets/images/logo/favicon.png" />
+    <link rel="shortcut icon" href="../assets/images/logo/favicon.png" />
+    <link rel="apple-touch-icon-precomposed" href="../assets/images/logo/favicon.png" />
 
   </head>
