@@ -295,11 +295,11 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
                         </li>
                         <li>
                           <p>Card purchases</p>
-                          <input type="checkbox" class="check-box__switcher" />
+                          <input type="checkbox" class="check-box__switcher" checked />
                         </li>
                         <li>
                           <p>Bank deposit</p>
-                          <input type="checkbox" class="check-box__switcher" />
+                          <input type="checkbox" class="check-box__switcher" checked />
                         </li>
                       </ul>
                     </div>
@@ -308,11 +308,7 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
                       <ul>
                         <li>
                           <p>Fiat and Spot wallet</p>
-                          <input
-                            type="checkbox"
-                            class="check-box__switcher"
-                            checked
-                          />
+                          <input type="checkbox" class="check-box__switcher" checked />
                         </li>
                         <li>
                           <p>Margin wallet</p>
