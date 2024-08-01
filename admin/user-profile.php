@@ -1,5 +1,5 @@
 <?php
-include '../function.php';
+include '../function.php'; 
 checkAdminLogin();
 
 // Fetch admin details from the database
@@ -308,7 +308,7 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
                       <ul>
                         <li>
                           <p>Fiat and Spot wallet</p>
-                          <input type="checkbox" class="check-box__switcher" checked />
+                          <input type="checkbox" class="check-box__switcher" />
                         </li>
                         <li>
                           <p>Margin wallet</p>
@@ -336,9 +336,10 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
                     </div>
                     <div>
                       <p>Referral code</p>
-                      <input class="form-control" type="text" value="N84CRDKK" />
-                      <span class="btn-action">Copy</span>
+                      <input class="form-control" type="text" id="inputText" value="A89CRXTS" />
+                      <span class="btn-action" id="copyButton">Copy</span>
                     </div>
+                    <p id="copiedText"></p>
                   </div>
                 </div>
                 <div class="mt-3">
@@ -349,13 +350,7 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
                 <h6>Enable API access on your account to generate keys (Coming soon).</h6>
                 <h4>API Access is <span>Disabled</span></h4>
                 <p class="mail">
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
+                  <svg  width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                       fill-rule="evenodd"
                       clip-rule="evenodd"
@@ -386,11 +381,7 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
                     </div>
                     <div class="form-group">
                       <p>2FA Code</p>
-                      <input
-                        class="form-control"
-                        type="text"
-                        placeholder="2FA code"
-                      />
+                      <input class="form-control" type="text" placeholder="2FA code" value="<?php echo mt_rand(10000,99999);?>" disabled />
                     </div>
                   </div>
                   <a href="#" class="btn-action">Enable API keys</a>
@@ -415,19 +406,11 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
                   <div class="refe">
                     <div class="form-group">
                       <p>Your Password</p>
-                      <input
-                        class="form-control"
-                        type="password"
-                        placeholder="Password"
-                      />
+                      <input class="form-control" type="password" placeholder="Password" />
                     </div>
                     <div class="form-group">
                       <p>2FA Code</p>
-                      <input
-                        class="form-control"
-                        type="text"
-                        placeholder="2FA code"
-                      />
+                      <input class="form-control" type="text" placeholder="2FA code" />
                     </div>
                   </div>
                   <a href="#" class="btn-action">Disable 2FA verification</a>
@@ -444,7 +427,7 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
                     </div>
                     <div>
                       <label>2FA Code<span>*</span>:</label>
-                      <input type="text" class="form-control" value="<?php echo mt_rand();?>" disabled />
+                      <input type="text" class="form-control" value="<?php echo mt_rand(10000,99999);?>" disabled />
                     </div>
                   </div>
                   <div class="form-group">
@@ -505,6 +488,9 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
 
     <!--Toastr-->
     <script type="text/javascript" src="../app/js/toastr.min.js"></script>
+
+      <!--Custom JS for copy text -->
+      <script type="text/javascript" src="../app/js/custom-scripts.js"></script>
 
     <script>
       imgInp.onchange = (evt) => {

@@ -67,6 +67,12 @@ function set_login_cookies($name, $value, $expire, $path = "/", $domain = "", $s
     setcookie($name, $value, $expire, $path, $domain, $secure, $httponly);
 }
 
+function generateRandomNumber() {
+    // Generate a random 7-digit number
+    $randomNumber = random_int(1000000, 9999999);
+    return $randomNumber;
+}
+
 // Check if an admin is logged in
 function checkAdminLogin() {
     if (!isset($_SESSION['admin_session'])) {
