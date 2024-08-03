@@ -10,7 +10,6 @@ $stmt->execute();
 $stmt->bind_result($firstname, $lastname, $phone, $userName, $address, $city, $country, $phone, $photoPath, $reg_date);
 $stmt->fetch();
 $stmt->close();
-$con->close();
 
 // Set the URL of the profile picture
 $profilePicUrl = !empty($photoPath) ? $photoPath : '';
@@ -107,7 +106,7 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
                       fill="#3772FF"
                     />
                   </svg>
-                  Referrals
+                  Users and Referrals
                 </h6>
               </li>
               <li>
@@ -212,22 +211,65 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
               <li>
                 <h6 class="fs-16">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-                  <g fill="#3772FF">
-                  <path d="M15.2 2.7c-2.6 0-4.9 1.1-6.6 2.8C6.4 7.2 5.3 9.5 5.3 12.1c0 1 .1 1.9.4 2.8L2 18.6l2.5 2.5 2.3-2.3c.8.3 1.8.4 2.7.4 2.6 0 4.9-1.1 6.6-2.8s2.8-4 2.8-6.6-1.1-4.9-2.8-6.6c-1.7-1.7-4-2.8-6.6-2.8zm0 14c-1.8 0-3.4-.7-4.6-2-1.2-1.2-2-2.8-2-4.6 0-1.8.7-3.4 2-4.6 1.2-1.2 2.8-2 4.6-2 1.8 0 3.4.7 4.6 2 1.2 1.2 2 2.8 2 4.6 0 1.8-.7 3.4-2 4.6-1.2 1.2-2.8 2-4.6 2zm-1.5-6.5c-.6 0-1-.4-1-1s.4-1 1-1 1 .4 1 1-.4 1-1 1zM6.3 17.8L3.5 20.6l-1.1-1.1 2.8-2.8c-.3-.4-.5-.9-.5-1.4s.2-1 .5-1.4c.4-.4.9-.5 1.4-.5s1 .2 1.4.5c.4.4.5.9.5 1.4s-.2 1-.5 1.4z"/>
-                  </g>
-                </svg>
-                  Addresses
+                          <g fill="#3772FF">
+                          <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4v-6h16v6zm0-8H4V6h16v4zm-4 2h-8v2h8v-2z"/>
+                          </g>
+                        </svg>
+                <!-- <span><a href="addresses.php">Addresses</a></span> -->
+                 Manage Wallets
                 </h6>
               </li>
 
               <li>
                 <h6 class="fs-16">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-                          <g fill="#3772FF">
-                          <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4v-6h16v6zm0-8H4V6h16v4zm-4 2h-8v2h8v-2z"/>
-                          </g>
-                        </svg>
-                  change Wallet
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+              >
+                  <path
+                      d="M3 4C1.89543 4 1 4.89543 1 6V18C1 19.1046 1.89543 20 3 20H21C22.1046 20 23 19.1046 23 18V6C23 4.89543 22.1046 4 21 4H3ZM3 6H21V8H3V6ZM3 18V10H21V18H3ZM5 12H7V14H5V12ZM9 12H11V14H9V12Z"
+                      fill="#000"
+                  />
+              </svg>
+                 Fund Requests
+                </h6>
+              </li>
+              <li>
+                <h6 class="fs-16">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+              >
+                  <path
+                      d="M3 4C1.89543 4 1 4.89543 1 6V18C1 19.1046 1.89543 20 3 20H21C22.1046 20 23 19.1046 23 18V6C23 4.89543 22.1046 4 21 4H3ZM3 6H21V8H3V6ZM3 18V10H21V18H3ZM5 12H7V14H5V12ZM9 12H11V14H9V12Z"
+                      fill="#000"
+                  />
+              </svg>
+                Withdrawals
+                </h6>
+              </li>
+
+              <li>
+                <h6 class="fs-16">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+              >
+                  <path
+                      d="M3 4C1.89543 4 1 4.89543 1 6V18C1 19.1046 1.89543 20 3 20H21C22.1046 20 23 19.1046 23 18V6C23 4.89543 22.1046 4 21 4H3ZM3 6H21V8H3V6ZM3 18V10H21V18H3ZM5 12H7V14H5V12ZM9 12H11V14H9V12Z"
+                      fill="#000"
+                  />
+              </svg>
+                 Transactions
                 </h6>
               </li>
               <li>
@@ -238,7 +280,7 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
                             <path d="M12 14c-3.86 0-7 3.14-7 7 0 .552.447 1 1 1h12c.553 0 1-.448 1-1 0-3.86-3.14-7-7-7zm-5.924 6c.458-2.318 2.578-4 5.924-4s5.466 1.682 5.924 4H6.076z"/>
                           </g>
                         </svg>
-                  Add new admin
+                 Newsletter
                 </h6>
               </li>
             </ul>
@@ -252,10 +294,10 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
                   <div class="form-group d-flex s1">
                     <input type="text" class="form-control" name="firstname" value="<?php if(isset($firstname)){echo $firstname;} ?>" placeholder="Firstname" />
                     <input type="text" class="form-control" name="lastname" value="<?php if(isset($lastname)){echo $lastname;} ?>" placeholder="Lastname" />
-                    <!-- <input type="text" class="form-control" id="exampleInputEmail1" value="<?php if(isset($userName)){echo $userName;} ?>" placeholder="username" /> -->
+                    <!-- <input type="text" class="form-control" id="exampleInputEmail1" value="<?php //if(isset($userName)){echo $userName;} ?>" placeholder="username" /> -->
                   </div>
                   <div class="form-group d-flex s1">
-                    <input type="text" class="form-control" name="userName" id="exampleInputEmail1" value="<?php if(isset($userName)){echo $userName;} ?>" placeholder="username" />
+                    <input type="text" class="form-control" name="userName" value="<?php if(isset($userName)){echo $userName;} ?>" placeholder="username" />
                     <input type="email" class="form-control" name="email" id="exampleInputEmail1" value="<?php if(isset($adminEmail)){echo $adminEmail;} ?>" title="This field cannot be edited" placeholder="email" disabled />
                     
                   </div>
@@ -321,33 +363,231 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
                 </form>
               </div>
               <div class="content-inner referrals">
-                <h6>Total rewards</h6>
-                <h4>0.00<span>&nbsp;USD</span></h4>
-                <p>
-                  You're earning 20% of the trading fees your referrals pay.
-                  <a href="../affiliate-policy.php">Learn more</a>
-                </p>
-                <div class="main">
-                  <h6>Affiliate program is not open to admins</h6>
-                  <div class="refe">
-                    <div>
-                      <p>Referral link</p>
-                      <input class="form-control" type="text" value="https://xtradesecurity.com/" disabled />
-                    </div>
-                    <div>
-                      <p>Referral code</p>
-                      <input class="form-control" type="text" id="inputText" value="A89CRXTS" />
-                      <span class="btn-action" id="copyButton">Copy</span>
-                    </div>
-                    <p id="copiedText"></p>
-                  </div>
+                <h6>User Management System</h6>
+                <h4>Manage<span>&nbsp;users, admins, and affiliates</span></h4>
+                
+                
+                <div class="main" style="max-width:100% !important;">
+                <div class="card-body">
+                <div class="table-responsive">
+                <table class="table table-striped responsive-table" id="userTable">
+                  <caption><strong>Users Table</strong></caption>
+                  <thead>
+                      <tr>
+                      <th>S/N</th>
+                          <th>Fullname</th>
+                          <th>Email</th>
+                          <th>Username</th>
+                          <th>Address</th>
+                          <th>City</th>
+                          <th>Country</th>
+                          <th>Phone</th>
+                          <th>Photo</th>
+                          <th>refId</th>
+                          <th>Reg.Date</th>
+                          <th>Delete</th>
+                      </tr>
+                  </thead>
+                  <tfoot>
+                  <tr>
+                          <th>S/N</th>
+                          <th>Fullname</th>
+                          <th>Email</th>
+                          <th>Username</th>
+                          <th>Address</th>
+                          <th>City</th>
+                          <th>Country</th>
+                          <th>Phone</th>
+                          <th>Photo</th>
+                          <th>refId</th>
+                          <th>Reg.Date</th>
+                          <th>Delete</th>
+                      </tr>
+                  </tfoot>
+                 <tbody>
+                  <?php $sql_users = "SELECT * FROM users"; $sql_users_exec = $con->query($sql_users);$serial_number = 1;
+                if ($sql_users_exec->num_rows > 0): ?>
+                <?php foreach($sql_users_exec as $users_info): ?>
+                    <tr>
+                        <td class="coin-name"><?= $serial_number; ?></td>
+                        <td class="coin-name"><?= $users_info['firstname'] . '&nbsp;'. $users_info['lastname']; ?></td>
+                        <td class="coin-name"><?= $users_info['user_email']; ?></td>
+                        <td class="coin-name"><?= $users_info['userName']; ?></td>
+                        <td class="coin-name"><?= $users_info['address']; ?></td>
+                        <td class="coin-name"><?= $users_info['city']; ?></td>
+                        <td class="coin-name"><?= $users_info['country']; ?></td>
+                        <td class="coin-name"><?= $users_info['phone']; ?></td>
+                        <td class="coin-name">
+                            <?php if (isset($users_info['photo']) && $users_info['photo'] !== null): ?>
+                                <img src="<?= $users_info['photo']; ?>" alt="profile photo" width="40px" height="40px">
+                            <?php endif; ?>
+                        </td>
+                        <td class="coin-name"><?= $users_info['affid']; ?></td>
+                        <td class="coin-name"><?= $users_info['reg_date']; ?></td>
+                        <td class="coin-name">
+                            <a href="confirmOperation.php?du=<?= $users_info['id_no']; ?>" class="dt-type-md">
+                                <span class="btn btn-outline-danger badge badge-outline badge-danger badge-md">Delete</span>
+                            </a>
+                        </td>
+                    </tr>
+                <?php $serial_number++; endforeach; ?>
+            <?php else: ?>
+                 </tbody>
+                <tr>
+                    <!-- <td colspan="8"><center>No user information found</center></td> -->
+                </tr>
+            <?php endif; ?>
+        </tbody>
+                 
+                </table>
                 </div>
-                <div class="mt-3">
-                <span>View and add wallets and wallet addresses&nbsp;<a href="addresses.php" class="">Wallet operations</a></span>
                 </div>
+                </div>
+
+            <!-- Referral Table -->
+            <div class="main" style="max-width:100% !important;">
+                <div class="card-body">
+                <div class="table-responsive">
+                <table class="table table-striped responsive-table" id="refTable">
+                  <caption><strong>Referral Table</strong></caption>
+                  <thead>
+                      <tr>
+                      <th>S/N</th>
+                          <th>Referrer Username</th>
+                          <th>User Referred</th>
+                          <th>Referal Date</th>
+                          <th>Delete</th>
+                      </tr>
+                  </thead>
+                  <tfoot>
+                  <tr>
+                  <th>S/N</th>
+                          <th>Referrer Username</th>
+                          <th>User Referred</th>
+                          <th>Referal Date</th>
+                          <th>Delete</th>
+                      </tr>
+                  </tfoot>
+                 <tbody>
+                  <?php $sql_refs = "SELECT * FROM referral"; $sql_ref_exec = $con->query($sql_refs);$serial_number = 1;
+                if ($sql_ref_exec->num_rows > 0): 
+                  foreach($sql_ref_exec as $ref_info):
+                      // Fetch the affid from the users table based on the referrer
+                      $referrer = $ref_info['referrer'];
+                      $sql_user = "SELECT affid FROM users WHERE userName = '$referrer'"; // Assuming 'username' is the column to match
+                      $sql_user_exec = $con->query($sql_user);
+                      $user_affid = "";
+                      
+                      if ($sql_user_exec->num_rows > 0) {
+                          $user_info = $sql_user_exec->fetch_assoc();
+                          $user_affid = $user_info['affid'];
+                      }?>
+                    <tr>
+                        <td class="coin-name"><?= $serial_number; ?></td>
+                        <td class="coin-name"><?= $ref_info['referrer']; ?>
+                        <br><?php if (!empty($user_affid)) { echo 'Ref ID: ' . $user_affid; } ?>
+                      </td>
+                        <td class="coin-name"><?= $ref_info['user_referred']; ?></td>
+                        <td class="coin-name"><?= $ref_info['date']; ?></td>
+                        <td class="coin-name">
+                            <a href="confirmOperation.php?ref=<?= $ref_info['id']; ?>" class="dt-type-md">
+                                <span class="btn btn-outline-danger badge badge-outline badge-danger badge-md">Delete</span>
+                            </a>
+                        </td>
+                    </tr>
+                <?php $serial_number++; endforeach; ?>
+            <?php else: ?>
+                 </tbody>
+                <tr>
+                    <!-- <td colspan="8"><center>No user information found</center></td> -->
+                </tr>
+            <?php endif; ?>
+        </tbody>
+                 
+                </table>
+                </div>
+                </div>
+                </div>
+
+                <!-- ADMIN TABLE -->
+            <div class="main" style="max-width:100% !important;">
+                <div class="card-body">
+                <div class="table-responsive">
+                <table class="table table-striped responsive-table" id="adminTable">
+                  <caption><strong>Admin Table</strong></caption>
+                  <thead>
+                      <tr>
+                      <th>S/N</th>
+                          <th>Fullname</th>
+                          <th>Email</th>
+                          <th>Username</th>
+                          <th>Address</th>
+                          <th>City</th>
+                          <th>Country</th>
+                          <th>Phone</th>
+                          <th>Photo</th>
+                          <th>Reg.Date</th>
+                          <th>Delete</th>
+                      </tr>
+                  </thead>
+                  <tfoot>
+                  <tr>
+                          <th>S/N</th>
+                          <th>Fullname</th>
+                          <th>Email</th>
+                          <th>Username</th>
+                          <th>Address</th>
+                          <th>City</th>
+                          <th>Country</th>
+                          <th>Phone</th>
+                          <th>Photo</th>
+                          <th>Reg.Date</th>
+                          <th>Delete</th>
+                      </tr>
+                  </tfoot>
+                 <tbody>
+                  <?php $sql_admins = "SELECT * FROM admin WHERE id_no != 1"; $sql_admins_exec = $con->query($sql_admins);$serial_number = 1;
+                if ($sql_admins_exec->num_rows > 0): ?>
+                <?php foreach($sql_admins_exec as $admins_info): ?>
+                    <tr>
+                        <td class="coin-name"><?= $serial_number; ?></td>
+                        <td class="coin-name"><?= $admins_info['firstname'] . '&nbsp;'. $admins_info['lastname']; ?></td>
+                        <td class="coin-name"><?= $admins_info['user_email']; ?></td>
+                        <td class="coin-name"><?= $admins_info['userName']; ?></td>
+                        <td class="coin-name"><?= $admins_info['address']; ?></td>
+                        <td class="coin-name"><?= $admins_info['city']; ?></td>
+                        <td class="coin-name"><?= $admins_info['country']; ?></td>
+                        <td class="coin-name"><?= $admins_info['phone']; ?></td>
+                        <td class="coin-name">
+                            <?php if (isset($admins_info['photo']) && $admins_info['photo'] !== null): ?>
+                                <img src="<?= $admins_info['photo']; ?>" alt="profile photo" width="40px" height="40px">
+                            <?php endif; ?>
+                        </td>
+                        <td class="coin-name"><?= $admins_info['reg_date']; ?></td>
+                        <td class="coin-name">
+                            <a href="confirmOperation.php?adm=<?= $admins_info['id_no']; ?>" class="dt-type-md">
+                                <span class="btn btn-outline-danger badge badge-outline badge-danger badge-md">Delete</span>
+                            </a>
+                        </td>
+                    </tr>
+                <?php $serial_number++; endforeach; ?>
+            <?php else: ?>
+                 </tbody>
+                <tr>
+                    <!-- <td colspan="8"><center>No user information found</center></td> -->
+                </tr>
+            <?php endif; ?>
+        </tbody>
+                 
+                </table>
+                </div>
+                </div>
+                </div>
+                
+
               </div>
               <div class="content-inner api">
-                <h6>Enable API access on your account to generate keys (Coming soon).</h6>
+                <h6>Enable API access on your account to generate keys (in beta).</h6>
                 <h4>API Access is <span>Disabled</span></h4>
                 <p class="mail">
                   <svg  width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -373,11 +613,7 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
                   <div class="refe">
                     <div class="form-group">
                       <p>Your Password</p>
-                      <input
-                        class="form-control"
-                        type="password"
-                        placeholder="Password"
-                      />
+                      <input class="form-control" type="password" placeholder="Password" />
                     </div>
                     <div class="form-group">
                       <p>2FA Code</p>
@@ -389,17 +625,17 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
               </div>
 
               <div class="content-inner api">
-                <h4>2FA <span class="color-success">Enabled</span></h4>
+                <h4>2FA <span class="color-danger">Disabled</span> (coming soon)</h4>
                 <p>
-                  If you want to turn off 2FA, input your account password and
-                  the six-digit code provided by the Google Authenticator app
-                  below, then click <strong>"Disable 2FA"</strong>.
+                  If you want to turn on 2FA, input your account password and
+                  the six-digit code provided by the  Google Authenticator app
+                  below, then click <strong>"Enable 2FA"</strong>.
                 </p>
 
                 <div class="main">
                   <h6>Disable 2FA</h6>
                   <p>
-                    Enter your password and 2FA code to Disable the 2FA
+                    Enter your password and 2FA code to enable the 2FA
                     verification
                   </p>
 
@@ -410,10 +646,10 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
                     </div>
                     <div class="form-group">
                       <p>2FA Code</p>
-                      <input class="form-control" type="text" placeholder="2FA code" />
+                      <input class="form-control" type="text" placeholder="2FA code" value="<?php echo mt_rand(10000,99999); ?>" disabled />
                     </div>
                   </div>
-                  <a href="#" class="btn-action">Disable 2FA verification</a>
+                  <a href="#" class="btn-action">Enable 2FA verification</a>
                 </div>
               </div>
               <div class="content-inner profile change-pass">
@@ -444,26 +680,394 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
                 </form>
                
               </div>
+
+              <div class="content-inner wallets" id="wallets">
+                <h6>Wallet and Addresses</h6>
+                <h4>Wallet Management<span>&nbsp;System</span></h4>
+                <p>
+                This page show you all the addresses that have been made for your website: from here you can add and edit addresses. This page is for record and editing purposes and is intended for admin use only.
+                </p>
+                <div class="main">
+                <div class="card-body">
+                <div class="table-responsive">
+                <table class="table table-striped responsive-table" id="walletTable">
+                  <thead>
+                      <tr>
+                          <th>Id No</th>
+                          <th>Wallet</th>
+                          <th>Address</th>
+                          <th>QR Code</th>
+                          <th>Date Created</th>
+                          <th>Delete Wallet</th>
+                      </tr>
+                  </thead>
+                  <tfoot>
+                      <tr>
+                        <th>Id No</th>
+                          <th>Wallet</th>
+                          <th>Address</th>
+                          <th>QR Code</th>
+                          <th>Date Created</th>
+                          <th>Delete Wallet</th>
+                      </tr>
+                  </tfoot>
+                 <tbody>
+                  <?php $sql_addresses = "SELECT * FROM wallet_addresses"; $sql_addresses_exec = $con->query($sql_addresses);$serial_number = 1;
+                    //foreach($sql_addresses_exec as $addresses_info){extract($addresses_info);
+                if ($sql_addresses_exec->num_rows > 0): ?>
+                <?php foreach($sql_addresses_exec as $addresses_info): ?>
+                    <tr>
+                        <td class="coin-name"><?= $serial_number; ?></td>
+                        <td class="coin-name"><?= $addresses_info['wallet']; ?></td>
+                        <td class="coin-name"><?= $addresses_info['address']; ?></td>
+                        <td class="coin-name">
+                            <?php if (isset($addresses_info['qrcode']) && $addresses_info['qrcode'] !== null): ?>
+                                <img src="../assets/user-uploads/<?= $addresses_info['qrcode']; ?>" alt="QRCode" width="40px" height="40px">
+                            <?php endif; ?>
+                        </td>
+                        <td class="coin-name"><?= $addresses_info['date_created']; ?></td>
+                        <td class="coin-name">
+                            <a href="confirmOperation.php?dwa=<?= $addresses_info['id_no']; ?>" class="dt-type-md">
+                                <span class="btn btn-outline-danger badge badge-outline badge-danger badge-md">Delete</span>
+                            </a>
+                        </td>
+                    </tr>
+                <?php $serial_number++; endforeach; ?>
+            <?php else: ?>
+                 </tbody>
+                <tr>
+                    <td colspan="8">No wallet information found</td>
+                </tr>
+            <?php endif; ?>
+        </tbody>
+                 
+                </table>
+                </div>
+                </div>
+                </div>
+            <!-- add new wallet form -->
+                <div class="mt-3">
+                <h6>Manage wallets</h6>
+                <div class="row">
+                    <form action="walletProcessor.php" method="post" enctype="multipart/form-data">  
+                      <fieldset>
+                    <legend>Add new receiving wallet</legend>            
+                    <div class="table-responsive">
+                    <table class="table table-striped responsive-table">
+                      <tr>
+                          <td class="">         
+                            <input title="Select wallet" list="selectCurrency" class="form-control form-control-line" type="text" name="newWallet" placeholder="Select wallet" required />
+                            <datalist id="selectCurrency"><?php include "../include/selectCurrency.html";?></datalist>
+                          </td>
+                          <td>
+                              <input title="Enter wallet address or number" class="form-control form-control-line" type="text" name="newAddress" placeholder="Wallet address or number" required />
+                          </td>
+                          <td>
+                              <input class="form-control form-control-line" type="file" name="qrcode" accept="image/*" />
+                          </td>
+                          <td>
+                              <input class="btn btn-outline-primary" type="submit" name="addNewAddress" value="Add New Wallet" />
+                          </td>
+                      </tr>
+                  </table>
+                    </div>
+                  </fieldset>
+                  </form>
+                  </div>
+                </div>
+              </div>
+            <!-- FUND SECTION BEGINS -->
+              <div class="content-inner funding">
+                <h6>Fund Requests</h6>
+                <h4>Fund Management<span>&nbsp;System</span></h4>
+                <p>
+                This page show you all the funding requests that have been made on your website using the fund account button. From here you can approve, add and edit funds. 
+                This page is for record and editing purposes and is intended for admin use only.
+                </p>
+                <div class="main">
+                <div class="card-body">
+                <div class="table-responsive">
+                <table class="table table-striped responsive-table" id="fundTable">
+                  <thead>
+                      <tr>
+                          <th>ID</th>
+                          <th>Email</th>
+                          <th>Fullname</th>
+                          <th>Amount</th>
+                          <th>Profit</th>
+                          <th>Proof</th>
+                          <th>Comment</th>
+                          <th>Status</th>
+                          <th>Date</th>
+                          <th>Edit</th>
+                          <th>Delete</th>
+                      </tr>
+                  </thead>
+                  <tfoot>
+                      <tr>
+                          <th>ID</th>
+                          <th>Email</th>
+                          <th>Fullname</th>
+                          <th>Amount</th>
+                          <th>Profit</th>
+                          <th>Proof</th>
+                          <th>Comment</th>
+                          <th>Status</th>
+                          <th>Date</th>
+                          <th>Edit</th>
+                          <th>Delete</th>
+                      </tr>
+                  </tfoot>
+                 <tbody>
+                  <?php $sql_funds = "SELECT * FROM fund"; $sql_funds_exec = $con->query($sql_funds);//$serial_number = 1;
+                if ($sql_funds_exec->num_rows > 0): ?>
+                <?php foreach($sql_funds_exec as $funds_info): ?>
+                    <tr>
+                        <td class="coin-name"><?= $funds_info['ftxn']; ?></td>
+                        <td class="coin-name"><?= $funds_info['user_email']; ?></td>
+                        <td class="coin-name"><?= $funds_info['firstname'] . '&nbsp;' . $funds_info['lastname']; ?></td>
+                        <td class="coin-name"><?= $funds_info['fund_amount'] . $funds_info['fund_currency']; ?></td>
+                        <td class="coin-name"><?= $funds_info['fund_profit'] . $funds_info['fund_currency']; ?></td>
+                        <td class="coin-name">
+                            <?php if (isset($funds_info['fund_proof']) && $funds_info['fund_proof'] !== null): ?>
+                                <img src="<?= $funds_info['fund_proof']; ?>" alt="Funding proof" width="40px" height="40px">
+                            <?php endif; ?>
+                        </td>
+                        <td class="coin-name"><?= $funds_info['fund_comment']; ?></td>
+                              <td class="coin-name">
+                                  <span class='bg-light'><strong><?= $funds_info['fund_status'] ?></strong></span><br>
+                                  <?php if ($funds_info['fund_status'] === 'pending'): ?>
+                                      <a href="confirmOperation.php?afr=<?= $funds_info['id_no'] ?>">
+                                          <span type="submit" class="btn btn-outline-info badge badge-outline badge-danger badge-md">Approve</span>
+                                      </a>
+                                  <?php elseif ($funds_info['fund_status'] === 'approved'): ?>
+                                      <a href="confirmOperation.php?dfr=<?= $funds_info['id_no'] ?>">
+                                          <span type="submit" class="btn btn-outline-warning badge badge-outline badge-danger badge-md">Disapprove</span>
+                                      </a>
+                                  <?php endif; ?>
+                              </td>
+                        <td class="coin-name"><?= $funds_info['fund_request_date']; ?></td>
+                      <td class="coin-name">
+                          <button type="button" class="edit-btn btn btn-outline-secondary badge badge-outline badge-danger badge-md">Edit</button>
+                      </td>
+                        <td class="coin-name">
+                            <a href="confirmOperation.php?fr=<?= $funds_info['id_no']; ?>" class="dt-type-md">
+                                <span class="btn btn-outline-danger badge badge-outline badge-danger badge-md">Delete</span>
+                            </a>
+                        </td>
+                    </tr>
+                <?php endforeach; //$serial_number++; ?>
+            <?php else: ?>
+                 </tbody>
+                <tr>
+                    <!-- <td colspan="8">No funding information found</td> -->
+                </tr>
+            <?php endif; ?>
+        </tbody>     
+                </table>
+                </div>
+                </div>
+                </div>
+              </div>
+                <!-- FUND SECTION ENDS -->
+
+
+                <!-- WITHDRAW SECTION BEGINS -->
+              <div class="content-inner withdraw">
+                <h6>Withdrawal Requests</h6>
+                <h4>Fund Management<span>&nbsp;System</span></h4>
+                <p>
+                This page show you all the withdrawal requests that have been made on your website using the withdraw button. From here you can approve and edit withdraw requests. 
+                This page is for record and editing purposes and is intended for admin use only.
+                </p>
+                <div class="main">
+                <div class="card-body">
+                <div class="table-responsive">
+                <table class="table table-striped responsive-table" id="withdrawTable">
+                  <thead>
+                      <tr>
+                          <th>ID</th>
+                          <th>Email</th>
+                          <th>Fullname</th>
+                          <th>Amount</th>
+                          <th>Wallet</th>
+                          <th>Status</th>
+                          <th>Date</th>
+                          <th>Delete</th>
+                      </tr>
+                  </thead>
+                  <tfoot>
+                      <tr>
+                          <th>ID</th>
+                          <th>Email</th>
+                          <th>Fullname</th>
+                          <th>Amount</th>
+                          <th>Wallet</th>
+                          <th>Status</th>
+                          <th>Date</th>
+                          <th>Delete</th>
+                      </tr>
+                  </tfoot>
+                 <tbody>
+                  <?php $sql_withdraws = "SELECT * FROM withdraw"; $sql_withdraws_exec = $con->query($sql_withdraws);//$serial_number = 1;
+                if ($sql_withdraws_exec->num_rows > 0): ?>
+                <?php foreach($sql_withdraws_exec as $withdraws_info): ?>
+                    <tr>
+                        <td class="coin-name"><?= $withdraws_info['wtxn']; ?></td>
+                        <td class="coin-name"><?= $withdraws_info['user_email']; ?></td>
+                        <td class="coin-name"><?= $withdraws_info['firstname'] . '&nbsp;' . $withdraws_info['lastname']; ?></td>
+                        <td class="coin-name"><?= $withdraws_info['withdraw_amount'] . $withdraws_info['withdraw_currency']; ?></td>
+                        <td class="coin-name"><?= $withdraws_info['withdraw_address']; ?></td>
+                              <td class="coin-name">
+                                  <span class='bg-light'><strong><?= $withdraws_info['withdraw_status'] ?></strong></span><br>
+                                  <?php if ($withdraws_info['withdraw_status'] === 'pending'): ?>
+                                      <a href="confirmOperation.php?awr=<?= $withdraws_info['id_no'] ?>">
+                                          <span type="submit" class="btn btn-outline-info badge badge-outline badge-danger badge-md">Approve</span>
+                                      </a>
+                                  <?php elseif ($withdraws_info['withdraw_status'] === 'approved'): ?>
+                                      <a href="confirmOperation.php?dwr=<?= $withdraws_info['id_no'] ?>">
+                                          <span type="submit" class="btn btn-outline-warning badge badge-outline badge-danger badge-md">Disapprove</span>
+                                      </a>
+                                  <?php endif; ?>
+                              </td>
+                        <td class="coin-name"><?= $withdraws_info['withdraw_request_date']; ?></td>
+                        <td class="coin-name">
+                            <a href="confirmOperation.php? wr=<?= $withdraws_info['id_no']; ?>" class="dt-type-md">
+                                <span class="btn btn-outline-danger badge badge-outline badge-danger badge-md">Delete</span>
+                            </a>
+                        </td>
+                    </tr>
+                <?php endforeach; //$serial_number++; ?>
+            <?php else: ?>
+                 </tbody>
+                <tr>
+                    <!-- <td colspan="8">No withdrawl information found</td> -->
+                </tr>
+            <?php endif; ?>
+        </tbody>     
+                </table>
+                </div>
+                </div>
+                </div>
+              </div>
+                <!-- WITHDRAW SECTION ENDS -->
+
+                <!-- TRANSACTION SECTION BEGINS -->
+              <div class="content-inner transaction">
+                <h6>Transaction Requests</h6>
+                <h4>Fund Management<span>&nbsp;System</span></h4>
+                <p>
+                This page show you all the transaction requests, related to trade, that have been made on your website. From here you can approve and edit these transactions. 
+                This page is for record and editing purposes and is intended for admin use only.
+                </p>
+                <div class="main">
+                <div class="card-body">
+                <div class="table-responsive">
+                <table class="table table-striped responsive-table" id="transactionTable">
+                  <thead>
+                      <tr>
+                          <th>ID</th>
+                          <th>Username</th>
+                          <th>Package</th>
+                          <th>Amount</th>
+                          <th>Duration</th>
+                          <th>Interest</th>
+                          <th>Profit</th>
+                          <th>Status</th>
+                          <th>Date</th>
+                          <th>Edit</th>
+                          <th>Delete</th>
+                      </tr>
+                  </thead>
+                  <tfoot>
+                      <tr>
+                      <th>ID</th>
+                          <th>Username</th>
+                          <th>Package</th>
+                          <th>Amount</th>
+                          <th>Duration</th>
+                          <th>Interest</th>
+                          <th>Profit</th>
+                          <th>Status</th>
+                          <th>Date</th>
+                          <th>Edit</th>
+                          <th>Delete</th>
+                      </tr>
+                  </tfoot>
+                 <tbody>
+                  <?php $sql_transactions = "SELECT * FROM transaction"; $sql_transactions_exec = $con->query($sql_transactions);//$serial_number = 1;
+                if ($sql_transactions_exec->num_rows > 0): ?>
+                <?php foreach($sql_transactions_exec as $transactions_info): ?>
+                    <tr>
+                        <td class="coin-name"><?= $transactions_info['txn']; ?></td>
+                        <td class="coin-name"><?= $transactions_info['userName']; ?></td>
+                        <td class="coin-name"><?= $transactions_info['firstname'] . '&nbsp;' . $transactions_info['lastname']; ?></td>
+                        <td class="coin-name"><?= $transactions_info['transaction_amount'] . $transactions_info['transaction_currency']; ?></td>
+                        <td class="coin-name"><?= $transactions_info['transaction_profit'] . $transactions_info['transaction_currency']; ?></td>
+                        
+                        <td class="coin-name"><?= $transactions_info['transaction_comment']; ?></td>
+                              <td class="coin-name">
+                                  <span class='bg-light'><strong><?= $transactions_info['transaction_status'] ?></strong></span><br>
+                                  <?php if ($transactions_info['transaction_status'] === 'pending'): ?>
+                                      <a href="confirmOperation.php?atr=<?= $transactions_info['id_no'] ?>">
+                                          <span type="submit" class="btn btn-outline-info badge badge-outline badge-danger badge-md">Approve</span>
+                                      </a>
+                                  <?php elseif ($transactions_info['transaction_status'] === 'approved'): ?>
+                                      <a href="confirmOperation.php?dtr=<?= $transactions_info['id_no'] ?>">
+                                          <span type="submit" class="btn btn-outline-warning badge badge-outline badge-danger badge-md">Disapprove</span>
+                                      </a>
+                                  <?php endif; ?>
+                              </td>
+                        <td class="coin-name"><?= $transactions_info['transaction_request_date']; ?></td>
+                        <!-- <td class="coin-name">
+                            <a href="" class="dt-type-md">
+                                <span class="btn btn-outline-secondary badge badge-outline badge-danger badge-md">Edit</span>
+                            </a>
+                        </td> -->
+                      <td class="coin-name">
+                          <button type="button" class="edit-transaction-btn btn btn-outline-secondary badge badge-outline badge-danger badge-md">Edit</button>
+                      </td>
+                        <td class="coin-name">
+                            <a href="confirmOperation.php?tr=<?= $transactions_info['id_no']; ?>" class="dt-type-md">
+                                <span class="btn btn-outline-danger badge badge-outline badge-danger badge-md">Delete</span>
+                            </a>
+                        </td>
+                    </tr>
+                <?php endforeach; //$serial_number++; ?>
+            <?php else: ?>
+                 </tbody>
+                <tr>
+                    <!-- <td colspan="8">No transaction information found</td> -->
+                </tr>
+            <?php endif; ?>
+            <?php $con->close(); ?>
+        </tbody>     
+                </table>
+                </div>
+                </div>
+                </div>
+                <!-- TRANSACTION SECTION ENDS -->
             </div>
           </div>
         </div>
       </div>
     </section>
-
+<!-- MODALFORMS -->
+ <?php include "modalForms.php"; ?>
     <section class="section-sale">
       <div class="container">
         <div class="row">
           <div class="col-md-7">
             <div class="block-text">
-              <h4 class="heading">User Management Center</h4>
+              <h4 class="heading">Admin Manager</h4>
               <p class="desc">
-                Visit the user management center to manage users and user information
+                Need a new admin? Use the add admin button to add new admin or manager to your website.
               </p>
             </div>
           </div>
           <div class="col-md-5">
             <div class="button">
-              <a href="#">User Management</a>
+              <a href="add-admin.php">Add Admin</a>
             </div>
           </div>
         </div>
@@ -491,6 +1095,9 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
 
       <!--Custom JS for copy text -->
       <script type="text/javascript" src="../app/js/custom-scripts.js"></script>
+
+            <!-- Datatable JS -->
+      <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
 
     <script>
       imgInp.onchange = (evt) => {
@@ -531,17 +1138,63 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
           showMessage();
         }
       }
+  //Datatables
+  $(document).ready(function() {
+      $('#walletTable').DataTable();
+      $('#userTable').DataTable();
+      $('#refTable').DataTable();
+      $('#adminTable').DataTable();
+      $('#fundTable').DataTable();
+      $('#withdrawTable').DataTable();
+      $('#tradeTable').DataTable();
+      $('#transactionTable').DataTable();
+      $('#p2pTable').DataTable();
+  });
+
     </script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var modal = document.getElementById("editModal");
+        var span = document.getElementsByClassName("close")[0];
+
+        document.querySelectorAll('.edit-btn').forEach(function(button) {
+            button.onclick = function() {
+                var row = button.closest('tr');
+                document.getElementById('ftxn').value = row.cells[0].innerText;
+                document.getElementById('editEmail').value = row.cells[1].innerText;
+                // document.getElementById('editFirstname').value = row.cells[2].innerText.split(' ')[0];
+                // document.getElementById('editLastname').value = row.cells[2].innerText.split(' ')[1];
+                document.getElementById('editAmount').value = row.cells[3].innerText.slice(0,-3);
+                document.getElementById('editCurrency').value = row.cells[3].innerText.slice(-3); // Assuming the last 3 characters are currency
+                document.getElementById('editProfit').value = row.cells[4].innerText.slice(0,-3);
+
+                modal.style.display = "block";
+            };
+        });
+
+        span.onclick = function() {
+            modal.style.display = "none";
+        };
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        };
+    });
+</script> 
   </body>
 </html>
 <?php
-        if(isset($toast)){
-        if($toast==='success'){
-          echo "<script>toastr.success('You will be redirected shortly', 'Success')</script>";
-        }
 
-        if($toast==='fail'){
-          echo "<script>toastr.error('We cannot log you in', 'Wrong credentials')</script>";
-        }
-      }
-        ?>
+if(isset($toast)){
+    if($toast==='success'){
+      echo "<script>toastr.success('You will be redirected shortly', 'Success')</script>";
+    }
+
+    if($toast==='fail'){
+      echo "<script>toastr.error('We cannot log you in', 'Error')</script>";
+    }
+  }
+?>

@@ -1,6 +1,7 @@
 <?php
-// Start the session and include required files
-include "../function.php";
+    // Include required files
+    include "../function.php"; 
+    checkAdminLogin();
 
 // Check if the user is logged in
 if (!isset($_SESSION['admin_session']) || empty($_SESSION['admin_session'])) {

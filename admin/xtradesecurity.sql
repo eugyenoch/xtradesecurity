@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 30, 2024 at 01:19 PM
+-- Generation Time: Aug 03, 2024 at 10:16 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -42,6 +42,13 @@ CREATE TABLE `admin` (
   `reg_date` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`id_no`, `firstname`, `lastname`, `user_email`, `userName`, `user_pass`, `address`, `city`, `country`, `phone`, `photo`, `reg_date`) VALUES
+(1, 'xtradesecurity', 'Admin', 'noadmin@xtradesecurity.com', 'XtradeSecurity Admin', 'd46740369851d8c082996a005b371fe2', '', 'Dubai', 'United Arab Emirates', '+2347030000000', '../assets/user-uploads/finance-svgrepo-com-1-100x100.png', '2024-08-01 09:23:18');
+
 -- --------------------------------------------------------
 
 --
@@ -55,13 +62,21 @@ CREATE TABLE `fund` (
   `firstname` varchar(255) NOT NULL,
   `lastname` varchar(255) NOT NULL,
   `fund_currency` varchar(255) DEFAULT NULL,
-  `fund_amount` decimal(19,9) DEFAULT NULL,
-  `fund_profit` decimal(19,9) DEFAULT NULL,
+  `fund_amount` decimal(19,5) DEFAULT NULL,
+  `fund_profit` decimal(19,5) DEFAULT NULL,
   `fund_proof` varchar(255) DEFAULT NULL,
   `fund_comment` varchar(1024) DEFAULT NULL,
   `fund_status` varchar(255) NOT NULL DEFAULT 'pending',
   `fund_request_date` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `fund`
+--
+
+INSERT INTO `fund` (`id_no`, `user_email`, `ftxn`, `firstname`, `lastname`, `fund_currency`, `fund_amount`, `fund_profit`, `fund_proof`, `fund_comment`, `fund_status`, `fund_request_date`) VALUES
+(2, 'danjohn@gmail.com', 'TXN765434', 'Daniel', 'John', 'BTC', 2.00000, 9.98700, '2(1).png', 'Nothing more to do', 'approved', '2024-08-02 21:43:39'),
+(5, 'emeka@gmail.com', 'TXN09855', 'Emeka', 'Bold', 'SOL', 4.03000, 13.67800, '2(1).png', 'There is more to come', 'pending', '2024-08-02 22:05:18');
 
 -- --------------------------------------------------------
 
@@ -91,8 +106,8 @@ CREATE TABLE `peer_transfer` (
   `buyer_wallet` varchar(255) DEFAULT NULL,
   `main_currency` varchar(512) DEFAULT NULL,
   `second_currency` varchar(512) DEFAULT NULL,
-  `seller_amount` decimal(18,9) DEFAULT NULL,
-  `buyer_amount` decimal(18,9) DEFAULT NULL,
+  `seller_amount` decimal(19,5) DEFAULT NULL,
+  `buyer_amount` decimal(19,5) DEFAULT NULL,
   `prole` varchar(512) DEFAULT NULL,
   `pstatus` varchar(255) NOT NULL DEFAULT 'pending',
   `peer_transact_date` datetime NOT NULL DEFAULT current_timestamp()
@@ -106,10 +121,17 @@ CREATE TABLE `peer_transfer` (
 
 CREATE TABLE `referral` (
   `id` int(11) NOT NULL,
-  `referral` varchar(50) NOT NULL,
-  `user_referred_email` varchar(50) NOT NULL,
+  `referrer` varchar(50) NOT NULL,
+  `user_referred` varchar(50) NOT NULL,
   `date` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `referral`
+--
+
+INSERT INTO `referral` (`id`, `referrer`, `user_referred`, `date`) VALUES
+(1, 'danjohn', 'okon', '2024-08-02 16:10:50');
 
 -- --------------------------------------------------------
 
@@ -138,8 +160,8 @@ CREATE TABLE `transaction` (
   `txn` varchar(25) DEFAULT NULL,
   `user_email` varchar(255) DEFAULT NULL,
   `tpackage` varchar(512) DEFAULT NULL,
-  `tamount` decimal(19,9) DEFAULT NULL,
-  `tprofit` decimal(19,9) DEFAULT NULL,
+  `tamount` decimal(19,5) DEFAULT NULL,
+  `tprofit` decimal(19,5) DEFAULT NULL,
   `tcurrency` varchar(255) DEFAULT 'USD',
   `tduration` varchar(512) DEFAULT '30',
   `tinterest` decimal(8,2) DEFAULT NULL,
@@ -170,6 +192,13 @@ CREATE TABLE `users` (
   `reg_date` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id_no`, `firstname`, `lastname`, `user_email`, `userName`, `user_pass`, `address`, `city`, `country`, `phone`, `photo`, `affid`, `reg_date`) VALUES
+(1, 'Daniel', 'John', 'danjohn@gmail.com', 'danjohn', '4f3d2e2f6f7003372c097ff57cffaf51', NULL, 'Lagos', 'Nigeria', '07030000000', NULL, 3454545, '2024-08-02 15:58:07');
+
 -- --------------------------------------------------------
 
 --
@@ -184,6 +213,18 @@ CREATE TABLE `wallet_addresses` (
   `date_created` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `wallet_addresses`
+--
+
+INSERT INTO `wallet_addresses` (`id_no`, `wallet`, `address`, `qrcode`, `date_created`) VALUES
+(5, 'BSC', '098jfjvndhjdfhjvbsah', '3.png', '2024-08-01 23:21:26'),
+(6, 'ETH', 'jkdfghjkyfughbjgvb', '1 (1).png', '2024-08-01 23:55:01'),
+(7, 'AUD', 'lkjhjjhmjm', '3.png', '2024-08-02 09:36:26'),
+(8, 'SOL', 'awrtyjhgfdsaadfg', '2 (1).png', '2024-08-02 10:15:12'),
+(9, 'DOGE', 'poiuydjksaoiuslfdykjsaiuyg', '2 (1).png', '2024-08-02 11:14:16'),
+(12, 'XRP', 'kjgdfsgdfhgjnkjhgfdgszfxcgv', '3.png', '2024-08-02 16:04:15');
+
 -- --------------------------------------------------------
 
 --
@@ -197,11 +238,19 @@ CREATE TABLE `withdraw` (
   `firstname` varchar(255) DEFAULT NULL,
   `lastname` varchar(255) DEFAULT NULL,
   `withdraw_currency` varchar(255) DEFAULT NULL,
-  `wthdraw_amount` decimal(19,9) DEFAULT NULL,
+  `withdraw_amount` decimal(19,5) DEFAULT NULL,
   `withdraw_address` varchar(512) DEFAULT NULL,
-  `wthdraw_status` varchar(255) NOT NULL DEFAULT 'pending',
+  `withdraw_status` varchar(255) NOT NULL DEFAULT 'pending',
   `withdraw_request_date` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `withdraw`
+--
+
+INSERT INTO `withdraw` (`id_no`, `wtxn`, `user_email`, `firstname`, `lastname`, `withdraw_currency`, `withdraw_amount`, `withdraw_address`, `withdraw_status`, `withdraw_request_date`) VALUES
+(1, 'TXN0987654', 'danjohn@gmail.com', 'Daniel', 'John', 'BTC', 2.00000, '09876543456yu8i876543456', 'pending', '2024-08-02 21:46:46'),
+(2, 'TXN987654345', 'okon@gmail.com', 'Okon', 'Emma', 'ETH', 2.00000, '09876543234567890', 'pending', '2024-08-02 21:46:46');
 
 --
 -- Indexes for dumped tables
@@ -275,13 +324,13 @@ ALTER TABLE `withdraw`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id_no` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `fund`
 --
 ALTER TABLE `fund`
-  MODIFY `id_no` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `newsletter`
@@ -299,7 +348,7 @@ ALTER TABLE `peer_transfer`
 -- AUTO_INCREMENT for table `referral`
 --
 ALTER TABLE `referral`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `totals`
@@ -317,19 +366,19 @@ ALTER TABLE `transaction`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_no` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `wallet_addresses`
 --
 ALTER TABLE `wallet_addresses`
-  MODIFY `id_no` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `withdraw`
 --
 ALTER TABLE `withdraw`
-  MODIFY `id_no` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

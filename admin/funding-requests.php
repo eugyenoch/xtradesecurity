@@ -1,48 +1,6 @@
 <?php
 include '../function.php';
 checkAdminLogin();
-
-// Check if the form is submitted
-if (isset($_POST['addAdmin'])) {
-    // Sanitize and extract user input
-    $firstname = sanitize($_POST['fname']);
-    $lastname = sanitize($_POST['lname']);
-    $email = sanitize($_POST['email']);
-    $username = sanitize($_POST['userName']);
-    $password = md5($_POST['pwd']);
-    //$password = password_hash(sanitize($_POST['pwd']), PASSWORD_BCRYPT); // Hash the password
-    $dial_code = sanitize($_POST['dialCode']);
-    $phone_number = sanitize($_POST['phone']);
-    $mobile_phone = $dial_code . $phone_number;
-    $address = sanitize($_POST['address']);
-    $city = sanitize($_POST['city']);
-    $country = sanitize($_POST['country']);
-
-    // Prepare the SQL query
-    $sql = "INSERT INTO admin (firstname, lastname, user_email, userName, user_pass, address, city, country, phone)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    
-    // Initialize a statement
-    $stmt = $con->prepare($sql);
-
-    // Bind the parameters
-    $stmt->bind_param("sssssssss", $firstname, $lastname, $email, $username, $password, $address, $city, $country, $mobile_phone);
-    
-    // Execute the statement
-    if ($stmt->execute()) {
-        echo "<script>alert('New admin added successfully.'); window.location='user-profile.php';</script>";
-    } else {
-        echo "<script>alert('Error: New admin unsuccessful.')</script>";
-    }
-    // Close the statement
-    $stmt->close();
-}
-
-// Close the database connection
-$con->close();
-?>
-
-
 ?>
 
 <!DOCTYPE html>
@@ -113,66 +71,54 @@ $con->close();
                 <div class="content-inner">
                   <form action="<?= htmlentities($_SERVER['PHP_SELF']);?>" method="post" name="addAdminEmailForm">
                     <div class="form-group">
-                      <label for="exampleInputEmail1">Email<span>*</span></label>
-                      <input type="email" class="form-control" id="exampleInputEmail1" name="email" placeholder="Please fill in the email" required />
-                     
+                      <label for="exampleInputEmail1">Email</label>
+                      <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Please fill in the email" required />
                     </div>
                     <div class="form-group">
-                      <label for="exampleInputEmail1">Username<span>*</span></label>
-                      <input type="text" class="form-control" id="exampleInputEmail1" name="userName" placeholder="Please fill in the username" required />
-                      
+                      <label for="exampleInputEmail1">Username</label>
+                      <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Please fill in the username" required />
                     </div>
                     <div class="form-group">
-                      <label>Password<span>*(8 or more characters, including uppercase letters, lowercase letters, numbers and special characters)</span></label>
-                      <input type="password" class="form-control" placeholder="Please enter a password." name="pwd" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required />
-                     
+                      <label>Password<span>(8 or more characters, including uppercase letters, lowercase letters, numbers and special characters)</span></label>
+                      <input type="password" class="form-control" placeholder="Please enter a password." pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required />
                     </div>
                     <div class="form-group">
-                      <label>First Name<span class="fs-14">*(Excluding special characters)</span></label>
-                      <input type="text" class="form-control" placeholder="Enter firstname" name="fname" required />
-                     
+                      <label>First Name<span class="fs-14">(Excluding special characters)</span></label>
+                      <input type="text" class="form-control" placeholder="Enter firstname" required />
                     </div>
                     <div class="form-group">
-                      <label>Last Name<span class="fs-14">*(Excluding special characters)</span></label>
-                      <input type="text" class="form-control" placeholder="Enter lastname" name="lname" required />
-                   
+                      <label>Last Name<span class="fs-14">(Excluding special characters)</span></label>
+                      <input type="text" class="form-control" placeholder="Enter lastname" required />
                     </div>
                 
                     <div class="form-group">
                       <label for="exampleInputEmail1">Mobile Phone</label>
                       <div>
-                        <select class="form-control" name="dialCode"><?php include "../include/selectDialingCode.html";?></select>
-                        <input type="text" class="form-control" placeholder="Your Phone number" name="phone" />
+                        <select class="form-control"><?php include "../include/selectDialingCode.html";?></select>
+                        <input type="text" class="form-control" placeholder="Your Phone number" />
                       </div>
                     </div>
 
                     <div class="form-group">
                       <label>Address </label>
-                      <input type="text" class="form-control" placeholder="Please enter your address" name="address" />
+                      <input type="text" class="form-control" placeholder="Please enter your address" />
                     </div>
 
                     <div class="form-group">
                       <label>City </label>
-                      <input type="text" class="form-control" placeholder="Please enter your city" name="city" />
+                      <input type="text" class="form-control" placeholder="Please enter your city" />
                     </div>
 
                     <div class="form-group">
                       <label>Country </label>
-                      <select class="form-control" name="country"><?php include "../include/selectCountry.html";?></select>
-                    </div>
-
-                    <div class="form-group">
-                    <label>
-                      <input type="checkbox" name="agreement" checked required />
-                            I agree to the <a href="../terms-of-use.php" title="View terms of use" target="_blank" rel="noopener noreferrer">Terms Of Use</a><span>*</span></label><br>
-                       
+                      <select class="form-control"><?php include "../include/selectCountry.html";?></select>
                     </div>
 
                     <button type="submit" class="btn-action" name="addAdmin">Register Admin</button>
-                    <div class="bottom">
-                      <p>Back to admin home page</p>
-                      <a href="user-profile.php">Click Here</a>
-                    </div>
+                    <!-- <div class="bottom">
+                      <p>Already have an account?</p>
+                      <a href="login.html">Login</a>
+                    </div> -->
                 </form> 
                 </div>
                 <!-- <div class="content-inner"></div> -->
@@ -204,7 +150,7 @@ $con->close();
       </div>
     </section>
 
-  <?php include "../include/footer.php"; ?>
+  <?php include "footer.php"; ?>
 
     <script src="../app/js/aos.js"></script>
     <script src="../app/js/jquery.min.js"></script>
@@ -255,4 +201,3 @@ $con->close();
     </script>
   </body>
 </html>
-

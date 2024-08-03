@@ -32,6 +32,9 @@
     <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
       <!--Toastr-->
       <link rel="stylesheet" type="text/css" href="../app/dist/toastr.min.css">
+
+      <!-- Data table -->
+       <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
     <!-- End Style CSS -->
 
     <link rel="shortcut icon" href="../assets/images/logo/favicon.png" />
