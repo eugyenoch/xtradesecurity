@@ -1103,6 +1103,8 @@ $historicalData = fetchCryptoData('https://api.coingecko.com/api/v3/coins/bitcoi
     <!-- Custom JS -->
     <script src="app/js/cookie.js"></script>
     <script src="app/js/coindata.js"></script>
+    <!--Toastr-->
+    <script type="text/javascript" src="app/js/toastr.min.js"></script>
 
     <!-- Chart JS -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -1152,3 +1154,24 @@ $historicalData = fetchCryptoData('https://api.coingecko.com/api/v3/coins/bitcoi
 
   </body>
 </html>
+
+<?php 
+if(isset($toast)){
+    if($toast==='success'){
+      echo "<script>toastr.success('You will be redirected shortly', 'Success');</script>";
+    }
+
+    if($toast==='Subsuccess'){
+     echo "<script>toastr.success('You were subscribed successfully', 'Success'); window.location='#';</script>";
+    }
+
+    if($toast==='fail'){
+      echo "<script>toastr.error('We cannot log you in', 'Error')</script>";
+    }
+
+    if($toast==='Subfail'){
+      echo "<script>toastr.error('A problem was encountered while performing that operation', 'Error'); window.location='#';</script>";
+    }
+  }
+  $con->close();
+?>

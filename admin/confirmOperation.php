@@ -59,6 +59,7 @@ if (isset($_GET['du']) && !empty($_GET['du'])) {
           </script>";
   }
 
+  //FUNDING
 //CONFIRM FUND REQUEST DELETE
 if (isset($_GET['fr']) && !empty($_GET['fr'])) {
     $fr = $con->real_escape_string($_GET['fr']);
@@ -101,6 +102,7 @@ if (isset($_GET['dfr']) && !empty($_GET['dfr'])) {
           </script>";
   }
 
+  //WITHDRAWALS
 //CONFIRM WITHDRAW REQUEST DELETE
 if (isset($_GET['wr']) && !empty($_GET['wr'])) {
     $wr = $con->real_escape_string($_GET['wr']);
@@ -143,7 +145,7 @@ if (isset($_GET['awr']) && !empty($_GET['awr'])) {
           </script>";
   }
 
-
+//TRANSACTIONS
   //CONFIRM TRANSACTION REQUEST DELETE
 if (isset($_GET['tr']) && !empty($_GET['tr'])) {
     $tr = $con->real_escape_string($_GET['tr']);
@@ -151,24 +153,100 @@ if (isset($_GET['tr']) && !empty($_GET['tr'])) {
     // Confirm deletion with the user
     echo "<script>
             if (confirm('Are you sure you want to permanently delete this record?')) {
-                window.location.href = 'finance.php?deleteTrade=" . $tr . "';
+                window.location.href = 'finance.php?deleteTransaction=" . $tr . "';
             } else {
                 window.location.href = 'user-profile.php';
             }
           </script>";
   }
 
-//CONFIRM TRADE REQUEST DELETE
-if (isset($_GET['trade']) && !empty($_GET['trade'])) {
-    $trade = $con->real_escape_string($_GET['trade']);
+
+    //CONFIRM TRANSACTION REQUEST APPROVE
+if (isset($_GET['atr']) && !empty($_GET['atr'])) {
+    $atr = $con->real_escape_string($_GET['atr']);
   
     // Confirm deletion with the user
     echo "<script>
-            if (confirm('Are you sure you want to permanently delete this record?')) {
-                window.location.href = 'finance.php?deleteTrade=" . $trade . "';
+            if (confirm('Are you sure you want to approve this record?')) {
+                window.location.href = 'finance.php?approveTransaction=" . $atr . "';
             } else {
                 window.location.href = 'user-profile.php';
             }
           </script>";
   }
+
+   //CONFIRM TRANSACTION REQUEST DISAPPROVE
+   if (isset($_GET['dtr']) && !empty($_GET['dtr'])) {
+    $dtr = $con->real_escape_string($_GET['dtr']);
+  
+    // Confirm deletion with the user
+    echo "<script>
+            if (confirm('Are you sure you want to disapprove this record?')) {
+                window.location.href = 'finance.php?disapproveTransaction=" . $dtr . "';
+            } else {
+                window.location.href = 'user-profile.php';
+            }
+          </script>";
+  }
+
+//TRADE
+//CONFIRM TRADE REQUEST DELETE
+// if (isset($_GET['trade']) && !empty($_GET['trade'])) {
+//     $trade = $con->real_escape_string($_GET['trade']);
+  
+//     // Confirm deletion with the user
+//     echo "<script>
+//             if (confirm('Are you sure you want to permanently delete this record?')) {
+//                 window.location.href = 'finance.php?deleteTrade=" . $trade . "';
+//             } else {
+//                 window.location.href = 'user-profile.php';
+//             }
+//           </script>";
+//   }
+
+  //CONFIRM TRADE REQUEST APPROVE
+if (isset($_GET['atrade']) && !empty($_GET['atrade'])) {
+    $atrade = $con->real_escape_string($_GET['atrade']);
+  
+    // Confirm deletion with the user
+    echo "<script>
+            if (confirm('Are you sure you want to approve this record?')) {
+                window.location.href = 'finance.php?approveTrade =" . $atrade . "';
+            } else {
+                window.location.href = 'user-profile.php';
+            }
+          </script>";
+  }
+
+   //CONFIRM TRADE REQUEST DISAPPROVE
+   if (isset($_GET['dtrade']) && !empty($_GET['dtrade'])) {
+    $dtrade = $con->real_escape_string($_GET['dtrade']);
+  
+    // Confirm deletion with the user
+    echo "<script>
+            if (confirm('Are you sure you want to disapprove this record?')) {
+                window.location.href = 'finance.php?disapproveTrade =" . $dtrade . "';
+            } else {
+                window.location.href = 'user-profile.php';
+            }
+          </script>";
+  }
+
+
+  //NEWSLETTER
+ //CONFIRM NEWSLETTER SUBSCRIBER REQUEST DELETE
+if (isset($_GET['dnews']) && !empty($_GET['dnews'])) {
+    $dnews = $con->real_escape_string($_GET['dnews']);
+  
+    // Confirm deletion with the user
+    echo "<script>
+            if (confirm('Are you sure you want to permanently delete this subscriber?')) {
+                window.location.href = 'userProcessor.php?deleteNewsletter=" . $dnews . "';
+            } else {
+                window.location.href = 'user-profile.php';
+            }
+          </script>";
+  }
+
+
 ?>

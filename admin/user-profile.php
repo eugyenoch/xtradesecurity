@@ -47,11 +47,11 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
       <div class="container">
         <div class="row">
           <div class="col-md-6">
-            <h3 class="heading">Admin Profile</h3>
+            <h3 class="heading">Admin Dashboard</h3>
           </div>
           <div class="col-md-6">
             <ul class="breadcrumb">
-              <li><a href="../index.php">Home</a></li>
+              <li><a href="user-profile.php">Profile</a></li>
               <li><p class="fs-18">/</p></li>
               <li><p class="fs-18">User</p></li>
             </ul>
@@ -258,28 +258,39 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
               <li>
                 <h6 class="fs-16">
                 <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
                   xmlns="http://www.w3.org/2000/svg"
-              >
+                  viewBox="0 0 64 64"
+                  width="21"
+                  height="22"
+                  fill="none"
+                >
                   <path
-                      d="M3 4C1.89543 4 1 4.89543 1 6V18C1 19.1046 1.89543 20 3 20H21C22.1046 20 23 19.1046 23 18V6C23 4.89543 22.1046 4 21 4H3ZM3 6H21V8H3V6ZM3 18V10H21V18H3ZM5 12H7V14H5V12ZM9 12H11V14H9V12Z"
-                      fill="#000"
+                    d="M16 44h-2a2 2 0 01-2-2v-6a2 2 0 012-2h2a2 2 0 012 2v6a2 2 0 01-2 2zM28 44h-2a2 2 0 01-2-2v-16a2 2 0 012-2h2a2 2 0 012 2v16a2 2 0 01-2 2zM40 44h-2a2 2 0 01-2-2v-24a2 2 0 012-2h2a2 2 0 012 2v24a2 2 0 01-2 2zM52 44h-2a2 2 0 01-2-2V18a2 2 0 012-2h2a2 2 0 012 2v24a2 2 0 01-2 2z"
+                    fill="#3772FF"
                   />
-              </svg>
+                </svg>
                  Transactions
                 </h6>
               </li>
               <li>
                 <h6 class="fs-16">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-                          <g fill="#3772FF">
-                            <path d="M12 2C9.243 2 7 4.243 7 7s2.243 5 5 5 5-2.243 5-5S14.757 2 12 2zm0 8c-1.654 0-3-1.346-3-3s1.346-3 3-3 3 1.346 3 3-1.346 3-3 3z"/>
-                            <path d="M12 14c-3.86 0-7 3.14-7 7 0 .552.447 1 1 1h12c.553 0 1-.448 1-1 0-3.86-3.14-7-7-7zm-5.924 6c.458-2.318 2.578-4 5.924-4s5.466 1.682 5.924 4H6.076z"/>
-                          </g>
-                        </svg>
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="21"
+                    height="22"
+                    viewBox="0 0 64 64"
+                    fill="none"
+                  >
+                <path
+                  d="M51 14H13a2 2 0 00-2 2v32a4 4 0 004 4h34a4 4 0 004-4V16a2 2 0 00-2-2zM15 48a2 2 0 01-2-2V16h36v30a2 2 0 01-2 2H15z"
+                  fill="#3772FF"
+                />
+                <path
+                  d="M21 20h22a1 1 0 100-2H21a1 1 0 100 2zM21 26h22a1 1 0 100-2H21a1 1 0 100 2zM21 32h16a1 1 0 100-2H21a1 1 0 100 2zM21 38h16a1 1 0 100-2H21a1 1 0 100 2zM21 44h22a1 1 0 100-2H21a1 1 0 100 2zM47 36h-6a1 1 0 100 2h6a1 1 0 100-2zM47 42h-6a1 1 0 100 2h6a1 1 0 100-2zM47 30h-6a1 1 0 100 2h6a1 1 0 100-2zM47 24h-6a1 1 0 100 2h6a1 1 0 100-2zM47 18h-6a1 1 0 100 2h6a1 1 0 100-2z"
+                  fill="#3772FF"
+                />
+              </svg>
+
                  Newsletter
                 </h6>
               </li>
@@ -289,7 +300,7 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
             <div class="content-tab">
               <div class="content-inner profile">
                 <form action="update-profile.php" method="post" name="adminEditProfileForm">
-                  <h4>User Profile</h4>
+                  <h4>User Profile Management</h4>
                   <h6>View and edit your profile infomation</h6>
                   <div class="form-group d-flex s1">
                     <input type="text" class="form-control" name="firstname" value="<?php if(isset($firstname)){echo $firstname;} ?>" placeholder="Firstname" />
@@ -681,7 +692,7 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
                
               </div>
 
-              <div class="content-inner wallets" id="wallets">
+              <div class="content-inner wallets" id="wallet">
                 <h6>Wallet and Addresses</h6>
                 <h4>Wallet Management<span>&nbsp;System</span></h4>
                 <p>
@@ -777,7 +788,7 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
                 </div>
               </div>
             <!-- FUND SECTION BEGINS -->
-              <div class="content-inner funding">
+              <div class="content-inner funding" id="funding">
                 <h6>Fund Requests</h6>
                 <h4>Fund Management<span>&nbsp;System</span></h4>
                 <p>
@@ -873,7 +884,7 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
 
 
                 <!-- WITHDRAW SECTION BEGINS -->
-              <div class="content-inner withdraw">
+              <div class="content-inner withdraw" id="withdraw">
                 <h6>Withdrawal Requests</h6>
                 <h4>Fund Management<span>&nbsp;System</span></h4>
                 <p>
@@ -953,7 +964,7 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
                 <!-- WITHDRAW SECTION ENDS -->
 
                 <!-- TRANSACTION SECTION BEGINS -->
-              <div class="content-inner transaction">
+              <div class="content-inner transaction" id="transaction">
                 <h6>Transaction Requests</h6>
                 <h4>Fund Management<span>&nbsp;System</span></h4>
                 <p>
@@ -1000,30 +1011,25 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
                 <?php foreach($sql_transactions_exec as $transactions_info): ?>
                     <tr>
                         <td class="coin-name"><?= $transactions_info['txn']; ?></td>
-                        <td class="coin-name"><?= $transactions_info['userName']; ?></td>
-                        <td class="coin-name"><?= $transactions_info['firstname'] . '&nbsp;' . $transactions_info['lastname']; ?></td>
-                        <td class="coin-name"><?= $transactions_info['transaction_amount'] . $transactions_info['transaction_currency']; ?></td>
-                        <td class="coin-name"><?= $transactions_info['transaction_profit'] . $transactions_info['transaction_currency']; ?></td>
-                        
-                        <td class="coin-name"><?= $transactions_info['transaction_comment']; ?></td>
+                        <td class="coin-name"><?= $transactions_info['userName'] . "<br>" .$transactions_info['trole']; ?></td>
+                        <td class="coin-name"><?= $transactions_info['tpackage']; ?></td>
+                        <td class="coin-name"><?= $transactions_info['tamount'] . $transactions_info['tcurrency']; ?></td>
+                        <td class="coin-name"><?= $transactions_info['tduration']; ?></td>
+                        <td class="coin-name"><?= $transactions_info['tinterest']; ?></td>
+                        <td class="coin-name"><?= $transactions_info['tprofit'] . $transactions_info['tcurrency']; ?></td>
                               <td class="coin-name">
-                                  <span class='bg-light'><strong><?= $transactions_info['transaction_status'] ?></strong></span><br>
-                                  <?php if ($transactions_info['transaction_status'] === 'pending'): ?>
+                                  <span class='bg-light'><strong><?= $transactions_info['tstatus'] ?></strong></span><br>
+                                  <?php if ($transactions_info['tstatus'] === 'pending'): ?>
                                       <a href="confirmOperation.php?atr=<?= $transactions_info['id_no'] ?>">
                                           <span type="submit" class="btn btn-outline-info badge badge-outline badge-danger badge-md">Approve</span>
                                       </a>
-                                  <?php elseif ($transactions_info['transaction_status'] === 'approved'): ?>
+                                  <?php elseif ($transactions_info['tstatus'] === 'approved'): ?>
                                       <a href="confirmOperation.php?dtr=<?= $transactions_info['id_no'] ?>">
                                           <span type="submit" class="btn btn-outline-warning badge badge-outline badge-danger badge-md">Disapprove</span>
                                       </a>
                                   <?php endif; ?>
                               </td>
-                        <td class="coin-name"><?= $transactions_info['transaction_request_date']; ?></td>
-                        <!-- <td class="coin-name">
-                            <a href="" class="dt-type-md">
-                                <span class="btn btn-outline-secondary badge badge-outline badge-danger badge-md">Edit</span>
-                            </a>
-                        </td> -->
+                        <td class="coin-name"><?= $transactions_info['transact_date']; ?></td>
                       <td class="coin-name">
                           <button type="button" class="edit-transaction-btn btn btn-outline-secondary badge badge-outline badge-danger badge-md">Edit</button>
                       </td>
@@ -1040,13 +1046,73 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
                     <!-- <td colspan="8">No transaction information found</td> -->
                 </tr>
             <?php endif; ?>
-            <?php $con->close(); ?>
         </tbody>     
                 </table>
                 </div>
                 </div>
                 </div>
+              </div>
                 <!-- TRANSACTION SECTION ENDS -->
+
+                <!-- NEWSLETTER SECTION BEGINS -->
+              <div class="content-inner newsletter" id="newsletter">
+                <h6>Newsletter Subscriptions</h6>
+                <h4>View Your Newsletter<span>&nbsp;Subscribers</span></h4>
+                <p>
+                This page show you all newsletter subscription requests, that have been made by filling out the newsletter subscription form on your website. From here you can manage these subscriptions. 
+                This page is for record and editing purposes and is intended for admin use only.
+                </p>
+                <div class="main">
+                <div class="card-body">
+                <div class="table-responsive">
+                <table class="table table-striped responsive-table" id="newsletterTable">
+                  <thead>
+                      <tr>
+                          <th>ID</th>
+                          <th>Name</th>
+                          <th>Email</th>
+                          <th>Date</th>
+                          <th>Delete</th>
+                      </tr>
+                  </thead>
+                  <tfoot>
+                      <tr>
+                          <th>ID</th>
+                          <th>Name</th>
+                          <th>Email</th>
+                          <th>Date</th>
+                          <th>Delete</th>
+                      </tr>
+                  </tfoot>
+                 <tbody>
+                  <?php $sql_news = "SELECT * FROM newsletter"; $sql_news_exec = $con->query($sql_news); $serial_number = 1;
+                if ($sql_news_exec->num_rows > 0): ?>
+                <?php foreach($sql_news_exec as $news_info): ?>
+                    <tr>
+                        <td class="coin-name"><?= $serial_number; ?></td>
+                        <td class="coin-name"><?= $news_info['fullname']; ?></td>
+                        <td class="coin-name"><?= $news_info['email_address']; ?></td>
+                        <td class="coin-name"><?= $news_info['registration_date']; ?></td>
+                        <td class="coin-name">
+                            <a href="confirmOperation.php?dnews=<?= $news_info['id']; ?>" class="dt-type-md">
+                                <span class="btn btn-outline-danger badge badge-outline badge-danger badge-md">Delete</span>
+                            </a>
+                        </td>
+                    </tr>
+                <?php $serial_number++; endforeach; ?>
+            <?php else: ?>
+                 </tbody>
+                <tr>
+                    <!-- <td colspan="8">No newsletter subscription found</td> -->
+                </tr>
+            <?php endif; ?>
+           
+        </tbody>     
+                </table>
+                </div>
+                </div>
+                </div>
+                <!-- NEWSLETTER SECTION ENDS -->
             </div>
           </div>
         </div>
@@ -1090,14 +1156,16 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
     <script src="../app/js/datepickerpluigin.js"></script>
     <script src="../app/js/datepicker.js"></script>
 
-    <!--Toastr-->
-    <script type="text/javascript" src="../app/js/toastr.min.js"></script>
-
       <!--Custom JS for copy text -->
       <script type="text/javascript" src="../app/js/custom-scripts.js"></script>
+      <script src="../app/js/coindata.js"></script>
+      <!--Toastr-->
+    <script type="text/javascript" src="../app/js/toastr.min.js"></script>
 
             <!-- Datatable JS -->
       <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+
+      
 
     <script>
       imgInp.onchange = (evt) => {
@@ -1146,9 +1214,10 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
       $('#adminTable').DataTable();
       $('#fundTable').DataTable();
       $('#withdrawTable').DataTable();
-      $('#tradeTable').DataTable();
       $('#transactionTable').DataTable();
+      $('#tradeTable').DataTable();
       $('#p2pTable').DataTable();
+      $('#newsletterTable').DataTable();
   });
 
     </script>
@@ -1183,6 +1252,39 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
             }
         };
     });
+    </script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var Tmodal = document.getElementById("editTransactionModal");
+        var Tspan = document.getElementsByClassName("close")[0];
+
+        document.querySelectorAll('.edit-transaction-btn').forEach(function(button) {
+            button.onclick = function() {
+                var row = button.closest('tr');
+                document.getElementById('txn').value = row.cells[0].innerText;
+                document.getElementById('transactionUser').value = row.cells[1].innerText;
+                document.getElementById('transactionPackage').value = row.cells[1].innerText;
+                document.getElementById('transactionAmount').value = row.cells[3].innerText.slice(0,-3);
+                document.getElementById('transactionCurrency').value = row.cells[3].innerText.slice(-3); // Assuming the last 3 characters are currency
+                document.getElementById('transactionDuration').value = row.cells[4].innerText;
+                document.getElementById('transactionInterest').value = row.cells[4].innerText;
+                document.getElementById('transactionProfit').value = row.cells[4].innerText.slice(0,-3);
+
+               Tmodal.style.display = "block";
+            };
+        });
+
+        Tspan.onclick = function() {
+            Tmodal.style.display = "none";
+        };
+
+        window.onclick = function(event) {
+            if (event.target == Tmodal) {
+                Tmodal.style.display = "none";
+            }
+        };
+    });
 </script> 
   </body>
 </html>
@@ -1190,11 +1292,20 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
 
 if(isset($toast)){
     if($toast==='success'){
-      echo "<script>toastr.success('You will be redirected shortly', 'Success')</script>";
+      echo "<script>toastr.success('You will be redirected shortly', 'Success');</script>";
+    }
+
+    if($toast==='Subsuccess'){
+     echo "<script>toastr.success('You were subscribed successfully', 'Success'); window.location='user-profile.php';</script>";
     }
 
     if($toast==='fail'){
       echo "<script>toastr.error('We cannot log you in', 'Error')</script>";
     }
+
+    if($toast==='Subfail'){
+      echo "<script>toastr.error('A problem was encountered while performing that operation', 'Error'); window.location='user-profile.php';</script>";
+    }
   }
+  $con->close();
 ?>

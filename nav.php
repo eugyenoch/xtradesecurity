@@ -67,10 +67,13 @@
                       <li class="menu-item-has-children">
                         <a href="#"> Account pages <i class="fas fa-sort-desc" aria-hidden="true"></i></a>
                         <ul class="sub-menu">
+                        <?php if (isset($_SESSION['session_email']) || $_SESSION['session_email'] == true): ?>
                           <li class="menu-item">
-                            <a href="user/dashboard.php">User Profile</a>
+                            <a href="user/user-profile.php">User Profile</a>
                           </li>
-
+                          <?php endif; ?>
+                          
+                          <?php if (!isset($_SESSION['session_email']) || $_SESSION['session_email'] !== true): ?>
                           <li class="menu-item">
                             <a href="user/login.php">Login</a>
                           </li>
@@ -78,6 +81,7 @@
                           <li class="menu-item">
                             <a href="user/register.php">Register</a>
                           </li>
+                          <?php endif; ?>
                         </ul>
                       </li>
                     </ul>

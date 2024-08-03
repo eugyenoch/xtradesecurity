@@ -38,7 +38,20 @@ if (isset($_GET['deleteAdm']) && !empty($_GET['deleteAdm'])) {
         echo "<script>alert('Error: We could not perform this operation'); window.location='user-profile.php';</script>";
     }
 }
-    
+
+
+ //DELETE NEWSLETTER SUBSCRIBER
+if (isset($_GET['deleteNewsletter']) && !empty($_GET['deleteNewsletter'])) {
+    $deleteNewsletter = $con->real_escape_string($_GET['deleteNewsletter']);
+    $stmt = $con->prepare("DELETE FROM `newsletter` WHERE `id` = ?");
+    $stmt->bind_param("s", $deleteNewsletter);
+
+    if ($stmt->execute()) {
+        echo "<script>alert('Subscriber deleted successfully'); window.location='user-profile.php';</script>";
+    } else {
+        echo "<script>alert('Error: We could not perform this operation'); window.location='user-profile.php';</script>";
+    }
+}   
      // Close the database connection
      $con->close();
 

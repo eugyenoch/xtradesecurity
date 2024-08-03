@@ -55,10 +55,12 @@
                   Subscribe our newsletter to get more free tips and
                   resources.
                 </p>
-                <form action="newletter.php" method="post">
-                  <input type="email" placeholder="Enter your email" required />
-                  <button type="submit" class="btn-action" onclick="" name="subscribe">Subscribe</button>
+                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" name="newsletterForm">
+                <input type="text" class="form-control" name="fullname" placeholder="Enter your fullname" required /><br>
+                  <input type="email" class="form-control" name="email" placeholder="Enter your email" required /><br>
+                  <button type="submit" class="btn-action" name="newsletter">Subscribe</button>
                 </form>
+               
                 <ul class="list-social">
                   <!-- <li>
                     <a href="#"><span class="icon-facebook-f"></span></a>
@@ -84,7 +86,8 @@
       <div class="container-fluid">
         <div class="footer__bottom">
           <p>
-           <small>xTradeSecurity does not provide recommendations regarding the merits of any digital asset or financial product mentioned on our platform, including in advertisements, emails, or related websites. The information provided does not consider your individual objectives, financial situation, or needs. You should assess whether these products align with your personal goals and financial circumstances, and carefully consider the risks involved. We recommend reviewing our Client Agreement before making any decisions related to xTradeSecurity’s products. Trading digital assets involves significant risk of loss. Only invest money that you can afford to lose. xTradeSecurity is operated by xTradeSecurity Ltd, which is regulated by the Financial Services Commission of Belize (License Number FSC000281/20). Client transactions are processed through Reituca Marketing Ltd, registered at 17 Stasinou, Floor 11 – 12, 1060, Nicosia, Cyprus (Registration No. HE231803). Our subsidiaries are also licensed in South Africa by the Financial Sector Conduct Authority (FSCA) under Peak Wealth PTY Ltd (License Number FSP44681) and in Belize by the Financial Services Commission of Belize under xTradeSecurity Ltd (License Number FSC000281/20).<br>
+           <small>xTradeSecurity does not provide recommendations regarding the merits of any digital asset or financial product mentioned on our platform, including in advertisements, emails, or related websites. The information provided does not consider your individual objectives, financial situation, or needs. You should assess whether these products align with your personal goals and financial circumstances, and carefully consider the risks involved. We recommend reviewing our Client Agreement before making any decisions related to xTradeSecurity’s products. Trading digital assets involves significant risk of loss. Only invest money that you can afford to lose. 
+            <br>
             <hr>
             <center><a href="terms-of-use.php" title="Read the terms of use">Terms of Service</a> | <a href="privacy-policy.php" title="Read the terms of use">Privacy policy</a></center></small>
             <hr>
@@ -97,4 +100,27 @@
       </div>
     </footer>
 
-    
+
+<?php
+// Check if the form is submitted
+if (isset($_POST['newsletter'])) {
+  // Sanitize the email input
+  $fullname = sanitize($_POST['fullname']);
+  $email = sanitize($_POST['email']);
+
+  // Prepare SQL and bind parameters
+  $stmt = $con->prepare("INSERT INTO newsletter (fullname, email_address) VALUES (?, ?)");
+  $stmt->bind_param('ss', $fullname, $email);
+
+  // Execute the prepared statement
+  if ($stmt->execute()) {
+     $toast = 'Subsuccess';
+     
+  } else {
+     $toast==='Subfail';
+  }
+
+  // Close the statement
+  $stmt->close();
+}
+?>

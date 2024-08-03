@@ -3,6 +3,7 @@
 include "../function.php"; 
 checkAdminLogin();
 
+//FUNDING
 //DELETE FUNDING REQUESTS
 if (isset($_GET['deleteFund']) && !empty($_GET['deleteFund'])) {
     $deleteFund = $con->real_escape_string($_GET['deleteFund']);
@@ -13,7 +14,7 @@ if (isset($_GET['deleteFund']) && !empty($_GET['deleteFund'])) {
     if ($stmt->execute()) {
         echo "<script>alert('Record deleted successfully'); window.location='user-profile.php';</script>";
     } else {
-        echo "<script>alert('Error: We could not perform this operation'); window.location='user-profile.php';</script>";
+        echo "<script>alert('Error: The operation could not be performed'); window.location='user-profile.php';</script>";
     }
 }
 
@@ -24,7 +25,7 @@ if (isset($_GET['approveFund']) && !empty($_GET['approveFund'])) {
     if ($con->query($approve_fund) === TRUE) {
         echo "<script>alert('Success: Funding Approved'); window.location='user-profile.php';</script>";
     } else {
-        echo "<script>alert('Error: We could not perform this operation'); window.location='user-profile.php';</script>";
+        echo "<script>alert('Error: The operation could not be performed'); window.location='user-profile.php';</script>";
     }
 }
 
@@ -35,7 +36,7 @@ if (isset($_GET['disapproveFund']) && !empty($_GET['disapproveFund'])) {
     if ($con->query($disapprove_fund) === TRUE) {
         echo "<script>alert('Success: Funding Disapproved'); window.location='user-profile.php';</script>";
     } else {
-        echo "<script>alert('Error: We could not perform this operation'); window.location='user-profile.php';</script>";
+        echo "<script>alert('Error: The operation could not be performed'); window.location='user-profile.php';</script>";
     }
 }
 
@@ -67,7 +68,7 @@ if (isset($_POST['updateFund'])) {
     
 }
 
-
+//WITHDRAWAL
 //DELETE WITHDRAWAL REQUESTS
 if (isset($_GET['deleteWithdraw']) && !empty($_GET['deleteWithdraw'])) {
     $deleteWithdraw = $con->real_escape_string($_GET['deleteWithdraw']);
@@ -78,7 +79,7 @@ if (isset($_GET['deleteWithdraw']) && !empty($_GET['deleteWithdraw'])) {
     if ($stmt->execute()) {
         echo "<script>alert('Record deleted successfully'); window.location='user-profile.php';</script>";
     } else {
-        echo "<script>alert('Error: We could not perform this operation'); window.location='user-profile.php';</script>";
+        echo "<script>alert('Error: The operation could not be performed'); window.location='user-profile.php';</script>";
     }
 }
 
@@ -89,7 +90,7 @@ if (isset($_GET['approveWithdraw']) && !empty($_GET['approveWithdraw'])) {
     if ($con->query($approve_withdraw) === TRUE) {
         echo "<script>alert('Success: Withdrawal Approved'); window.location='user-profile.php';</script>";
     } else {
-        echo "<script>alert('Error: We could not perform this operation'); window.location='user-profile.php';</script>";
+        echo "<script>alert('Error: The operation could not be performed'); window.location='user-profile.php';</script>";
     }
 }
 
@@ -100,7 +101,45 @@ if (isset($_GET['disapproveWithdraw']) && !empty($_GET['disapproveWithdraw'])) {
     if ($con->query($disapprove_withdraw) === TRUE) {
         echo "<script>alert('Success: Withdrawal Disapproved'); window.location='user-profile.php';</script>";
     } else {
-        echo "<script>alert('Error: We could not perform this operation'); window.location='user-profile.php';</script>";
+        echo "<script>alert('Error: The operation could not be performed'); window.location='user-profile.php';</script>";
+    }
+}
+
+
+//TRANSACTION
+//DELETE TRANSACTION REQUESTS
+if (isset($_GET['deleteTransaction']) && !empty($_GET['deleteTransaction'])) {
+    $deleteTransaction = $con->real_escape_string($_GET['deleteTransaction']);
+    //Prepare statement
+    $stmt = $con->prepare("DELETE FROM transaction WHERE id_no = ?");
+    $stmt->bind_param("s", $deleteTransaction);
+
+    if ($stmt->execute()) {
+        echo "<script>alert('Success: Transaction deleted successfully'); window.location='user-profile.php';</script>";
+    } else {
+        echo "<script>alert('Error: The operation could not be performed'); window.location='user-profile.php';</script>";
+    }
+}
+
+//APPROVE TRANSACTION
+if (isset($_GET['approveTransaction']) && !empty($_GET['approveTransaction'])) {
+    $approveTransaction = $con->real_escape_string($_GET['approveTransaction']);
+    $approve_transaction ="UPDATE transaction SET tstatus='approved' WHERE id_no = '$approveTransaction'";
+    if ($con->query($approve_transaction) === TRUE) {
+        echo "<script>alert('Success:Transaction Approved'); window.location='user-profile.php';</script>";
+    } else {
+        echo "<script>alert('Error: The operation could not be performed'); window.location='user-profile.php';</script>";
+    }
+}
+
+//DISAPPROVE TRANSACTION
+if (isset($_GET['disapproveTransaction']) && !empty($_GET['disapproveTransaction'])) {
+    $disapproveTransaction = $con->real_escape_string($_GET['disapproveTransaction']);
+    $disapprove_transaction = "UPDATE transaction SET tstatus='pending' WHERE id_no = '$disapproveTransaction'";
+    if ($con->query($disapprove_transaction) === TRUE) {
+        echo "<script>alert('Success: Transaction Disapproved'); window.location='user-profile.php';</script>";
+    } else {
+        echo "<script>alert('Error: The operation could not be performed'); window.location='user-profile.php';</script>";
     }
 }
 

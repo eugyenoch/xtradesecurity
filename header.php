@@ -37,4 +37,9 @@ include "function.php";
 
     <link rel="shortcut icon" href="assets/images/logo/favicon.png" />
     <link rel="apple-touch-icon-precomposed" href="assets/images/logo/favicon.png" />
+    <style>
+      .footer.style-2 .footer__main .footer-contact form button{
+        top:auto !important;
+      }
+    </style>
   </head>

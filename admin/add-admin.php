@@ -37,12 +37,6 @@ if (isset($_POST['addAdmin'])) {
     // Close the statement
     $stmt->close();
 }
-
-// Close the database connection
-$con->close();
-?>
-
-
 ?>
 
 <!DOCTYPE html>

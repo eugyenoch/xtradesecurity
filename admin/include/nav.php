@@ -1,4 +1,4 @@
- <nav id="main-nav" class="main-nav">
+<nav id="main-nav" class="main-nav">
                     <ul id="menu-primary-menu" class="menu">
                       <li class="menu-item-has-children">
                         <a href="index.php">Home<svg
@@ -67,17 +67,21 @@
                       <li class="menu-item-has-children">
                         <a href="#"> Account Pages <i class="fas fa-sort-desc" aria-hidden="true"></i></a>
                         <ul class="sub-menu">
+                        <?php if (isset($_SESSION['admin_session']) || $_SESSION['admin_session'] == true): ?>
                           <li class="menu-item">
-                            <a href="user/dashboard.php">User Profile</a>
+                            <a href="../user-profile.php">Admin Dashboard</a>
                           </li>
-
+                          
                           <li class="menu-item">
-                            <a href="user/login.php">Login</a>
+                            <a href="../add-admin.php">Add New Admin</a>
                           </li>
-
+                          <?php endif; ?>
+                          
+                          <?php if(!isset($_SESSION['admin_session']) && $_SESSION['admin_session'] === false): ?>
                           <li class="menu-item">
-                            <a href="user/register.php">Register</a>
+                            <a href="../login.php">Login</a>
                           </li>
+                          <?php endif; ?>
                         </ul>
                       </li>
                     </ul>
