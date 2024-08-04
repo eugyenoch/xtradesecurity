@@ -395,6 +395,9 @@
     <script src="app/js/switchmode.js"></script>
     <script src="https://unpkg.com/boxicons@2.1.2/dist/boxicons.js"></script>
 
+     <!--Toastr-->
+     <script type="text/javascript" src="app/js/toastr.min.js"></script>
+
     <script>
       function Convert() {
         let dollarInput = document.getElementByClass("dollar").value;

@@ -93,8 +93,8 @@
             <hr>
             &copy; <?php echo date('Y');?>&nbsp;xTradeSecurity.com. All rights reserved. <br><br></p>
             <p>
-            <center><span><img src="../assets/images/icon/googleplay.png" title="Android app for xTradeSecurity (in Beta)" alt="Google playstore image" /></span>&nbsp;
-            <span><img src="../assets/images/icon/appstore.png" title="iOS app for xTradeSecurity (in Beta)" alt="Apple iStore image" /></span></center>
+            <center><span><img src="assets/images/icon/googleplay.png" title="Android app for xTradeSecurity (in Beta)" alt="Google playstore image" /></span>&nbsp;
+            <span><img src="assets/images/icon/appstore.png" title="iOS app for xTradeSecurity (in Beta)" alt="Apple iStore image" /></span></center>
           </p>
         </div>
       </div>

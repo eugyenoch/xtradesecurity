@@ -29150,6 +29150,8 @@
     <script src="app/js/swiper-bundle.min.js"></script>
 
     <script src="app/js/swiper.js"></script>
+     <!--Toastr-->
+     <script type="text/javascript" src="app/js/toastr.min.js"></script>
   </body>
 </html>
 <?php

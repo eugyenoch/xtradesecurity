@@ -13,30 +13,30 @@ if (isset($_SESSION['admin_session']) && !empty($_SESSION['admin_session'])) {
 
 // Build the login script
 if (isset($_POST['emailLogin'])) {
-    // Sanitize and extract the user input
-    $admin_email = sanitize($_POST['adminEmail']);
-    $pass = md5(sanitize($_POST['pwd']));
-    
-    // Use prepared statements to prevent SQL injection
-    $stmt = $con->prepare("SELECT * FROM admin WHERE user_email = ? AND user_pass = ?");
-    $stmt->bind_param("ss", $admin_email, $pass);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    
-    // Count the number of rows that contain the data
-    $rowCountAdmin = $result->num_rows;
-    
-    // Check if there is no matching row with the user data
-    if ($rowCountAdmin <= 0) {
-        $toast = "fail";
-    } else {
-        $_SESSION['admin_session'] = $admin_email;
-        $toast = "success";
-        header("Location: user-profile.php");
-        exit;
-    }
+  // Sanitize and extract the user input
+  $admin_email_or_username = sanitize($_POST['adminEmail']);
+  $pass = md5(sanitize($_POST['pwd']));
 
-    $stmt->close();
+  // Use prepared statements to prevent SQL injection
+  $stmt = $con->prepare("SELECT * FROM admin WHERE (user_email = ? OR userName = ?) AND user_pass = ?");
+  $stmt->bind_param("sss", $admin_email_or_username, $admin_email_or_username, $pass);
+  $stmt->execute();
+  $result = $stmt->get_result();
+
+  // Count the number of rows that contain the data
+  $rowCountAdmin = $result->num_rows;
+
+  // Check if there is no matching row with the user data
+  if ($rowCountAdmin <= 0) {
+      $toast = "fail";
+  } else {
+      $_SESSION['admin_session'] = $admin_email_or_username;
+      $toast = "success";
+      header("Location: user-profile.php");
+      exit;
+  }
+
+  $stmt->close();
 }
 
 if (isset($_POST['phoneLogin'])) {
@@ -166,7 +166,7 @@ if (isset($_POST['phoneLogin'])) {
                   <form action="<?= htmlentities($_SERVER['PHP_SELF']);?>" method="post" name="adminLoginForm">
                     <div class="form-group">
                       <label for="exampleInputEmail1">Email/ID</label>
-                      <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email address" name="adminEmail" title="Email is required" required/>
+                      <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter email address" name="adminEmail" title="Email is required" required/>
                     </div>
                     <div class="form-group s1">
                       <label>Password </label>

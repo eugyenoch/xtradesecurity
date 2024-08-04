@@ -1,3 +1,95 @@
+<?php
+include "function.php";
+
+//using php mailer
+// use PHPMailer\PHPMailer\PHPMailer;
+// use PHPMailer\PHPMailer\Exception;
+
+// require 'vendor/autoload.php';
+
+// $mail = new PHPMailer(true);
+
+// try {
+//     //Server settings
+//     $mail->isSMTP();
+//     $mail->Host       = 'smtp.example.com';
+//     $mail->SMTPAuth   = true;
+//     $mail->Username   = 'your-email@example.com';
+//     $mail->Password   = 'your-email-password';
+//     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+//     $mail->Port       = 587;
+
+//     //Recipients
+//     $mail->setFrom('from@example.com', 'Mailer');
+//     $mail->addAddress('recipient@example.com', 'Joe User');
+
+//     //Content
+//     $mail->isHTML(true);
+//     $mail->Subject = 'Here is the subject';
+//     $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
+//     $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+//     $mail->send();
+//     echo 'Message has been sent';
+// } catch (Exception $e) {
+//     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+// }
+
+$toast = '';
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['contact'])) {
+    // Sanitize and extract user input
+    $firstname = sanitize($_POST['firstname']);
+    $lastname = sanitize($_POST['lastname']);
+    $phone = sanitize($_POST['phone']);
+    $email = sanitize($_POST['email']);
+    $subject = sanitize($_POST['subject']);
+    $message = sanitize($_POST['message']);
+
+   // Check if the reCAPTCHA response is set
+   if (isset($_POST['g-recaptcha-response']) && !empty($_POST['g-recaptcha-response'])) {
+    // reCAPTCHA validation
+    $recaptcha_secret = '6Ld5Px8qAAAAABT4wTXKHJNpXt6-iEROX-VqoSwr';
+    $recaptcha_response = $_POST['g-recaptcha-response'];
+    
+    $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
+    $recaptcha_data = [
+        'secret' => $recaptcha_secret,
+        'response' => $recaptcha_response
+    ];
+    
+    $options = [
+        'http' => [
+            'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+            'method'  => 'POST',
+            'content' => http_build_query($recaptcha_data),
+        ],
+    ];
+    $context  = stream_context_create($options);
+    $result = file_get_contents($recaptcha_url, false, $context);
+    $result = json_decode($result);
+    
+    if ($result->success) {
+        // Send email
+        $to = 'customer@xtradesecurity.com';
+        $subject = 'Website contact';
+        $message_body = "First Name: $firstname\nLast Name: $lastname\nEmail: $email\nPhone: $phone\nSubject: $subject\nMessage: $message";
+        $headers = 'From: no-reply@yourdomain.com' . "\r\n" .
+                   'Reply-To: ' . $email . "\r\n" .
+                   'X-Mailer: PHP/' . phpversion();
+
+        if (mail($to, $subject, $message_body, $headers)) {
+            $toast==='success';
+        } else {
+           $toast==='fail';
+        }
+    } else {
+        $toast = 'captchaFail';
+    }
+} else {
+    $toast='captchaOmit';
+  }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -64,47 +156,28 @@
                 <p class="desc fs-20">Get in touch with xTradeSecurity</p>
               </div>
 
-              <form>
+              <form action="<?= htmlentities($_SERVER['PHP_SELF']);?>" method="post" name="contactForm">
                 <div class="form-group">
                   <label>Your firstname<span class="text-danger">*</span></label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Enter your first name"
-                    required
-                  />
+                  <input type="text" class="form-control" placeholder="Enter your first name" name="firstname" required />
                 </div>
                 <div class="form-group">
                   <label>Your lastname<span class="text-danger">*</span></label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Enter your last name"
-                    required
-                  />
+                  <input type="text" class="form-control" placeholder="Enter your last name" name="lastname" required />
                 </div>
                  <div class="form-group">
-                  <label>Your Phone number<br><small>Format: 123-456-7890000</small></label>
-                  <input
-                    type="tel"
-                    class="form-control"
-                    placeholder="Enter your phone number"
-                    pattern="[0-9]{3}-[0-9]{3}-[0-9]{4,7}"
-                  />
+                  <label>Your Phone number<br><small>Format:123-456-7890000</small></label>
+                  <input type="tel" class="form-control" placeholder="Enter your phone number" name="phone" 
+                  title="Please match the requested format, including country code" pattern="[0-9]{1,3}-[0-9]{1,3}-[0-9]{4,9}" />
                 </div>
                 <div class="form-group">
                   <label>Email <span class="text-danger">*</span></label>
-                  <input
-                    type="email"
-                    class="form-control"
-                    placeholder="Enter mail"
-                    required
-                  />
+                  <input type="email" class="form-control" placeholder="Enter mail" name="email" required />
                 </div>
 
                 <div class="form-group">
-                  <label>Subject <span class="text-danger">*</span></label>
-                  <select class="form-control" id="exampleFormControlSelect1" required>
+                  <label>Subject</label>
+                  <select class="form-control" id="exampleFormControlSelect1" name="subject">
                     <option value="general">General Enquiry</option>
                     <option value="account">Account issues</option>
                     <option value="technical">Technical</option>
@@ -115,16 +188,16 @@
                 </div>
                 <div class="form-group">
                   <label>Message <span class="text-danger">*</span></label>
-                  <textarea
-                    cols="30"
-                    rows="10"
-                    class="form-control"
-                    placeholder="Enter your message in details"
-                    required
-                  ></textarea>
+                  <textarea cols="30" rows="10" class="form-control" placeholder="Enter your message in details" name="message" required></textarea>
                 </div>
 
-                <button type="submit" class="btn-action">Send message</button>
+                <div class="form-group">
+                <input type="checkbox" name="checkbox" required />By submitting this form, I agree to the website <a href="terms-of-use.php">terms of use</a> and <a href="privacy-policy.php">privacy policy</a>
+                </div>
+              
+                <div class="g-recaptcha" data-sitekey="6Ld5Px8qAAAAAOqOnYeBL8ELqirvPKqMAauzHrnT" data-callback='onSubmit' data-action='submit'></div>
+                
+                <button type="submit" name="contact" class="btn-action">Send message</button>
               </form>
             </div>
           </div>
@@ -165,25 +238,37 @@
 
     <script src="app/js/switchmode.js"></script>
     <script src="https://unpkg.com/boxicons@2.1.2/dist/boxicons.js"></script>
+     <!--Toastr-->
+     <script type="text/javascript" src="app/js/toastr.min.js"></script>
+
+     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   </body>
 </html>
 <?php
 
 if(isset($toast)){
     if($toast==='success'){
-      echo "<script>toastr.success('You will be redirected shortly', 'Success');</script>";
+      echo "<script>toastr.success('Thank you. Your message was sent successfully.', 'Success');</script>";
+    }
+
+    if($toast==='fail'){
+      echo "<script>toastr.error('Message could not be sent at the moment. Please try again later', 'Error')</script>";
     }
 
     if($toast==='Subsuccess'){
      echo "<script>toastr.success('You were subscribed successfully', 'Success'); window.location='user-profile.php';</script>";
     }
 
-    if($toast==='fail'){
-      echo "<script>toastr.error('We cannot log you in', 'Error')</script>";
-    }
-
     if($toast==='Subfail'){
       echo "<script>toastr.error('A problem was encountered while performing that operation', 'Error'); window.location='user-profile.php';</script>";
+    }
+
+    if($toast==='captchaFail'){
+      echo "<script>toastr.error('reCAPTCHA verification failed. Please try again.', 'Error'); </script>";
+    }
+
+    if($toast==='captchaOmit'){
+      echo "<script>toastr.warning('Please complete the reCAPTCHA verification.', 'Message Not Sent'); </script>";
     }
   }
 ?>

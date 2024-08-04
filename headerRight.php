@@ -40,7 +40,7 @@
                     <a class="dropdown-item" href="#">P2P</a>
                   </div>
                 </div>
-                <!-- <div class="dropdown">
+                <div class="dropdown">
                   <button
                     class="btn dropdown-toggle"
                     type="button"
@@ -125,7 +125,7 @@
                       <span class="align-middle">Russian</span>
                     </a>
                   </div>
-                </div> -->
+                </div>
                 <div class="mode-switcher">
                   <a class="sun" href="#" onclick="switchTheme()">
                     <svg
@@ -269,8 +269,8 @@
                         </svg>
                         <div class="media-body">
                           <div class="data-info">
-                            <h6 class="">Server Rebooted</h6>
-                            <p class="">45 min ago</p>
+                          <h6 class="">Review agreements before making any decisions related to our products. </h6>
+                          <p class="">Announcement</p>
                           </div>
 
                           <div class="icon-status">
@@ -314,8 +314,8 @@
                         </svg>
                         <div class="media-body">
                           <div class="data-info">
-                            <h6 class="">Licence Expiring Soon</h6>
-                            <p class="">8 hrs ago</p>
+                            <h6 class="">Always keep up with the latest crypto prices</h6>
+                          <p class="">News</p>
                           </div>
 
                           <div class="icon-status">
@@ -363,8 +363,8 @@
                         </svg>
                         <div class="media-body">
                           <div class="data-info">
-                            <h6 class="">Kelly Portfolio.pdf</h6>
-                            <p class="">670 kb</p>
+                          <h6 class="">Keep profiles complete and updated</h6>
+                          <p class="">Announcement</p>
                           </div>
 
                           <div class="icon-status">
@@ -392,7 +392,7 @@
                 <div class="wallet">
                   <a href="wallet.php"> Wallet </a>
                 </div>
-                <div class="dropdown user">
+                <!-- <div class="dropdown user">
                   <button
                     class="btn dropdown-toggle"
                     type="button"
@@ -401,7 +401,8 @@
                     aria-haspopup="true"
                     aria-expanded="false"
                   >
-                    <img src="assets/images/avt/avt-01.jpg" alt="" />
+                    <img src="" alt="no file" title="Profile photo" />
+                     <i class="fa fa-building"></i>
                   </button>
                   <div
                     class="dropdown-menu"
@@ -439,4 +440,4 @@
                     >
                   </div>
                 </div>
-              </div>
+              </div> -->

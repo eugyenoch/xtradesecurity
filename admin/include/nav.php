@@ -57,9 +57,9 @@
                           <li class="menu-item">
                             <a href="../terms-of-use.php">Terms of use</a>
                           </li>
-                          <!-- <li class="menu-item">
+                          <li class="menu-item">
                             <a href="../contact.php">Contact</a>
-                          </li> -->
+                          </li>
                           
                         </ul>
                       </li>

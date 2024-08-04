@@ -1,7 +1,4 @@
-<?php 
-include "function.php"; 
-?>
-  <head>
+<head>
     <!-- Meta Tags -->
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -32,7 +29,12 @@ include "function.php";
     <link rel="stylesheet" href="app/dist/magnific-popup.css" />
     <link rel="stylesheet" type="text/css" href="assets/cookie-banner.css">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-    <!-- <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" /> -->
+    <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
+      <!--Toastr-->
+      <link rel="stylesheet" type="text/css" href="app/dist/toastr.min.css">
+
+      <!-- Data table -->
+       <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
     <!-- End Style CSS -->
 
     <link rel="shortcut icon" href="assets/images/logo/favicon.png" />
