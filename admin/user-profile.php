@@ -234,7 +234,7 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
                       fill="#000"
                   />
               </svg>
-                 Fund Requests
+                 Funding Requests
                 </h6>
               </li>
               <li>
@@ -251,7 +251,7 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
                       fill="#000"
                   />
               </svg>
-                Withdrawals
+                Withdrawal Requests
                 </h6>
               </li>
 
@@ -292,6 +292,17 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
               </svg>
 
                  Newsletter
+                </h6>
+              </li>
+
+              <li>
+                <h6 class="fs-16">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M9 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H9" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M16 17L21 12L16 7" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M21 12H9" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <a href="../logout.php" title="logout of this account"> Logout </a>
                 </h6>
               </li>
             </ul>
@@ -789,7 +800,7 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
               </div>
             <!-- FUND SECTION BEGINS -->
               <div class="content-inner funding" id="funding">
-                <h6>Fund Requests</h6>
+                <h6>Funding Requests</h6>
                 <h4>Fund Management<span>&nbsp;System</span></h4>
                 <p>
                 This page show you all the funding requests that have been made on your website using the fund account button. From here you can approve, add and edit funds. 
@@ -977,32 +988,34 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
                 <table class="table table-striped responsive-table" id="transactionTable">
                   <thead>
                       <tr>
-                          <th>ID</th>
-                          <th>Username</th>
-                          <th>Package</th>
-                          <th>Amount</th>
-                          <th>Duration</th>
-                          <th>Interest</th>
-                          <th>Profit</th>
-                          <th>Status</th>
-                          <th>Date</th>
-                          <th>Edit</th>
-                          <th>Delete</th>
+                        <th>ID</th>
+                        <th>Email</th>
+                        <th>Username</th>
+                        <th>Package</th>
+                        <th>Amount</th>
+                        <th>Duration</th>
+                        <th>Interest</th>
+                        <th>Profit</th>
+                        <th>Status</th>
+                        <th>Date</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
                       </tr>
                   </thead>
                   <tfoot>
                       <tr>
-                      <th>ID</th>
-                          <th>Username</th>
-                          <th>Package</th>
-                          <th>Amount</th>
-                          <th>Duration</th>
-                          <th>Interest</th>
-                          <th>Profit</th>
-                          <th>Status</th>
-                          <th>Date</th>
-                          <th>Edit</th>
-                          <th>Delete</th>
+                        <th>ID</th>
+                        <th>Email</th>
+                        <th>Username</th>
+                        <th>Package</th>
+                        <th>Amount</th>
+                        <th>Duration</th>
+                        <th>Interest</th>
+                        <th>Profit</th>
+                        <th>Status</th>
+                        <th>Date</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
                       </tr>
                   </tfoot>
                  <tbody>
@@ -1011,24 +1024,39 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
                 <?php foreach($sql_transactions_exec as $transactions_info): ?>
                     <tr>
                         <td class="coin-name"><?= $transactions_info['txn']; ?></td>
-                        <td class="coin-name"><?= $transactions_info['userName'] . "<br>" .$transactions_info['trole']; ?></td>
+                        <td class="coin-name"><?= $transactions_info['user_email']; ?></td>
+                        <td class="coin-name">
+                            <?= $transactions_info['userName'] ?>
+                            <?php if (!empty($transactions_info['trole'])): ?>
+                                <br><small><strong>Role:&nbsp;</strong><?= $transactions_info['trole'] ?></small>
+                            <?php endif; ?>
+                        </td>
                         <td class="coin-name"><?= $transactions_info['tpackage']; ?></td>
                         <td class="coin-name"><?= $transactions_info['tamount'] . $transactions_info['tcurrency']; ?></td>
-                        <td class="coin-name"><?= $transactions_info['tduration']; ?></td>
-                        <td class="coin-name"><?= $transactions_info['tinterest']; ?></td>
-                        <td class="coin-name"><?= $transactions_info['tprofit'] . $transactions_info['tcurrency']; ?></td>
-                              <td class="coin-name">
-                                  <span class='bg-light'><strong><?= $transactions_info['tstatus'] ?></strong></span><br>
-                                  <?php if ($transactions_info['tstatus'] === 'pending'): ?>
-                                      <a href="confirmOperation.php?atr=<?= $transactions_info['id_no'] ?>">
-                                          <span type="submit" class="btn btn-outline-info badge badge-outline badge-danger badge-md">Approve</span>
-                                      </a>
-                                  <?php elseif ($transactions_info['tstatus'] === 'approved'): ?>
-                                      <a href="confirmOperation.php?dtr=<?= $transactions_info['id_no'] ?>">
-                                          <span type="submit" class="btn btn-outline-warning badge badge-outline badge-danger badge-md">Disapprove</span>
-                                      </a>
-                                  <?php endif; ?>
-                              </td>
+                        <td class="coin-name"> <?php if (!empty($transactions_info['tduration'])): ?>
+                            <?= $transactions_info['tduration']; ?>&nbsp;days
+                          <?php endif; ?>
+                        </td>
+                        <td class="coin-name"> <?php if (!empty($transactions_info['tinterest'])): ?>
+                            <?= round($transactions_info['tinterest'] * 100) . '%'; ?>
+                          <?php endif; ?>
+                        </td>
+                        <td class="coin-name"> <?php if (!empty($transactions_info['tprofit'])): ?>
+                            <?= $transactions_info['tprofit'] . $transactions_info['tcurrency']; ?>
+                          <?php endif; ?>
+                        </td>
+                        <td class="coin-name">
+                            <span class='bg-light fs-6'><strong><?= $transactions_info['tstatus'] ?></strong></span><br>
+                            <?php if ($transactions_info['tstatus'] === 'pending'): ?>
+                                <a href="confirmOperation.php?atr=<?= $transactions_info['id_no'] ?>">
+                                    <span type="submit" class="btn btn-outline-info badge badge-outline badge-danger badge-md">Approve</span>
+                                </a>
+                            <?php elseif ($transactions_info['tstatus'] === 'approved'): ?>
+                                <a href="confirmOperation.php?dtr=<?= $transactions_info['id_no'] ?>">
+                                    <span type="submit" class="btn btn-outline-warning badge badge-outline badge-danger badge-md">Disapprove</span>
+                                </a>
+                            <?php endif; ?>
+                        </td>
                         <td class="coin-name"><?= $transactions_info['transact_date']; ?></td>
                       <td class="coin-name">
                           <button type="button" class="edit-transaction-btn btn btn-outline-secondary badge badge-outline badge-danger badge-md">Edit</button>
@@ -1215,9 +1243,9 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
       $('#fundTable').DataTable();
       $('#withdrawTable').DataTable();
       $('#transactionTable').DataTable();
+      $('#newsletterTable').DataTable();
       $('#tradeTable').DataTable();
       $('#p2pTable').DataTable();
-      $('#newsletterTable').DataTable();
   });
 
     </script>
@@ -1256,14 +1284,14 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
 
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-        var Tmodal = document.getElementById("editTransactionModal");
-        var Tspan = document.getElementsByClassName("close")[0];
+        var modal = document.getElementById("editTransactionModal");
+        var span = document.getElementsByClassName("close")[0];
 
         document.querySelectorAll('.edit-transaction-btn').forEach(function(button) {
             button.onclick = function() {
                 var row = button.closest('tr');
                 document.getElementById('txn').value = row.cells[0].innerText;
-                document.getElementById('transactionUser').value = row.cells[1].innerText;
+                document.getElementById('transactionEmail').value = row.cells[1].innerText;
                 document.getElementById('transactionPackage').value = row.cells[1].innerText;
                 document.getElementById('transactionAmount').value = row.cells[3].innerText.slice(0,-3);
                 document.getElementById('transactionCurrency').value = row.cells[3].innerText.slice(-3); // Assuming the last 3 characters are currency
@@ -1271,17 +1299,17 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
                 document.getElementById('transactionInterest').value = row.cells[4].innerText;
                 document.getElementById('transactionProfit').value = row.cells[4].innerText.slice(0,-3);
 
-               Tmodal.style.display = "block";
+               modal.style.display = "block";
             };
         });
 
-        Tspan.onclick = function() {
-            Tmodal.style.display = "none";
+        span.onclick = function() {
+            modal.style.display = "none";
         };
 
         window.onclick = function(event) {
-            if (event.target == Tmodal) {
-                Tmodal.style.display = "none";
+            if (event.target == modal) {
+                modal.style.display = "none";
             }
         };
     });

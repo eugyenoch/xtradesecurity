@@ -37,7 +37,7 @@ if (isset($_GET['du']) && !empty($_GET['du'])) {
   
     // Confirm deletion with the user
     echo "<script>
-            if (confirm('Are you sure you want to permanently delete this admin?')) {
+            if (confirm('This is an admin! Are you sure you want to permanently delete this admin?')) {
                 window.location.href = 'userProcessor.php?deleteAdm=" . $adm . "';
             } else {
                 window.location.href = 'user-profile.php';

@@ -12,7 +12,7 @@ $sessID = session_id();
 
 // Empty variables to be used for different session purposes
 $user_session_email = "";
-$session_email = "";
+$user_session = "";
 $admin_session = "";
 
 // Optionally, you can set session cookie parameters for additional security

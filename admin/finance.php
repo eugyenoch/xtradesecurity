@@ -43,7 +43,7 @@ if (isset($_GET['disapproveFund']) && !empty($_GET['disapproveFund'])) {
 // UPDATE FUND
 if (isset($_POST['updateFund'])) {
     // Retrieve and sanitize user input
-    $fund_ftxn = $_POST['funding_ftxn'];
+    $fund_txn = $_POST['funding_txn'];
     $fund_email = $_POST['funding_email'];
     $fund_amount = sanitize($_POST['fund_amount']);
     $fund_profit = sanitize($_POST['fund_profit']);
@@ -54,7 +54,7 @@ if (isset($_POST['updateFund'])) {
    // Bind parameters
    // Assuming fund_amount and fund_profit are decimal values, and ftxn is a string.
    // Adjust the parameter types as needed (e.g., "d" for double/decimal, "s" for string).
-   $stmt->bind_param("ddss", $fund_amount, $fund_profit, $fund_ftxn, $fund_email);
+   $stmt->bind_param("ddss", $fund_amount, $fund_profit, $fund_txn, $fund_email);
 
 
     // Execute the statement
@@ -141,6 +141,40 @@ if (isset($_GET['disapproveTransaction']) && !empty($_GET['disapproveTransaction
     } else {
         echo "<script>alert('Error: The operation could not be performed'); window.location='user-profile.php';</script>";
     }
+}
+
+// UPDATE TRANSACTION
+if (isset($_POST['updateTransaction'])) {
+    // Retrieve and sanitize user input
+    $transaction_txn = $_POST['transaction_txn'];
+    $transaction_email= $_POST['transaction_email'];
+    $transaction_amount = sanitize($_POST['transaction_amount']);
+    $transaction_profit = sanitize($_POST['transaction_profit']);
+
+    // Remove any '%' symbol for interest if present
+    // $percentageInput = str_replace('%', '', $percentageInput);
+
+    // Convert to decimal
+   // $decimalValue = $percentageInput / 100;
+
+   // Update query
+   $stmt = $con->prepare("UPDATE transaction SET tamount = ?, tprofit = ? WHERE txn = ? AND user_email = ?");
+    
+   // Bind parameters
+   // Assuming fund_amount and fund_profit are decimal values, and ftxn is a string.
+   // Adjust the parameter types as needed (e.g., "d" for double/decimal, "s" for string).
+   $stmt->bind_param("ddss", $transaction_amount, $transaction_profit, $transaction_txn, $transaction_email);
+
+
+    // Execute the statement
+    if ($stmt->execute()) {
+       echo "<script>alert('Success: Transaction updated'); window.location='user-profile.php';</script>";
+        echo  $stmt->error;
+    } else {
+       echo "<script>alert('Error: Could not update transaction'); window.location='user-profile.php';</script>";
+        echo $stmt->error;
+    }
+    
 }
 
     

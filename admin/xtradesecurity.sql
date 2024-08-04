@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 03, 2024 at 10:16 AM
+-- Generation Time: Aug 04, 2024 at 01:40 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -75,8 +75,8 @@ CREATE TABLE `fund` (
 --
 
 INSERT INTO `fund` (`id_no`, `user_email`, `ftxn`, `firstname`, `lastname`, `fund_currency`, `fund_amount`, `fund_profit`, `fund_proof`, `fund_comment`, `fund_status`, `fund_request_date`) VALUES
-(2, 'danjohn@gmail.com', 'TXN765434', 'Daniel', 'John', 'BTC', 2.00000, 9.98700, '2(1).png', 'Nothing more to do', 'approved', '2024-08-02 21:43:39'),
-(5, 'emeka@gmail.com', 'TXN09855', 'Emeka', 'Bold', 'SOL', 4.03000, 13.67800, '2(1).png', 'There is more to come', 'pending', '2024-08-02 22:05:18');
+(2, 'danjohn@gmail.com', 'TXN765434', 'Daniel', 'John', 'BTC', 2.00000, 7.98700, '2(1).png', 'Nothing more to do', 'approved', '2024-08-02 21:43:39'),
+(5, 'emeka@gmail.com', 'TXN09855', 'Emeka', 'Bold', 'SOL', 4.03000, 10.66500, '2(1).png', 'There is more to come', 'pending', '2024-08-02 22:05:18');
 
 -- --------------------------------------------------------
 
@@ -86,9 +86,21 @@ INSERT INTO `fund` (`id_no`, `user_email`, `ftxn`, `firstname`, `lastname`, `fun
 
 CREATE TABLE `newsletter` (
   `id` int(19) NOT NULL,
+  `fullname` varchar(255) NOT NULL,
   `email_address` varchar(255) DEFAULT NULL,
   `registration_date` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `newsletter`
+--
+
+INSERT INTO `newsletter` (`id`, `fullname`, `email_address`, `registration_date`) VALUES
+(1, 'Yhame Mail', 'yhamemail@gmail.com', '2024-08-03 15:41:43'),
+(2, 'Iboora System', 'iboorasystems@gmail.com', '2024-08-03 15:41:56'),
+(6, 'loggerbros', 'loggerbros@gmail.com', '2024-08-03 17:49:21'),
+(8, 'kikicoin services', 'kikicoinservices@gmail.com', '2024-08-03 17:50:28'),
+(16, 'dan john', 'danjohn@gmail.com', '2024-08-03 18:40:19');
 
 -- --------------------------------------------------------
 
@@ -159,16 +171,27 @@ CREATE TABLE `transaction` (
   `id_no` int(11) NOT NULL,
   `txn` varchar(25) DEFAULT NULL,
   `user_email` varchar(255) DEFAULT NULL,
+  `userName` varchar(255) NOT NULL,
   `tpackage` varchar(512) DEFAULT NULL,
   `tamount` decimal(19,5) DEFAULT NULL,
   `tprofit` decimal(19,5) DEFAULT NULL,
   `tcurrency` varchar(255) DEFAULT 'USD',
   `tduration` varchar(512) DEFAULT '30',
-  `tinterest` decimal(8,2) DEFAULT NULL,
+  `tinterest` decimal(8,3) DEFAULT NULL,
   `trole` varchar(512) DEFAULT 'trader',
   `tstatus` varchar(255) NOT NULL DEFAULT 'pending',
   `transact_date` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `transaction`
+--
+
+INSERT INTO `transaction` (`id_no`, `txn`, `user_email`, `userName`, `tpackage`, `tamount`, `tprofit`, `tcurrency`, `tduration`, `tinterest`, `trole`, `tstatus`, `transact_date`) VALUES
+(1, 'TXN09876', 'okon@gmail.com', 'okonekpa', 'silver', 50.00000, NULL, 'USD', '30', NULL, 'investor', 'pending', '2024-08-03 10:22:58'),
+(3, 'TXN03376', 'okonji@gmail.com', 'okonji', 'Diamond', 500.00000, NULL, 'USD', '30', NULL, 'trader', 'approved', '2024-08-03 10:24:11'),
+(4, 'TXN5574', 'barto@gmail.com', 'barto', 'Platinum', 900.00000, NULL, 'ETH', '30', NULL, 'trader', 'pending', '2024-08-03 10:24:11'),
+(5, 'TXN9595885', 'userEmail@mail.com', 'Useremailgmail', 'Gold', 50.00000, 300.00000, 'USD', '30', 0.150, 'trader', 'approved', '2024-08-04 10:21:42');
 
 -- --------------------------------------------------------
 
@@ -249,8 +272,7 @@ CREATE TABLE `withdraw` (
 --
 
 INSERT INTO `withdraw` (`id_no`, `wtxn`, `user_email`, `firstname`, `lastname`, `withdraw_currency`, `withdraw_amount`, `withdraw_address`, `withdraw_status`, `withdraw_request_date`) VALUES
-(1, 'TXN0987654', 'danjohn@gmail.com', 'Daniel', 'John', 'BTC', 2.00000, '09876543456yu8i876543456', 'pending', '2024-08-02 21:46:46'),
-(2, 'TXN987654345', 'okon@gmail.com', 'Okon', 'Emma', 'ETH', 2.00000, '09876543234567890', 'pending', '2024-08-02 21:46:46');
+(3, 'TXN098765', 'i@gmail.com', 'Ionus', 'Ike', 'SOL', 9.00000, '0x0987654321234567890', 'approved', '2024-08-03 09:28:29');
 
 --
 -- Indexes for dumped tables
@@ -324,7 +346,7 @@ ALTER TABLE `withdraw`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `fund`
@@ -336,7 +358,7 @@ ALTER TABLE `fund`
 -- AUTO_INCREMENT for table `newsletter`
 --
 ALTER TABLE `newsletter`
-  MODIFY `id` int(19) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(19) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `peer_transfer`
@@ -360,7 +382,7 @@ ALTER TABLE `totals`
 -- AUTO_INCREMENT for table `transaction`
 --
 ALTER TABLE `transaction`
-  MODIFY `id_no` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -378,7 +400,7 @@ ALTER TABLE `wallet_addresses`
 -- AUTO_INCREMENT for table `withdraw`
 --
 ALTER TABLE `withdraw`
-  MODIFY `id_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

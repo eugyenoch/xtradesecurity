@@ -61,7 +61,7 @@
                       data-lang="en"
                     >
                       <img
-                        src="assets/images/flags/us.jpg"
+                        src="../assets/images/flags/us.jpg"
                         alt="user-image"
                         class="me-1"
                         height="12"
@@ -75,7 +75,7 @@
                       data-lang="sp"
                     >
                       <img
-                        src="assets/images/flags/spain.jpg"
+                        src="../assets/images/flags/spain.jpg"
                         alt="user-image"
                         class="me-1"
                         height="12"
@@ -89,7 +89,7 @@
                       data-lang="gr"
                     >
                       <img
-                        src="assets/images/flags/germany.jpg"
+                        src="../assets/images/flags/germany.jpg"
                         alt="user-image"
                         class="me-1"
                         height="12"
@@ -103,7 +103,7 @@
                       data-lang="it"
                     >
                       <img
-                        src="assets/images/flags/italy.jpg"
+                        src="../assets/images/flags/italy.jpg"
                         alt="user-image"
                         class="me-1"
                         height="12"
@@ -117,7 +117,7 @@
                       data-lang="ru"
                     >
                       <img
-                        src="assets/images/flags/russia.jpg"
+                        src="../assets/images/flags/russia.jpg"
                         alt="user-image"
                         class="me-1"
                         height="12"
@@ -227,7 +227,8 @@
                     aria-haspopup="true"
                     aria-expanded="false"
                   >
-                    <span class="icon-notification"></span>
+                    <span class="icon-notification"><span class="badge bg-success float-end">3</span
+                    ></span>
                   </button>
 
                   <div
@@ -269,8 +270,8 @@
                         </svg>
                         <div class="media-body">
                           <div class="data-info">
-                            <h6 class="">Server Rebooted</h6>
-                            <p class="">45 min ago</p>
+                            <h6 class="">Use the add admin page to add a new admin or manager</h6>
+                            <p class="">Announcement</p>
                           </div>
 
                           <div class="icon-status">
@@ -314,8 +315,8 @@
                         </svg>
                         <div class="media-body">
                           <div class="data-info">
-                            <h6 class="">Licence Expiring Soon</h6>
-                            <p class="">8 hrs ago</p>
+                            <h6 class="">Always keep up with the latest crypto prices</h6>
+                            <p class="">News</p>
                           </div>
 
                           <div class="icon-status">
@@ -363,8 +364,8 @@
                         </svg>
                         <div class="media-body">
                           <div class="data-info">
-                            <h6 class="">Kelly Portfolio.pdf</h6>
-                            <p class="">670 kb</p>
+                            <h6 class="">Remember to always keep your profile complete and updated</h6>
+                            <p class="">Announcement</p>
                           </div>
 
                           <div class="icon-status">
@@ -390,7 +391,7 @@
                 </div>
                 <div class="mobile-button"><span></span></div>
                 <div class="wallet">
-                  <a href="wallet.html"> Wallet </a>
+                  <a href="user-profile.php#wallet"> Wallet </a>
                 </div>
                 <div class="dropdown user">
                   <button
@@ -407,34 +408,27 @@
                     class="dropdown-menu"
                     aria-labelledby="dropdownMenuButton5"
                   >
-                    <a class="dropdown-item" href="user-profile.php"
+                    <a class="dropdown-item" href="#"
                       ><i class="bx bx-user font-size-16 align-middle me-1"></i>
                       <span>Profile</span></a
                     >
-                    <a class="dropdown-item" href="#"
+                    <a class="dropdown-item" href="user-profile.php#wallet"
                       ><i
                         class="bx bx-wallet font-size-16 align-middle me-1"
                       ></i>
-                      <span>My Wallet</span></a
+                      <span>Wallets</span></a
                     >
-                    <a class="dropdown-item d-block" href="#"
-                      ><span class="badge bg-success float-end">11</span
-                      ><i
-                        class="bx bx-wrench font-size-16 align-middle me-1"
-                      ></i>
-                      <span>Settings</span></a
-                    >
-                    <a class="dropdown-item" href="#"
-                      ><i
-                        class="bx bx-lock-open font-size-16 align-middle me-1"
-                      ></i>
-                      <span>Lock screen</span></a
-                    >
+                    <a class="dropdown-item d-block" href="user-profile.php"><i class="bx bx-wrench font-size-16 align-middle me-1"></i>
+                      <span>Settings</span></a>
+                    <!-- <a class="dropdown-item" href="#"><i class="bx bx-lock-open font-size-16 align-middle me-1"></i>
+                      <span>Lock screen</span></a> -->
+
+                      <a class="dropdown-item" href="add-admin.php"><i class="bx bx-user font-size-16 align-middle me-1"></i>
+                      <span>Add manager</span></a>
+
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item text-danger" href="../logout.php"
-                      ><i
-                        class="bx bx-power-off font-size-16 align-middle me-1 text-danger"
-                      ></i>
+                    <a class="dropdown-item text-danger" href="include/logout.php"><i
+                        class="bx bx-power-off font-size-16 align-middle me-1 text-danger"></i>
                       <span>Logout</span></a
                     >
                   </div>

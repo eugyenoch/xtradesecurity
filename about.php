@@ -143,3 +143,23 @@
     <script src="https://unpkg.com/boxicons@2.1.2/dist/boxicons.js"></script>
   </body>
 </html>
+<?php
+
+if(isset($toast)){
+    if($toast==='success'){
+      echo "<script>toastr.success('You will be redirected shortly', 'Success');</script>";
+    }
+
+    if($toast==='Subsuccess'){
+     echo "<script>toastr.success('You were subscribed successfully', 'Success'); window.location='user-profile.php';</script>";
+    }
+
+    if($toast==='fail'){
+      echo "<script>toastr.error('We cannot log you in', 'Error')</script>";
+    }
+
+    if($toast==='Subfail'){
+      echo "<script>toastr.error('A problem was encountered while performing that operation', 'Error'); window.location='user-profile.php';</script>";
+    }
+  }
+?>

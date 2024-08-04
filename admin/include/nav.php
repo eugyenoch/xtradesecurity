@@ -1,7 +1,7 @@
 <nav id="main-nav" class="main-nav">
                     <ul id="menu-primary-menu" class="menu">
                       <li class="menu-item-has-children">
-                        <a href="index.php">Home<svg
+                        <a href="../index.php">Home<svg
                             class="s1"
                             width="8"
                             height="10"
@@ -16,7 +16,7 @@
                           </svg> </a>
                         </li>
                       <li class="menu-item">
-                        <a href="exchange.php">Exchange</a>
+                        <a href="../exchange.php">Exchange</a>
                       </li>
                        <!-- <li class="menu-item">
                         <a href="markets.php">Markets</a>
@@ -25,12 +25,12 @@
                       <li class="menu-item-has-children">
                         <a href="#">Trade <i class="fas fa-sort-desc" aria-hidden="true"></i></a><ul class="sub-menu">
                           <li class="menu-item">
-                            <a href="blog-default.php">Buy Assets</a>
+                            <a href="../blog-default.php">Buy Assets</a>
                           </li>
                           <li class="menu-item">
-                            <a href="blog-grid-v1.php">Sell Assets</a>
+                            <a href="../blog-grid-v1.php">Sell Assets</a>
                           </li><li class="menu-item">
-                            <a href="#platforms">Platform</a>
+                            <a href="../#platforms">Platform</a>
                           </li></ul>
 
                       </li>
@@ -40,26 +40,26 @@
 
                         <ul class="sub-menu">
                           <li class="menu-item">
-                            <a href="about.php">About xTradeSecurity</a>
+                            <a href="../about.php">About xTradeSecurity</a>
                           </li>
                           <li class="menu-item">
-                            <a href="affiliate-policy.php">Affiliate policy</a>
+                            <a href="../affiliate-policy.php">Affiliate policy</a>
                           </li>
                           <li class="menu-item">
-                            <a href="cookie-policy.php">Cookie policy</a>
+                            <a href="../cookie-policy.php">Cookie policy</a>
                           </li>
                           <li class="menu-item">
-                            <a href="faq.php">FAQs</a>
+                            <a href="../faq.php">FAQs</a>
                           </li>
                           <li class="menu-item">
-                            <a href="privacy-policy.php">Privacy policy</a>
+                            <a href="../privacy-policy.php">Privacy policy</a>
                           </li>
                           <li class="menu-item">
-                            <a href="terms-of-use.php">Terms of use</a>
+                            <a href="../terms-of-use.php">Terms of use</a>
                           </li>
-                          <li class="menu-item">
-                            <a href="contact.php">Contact</a>
-                          </li>
+                          <!-- <li class="menu-item">
+                            <a href="../contact.php">Contact</a>
+                          </li> -->
                           
                         </ul>
                       </li>
@@ -67,15 +67,13 @@
                       <li class="menu-item-has-children">
                         <a href="#"> Account Pages <i class="fas fa-sort-desc" aria-hidden="true"></i></a>
                         <ul class="sub-menu">
-                        <?php if (isset($_SESSION['admin_session']) || $_SESSION['admin_session'] == true): ?>
                           <li class="menu-item">
-                            <a href="../user-profile.php">Admin Dashboard</a>
+                            <a href="user-profile.php">Admin Dashboard</a>
                           </li>
                           
                           <li class="menu-item">
-                            <a href="../add-admin.php">Add New Admin</a>
+                            <a href="add-admin.php">Add New Admin</a>
                           </li>
-                          <?php endif; ?>
                           
                           <?php if(!isset($_SESSION['admin_session']) && $_SESSION['admin_session'] === false): ?>
                           <li class="menu-item">

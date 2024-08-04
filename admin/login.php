@@ -8,9 +8,7 @@ $toast = '';
 
 // Check if the admin is already logged in
 if (isset($_SESSION['admin_session']) && !empty($_SESSION['admin_session'])) {
-  $toast = "logged in";
-  header("Location: user-profile.php");
-  exit;
+  echo "<script>window.location='user-profile.php';</script>";
 }
 
 // Build the login script
@@ -320,8 +318,18 @@ if (isset($toast)) {
       echo "<script>toastr.error('We cannot log you in', 'Wrong credentials')</script>";
     }
 
-    if($toast==='logged in'){
-      echo "<script>toastr.info('You are already logged in', 'GoTo Profile')</script>";
+    // if($toast==='logged in'){
+    //   echo "<script>toastr.info('You are already logged in', 'Info'); window.location='user-profile.php';</script>";
+    // }
+  
+ 
+    if($toast==='Subsuccess'){
+     echo "<script>toastr.success('You were subscribed successfully', 'Success'); window.location='user-profile.php';</script>";
+    }
+
+
+    if($toast==='Subfail'){
+      echo "<script>toastr.error('A problem was encountered while performing that operation', 'Error'); window.location='user-profile.php';</script>";
     }
   }
 ?>

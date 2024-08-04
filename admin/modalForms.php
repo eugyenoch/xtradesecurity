@@ -46,7 +46,7 @@
                     <div class="modal-body">
                     <form id="editForm" method="POST" action="finance.php" name="editFundRequestForm">
                     <div class="form-group">
-                    <input type="text" class="form-control" name="funding_ftxn" id="ftxn" hidden>
+                    <input type="text" class="form-control" name="funding_txn" id="ftxn" hidden>
                     </div>
                     <div class="form-group">
                     <input type="email" class="form-control" name="funding_email" id="editEmail" hidden>
@@ -80,7 +80,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h6 class="modal-title" id="editTransactionModalLabel">Edit Transaction Record</h6>
-                <button type="button" class="close btn btn-outline-primary" data-bs-dismiss="editTransactionModal" aria-label="Close" onclick="editTransactionModal.style.display = 'none';">
+                <button type="button" class="close btn btn-outline-primary" data-bs-dismiss="editTransactionModal" aria-label="Close">
                     &times;
                 </button>
                 </div>
@@ -90,7 +90,7 @@
                     <input type="text" class="form-control" name="transaction_txn" id="txn">
                     </div>
                     <div class="form-group">
-                    <input type="text" class="form-control" name="transaction_user" id="transactionUser">
+                    <input type="text" class="form-control" name="transaction_email" id="transactionEmail">
                     </div>
                     <div class="form-group">
                     <input type="email" class="form-control" name="transaction_package" id="package">

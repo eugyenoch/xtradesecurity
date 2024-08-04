@@ -80,4 +80,12 @@ function checkAdminLogin() {
         exit();
     }
 }
+
+// Check if a user is logged in
+function checkUserLogin() {
+    if (!isset($_SESSION['user_session'])) {
+        header("Location: login.php");
+        exit();
+    }
+}
 ?>

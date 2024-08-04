@@ -4,38 +4,54 @@ checkAdminLogin();
 
 // Check if the form is submitted
 if (isset($_POST['addAdmin'])) {
-    // Sanitize and extract user input
-    $firstname = sanitize($_POST['fname']);
-    $lastname = sanitize($_POST['lname']);
-    $email = sanitize($_POST['email']);
-    $username = sanitize($_POST['userName']);
-    $password = md5($_POST['pwd']);
-    //$password = password_hash(sanitize($_POST['pwd']), PASSWORD_BCRYPT); // Hash the password
-    $dial_code = sanitize($_POST['dialCode']);
-    $phone_number = sanitize($_POST['phone']);
-    $mobile_phone = $dial_code . $phone_number;
-    $address = sanitize($_POST['address']);
-    $city = sanitize($_POST['city']);
-    $country = sanitize($_POST['country']);
+  // Sanitize and extract user input
+  $firstname = sanitize($_POST['fname']);
+  $lastname = sanitize($_POST['lname']);
+  $email = sanitize($_POST['email']);
+  $username = sanitize($_POST['userName']);
+  $password = md5($_POST['pwd']);
+  //$password = password_hash(sanitize($_POST['pwd']), PASSWORD_BCRYPT); // Hash the password
+  $dial_code = sanitize($_POST['dialCode']);
+  $phone_number = sanitize($_POST['phone']);
+  $mobile_phone = $dial_code . $phone_number;
+  $address = sanitize($_POST['address']);
+  $city = sanitize($_POST['city']);
+  $country = sanitize($_POST['country']);
 
-    // Prepare the SQL query
-    $sql = "INSERT INTO admin (firstname, lastname, user_email, userName, user_pass, address, city, country, phone)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    
-    // Initialize a statement
-    $stmt = $con->prepare($sql);
+  // Check if email or username already exists
+  $checkQuery = "SELECT * FROM admin WHERE user_email = ? OR userName = ?";
+  $checkStmt = $con->prepare($checkQuery);
+  $checkStmt->bind_param("ss", $email, $username);
+  $checkStmt->execute();
+  $result = $checkStmt->get_result();
 
-    // Bind the parameters
-    $stmt->bind_param("sssssssss", $firstname, $lastname, $email, $username, $password, $address, $city, $country, $mobile_phone);
-    
-    // Execute the statement
-    if ($stmt->execute()) {
-        echo "<script>alert('New admin added successfully.'); window.location='user-profile.php';</script>";
-    } else {
-        echo "<script>alert('Error: New admin unsuccessful.')</script>";
-    }
-    // Close the statement
-    $stmt->close();
+  if ($result->num_rows > 0) {
+      // Email or username already exists
+      $toast = "checkEmail";
+     // echo "<script>alert('Error: Email or username already exists.'); window.location='register.php';</script>";
+  } else {
+      // Prepare the SQL query
+      $sql = "INSERT INTO admin (firstname, lastname, user_email, userName, user_pass, address, city, country, phone)
+              VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+      
+      // Initialize a statement
+      $stmt = $con->prepare($sql);
+
+      // Bind the parameters
+      $stmt->bind_param("sssssssss", $firstname, $lastname, $email, $username, $password, $address, $city, $country, $mobile_phone);
+      
+      // Execute the statement
+      if ($stmt->execute()) {
+          echo "<script>alert('New admin added successfully.'); window.location='user-profile.php';</script>";
+      } else {
+          echo "<script>alert('Error: New admin unsuccessful.')</script>";
+      }
+      // Close the statement
+      $stmt->close();
+  }
+
+  // Close the check statement
+  $checkStmt->close();
 }
 ?>
 
@@ -210,6 +226,8 @@ if (isset($_POST['addAdmin'])) {
 
     <script src="../app/js/switchmode.js"></script>
     <script src="https://unpkg.com/boxicons@2.1.2/dist/boxicons.js"></script>
+     <!--Toastr-->
+     <script type="text/javascript" src="../app/js/toastr.min.js"></script>
 
     
 
@@ -249,4 +267,27 @@ if (isset($_POST['addAdmin'])) {
     </script>
   </body>
 </html>
+<?php
 
+if(isset($toast)){
+    if($toast==='success'){
+      echo "<script>toastr.success('You will be redirected shortly', 'Success');</script>";
+    }
+
+    if($toast==='Subsuccess'){
+     echo "<script>toastr.success('You were subscribed successfully', 'Success'); window.location='user-profile.php';</script>";
+    }
+
+    if($toast==='fail'){
+      echo "<script>toastr.error('We cannot log you in', 'Error')</script>";
+    }
+
+    if($toast==='Subfail'){
+      echo "<script>toastr.error('A problem was encountered while performing that operation', 'Error'); window.location='user-profile.php';</script>";
+    }
+
+    if($toast==='checkEmail'){
+      echo "<script>toastr.warning('The email or username already exists. Ensure they are unique', 'Error');</script>";
+    }
+  }
+?>

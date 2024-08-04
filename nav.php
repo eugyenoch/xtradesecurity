@@ -67,13 +67,11 @@
                       <li class="menu-item-has-children">
                         <a href="#"> Account pages <i class="fas fa-sort-desc" aria-hidden="true"></i></a>
                         <ul class="sub-menu">
-                        <?php if (isset($_SESSION['session_email']) || $_SESSION['session_email'] == true): ?>
                           <li class="menu-item">
                             <a href="user/user-profile.php">User Profile</a>
                           </li>
-                          <?php endif; ?>
                           
-                          <?php if (!isset($_SESSION['session_email']) || $_SESSION['session_email'] !== true): ?>
+                          <?php if (!isset($_SESSION['user_session']) || $_SESSION['user_session'] !== true): ?>
                           <li class="menu-item">
                             <a href="user/login.php">Login</a>
                           </li>
