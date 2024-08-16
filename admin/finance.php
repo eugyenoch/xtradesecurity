@@ -2,6 +2,7 @@
 // Include required files
 include "../function.php"; 
 checkAdminLogin();
+/** @var mysqli $con */
 
 //FUNDING
 //DELETE FUNDING REQUESTS
@@ -176,7 +177,6 @@ if (isset($_POST['updateTransaction'])) {
     }
     
 }
-
     
      // Close the database connection
      $con->close();

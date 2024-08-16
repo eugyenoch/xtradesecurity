@@ -3,69 +3,82 @@
 include "../function.php";
 include "../cookie.php";
 
+/** @var mysqli $con */
+
 // Initialize the toast variable
 $toast = '';
 
 // Check if the admin is already logged in
 if (isset($_SESSION['admin_session']) && !empty($_SESSION['admin_session'])) {
-  echo "<script>window.location='user-profile.php';</script>";
+  header("Location: user-profile.php");
+  exit;
 }
 
 // Build the login script
-if (isset($_POST['emailLogin'])) {
-  // Sanitize and extract the user input
-  $admin_email_or_username = sanitize($_POST['adminEmail']);
-  $pass = md5(sanitize($_POST['pwd']));
-
-  // Use prepared statements to prevent SQL injection
-  $stmt = $con->prepare("SELECT * FROM admin WHERE (user_email = ? OR userName = ?) AND user_pass = ?");
-  $stmt->bind_param("sss", $admin_email_or_username, $admin_email_or_username, $pass);
-  $stmt->execute();
-  $result = $stmt->get_result();
-
-  // Count the number of rows that contain the data
-  $rowCountAdmin = $result->num_rows;
-
-  // Check if there is no matching row with the user data
-  if ($rowCountAdmin <= 0) {
-      $toast = "fail";
+if (isset($_POST['emailLogin']) || isset($_POST['phoneLogin'])) {
+  // Verify reCAPTCHA
+  $captchaToken = isset($_POST['g-recaptcha-response']) ? $_POST['g-recaptcha-response'] : '';
+  if (!verifyReCaptcha($captchaToken)) {
+      $toast = 'captchaOmit';
   } else {
-      $_SESSION['admin_session'] = $admin_email_or_username;
-      $toast = "success";
-      header("Location: user-profile.php");
-      exit;
-  }
+      if(isset($_POST['emailLogin'])) {
+              // Sanitize and extract the user input
+              $admin_email_or_username = sanitize($_POST['adminEmail']);
+              $pass = md5(sanitize($_POST['pwd']));
 
-  $stmt->close();
-}
+              // Use prepared statements to prevent SQL injection
+              $stmt = $con->prepare("SELECT * FROM admin WHERE (user_email = ? OR userName = ?) AND user_pass = ?");
+              $stmt->bind_param("sss", $admin_email_or_username, $admin_email_or_username, $pass);
+              $stmt->execute();
+              $result = $stmt->get_result();
 
-if (isset($_POST['phoneLogin'])) {
-  // Sanitize and extract the user input
-  $admin_phone = sanitize($_POST['dialCode'] . $_POST['adminPhone']);
-  $pass = md5($_POST['pwd2']);
-  
-  // Use prepared statements to prevent SQL injection
-  $stmt = $con->prepare("SELECT * FROM admin WHERE phone = ? AND user_pass = ?");
-  $stmt->bind_param("ss", $admin_phone, $pass);
-  $stmt->execute();
-  $result = $stmt->get_result();
-  
-  // Count the number of rows that contain the data
-  $rowCountAdmin = $result->num_rows;
-  
-  // Check if there is no matching row with the user data
-  if ($rowCountAdmin <= 0) {
-      $toast = "fail";
-  } else {
-      $_SESSION['admin_session'] = $admin_phone;
-      $toast = "success";
-      header("Location: user-profile.php");
-      exit;
-  }
+              // Count the number of rows that contain the data
+              $rowCountAdmin = $result->num_rows;
 
-  $stmt->close();
-}
+              // Check if there is no matching row with the user data
+              if ($rowCountAdmin <= 0) {
+                  $toast = "fail";
+              } else {
+                  $_SESSION['admin_session'] = $admin_email_or_username;
+                  $toast = "success";
+                  header("Location: user-profile.php");
+                  exit;
+              }
 
+              $stmt->close();
+          }
+
+          if (isset($_POST['phoneLogin'])) {
+            // Sanitize and extract the user input
+            $admin_phone = sanitize($_POST['dialCode'] . $_POST['adminPhone']);
+            $pass = md5($_POST['pwd2']);
+        
+            // Use prepared statements to prevent SQL injection
+            $stmt = $con->prepare("SELECT * FROM admin WHERE phone = ? AND user_pass = ?");
+            $stmt->bind_param("ss", $admin_phone, $pass);
+            $stmt->execute();
+            $result = $stmt->get_result();
+        
+            // Count the number of rows that contain the data
+            $rowCountAdmin = $result->num_rows;
+        
+            // Check if there is no matching row with the user data
+            if ($rowCountAdmin <= 0) {
+                $toast = "fail";
+            } else {
+                $admin = $result->fetch_assoc();
+                // Set session to admin_email instead of admin_phone
+                $_SESSION['admin_session'] = $admin['user_email'];
+                $toast = "success";
+                header("Location: user-profile.php");
+                exit;
+            }
+        
+            $stmt->close();
+        }
+        
+         }
+  } 
 ?>
 
 <!DOCTYPE html>
@@ -104,7 +117,7 @@ if (isset($_POST['phoneLogin'])) {
       <div class="container">
         <div class="row">
           <div class="col-md-6">
-            <h3 class="heading">Login to XTrade security</h3>
+            <h3 class="heading">Login to Your Account</h3>
           </div>
           <div class="col-md-6">
             <ul class="breadcrumb">
@@ -180,6 +193,7 @@ if (isset($_POST['phoneLogin'])) {
                       </div>
                       <p><a class="small" href="check.php">Forgot Password?</a></p>
                     </div>
+                    <div class="g-recaptcha" data-sitekey="6Ld5Px8qAAAAAOqOnYeBL8ELqirvPKqMAauzHrnT" data-callback='onSubmit' data-action='submit'></div>
 
                     <button type="submit" class="btn-action" name="emailLogin">Login</button>
                     <div class="bottom">
@@ -211,6 +225,7 @@ if (isset($_POST['phoneLogin'])) {
                       </div>
                       <p><a class="small" href="check.php">Forgot Password?</a></p>
                     </div>
+                    <div class="g-recaptcha" data-sitekey="6Ld5Px8qAAAAAOqOnYeBL8ELqirvPKqMAauzHrnT" data-callback='onSubmit' data-action='submit'></div>
 
                     <button type="submit" class="btn-action" name="phoneLogin">Login</button>
                     <div class="bottom">
@@ -221,15 +236,15 @@ if (isset($_POST['phoneLogin'])) {
                 </div>
               </div>
             </div>
-<!-- 
+
             <div class="qr-code center">
               <img src="assets/images/icon/qrcode.png" alt="" />
-              <h6 class="fs-20">Login with QR code</h6>
+              <h6 class="fs-20">Login with QR code (coming soon)</h6>
               <p class="fs-14">
-                Scan this code with the <span>XTrade security mobile app</span> <br />
+                Scan this code with the <span>XTrade Security mobile app</span> <br />
                 to log in instantly.
               </p>
-            </div> -->
+            </div>
           </div>
         </div>
       </div>
@@ -240,17 +255,16 @@ if (isset($_POST['phoneLogin'])) {
         <div class="row">
           <div class="col-md-7">
             <div class="block-text">
-              <h4 class="heading">Earn up to $25 worth of crypto</h4>
+              <h4 class="heading">You Will Be Able To Add Managers</h4>
               <p class="desc">
-                Discover how specific cryptocurrencies work — and get a bit of
-                each crypto investment to try out for yourself.
+                As quickly as you are able to login, you will be able to add other admins and managers to help in sitewide management tasks.
               </p>
             </div>
           </div>
           <div class="col-md-5">
-            <div class="button">
-            <a href="#">Try Demo</a>
-            </div>
+            <!-- <div class="button">
+            <a href="#">Begin Investing</a>
+            </div> -->
           </div>
         </div>
       </div>
@@ -271,41 +285,8 @@ if (isset($_POST['phoneLogin'])) {
 
     <!--Toastr-->
     <script type="text/javascript" src="../app/js/toastr.min.js"></script>
-
-    <script>
-      function Convert() {
-        let dollarInput = document.getElementByClass("dollar").value;
-        let bitcoinInput = document.getElementByClass("bitcoin").value;
-
-        if ((dollarInput != "") & (bitcoinInput == "")) {
-          let parsedDollar = parseFloat(dollarInput);
-          let fromDollarToBitcoin = parsedDollar * 0.000022;
-
-          let output = document.getElementByClass("bitcoin");
-          output.value = fromDollarToBitcoin;
-          console.log("Bitcoin", fromDollarToBitcoin);
-
-          clearMessage();
-          clearAlert();
-        }
-
-        if ((bitcoinInput != "") & (dollarInput == "")) {
-          let parsedBitcoin = parseFloat(bitcoinInput);
-          let fromBitcoinToDollar = parsedBitcoin * 46403.5;
-
-          let output = document.getElementByClass("dollar");
-          output.value = fromBitcoinToDollar;
-          console.log("US$", fromBitcoinToDollar);
-
-          clearMessage();
-          clearAlert();
-        }
-
-        if ((bitcoinInput == "") & (dollarInput == "")) {
-          showMessage();
-        }
-      }
-    </script>
+     <!-- Recaptcha Script -->
+     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   </body>
 </html>
 <?php
@@ -318,18 +299,20 @@ if (isset($toast)) {
       echo "<script>toastr.error('We cannot log you in', 'Wrong credentials')</script>";
     }
 
-    // if($toast==='logged in'){
-    //   echo "<script>toastr.info('You are already logged in', 'Info'); window.location='user-profile.php';</script>";
-    // }
-  
+    if($toast==='captchaFail'){
+      echo "<script>toastr.error('reCAPTCHA verification failed  or you have entered wrong credentials.', 'Please Try Again'); </script>";
+    }
+
+    if($toast==='captchaOmit'){
+      echo "<script>toastr.warning('Please complete the reCAPTCHA verification.', 'Message Not Sent'); </script>";
+    }
  
     if($toast==='Subsuccess'){
-     echo "<script>toastr.success('You were subscribed successfully', 'Success'); window.location='user-profile.php';</script>";
-    }
-
-
-    if($toast==='Subfail'){
-      echo "<script>toastr.error('A problem was encountered while performing that operation', 'Error'); window.location='user-profile.php';</script>";
-    }
+      echo "<script>toastr.success('You were subscribed successfully', 'Success');</script>";
+     }
+ 
+     if($toast==='Subfail'){
+       echo "<script>toastr.error('A problem was encountered while performing that operation', 'Error');</script>";
+     }
   }
 ?>

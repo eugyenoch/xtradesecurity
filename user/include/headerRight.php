@@ -14,7 +14,7 @@
                     class="dropdown-menu"
                     aria-labelledby="dropdownMenuButton"
                   >
-                    <a class="dropdown-item" href="#">Visa Card (coming soon)</a>
+                    <a class="dropdown-item" href="#">Visa Cards (coming soon)</a>
                     <a class="dropdown-item" href="#">Loans (coming soon)</a>
                     <a class="dropdown-item" href="#">Payments (coming soon)</a>
                   </div>
@@ -34,13 +34,13 @@
                     class="dropdown-menu"
                     aria-labelledby="dropdownMenuButton2"
                   >
-                  <a class="dropdown-item" href="../user/user-profile.php">Funding</a>
-                    <a class="dropdown-item" href="../user/user-profile.php">Investment</a>
-                    <a class="dropdown-item" href="../user/user-profile.php">Profits and Interests</a>
-                    <a class="dropdown-item" href="../user/user-profile.php">Withdrawals</a>
+                    <a class="dropdown-item" href="user-profile.php">Funding</a>
+                    <a class="dropdown-item" href="user-profile.php">Investment</a>
+                    <a class="dropdown-item" href="user-profile.php">Profits and Interests</a>
+                    <a class="dropdown-item" href="user-profile.php">Withdrawals</a>
                   </div>
                 </div>
-                
+               
                 <div class="mode-switcher">
                   <a class="sun" href="#" onclick="switchTheme()">
                     <svg
@@ -185,7 +185,7 @@
                         </svg>
                         <div class="media-body">
                           <div class="data-info">
-                            <h6 class="">Use the add admin page to add a new admin or manager</h6>
+                            <h6 class="">Use the wallet page to view all your transaction breakdown</h6>
                             <p class="">Announcement</p>
                           </div>
 
@@ -306,7 +306,7 @@
                 </div>
                 <div class="mobile-button"><span></span></div>
                 <div class="wallet">
-                  <a href="../user/wallet.php"> Wallet </a>
+                  <a href="wallet.php"> Wallet </a>
                 </div>
                 <div class="dropdown user">
                   <button
@@ -317,17 +317,17 @@
                     aria-haspopup="true"
                     aria-expanded="false"
                   >
-                    <img src="<?php echo htmlspecialchars($profilePicUrl); ?>" alt="no file" title="Admin profile photo" /> 
+                    <img src="<?php if(isset($profilePicUrl) && $profilePicUrl !=null){echo $profilePicUrl;} ?>" alt="no file" title="Admin profile photo" /> 
                   </button>
                   <div
                     class="dropdown-menu"
                     aria-labelledby="dropdownMenuButton5"
                   >
-                    <a class="dropdown-item" href="#"
+                    <a class="dropdown-item" href="user-profile.php"
                       ><i class="bx bx-user font-size-16 align-middle me-1"></i>
                       <span>Profile</span></a
                     >
-                    <a class="dropdown-item" href="../user/wallet.php"
+                    <a class="dropdown-item" href="wallet.php"
                       ><i
                         class="bx bx-wallet font-size-16 align-middle me-1"
                       ></i>
@@ -335,9 +335,6 @@
                     >
                     <a class="dropdown-item d-block" href="user-profile.php"><i class="bx bx-wrench font-size-16 align-middle me-1"></i>
                       <span>Settings</span></a>
-
-                      <a class="dropdown-item" href="add-admin.php"><i class="bx bx-user font-size-16 align-middle me-1"></i>
-                      <span>Add manager</span></a>
 
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item text-danger" href="include/logout.php"><i

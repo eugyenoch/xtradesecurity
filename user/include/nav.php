@@ -16,17 +16,16 @@
                           </svg> </a>
                         </li>
                       <li class="menu-item">
-                        <a href="../user/wallet.php">Transfer</a>
+                        <a href="transfer.php">Tranfer</a>
                       </li>
-                     
 
                       <li class="menu-item-has-children">
                         <a href="#">Trade <i class="fas fa-sort-desc" aria-hidden="true"></i></a><ul class="sub-menu">
                           <li class="menu-item">
-                            <a href="../user/user-profile.php">Buy Assets</a>
+                            <a href="user-profile.php">Buy Assets</a>
                           </li>
                           <li class="menu-item">
-                            <a href="../user/user-profile.php">Sell Assets</a>
+                            <a href="user-profile.php">Sell Assets</a>
                           </li><li class="menu-item">
                             <a href="../index.php#platforms">Platform</a>
                           </li></ul>
@@ -66,16 +65,17 @@
                         <a href="#"> Account Pages <i class="fas fa-sort-desc" aria-hidden="true"></i></a>
                         <ul class="sub-menu">
                           <li class="menu-item">
-                            <a href="user-profile.php">Admin Dashboard</a>
+                            <a href="user-profile.php">Dashboard</a>
                           </li>
-                          
-                          <li class="menu-item">
-                            <a href="add-admin.php">Add New Admin</a>
+                          <?php if(isset($_SESSION['user_session']) && $_SESSION['user_session']!=null): ?>
+                            <li class="menu-item">
+                            <a href="include/logout.php">Logout</a>
                           </li>
-                          
-                          <?php if(!isset($_SESSION['admin_session']) && empty($_SESSION['admin_session'])): ?>
+                            <?php endif; ?>
+
+                          <?php if(!isset($_SESSION['user_session'])): ?>
                           <li class="menu-item">
-                            <a href="../login.php">Login</a>
+                            <a href="login.php">Login</a>
                           </li>
                           <?php endif; ?>
                         </ul>

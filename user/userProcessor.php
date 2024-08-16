@@ -1,7 +1,7 @@
 <?php
 // Include required files
 include "../function.php"; 
-checkAdminLogin();
+checkUserLogin();
 
 /** @var mysqli $con */
 //DELETE USER

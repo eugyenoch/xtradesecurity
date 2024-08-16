@@ -1,11 +1,12 @@
 <?php
 // Start the session and include required files
 include "../function.php";
-checkAdminLogin();
+checkUserlogin();
 
+/** @var mysqli $con */
 
 // Check if the user is logged in
-if (!isset($_SESSION['admin_session']) || empty($_SESSION['admin_session'])) {
+if (!isset($_SESSION['user_session']) || empty($_SESSION['user_session'])) {
     header("Location: login.php");
     exit;
 }
@@ -30,11 +31,11 @@ if (isset($_POST['upload'])) {
         // Move the uploaded file to the designated directory
         if (move_uploaded_file($fileTmpName, $filePath)) {
             // Update the database with the new profile picture path
-            $adminEmail = $_SESSION['admin_session'];
+            $userEmail = $_SESSION['user_session'];
             $filePath = $con->real_escape_string($filePath);
             
-            $stmt = $con->prepare("UPDATE admin SET photo = ? WHERE user_email = ? OR userName = ?");
-            $stmt->bind_param("sss", $filePath, $adminEmail, $adminEmail);
+            $stmt = $con->prepare("UPDATE users SET photo = ? WHERE user_email = ? OR userName = ?");
+            $stmt->bind_param("sss", $filePath, $userEmail, $userEmail);
 
             if ($stmt->execute()) {
                 echo "<script>alert('Profile picture uploaded successfully!'); window.location='user-profile.php';</script>";

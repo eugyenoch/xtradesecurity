@@ -3,11 +3,7 @@
     include "../function.php"; 
     checkAdminLogin();
 
-// Check if the user is logged in
-if (!isset($_SESSION['admin_session']) || empty($_SESSION['admin_session'])) {
-    header("Location: login.php");
-    exit;
-}
+    /** @var mysqli $con  */
 
 if (isset($_POST['changePassword'])){
     // Sanitize and extract user inputs
@@ -18,7 +14,7 @@ if (isset($_POST['changePassword'])){
 
     // Verify if new password and confirm password match
     if ($newPassword !== $confirmPassword) {
-        echo "<scrip>alert('Error: New password and confirm password do not match!'); window.location='user-profile.php';</script>";
+        echo "<script>alert('Error: New password and confirm password do not match!'); window.location='user-profile.php';</script>";
         exit;
     }
 

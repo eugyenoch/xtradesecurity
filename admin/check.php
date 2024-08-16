@@ -32,7 +32,7 @@ if (isset($_POST['confirm'])) {
 <!DOCTYPE html>
 <html lang="en">
 
-<?php include "header.php"; ?>
+<?php include "include/header.php"; ?>
 
   <body class="body header-fixed">
     <!-- Header -->
@@ -43,15 +43,15 @@ if (isset($_POST['confirm'])) {
             <div class="header__body d-flex justify-content-between">
 
               <div class="header__left">
-               <?php include "logo.php"; ?>
+               <?php include "../include/logo.php"; ?>
                
                 <div class="left__main">
-                <?php include "nav.php";?>
+                <?php include "include/nav.php";?>
                   <!-- /#main-nav -->
                 </div>
               </div>
 
-              <?php include "headerRight.php";?>
+              <?php include "include/headerRight.php";?>
             </div>
           </div>
         </div>
@@ -128,7 +128,7 @@ if (isset($_POST['confirm'])) {
       </div>
     </section>
 
-  <?php include "footer.php"; ?>
+  <?php include "../include/footer.php"; ?>
 
     <script src="../app/js/aos.js"></script>
     <script src="../app/js/jquery.min.js"></script>
@@ -141,42 +141,7 @@ if (isset($_POST['confirm'])) {
     <script src="../app/js/switchmode.js"></script>
     <script src="https://unpkg.com/boxicons@2.1.2/dist/boxicons.js"></script>
 
-    
 
-    <script>
-      function Convert() {
-        let dollarInput = document.getElementByClass("dollar").value;
-        let bitcoinInput = document.getElementByClass("bitcoin").value;
-
-        if ((dollarInput != "") & (bitcoinInput == "")) {
-          let parsedDollar = parseFloat(dollarInput);
-          let fromDollarToBitcoin = parsedDollar * 0.000022;
-
-          let output = document.getElementByClass("bitcoin");
-          output.value = fromDollarToBitcoin;
-          console.log("Bitcoin", fromDollarToBitcoin);
-
-          clearMessage();
-          clearAlert();
-        }
-
-        if ((bitcoinInput != "") & (dollarInput == "")) {
-          let parsedBitcoin = parseFloat(bitcoinInput);
-          let fromBitcoinToDollar = parsedBitcoin * 46403.5;
-
-          let output = document.getElementByClass("dollar");
-          output.value = fromBitcoinToDollar;
-          console.log("US$", fromBitcoinToDollar);
-
-          clearMessage();
-          clearAlert();
-        }
-
-        if ((bitcoinInput == "") & (dollarInput == "")) {
-          showMessage();
-        }
-      }
-    </script>
   </body>
 </html>
 <?php

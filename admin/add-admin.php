@@ -2,6 +2,8 @@
 include '../function.php';
 checkAdminLogin();
 
+/** @var mysqli $con */
+
 // Check if the form is submitted
 if (isset($_POST['addAdmin'])) {
   // Sanitize and extract user input
@@ -28,7 +30,7 @@ if (isset($_POST['addAdmin'])) {
   if ($result->num_rows > 0) {
       // Email or username already exists
       $toast = "checkEmail";
-     // echo "<script>alert('Error: Email or username already exists.'); window.location='register.php';</script>";
+     // echo "<script>alert('Error: Email or username already exists.');</script>";
   } else {
       // Prepare the SQL query
       $sql = "INSERT INTO admin (firstname, lastname, user_email, userName, user_pass, address, city, country, phone)
@@ -42,9 +44,9 @@ if (isset($_POST['addAdmin'])) {
       
       // Execute the statement
       if ($stmt->execute()) {
-          echo "<script>alert('New admin added successfully.'); window.location='user-profile.php';</script>";
+        $toast='success';
       } else {
-          echo "<script>alert('Error: New admin unsuccessful.')</script>";
+         $toast='fail';
       }
       // Close the statement
       $stmt->close();
@@ -271,19 +273,19 @@ if (isset($_POST['addAdmin'])) {
 
 if(isset($toast)){
     if($toast==='success'){
-      echo "<script>toastr.success('You will be redirected shortly', 'Success');</script>";
+      echo "<script>toastr.success('Your action was performed successfully', 'Success');</script>";
     }
 
     if($toast==='Subsuccess'){
-     echo "<script>toastr.success('You were subscribed successfully', 'Success'); window.location='user-profile.php';</script>";
-    }
+      echo "<script>toastr.success('You were subscribed successfully', 'Success');</script>";
+     }
+ 
+     if($toast==='Subfail'){
+       echo "<script>toastr.error('A problem was encountered while performing that operation', 'Error');</script>";
+     }
 
     if($toast==='fail'){
-      echo "<script>toastr.error('We cannot log you in', 'Error')</script>";
-    }
-
-    if($toast==='Subfail'){
-      echo "<script>toastr.error('A problem was encountered while performing that operation', 'Error'); window.location='user-profile.php';</script>";
+      echo "<script>toastr.error('There was an error in performing this operation', 'Error')</script>";
     }
 
     if($toast==='checkEmail'){

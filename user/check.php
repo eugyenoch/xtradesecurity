@@ -1,112 +1,154 @@
 <?php
-//Require my functions.php file
-include('function.php');
+// Include required files
+include "../function.php";
+include "../cookie.php";
 
-//Build the login script
-if(isset($_POST['confirm'])){
-  //Extract the user input and assign to variables
-  $user = sanitize($_POST['user']);
+// Initialize the toast variable
+$toast = '';
 
-  //Search DB for the entered data above
-  $sql_check = "SELECT * FROM users WHERE user_email = '$user'";
-  
-  //Execute the mysqli query
-  $sqlDo = $con->query($sql_check);
-
-  //count the number of rows that contain the data
-    $rowCount = mysqli_num_rows($sqlDo);
-
-    //Check if there is no matching row with the user data
-    if($rowCount<=0){
-      $toast = "fail";
+if (isset($_POST['confirm'])) {
+    $user_email = sanitize($_POST['userEmail']);
+    $user_phone = $_POST['dialCode'] . sanitize($_POST['userPhone']);
+    
+    // Use prepared statements to prevent SQL injection
+    $stmt = $con->prepare("SELECT * FROM users WHERE user_email = ? AND phone = ?");
+    $stmt->bind_param("ss", $user_email, $user_phone);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    if ($result->num_rows > 0) {
+        $toast='success';
+        $_SESSION['user_email'] = $user_email;
+        header("Location: reset-password.php");
+        exit;
+    } else {
+        $toast='fail';
+        echo "<script>alert('Invalid email or phone number.'); window.location.href = 'login.php';</script>";
     }
-    else{
-      $toast = "success";
-        header("Refresh:2,url=change-password.php?em=$user");
-    }
+
+    $stmt->close();
 }
-else{
-  //header('Location:login.php');
-}
-$con->close();
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Confirm Email Address | Member</title>
-<!-- Tell the browser to be responsive to screen width -->
-<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1" />
 
-<!-- v4.0.0-alpha.6 -->
-<link rel="stylesheet" href="dist/bootstrap/css/bootstrap.min.css">
+<?php include "include/header.php"; ?>
 
-<!-- Google Font -->
-<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+  <body class="body header-fixed">
+    <!-- Header -->
+    <header id="header_main" class="header">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="header__body d-flex justify-content-between">
 
-<!-- Theme style -->
-<link rel="stylesheet" href="dist/css/style.css">
-<link rel="stylesheet" href="dist/css/font-awesome/css/font-awesome.min.css">
-<link rel="stylesheet" href="dist/css/et-line-font/et-line-font.css">
-<link rel="stylesheet" href="dist/css/themify-icons/themify-icons.css">
-<link rel="stylesheet" href="dist/plugins/hmenu/ace-responsive-menu.css">
-<link rel="icon" href="dist/img/p2pdarkicon.png">
-<!--Toastr-->
-<link rel="stylesheet" type="text/css" href="dist/css/toastr.css">
+              <div class="header__left">
+               <?php include "../include/logo.php"; ?>
+               
+                <div class="left__main">
+                <?php include "include/nav.php";?>
+                  <!-- /#main-nav -->
+                </div>
+              </div>
 
-<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
-<link rel="stylesheet" type="text/css" href="../custom.css">
-</head>
-<body class="hold-transition login-page sty2" style="background-image:url('./assets/cover_home.jpg'); background-position:center; background-attachment:fixed;">
-<div class="login-box sty2">
-  <div class="login-box-body sty2">
-  <div class="login-logo mt-3">
-    <h4 class="">Member Area - username check</h4><!-- <img src="dist/img/p2pdark.png" width="" height="" alt="Crypto Gains" title="Crypto Gains"> -->
-  </div>
-     <p class="login-box-msg">Confirm Your Email</p><br>
-    <form action="<?php htmlentities($_SERVER['PHP_SELF']);?>" method="post" name="loginForm">
-      <div class="form-group has-feedback">
-        <input type="email" class="form-control sty2" placeholder="username" name="user" title="Enter your registered email address" required><br>
-      </div>
-      <div>
-        <div class="col-xs-8">
-        <!-- /.col -->
-        <div class="col-xs-4 m-t-1">
-          <button type="submit" class="btn btn-dark btn-block btn-flat" name="confirm">Confirm</button>
+              <?php include "include/headerRight.php";?>
+            </div>
+          </div>
         </div>
-        <!-- /.col --> 
       </div>
-    </form>
-    <div class="social-auth-links text-center">
-      <p><small>Confirm your registered email address and if found, you will be re-directed to update your password.</small></p>
-  <!-- /.login-box-body --> 
-</div>
-<!-- /.login-box --> 
-<!-- jQuery 3 --> 
-<script src="dist/js/jquery.min.js"></script> 
+    </header>
+    <!-- end Header -->
 
-<!-- v4.0.0-alpha.6 --> 
-<script src="dist/bootstrap/js/bootstrap.min.js"></script> 
+    <!-- PageTitle -->
+    <section class="page-title">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <h3 class="heading">User Verification</h3>
+          </div>
+          <div class="col-md-6">
+            <ul class="breadcrumb">
+              <li><a href="../index.php">Home</a></li>
+              <li><p class="fs-18">/</p></li>
+              <li><p class="fs-18">User verification</p></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End PageTitle -->
 
-<!-- template --> 
-<script src="dist/js/niche.js"></script>
-<!--Toastr-->
-<script type="text/javascript" src="dist/js/toastr.min.js"></script>
+    <section class="register">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="block-text center">
+              <h3 class="heading">Password Recovery</h3>
+              <p class="desc fs-20">
+             <small> Confirm your registered email address and phone number. If found, you will be re-directed to update your password effectively</small>
+              </p>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="flat-tabs">
+              <!-- <ul class="menu-tab">
+                <li class="active"><h6 class="fs-16">Email</h6></li>
+                <li><h6 class="fs-16">Mobile</h6></li>
+              </ul> -->
+              <div class="col-md-12">
+            <div class="flat-tabs">
+              <!-- <ul class="menu-tab"></ul> -->
+              <div class="content-tab">
+                <div class="content-inner">
+                    <form action="<?php htmlentities($_SERVER['PHP_SELF']);?>" method="post" name="userCheckForm">
+                        <div class="form-floating mb-3">
+                        <label for="inputEmail">Email address</label>
+                            <input class="form-control" id="inputEmail" type="email" placeholder="username" name="userEmail" title="Enter your registered email address" required />
+                        </div>
+                        <div class="form-group">
+                      <label for="InputEmail1">Phone</label>
+                      <div>
+                        <select  class="form-control" id="exampleFormControlSelect1" name="dialCode">
+                        <?php include "../include/selectDialingCode.html";?>
+                        </select>
+                        <input type="tel" class="form-control"  placeholder="Your Phone number" name="userPhone" required />
+                      </div>
+                    </div>
+                            <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
+                            <a class="small" href="login.php">Return to login?</a>
+                            <button type="submit" class="btn-action" name="confirm">Confirm Credentials</button>
+                        </div>
+                    </form>
+                </div>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-</body>
+  <?php include "../include/footer.php"; ?>
+
+    <script src="../app/js/aos.js"></script>
+    <script src="../app/js/jquery.min.js"></script>
+    <script src="../app/js/jquery.easing.js"></script>
+    <script src="../app/js/popper.min.js"></script>
+    <script src="../app/js/bootstrap.min.js"></script>
+    <script src="../app/js/app.js"></script>
+    <script src="../app/js/jquery.peity.min.js"></script>
+
+    <script src="../app/js/switchmode.js"></script>
+    <script src="https://unpkg.com/boxicons@2.1.2/dist/boxicons.js"></script>
+
+  </body>
 </html>
 <?php
-if(isset($toast) && $toast==='success'){
-  echo "<script>toastr.success('You will be redirected shortly', 'Success')</script>";
-}
+        if(isset($toast) && $toast==='success'){
+          echo "<script>toastr.success('You will be redirected shortly', 'Success')</script>";
+        }
 
-if(isset($toast) && $toast==='fail'){
-  echo "<script>toastr.error('We cannot log you in', 'Wrong credentials')</script>";
-}
-?>
+        if(isset($toast) && $toast==='fail'){
+          echo "<script>toastr.error('We cannot verify you', 'Wrong credentials')</script>";
+        }
+        ?>

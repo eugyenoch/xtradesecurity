@@ -3,13 +3,16 @@
 include "../function.php"; 
 checkAdminLogin();
 
+/** @var mysqli $con */
 // Check if the form was submitted
 if (isset($_POST['addNewAddress'])){
     // Sanitize and extract the user input
     $wallet = sanitize($_POST['newWallet']);
     $address = sanitize($_POST['newAddress']);
-
-    // Handle file upload
+    $walletTag = sanitize($_POST['newWalletTag']);
+    
+    // Handle file upload (optional)
+    $qrcode = null;
     if (isset($_FILES['qrcode']) && $_FILES['qrcode']['error'] == UPLOAD_ERR_OK) {
         $upload_dir = '../assets/user-uploads/';
         $qrcode = basename($_FILES['qrcode']['name']);
@@ -28,28 +31,27 @@ if (isset($_POST['addNewAddress'])){
             echo "<script>alert('Error: Only JPEG, JPG, and PNG files are allowed'); window.location='user-profile.php';</script>";
             exit;
         }
-
+        
         // Move the uploaded file to the desired directory
-        if (move_uploaded_file($_FILES['qrcode']['tmp_name'], $upload_file)) {
-            // Prepare and bind
-            $stmt = $con->prepare("INSERT INTO wallet_addresses (wallet, address, qrcode) VALUES (?, ?, ?)");
-            $stmt->bind_param("sss", $wallet, $address, $qrcode);
-
-            // Execute the statement
-            if ($stmt->execute()) {
-                echo "<script>alert('New wallet created successfully'); window.location='user-profile.php';</script>";
-            } else {
-                echo "<script>alert('Error: Failure to create wallet'); window.location='user-profile.php';</script>";//$stmt->error;
-            }
-
-            // Close the statement
-            $stmt->close();
-        } else {
+        if (!move_uploaded_file($_FILES['qrcode']['tmp_name'], $upload_file)) {
             echo "<script>alert('Error: Failed to upload file'); window.location='user-profile.php';</script>";
+            exit;
         }
-    } else {
-        echo "<script>alert('Error: No file uploaded or upload error.'); window.location='user-profile.php';</script>";
     }
+    
+    // Prepare and bind
+    $stmt = $con->prepare("INSERT INTO wallet_addresses (wallet, address, wallet_tag, qrcode) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("ssss", $wallet, $address, $walletTag, $qrcode);
+    
+    // Execute the statement
+    if ($stmt->execute()) {
+        echo "<script>alert('New wallet created successfully'); window.location='user-profile.php';</script>";
+    } else {
+        echo "<script>alert('Error: Failure to create wallet'); window.location='user-profile.php';</script>";//$stmt->error;
+    }
+    
+    // Close the statement
+    $stmt->close();
 }
 
 //DELETE WALLET

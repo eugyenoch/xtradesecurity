@@ -2,6 +2,7 @@
 // Include required files
 include "../function.php"; 
 checkAdminLogin();
+/** @var mysqli $con */
 
 //CONFIRM USER DELETE
 if (isset($_GET['du']) && !empty($_GET['du'])) {

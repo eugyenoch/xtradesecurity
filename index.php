@@ -1,8 +1,14 @@
-<?php  include "function.php";?>
-<!DOCTYPE html>
-<html lang="en">
 <?php 
-include "header.php"; 
+include "function.php"; 
+if (isset($_SESSION['user_firstname']) && isset($_SESSION['user_lastname']) && isset($_SESSION['user_email']) && isset($_SESSION['user_username']) && isset($_SESSION['user_profile_pic'])) {
+  $Userfirstname = $_SESSION['user_firstname'];
+  $Userlastname = $_SESSION['user_lastname'];
+  $Useremail = $_SESSION['user_email'];
+  $Userusername = $_SESSION['user_username'];
+  $UserprofilePic = $_SESSION['user_profile_pic']; 
+
+  $UserprofilePic = str_replace('../', '', $UserprofilePic);
+}
 // Fetch current prices
 $currentPrices = fetchCryptoData('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,tether,binancecoin&vs_currencies=usd');
 // Fetch historical price data for the past 30 days
@@ -19,6 +25,9 @@ $historicalData = fetchCryptoData('https://api.coingecko.com/api/v3/coins/bitcoi
 //     exit;
 //}
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<?php include "header.php"; ?>
   <body class="body header-fixed home-2">
     <!-- Header -->
     <header id="header_main" class="header">
@@ -59,7 +68,7 @@ $historicalData = fetchCryptoData('https://api.coingecko.com/api/v3/coins/bitcoi
               <p class="fs-20 desc">
                 At XTradeSecurity, we make it easy to buy, sell, swap, convert, and trade your digital assets and currencies. Profits are guaranteed on our platform, using our strategies. <br>Buy now and get up to +10% extra bonus minimum sale amount on major assets. We accept BTC and other leading currencies.
               </p>
-              <a href="#" class="btn-action"><span>Get Started Here</span></a>
+              <a href="user/user-profile.php" class="btn-action"><span>Get Started Here</span></a>
             </div>
             <p>
             <center><span><img src="assets/images/icon/googleplay.png" title="Android app for xTradeSecurity (in Beta)" alt="Google playstore image" /></span>&nbsp;
@@ -490,7 +499,7 @@ $historicalData = fetchCryptoData('https://api.coingecko.com/api/v3/coins/bitcoi
               <div class="crypto-box">
                 <img class="arrow" src="assets/images/icon/Arrow.png" alt="" />
                 <div class="left">
-                  <img src="assets/images/logo/favicon.png" alt="" title="Bitcoin currency logo" />
+                  <img src="assets/images/layout/bitcoin-guarantee.png" alt="" title="Bitcoin currency logo" />
                   <span class="icon-btc"></span>
                   <div>
                     <h6>BTC</h6>
@@ -499,16 +508,18 @@ $historicalData = fetchCryptoData('https://api.coingecko.com/api/v3/coins/bitcoi
                 </div>
 
                 <div class="right">
-                  <h6 class="price">$&nbsp;<?php echo $currentPrices['bitcoin']['usd']; ?></h6>
+                  <h6 class="price"><?php if(!empty($currentPrices['bitcoin']['usd'])){echo '$'.$currentPrices['bitcoin']['usd'];} ?></h6>
                   <div id="total-revenue-chart-1"></div>
                 </div>
               </div>
               <div class="shape"></div>
               <div class="user-card">
-                <div class="info">
-                  <img src="assets/images/avt/user.jpg" alt="" />
-                  <h6>Esther Howard</h6>
-                  <p>estherhoward01@gmail.com</p>
+              <div class="info">
+                  <?php if(isset($Useremail) && isset($Userfirstname) && isset($Userlastname) && isset($UserprofilePic) && isset($Userusername)):?>
+                  <img src="<?= $UserprofilePic; ?>" alt="User Display Photo" title="User Display Photo" />
+                  <h6><?= $Userfirstname .'&nbsp;'. $Userlastname . '<br>(@'. $Userusername . ')'; ?></h6>
+                  <p><?= $Useremail; ?></p>
+                  <?php endif; ?>
                 </div>
 
                 <div class="content">
@@ -533,12 +544,15 @@ $historicalData = fetchCryptoData('https://api.coingecko.com/api/v3/coins/bitcoi
                       fill="#B1B5C3"
                     />
                   </svg>
-                  <p>Balance</p>
-                  <h6 class="price">$2,509.75 <span>+9.77%</span></h6>
+                  <?php if(isset($_SESSION['user_session'])) {$userBalance = calculateUserTotalBalance();
+                            echo "<p title='Total Balance (TB) as approved'>Balance</p>". "<h6 class='price' title='Total Balance (TB) as approved'>". $userBalance ."</h6>";
+                        } else {
+                            echo "&nbsp;<span class='badge bg-warning text-primary' title='Total Balance (TB) as approved'>$0.00<br>Login To Display Current Balance</span>";
+                        }?>
 
                   <div class="button">
-                    <a href="#">Deposit</a>
-                    <a href="#">Withdraw</a>
+                  <a href="user/user-profile.php">Deposit</a>
+                  <a href="user/user-profile.php">Withdraw</a>
                   </div>
                 </div>
               </div>
@@ -581,7 +595,7 @@ $historicalData = fetchCryptoData('https://api.coingecko.com/api/v3/coins/bitcoi
                   "defaultColumn": "oscillators",
                   "screener_type": "crypto_mkt",
                   "displayCurrency": "USD",
-                  "colorTheme": "dark",
+                  "colorTheme": "light",
                   "locale": "en",
                   "isTransparent": true
                 }
@@ -1030,7 +1044,7 @@ $historicalData = fetchCryptoData('https://api.coingecko.com/api/v3/coins/bitcoi
           </div>
           <div class="col-md-12">
             <div class="button-loadmore">
-              <a href="user-profile.php">
+              <a href="user/user-profile.php">
                 <svg
                   width="14"
                   height="14"

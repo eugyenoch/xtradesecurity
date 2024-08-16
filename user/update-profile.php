@@ -1,15 +1,16 @@
 <?php
 include '../function.php';
-checkAdminLogin();
+checkUserLogin();
 
+/** @var mysqli $con */
 
     // Check if the user is logged in
-    if (!isset($_SESSION['admin_session']) || empty($_SESSION['admin_session'])) {
+    if (!isset($_SESSION['user_session']) || empty($_SESSION['user_session'])) {
         header("Location: login.php");
         exit;
     }
 
-    $adminEmail = $_SESSION['admin_session'];
+    $userEmail = $_SESSION['user_session'];
     $firstname = $lastname = $userName = $address = $city = $country = $phone = "";
 
     if (isset($_POST['updateProfile'])) {
@@ -20,10 +21,10 @@ checkAdminLogin();
         $city = sanitize($_POST['city']);
         $country = $_POST['country'];
         $phone = sanitize($_POST['phone']);
-        
-        // Update the admin details in the database
-        $stmt = $con->prepare("UPDATE admin SET firstname = ?, lastname = ?, address = ?, city = ?, country = ?, phone = ? WHERE user_email = ? OR userName = ?");
-        $stmt->bind_param("ssssssss", $firstname, $lastname, $address, $city, $country, $phone, $adminEmail, $adminEmail);
+
+        // Update the user details in the database
+        $stmt = $con->prepare("UPDATE users SET firstname = ?, lastname = ?, address = ?, city = ?, country = ?, phone = ? WHERE user_email = ? OR userName = ?");
+        $stmt->bind_param("ssssssss", $firstname, $lastname, $address, $city, $country, $phone, $userEmail, $userEmail);
 
         if ($stmt->execute()) {
            echo "<script>alert('Success: Profile updated successfully!'); window.location='user-profile.php';</script>;";
@@ -33,9 +34,9 @@ checkAdminLogin();
         $stmt->close();
 
     } else {
-        // Fetch admin details from the database
-        $stmt = $con->prepare("SELECT firstname, lastname, userName, address, city, country, phone FROM admin WHERE user_email = ? OR userName = ?");
-        $stmt->bind_param("ss", $adminEmail, $adminEmail);
+        // Fetch user details from the database
+        $stmt = $con->prepare("SELECT firstname, lastname, userName, address, city, country, phone FROM users WHERE user_email = ? OR userName = ?");
+        $stmt->bind_param("ss", $userEmail, $userEmail);
         $stmt->execute();
         $stmt->bind_result($firstname, $lastname, $userName, $address, $city, $country, $phone);
         $stmt->fetch();

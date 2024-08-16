@@ -14,9 +14,9 @@
                     class="dropdown-menu"
                     aria-labelledby="dropdownMenuButton"
                   >
-                    <a class="dropdown-item" href="#">Binance Visa Card</a>
-                    <a class="dropdown-item" href="#">Crypto Loans</a>
-                    <a class="dropdown-item" href="#">Binance Pay</a>
+                    <a class="dropdown-item" href="#">Visa Card (coming soon)</a>
+                    <a class="dropdown-item" href="#">Crypto Loans (coming soon)</a>
+                    <a class="dropdown-item" href="#">Binance Pay (coming soon)</a>
                   </div>
                 </div>
                 <div class="dropdown">
@@ -34,96 +34,10 @@
                     class="dropdown-menu"
                     aria-labelledby="dropdownMenuButton2"
                   >
-                    <a class="dropdown-item" href="#">Binance Convert</a>
-                    <a class="dropdown-item" href="#">Spot</a>
-                    <a class="dropdown-item" href="#">Margin</a>
-                    <a class="dropdown-item" href="#">P2P</a>
-                  </div>
-                </div>
-                <div class="dropdown">
-                  <button
-                    class="btn dropdown-toggle"
-                    type="button"
-                    id="dropdownMenuButton3"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    EN/USD
-                  </button>
-                  <div
-                    class="dropdown-menu"
-                    aria-labelledby="dropdownMenuButton3"
-                  >
-                    <a
-                      href="javascript:void(0);"
-                      class="dropdown-item notify-item language"
-                      data-lang="en"
-                    >
-                      <img
-                        src="assets/images/flags/us.jpg"
-                        alt="user-image"
-                        class="me-1"
-                        height="12"
-                      />
-                      <span class="align-middle">English</span>
-                    </a>
-
-                    <a
-                      href="javascript:void(0);"
-                      class="dropdown-item notify-item language"
-                      data-lang="sp"
-                    >
-                      <img
-                        src="assets/images/flags/spain.jpg"
-                        alt="user-image"
-                        class="me-1"
-                        height="12"
-                      />
-                      <span class="align-middle">Spanish</span>
-                    </a>
-
-                    <a
-                      href="javascript:void(0);"
-                      class="dropdown-item notify-item language"
-                      data-lang="gr"
-                    >
-                      <img
-                        src="assets/images/flags/germany.jpg"
-                        alt="user-image"
-                        class="me-1"
-                        height="12"
-                      />
-                      <span class="align-middle">German</span>
-                    </a>
-
-                    <a
-                      href="javascript:void(0);"
-                      class="dropdown-item notify-item language"
-                      data-lang="it"
-                    >
-                      <img
-                        src="assets/images/flags/italy.jpg"
-                        alt="user-image"
-                        class="me-1"
-                        height="12"
-                      />
-                      <span class="align-middle">Italian</span>
-                    </a>
-
-                    <a
-                      href="javascript:void(0);"
-                      class="dropdown-item notify-item language"
-                      data-lang="ru"
-                    >
-                      <img
-                        src="assets/images/flags/russia.jpg"
-                        alt="user-image"
-                        class="me-1"
-                        height="12"
-                      />
-                      <span class="align-middle">Russian</span>
-                    </a>
+                    <a class="dropdown-item" href="user/user-profile.php">Convert</a>
+                    <a class="dropdown-item" href="user/user-profile.php">Spot</a>
+                    <a class="dropdown-item" href="user/user-profile.php">Margin</a>
+                    <a class="dropdown-item" href="user/user-profile.php">P2P</a>
                   </div>
                 </div>
                 <div class="mode-switcher">
@@ -390,7 +304,7 @@
                 </div>
                 <div class="mobile-button"><span></span></div>
                 <div class="wallet">
-                  <a href="wallet.php"> Wallet </a>
+                  <a href="user/wallet.php"> Wallet </a>
                 </div>
                 <!-- <div class="dropdown user">
                   <button

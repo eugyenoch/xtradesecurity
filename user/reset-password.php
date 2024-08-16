@@ -3,6 +3,7 @@
 include "../function.php";
 include "../cookie.php";
 
+/** @var mysqli $con */
 
 // Initialize the toast variable
 $toast = '';

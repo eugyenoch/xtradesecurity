@@ -1,41 +1,22 @@
 <?php
-include "function.php";
+use phpmailer\phpmailer\PHPMailer;
+use phpmailer\phpmailer\SMTP;
+use phpmailer\phpmailer\Exception;
 
-//using php mailer
-// use PHPMailer\PHPMailer\PHPMailer;
-// use PHPMailer\PHPMailer\Exception;
+include 'function.php';
 
-// require 'vendor/autoload.php';
+require 'vendor/phpmailer/phpmailer/src/Exception.php';
+require 'vendor/phpmailer/phpmailer/src/PHPMailer.php';
+require 'vendor/phpmailer/phpmailer/src/SMTP.php';
 
-// $mail = new PHPMailer(true);
+//Load Composer's autoloader
+require 'vendor/autoload.php';
 
-// try {
-//     //Server settings
-//     $mail->isSMTP();
-//     $mail->Host       = 'smtp.example.com';
-//     $mail->SMTPAuth   = true;
-//     $mail->Username   = 'your-email@example.com';
-//     $mail->Password   = 'your-email-password';
-//     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-//     $mail->Port       = 587;
+$config = require_once 'emailConfig.php';
 
-//     //Recipients
-//     $mail->setFrom('from@example.com', 'Mailer');
-//     $mail->addAddress('recipient@example.com', 'Joe User');
-
-//     //Content
-//     $mail->isHTML(true);
-//     $mail->Subject = 'Here is the subject';
-//     $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
-//     $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-
-//     $mail->send();
-//     echo 'Message has been sent';
-// } catch (Exception $e) {
-//     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-// }
-
+// Initialize the toast variable
 $toast = '';
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['contact'])) {
     // Sanitize and extract user input
     $firstname = sanitize($_POST['firstname']);
@@ -69,25 +50,48 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['contact'])) {
     $result = json_decode($result);
     
     if ($result->success) {
-        // Send email
-        $to = 'customer@xtradesecurity.com';
-        $subject = 'Website contact';
-        $message_body = "First Name: $firstname\nLast Name: $lastname\nEmail: $email\nPhone: $phone\nSubject: $subject\nMessage: $message";
-        $headers = 'From: no-reply@yourdomain.com' . "\r\n" .
-                   'Reply-To: ' . $email . "\r\n" .
-                   'X-Mailer: PHP/' . phpversion();
+      // Send email using PHPMailer
+      $mail = new PHPMailer(true);
+      try {
+          // Server settings
+          $mail->isSMTP();
+          $mail->Host = $config['smtp']['host'];
+          $mail->SMTPAuth = true;
+          $mail->Username = $config['smtp']['username'];
+          $mail->Password = $config['smtp']['password'];
+          $mail->SMTPSecure = $config['smtp']['encryption'];
+          $mail->Port = $config['smtp']['port'];
 
-        if (mail($to, $subject, $message_body, $headers)) {
-            $toast==='success';
-        } else {
-           $toast==='fail';
-        }
-    } else {
-        $toast = 'captchaFail';
-    }
-} else {
-    $toast='captchaOmit';
+          // Set encryption based on config
+          if ($config['smtp']['encryption'] === 'tls') {
+              $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+          } elseif ($config['smtp']['encryption'] === 'ssl') {
+              $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+          }
+
+          // Recipients
+          $mail->setFrom('noreply@xtradesecurity.com', 'Xtrade Security LTD');
+          $mail->addAddress('customer@xtradesecurity.com', 'Xtrade Support'); // Replace with your recipient's address and name
+
+          // Content
+          $mail->isHTML(true);
+          $mail->Subject = 'Website Customer Contact';
+          $mail->Body    = "There is a new customer contact request from the website. Details are shown below:<br>First Name: $firstname<br>Last Name: $lastname<br>Email: $email<br>Phone: $phone<br>Subject: $subject<br>Message: $message";
+          $mail->AltBody = "There is a new customer contact request from the website. Details are shown below:\nFirst Name: $firstname\nLast Name: $lastname\nEmail: $email\nPhone: $phone\nSubject: $subject\nMessage: $message";
+
+          $mail->send();
+          $toast = 'success';
+      } catch (Exception $e) {
+          $toast = 'fail';
+          // You can log the error if needed
+          error_log("Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
+      }
+  } else {
+      $toast = 'captchaFail';
   }
+} else {
+  $toast = 'captchaOmit';
+}
 }
 ?>
 <!DOCTYPE html>
@@ -146,14 +150,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['contact'])) {
         <div class="row">
           <div class="col-xl-6 col-md-12">
             <div class="image">
-              <img src="assets/images/layout/testimonials.png" alt="xTradeSecurity support representation image" title="xTradeSecurity Support" />
+              <img src="assets/images/layout/testimonials.png" alt="Support representation image" title="Support page" />
             </div>
           </div>
           <div class="col-xl-6 col-md-12">
             <div class="contact-main">
               <div class="block-text center">
-                <h3 class="heading">Leave a message for us</h3>
-                <p class="desc fs-20">Get in touch with xTradeSecurity</p>
+                <h3 class="heading">Get in touch with us </h3>
+                <p class="desc fs-20">Send us your mesasge using the form and a staff will reachout to you. </p>
               </div>
 
               <form action="<?= htmlentities($_SERVER['PHP_SELF']);?>" method="post" name="contactForm">
@@ -166,9 +170,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['contact'])) {
                   <input type="text" class="form-control" placeholder="Enter your last name" name="lastname" required />
                 </div>
                  <div class="form-group">
-                  <label>Your Phone number<br><small>Format:123-456-7890000</small></label>
+                  <label>Your Phone number<span class="text-danger">*</span><br><small>Format:+123-456-7890000</small></label>
                   <input type="tel" class="form-control" placeholder="Enter your phone number" name="phone" 
-                  title="Please match the requested format, including country code" pattern="[0-9]{1,3}-[0-9]{1,3}-[0-9]{4,9}" />
+                  title="Please match the requested format, including country code" pattern="\+\d{1,3}-\d{1,4}-\d{3,4}-\d{3,4}" title="Format: +1-234-567-89000" required />
                 </div>
                 <div class="form-group">
                   <label>Email <span class="text-danger">*</span></label>
@@ -192,7 +196,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['contact'])) {
                 </div>
 
                 <div class="form-group">
-                <input type="checkbox" name="checkbox" required />By submitting this form, I agree to the website <a href="terms-of-use.php">terms of use</a> and <a href="privacy-policy.php">privacy policy</a>
+                <input type="checkbox" name="checkbox" required />By submitting this form, I agree to the website <a href="terms-of-use.php">terms of use</a> and <a href="privacy-policy.php">privacy policy</a><span class="text-danger">*</span>
                 </div>
               
                 <div class="g-recaptcha" data-sitekey="6Ld5Px8qAAAAAOqOnYeBL8ELqirvPKqMAauzHrnT" data-callback='onSubmit' data-action='submit'></div>
@@ -212,7 +216,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['contact'])) {
             <div class="block-text">
               <h4 class="heading">Check out the FAQs for additional support.</h4>
               <p class="desc">
-                Discover more about what we can do for you by looking at our frequently asked questions: some of the issues faced by customers have been treated at the FAQs.<br>Find answers to the most common questions about xTradeSecurity’s services, security features, and account management to enhance your experience with our platform.
+                Discover more about what we can do for you by looking at our frequently asked questions: some of the issues faced by customers have been treated at the FAQs.<br>Find answers to the most common questions about our services, security features, and account management to enhance your experience within our platform.
               </p>
             </div>
           </div>
@@ -241,6 +245,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['contact'])) {
      <!--Toastr-->
      <script type="text/javascript" src="app/js/toastr.min.js"></script>
 
+    <!-- Recaptcha Script -->
      <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   </body>
 </html>
@@ -256,12 +261,12 @@ if(isset($toast)){
     }
 
     if($toast==='Subsuccess'){
-     echo "<script>toastr.success('You were subscribed successfully', 'Success'); window.location='user-profile.php';</script>";
-    }
-
-    if($toast==='Subfail'){
-      echo "<script>toastr.error('A problem was encountered while performing that operation', 'Error'); window.location='user-profile.php';</script>";
-    }
+      echo "<script>toastr.success('You were subscribed successfully', 'Success');</script>";
+     }
+ 
+     if($toast==='Subfail'){
+       echo "<script>toastr.error('A problem was encountered while performing that operation', 'Error');</script>";
+     }
 
     if($toast==='captchaFail'){
       echo "<script>toastr.error('reCAPTCHA verification failed. Please try again.', 'Error'); </script>";

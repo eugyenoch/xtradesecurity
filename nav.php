@@ -18,17 +18,17 @@
                       <li class="menu-item">
                         <a href="exchange.php">Exchange</a>
                       </li>
-                       <!-- <li class="menu-item">
+                       <li class="menu-item">
                         <a href="markets.php">Markets</a>
-                      </li> -->
+                      </li>
 
                       <li class="menu-item-has-children">
                         <a href="#">Trade <i class="fas fa-sort-desc" aria-hidden="true"></i></a><ul class="sub-menu">
                           <li class="menu-item">
-                            <a href="blog-default.php">Buy Assets</a>
+                            <a href="user/user-profile.php">Buy Assets</a>
                           </li>
                           <li class="menu-item">
-                            <a href="blog-grid-v1.php">Sell Assets</a>
+                            <a href="user/user-profile.php">Sell Assets</a>
                           </li><li class="menu-item">
                             <a href="#platforms">Platform</a>
                           </li></ul>
