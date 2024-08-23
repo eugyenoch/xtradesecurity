@@ -98,7 +98,7 @@ $historicalData = fetchCryptoData('https://api.coingecko.com/api/v3/coins/bitcoi
                   ></span>
                   <h6>Bitcoin price</h6>
                   <!-- cryptoprice BEGIN -->
-                  <h6 class="price"> $&nbsp;<?php if ($currentPrices !== null){echo $currentPrices['bitcoin']['usd'];} ?> </h6>
+                  <h6 class="price"><?php if ($currentPrices !== null){echo '$'.$currentPrices['bitcoin']['usd'];}else{echo "Fetching prices...";} ?> </h6>
                   <!-- cryptoprice END -->
                 </div>
                 <div class="right">
@@ -115,7 +115,7 @@ $historicalData = fetchCryptoData('https://api.coingecko.com/api/v3/coins/bitcoi
                   ></span>
                   <h6>Ethereum price</h6>
                     <!-- cryptoprice BEGIN -->
-                    <h6 class="price"> $&nbsp;<?php if ($currentPrices !== null){echo $currentPrices['ethereum']['usd'];} ?> </h6>
+                    <h6 class="price"><?php if ($currentPrices !== null){echo '$'.$currentPrices['ethereum']['usd'];}else{echo "Fetching prices...";}  ?> </h6>
                   <!-- cryptoprice END -->
                 </div>
 
@@ -131,7 +131,7 @@ $historicalData = fetchCryptoData('https://api.coingecko.com/api/v3/coins/bitcoi
                   ></span>
                   <h6>Tether Price</h6>
                     <!-- cryptoprice BEGIN -->
-                    <h6 class="price"> $&nbsp;<?php if ($currentPrices !== null){echo $currentPrices['tether']['usd'];} ?> </h6>
+                    <h6 class="price"><?php if ($currentPrices !== null){echo '$'.$currentPrices['tether']['usd'];}else{echo "Fetching prices...";} ?> </h6>
                   <!-- cryptoprice END -->
                 </div>
 
@@ -149,7 +149,7 @@ $historicalData = fetchCryptoData('https://api.coingecko.com/api/v3/coins/bitcoi
                   ></span>
                   <h6>BNB price</h6>
                     <!-- cryptoprice BEGIN -->
-                    <h6 class="price"> $&nbsp;<?php if ($currentPrices !== null){echo $currentPrices['binancecoin']['usd'];} ?> </h6>
+                    <h6 class="price"><?php if ($currentPrices !== null){echo '$'.$currentPrices['binancecoin']['usd'];}else{echo "Fetching prices...";}?> </h6>
                   <!-- cryptoprice END -->
                 </div>
 

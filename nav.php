@@ -16,10 +16,7 @@
                           </svg> </a>
                         </li>
                       <li class="menu-item">
-                        <a href="exchange.php">Exchange</a>
-                      </li>
-                       <li class="menu-item">
-                        <a href="markets.php">Markets</a>
+                        <a href="exchange.php">Markets and Exchange</a>
                       </li>
 
                       <li class="menu-item-has-children">

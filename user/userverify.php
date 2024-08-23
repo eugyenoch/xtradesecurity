@@ -9,7 +9,7 @@ include "../cookie.php";
 
 //Check if the user is already logged in
 if (isset($_SESSION['admin_session']) && !empty($_SESSION['admin_session'])) {
-    header("Location: ../ user-profile.php");
+    header("Location: ../user-profile.php");
     exit;
   }
 

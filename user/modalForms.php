@@ -455,3 +455,134 @@
         <!-- .modal-dialog -->
     </div>
     <!-- Modal End -->
+
+
+     <!--2FA FORM-->
+<div class="modal fade sho d-bloc" id="tfa" tabindex="-1" aria-labelledby="tfaModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-sm modal-dialog-centered">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h6>2FA <span class="color-danger">(Disabled)</span></h6>
+                <a href="#" class="modal-close" data-dismiss="modal" aria-label="Close">
+                    <span class="badge bg-warning text-black p-2 fs-4">&times;</span>
+                </a>
+        </div>
+                <div class="modal-body">
+                <form method="POST" id="edittfaForm">
+                <div class="form-group">
+                <input type="hidden" name="2faemail" value="<?php if(isset($user_email) && $user_email!=null){echo $user_email;} ?>" readonly>  
+                    <input type="hidden" name="2fauser" value="<?php if(isset($userName) && $userName!=null){echo $userName;} ?>" readonly>   
+                </div>
+                            <p>
+                            If you want to turn on 2FA, input your account password and
+                            the six-digit code provided by your Authenticator app
+                            below, then click <strong>"Enable 2FA Verification"</strong>.
+                            </p>
+
+                    <div class="main">
+                  <h6>Enable 2FA</h6>
+                  <p>Enter your password and 2FA code to enable the 2FA verification</p>
+
+                  <div class="refe">
+                    <div class="form-group">
+                      <label>Your Password</label>
+                      <input class="form-control" type="password" placeholder="Password" title="Enter your account password" />
+                    </div>
+                    <div class="form-group">
+                      <label>2FA Code</label>
+                      <input class="form-control" type="text" placeholder="2FA code" title="Enter code received from your authenticator app" value="<?php echo mt_rand(100000,999999); ?>" disabled />
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                  <button type="button" class="btn btn-primary">Enable 2FA verification</button>
+                    </div>
+                    </div>
+                </form>
+
+                </div>
+            </div>
+            <!-- .modal-content -->
+        </div>
+        <!-- .modal-dialog -->
+    </div>
+    <!-- Modal End -->
+
+     <!--API Keys FORM-->
+<div class="modal fade sho d-bloc" id="apiKey" tabindex="-1" aria-labelledby="apiKeyModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-sm modal-dialog-centered">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h6>API Access <span class="color-danger">(Disabled)</span></h6>
+                <a href="#" class="modal-close" data-dismiss="modal" aria-label="Close">
+                    <span class="badge bg-warning text-black p-2 fs-4">&times;</span>
+                </a>
+        </div>
+                <div class="modal-body">
+                <form method="POST" id="editapiKeyForm">
+                <div class="form-group">
+                <input type="hidden" name="apiemail" value="<?php if(isset($user_email) && $user_email!=null){echo $user_email;} ?>" readonly>  
+                    <input type="hidden" name="apiuser" value="<?php if(isset($userName) && $userName!=null){echo $userName;} ?>" readonly>   
+                </div>
+
+                <p class="lead">Enable API access on your account to generate API keys (available soon).</p>
+               
+        
+                  <div class="modal-footer">
+                  <button type="button" class="btn btn-primary">Enable API Keys</button>
+                    </div>
+                </form>
+
+                </div>
+            </div>
+            <!-- .modal-content -->
+        </div>
+        <!-- .modal-dialog -->
+    </div>
+    <!-- Modal End -->
+
+     <!--Change Password FORM-->
+<div class="modal fade sho d-bloc" id="changePassword" tabindex="-1" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-sm modal-dialog-centered">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h6>Change Password</span></h6>
+                <a href="#" class="modal-close" data-dismiss="modal" aria-label="Close">
+                    <span class="badge bg-warning text-black p-2 fs-4">&times;</span>
+                </a>
+        </div>
+                <div class="modal-body">
+                <form action="change-password.php" method="post">
+                <div class="form-group">
+                <input type="hidden" name="cpemail" value="<?php if(isset($user_email) && $user_email!=null){echo $user_email;} ?>" readonly>  
+                    <input type="hidden" name="cpuser" value="<?php if(isset($userName) && $userName!=null){echo $userName;} ?>" readonly>   
+                </div>
+                            <p>Use this form to change your account password to a new one</p>
+                            <form action="change-password.php" method="post" name="userChangePasswordForm">
+                  <div class="form-group">
+                      <label>Old Password<span class="text-danger">*</span></label>
+                      <input type="password" class="form-control"  placeholder="old password" name="oldPassword" required />
+                    </div>
+                    <div class="form-group">
+                      <label>2FA Code</label>
+                      <input type="text" class="form-control" value="<?php echo mt_rand(100000,999999);?>" disabled />
+                    </div>
+                  <div class="form-group">
+                      <label>New Password<span class="text-danger">*</span><small>(atleast 8 characters, including uppercase letters, lowercase letters, numbers, and special characters)</small></label>
+                      <input type="password" class="form-control" placeholder="new password"  title="atleast 8 characters, including uppercase letters, lowercase letters, numbers, and special characters" name="newPassword" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required />
+                    </div>
+                    <div class="form-group">
+                      <label>Confirm Password<span class="text-danger">*</span></label>
+                      <input type="password" class="form-control" placeholder="confirm password"  name="confirmPassword" required />
+                    </div>
+                  <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary" name="changePassword">Submit Data</button>
+                  <button type="reset" class="btn btn-outline-primary" name="resetData">Reset Data</button>
+                  </div>
+                </form>
+                </div>
+            </div>
+            <!-- .modal-content -->
+        </div>
+        <!-- .modal-dialog -->
+    </div>
+    <!-- Modal End -->

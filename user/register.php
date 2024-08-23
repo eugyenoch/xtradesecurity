@@ -145,7 +145,7 @@ if (isset($_POST['addUser'])) {
                                         <a href='https://xtradesecurity.com/user/userverify.php?token=$verification_token'>Verify Email.</a><br>If you are having issues with the link, copy the below directly to your browser
                                         <br>https://xtradesecurity.com/user/userverify.php?token=$verification_token<br><br>Best Regards,<br>XTrade Security LTD";
                       $mail->AltBody = "Dear $firstname $lastname,\n\nThank you for registering. Please click the link below to verify your email address:\n\n
-                                        https://abpsecurities.com/user/userverify.php?token=$verification_token\n\nBest Regards,\nXTrade Security LTD";
+                                        https://xtradesecurity.com/user/userverify.php?token=$verification_token\n\nBest Regards,\nXTrade Security LTD";
 
                       $mail->send();
                       // Send browser notification

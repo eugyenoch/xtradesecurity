@@ -1,23 +1,52 @@
+<?php
+include '../function.php'; 
+checkUserLogin();
+
+// Fetch current prices
+$currentPrices = fetchCryptoData('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,tether,binancecoin&vs_currencies=usd');
+// Fetch historical price data for the past 30 days
+$historicalData = fetchCryptoData('https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=30');
+
+//This PHPDoc annotation is to help IntelliSense understand the type of $con
+/** @var mysqli $con */
+
+// Fetch user details from the database
+$userEmail = $_SESSION['user_session'];
+$stmt = $con->prepare("SELECT firstname, lastname, phone, user_email, userName, address, city, country, phone, photo, affid, reg_date, is_verified FROM users WHERE user_email = ? OR userName = ? ");
+$stmt->bind_param("ss", $userEmail, $userEmail);
+$stmt->execute();
+$stmt->bind_result($firstname, $lastname, $phone, $user_email, $userName, $address, $city, $country, $phone, $photoPath, $affid, $reg_date, $is_verified);
+$stmt->fetch();
+$stmt->close();
+
+// Set the URL of the profile picture
+$profilePicUrl = !empty($photoPath) ? $photoPath : '';
+
+// Optionally, store these values in session variables to access them on other pages
+$_SESSION['user_firstname'] = $firstname;
+$_SESSION['user_lastname'] = $lastname;
+$_SESSION['user_email'] = $user_email;
+$_SESSION['user_username'] = $userName;
+$_SESSION['user_profile_pic'] = $profilePicUrl;
+
+//SECTION TO CALL SPECIFIC USER INFORMATION
+// Call the function to check if the logged in user is subscribed to newsletter
+$user_subscribed_email = $user_email; // The actual email of the currently subscribed user
+
+//Call the function to check user referral count
+$user_referrer_count = $_SESSION['user_session'];
+$total_referrals = countUserReferrals($con, $user_referrer_count);
+
+//Call the function to check user P2P count
+$user_p2p_count = $_SESSION['user_session'];
+$total_p2p_count = countUserP2PTrades($con, $user_p2p_count);
+
+//Get all fund data from currently logged in user
+$funds = fetchFunds($con, $userEmail);
+?>
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Qash - Crypto Exchange Dashboard UI Kit</title>
-    <!-- Favicon icon -->
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="./images/favicon.png"
-    />
-    <!-- Custom Stylesheet -->
-    <link rel="stylesheet" type="text/css" href="./vendor/slick/slick.css" />
-    <!-- <link rel="stylesheet" type="text/css" href="./vendor/slick/slick-theme.css" /> -->
-    <link rel="stylesheet" href="./css/style.css" />
-  </head>
-
+  <?php include "include/profileHeader.php";?>
   <body>
     <div id="preloader"><i>.</i><i>.</i><i>.</i></div>
 
@@ -31,7 +60,7 @@
                   <div class="brand-logo">
                     <a href="index.html" class="">
                       <img src="./images/logo.png" alt="" />
-                      <span>Qash</span>
+                      <span>XTrade Security</span>
                     </a>
                   </div>
                   <div class="search">
@@ -50,195 +79,9 @@
                   </div>
                 </div>
 
-                <div class="header-right">
-                  <div class="dark-light-toggle" onclick="themeToggle()">
-                    <span class="dark"><i class="icofont-moon"></i></span>
-                    <span class="light"><i class="icofont-sun-alt"></i></span>
-                  </div>
-                  <div class="notification dropdown">
-                    <div class="notify-bell" data-toggle="dropdown">
-                      <span><i class="icofont-alarm"></i></span>
-                    </div>
-                    <div
-                      class="
-                        dropdown-menu dropdown-menu-right
-                        notification-list
-                      "
-                    >
-                      <h4>Announcements</h4>
-                      <div class="lists">
-                        <a href="#" class="">
-                          <div class="d-flex align-items-center">
-                            <span class="me-3 icon success"
-                              ><i class="icofont-check"></i
-                            ></span>
-                            <div>
-                              <p>Account created successfully</p>
-                              <span>2020-11-04 12:00:23</span>
-                            </div>
-                          </div>
-                        </a>
-                        <a href="#" class="">
-                          <div class="d-flex align-items-center">
-                            <span class="me-3 icon fail"
-                              ><i class="icofont-close"></i
-                            ></span>
-                            <div>
-                              <p>2FA verification failed</p>
-                              <span>2020-11-04 12:00:23</span>
-                            </div>
-                          </div>
-                        </a>
-                        <a href="#" class="">
-                          <div class="d-flex align-items-center">
-                            <span class="me-3 icon success"
-                              ><i class="icofont-check"></i
-                            ></span>
-                            <div>
-                              <p>Device confirmation completed</p>
-                              <span>2020-11-04 12:00:23</span>
-                            </div>
-                          </div>
-                        </a>
-                        <a href="#" class="">
-                          <div class="d-flex align-items-center">
-                            <span class="me-3 icon pending"
-                              ><i class="icofont-warning"></i
-                            ></span>
-                            <div>
-                              <p>Phone verification pending</p>
-                              <span>2020-11-04 12:00:23</span>
-                            </div>
-                          </div>
-                        </a>
+                <?php include "include/profileHeadRight.php";?>
 
-                        <a href="./settings-activity.html"
-                          >More <i class="icofont-simple-right"></i
-                        ></a>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="profile_log dropdown">
-                    <div class="user" data-toggle="dropdown">
-                      <span class="thumb"
-                        ><img src="./images/profile/2.png" alt=""
-                      /></span>
-                      <span class="arrow"
-                        ><i class="icofont-angle-down"></i
-                      ></span>
-                    </div>
-                    <div class="dropdown-menu dropdown-menu-right">
-                      <div class="user-email">
-                        <div class="user">
-                          <span class="thumb"
-                            ><img src="./images/profile/2.png" alt=""
-                          /></span>
-                          <div class="user-info">
-                            <h5>Jannatul Maowa</h5>
-                            <span>Qash.inc@gmail.com</span>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="user-balance">
-                        <div class="available">
-                          <p>Available</p>
-                          <span>0.00 BTC</span>
-                        </div>
-                        <div class="total">
-                          <p>Total</p>
-                          <span>0.00 USD</span>
-                        </div>
-                      </div>
-                      <a href="profile.html" class="dropdown-item">
-                        <i class="icofont-ui-user"></i>Profile
-                      </a>
-                      <a href="wallet.html" class="dropdown-item">
-                        <i class="icofont-wallet"></i>Wallet
-                      </a>
-                      <a href="settings-profile.html" class="dropdown-item">
-                        <i class="icofont-ui-settings"></i> Setting
-                      </a>
-                      <a href="settings-activity.html" class="dropdown-item">
-                        <i class="icofont-history"></i> Activity
-                      </a>
-                      <a href="lock.html" class="dropdown-item">
-                        <i class="icofont-lock"></i>Lock
-                      </a>
-                      <a href="signin.html" class="dropdown-item logout">
-                        <i class="icofont-logout"></i> Logout
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="sidebar">
-        <div class="brand-logo">
-          <a href="index.html"><img src="./images/logo.png" alt="" /> </a>
-        </div>
-        <div class="menu">
-          <ul>
-            <li>
-              <a
-                href="index.html"
-                data-toggle="tooltip"
-                data-placement="right"
-                title="Home"
-              >
-                <span><i class="icofont-ui-home"></i></span>
-              </a>
-            </li>
-            <li>
-              <a
-                href="trade.html"
-                data-toggle="tooltip"
-                data-placement="right"
-                title="Trade"
-              >
-                <span><i class="icofont-stack-exchange"></i></span>
-              </a>
-            </li>
-            <li>
-              <a
-                href="wallet.html"
-                data-toggle="tooltip"
-                data-placement="right"
-                title="Wallet"
-              >
-                <span><i class="icofont-wallet"></i></span>
-              </a>
-            </li>
-            <li>
-              <a
-                href="price.html"
-                data-toggle="tooltip"
-                data-placement="right"
-                title="Price"
-              >
-                <span><i class="icofont-price"></i></span>
-              </a>
-            </li>
-            <li class="logout">
-              <a
-                href="signin.html"
-                data-toggle="tooltip"
-                data-placement="right"
-                title="Signout"
-              >
-                <span><i class="icofont-power"></i></span>
-              </a>
-            </li>
-          </ul>
-
-          <p class="copyright">&#169; <a href="#">codeefly</a></p>
-        </div>
-      </div>
+      <?php include "include/sidebar.php";?>
 
       <div class="content-body">
         <div class="container">
@@ -247,28 +90,22 @@
               <div class="card">
                 <div class="card-body">
                   <div class="invite-content">
-                    <h4>Invite a friend and get $30</h4>
+                    <h4>Invite a friend and get referral</h4>
                     <p>
-                      You will receive up to $30 when they： 1.Buy Crypto 2.
-                      Deposit 3. Finish Trading Tasks <br /><a href="#"
-                        >Learn more</a
-                      >
+                    Earn rewards by inviting friends to XTrade Security. You will receive rewards when they： 1.Buy Crypto 2.Finish Trading Tasks.
+                    3.Sign up; gain recognition when they sign up.
                     </p>
-
+                    
                     <div class="copy-link">
                       <form action="#">
                         <div class="input-group">
                           <input
                             type="text"
                             class="form-control"
-                            value="https://www.Qash.io/join/12345"
+                            value="https://www.xtradesecurity.com/?affid=<?php if(isset($affid)){echo $affid;} ?>"
                             id="myInput"
                           />
-                          <span
-                            class="input-group-text c-pointer"
-                            onclick="myFunction()"
-                            >Copy</span
-                          >
+                          <span class="input-group-text c-pointer" onclick="myFunction()">Copy</span>
                         </div>
                       </form>
                     </div>
@@ -287,20 +124,18 @@
               <div class="card">
                 <div class="card-body">
                   <div class="invite-content">
-                    <h4>Get free BTC every day</h4>
+                    <h4>Account Security</h4>
                     <p>
-                      Earn free bitcoins in rewards by completing a learning
-                      mission daily or inviting friends to Qash.
-                      <a href="#">Learn more</a>
+                     Get started on your account security and API keys (for developers). <br>Take advantage of the several get started points available through your dashboard.
                     </p>
-
-                    <a href="#" class="btn btn-primary"
-                      >Invite friends to join</a
-                    >
+                    <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#tfa" tabindex="-1">2FA (coming soon)</a>
+                    <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#apiKey" tabindex="-1">API Keys(coming soon)</a>
+                    <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#changePassword" tabindex="-1">Change Password</a>
                   </div>
                 </div>
               </div>
-            </div>
+            </div> 
+
             <div class="col-xxl-4 col-xl-4 col-lg-6">
               <div class="price-widget bg-btc">
                 <a href="price-details.html">
@@ -309,7 +144,7 @@
                       <i class="cc BTC-alt"></i>
                       <span>Bitcoin</span>
                     </div>
-                    <h5>$ 11,785.10</h5>
+                    <h5><?php if ($currentPrices !== null){echo '$'.$currentPrices['bitcoin']['usd'];}else{echo "Fetching prices...";} ?></h5>
                   </div>
                   <div id="chart"></div>
                 </a>
@@ -323,7 +158,7 @@
                       <i class="cc ETH-alt"></i>
                       <span>Ethereum</span>
                     </div>
-                    <h5>$ 11,785.10</h5>
+                    <h5><?php if ($currentPrices !== null){echo '$'.$currentPrices['ethereum']['usd'];}else{echo "Fetching prices...";}  ?></h5>
                   </div>
                   <div id="chart2"></div>
                 </a>
@@ -337,7 +172,7 @@
                       <i class="cc USDT-alt"></i>
                       <span>Tether</span>
                     </div>
-                    <h5>$ 11,785.10</h5>
+                    <h5><?php if ($currentPrices !== null){echo '$'.$currentPrices['tether']['usd'];}else{echo "Fetching prices...";} ?></h5>
                   </div>
                   <div id="chart3"></div>
                 </a>
@@ -346,11 +181,29 @@
             <div class="col-xxl-3 col-xl-6 col-lg-6">
               <div class="card welcome-profile">
                 <div class="card-body">
-                  <img src="./images/profile/2.png" alt="" />
-                  <h4>Welcome, Jannatul Maowa!</h4>
+                <form action="upload-profile-picture.php" method="post" enctype="multipart/form-data">
+                
+                <div class="avt">
+                <img id="blah" src="<?php if(isset($profilePicUrl)){echo htmlspecialchars($profilePicUrl);} else{echo './images/profile/2.png" alt="" />';}?>" alt="no file" title="Display Photo" /> 
+                <input type="file" class="custom-file-input" accept="image/*" id="imgInp" name="profilePic" title="Select an image" /> 
+                </div>
+                <input type="submit" class="btn" name="upload" value="Upload" title="Upload image" /> 
+              </form>
+                 
+                  <?php if(isset($firstname) && isset($lastname)): ?>
+                  <h4>Welcome,  <?= $firstname .'&nbsp;'.$lastname; ?>!</h4>
+                  <h6 class="name position-relative" title="Display Name">
+                  <?php if(isset($userName)){echo '@'. $userName;} ?>
+                <span class="position-absolute top-0 start-90 translate-right p-2 bg-success border border-light rounded-circle" title="Online">
+                  <span class="visually-hidden">Online</span>
+                </span>
+                  </h6>
+                  <?php endif; ?>
+                  <p><?php if(isset($user_email)){echo '<strong>Email:</strong>&nbsp;'. $user_email;} ?></p>
+              <p><?php if(isset($affid)){echo '<strong>Referral Code:</strong>&nbsp;'.$affid;} ?></p>
+              <p><?php if(isset($reg_date)){echo '<strong>Registered:</strong>&nbsp;'.$reg_date;} ?></p>
                   <p>
-                    Looks like you are not verified yet. Verify yourself to use
-                    the full potential of Qash.
+                    Remember to verify yourself and fill out our KYC to use the full potential of XTrade Security.
                   </p>
 
                   <ul>
@@ -786,6 +639,8 @@
         </div>
       </div>
     </div>
+
+    <?php include "modalForms.php"; ?>
 
     <script src="./vendor/jquery/jquery.min.js"></script>
     <script src="./vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

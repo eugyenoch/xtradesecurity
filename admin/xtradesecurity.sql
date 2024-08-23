@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 16, 2024 at 03:40 PM
+-- Generation Time: Aug 22, 2024 at 03:20 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -200,6 +200,7 @@ CREATE TABLE `transaction` (
   `tinterest` decimal(8,3) DEFAULT NULL,
   `trole` varchar(512) DEFAULT 'trader',
   `tstatus` varchar(255) NOT NULL DEFAULT 'pending',
+  `approved_at` datetime DEFAULT NULL,
   `transact_date` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -207,11 +208,11 @@ CREATE TABLE `transaction` (
 -- Dumping data for table `transaction`
 --
 
-INSERT INTO `transaction` (`id_no`, `txn`, `user_email`, `userName`, `tpackage`, `tamount`, `tprofit`, `tcurrency`, `tduration`, `tinterest`, `trole`, `tstatus`, `transact_date`) VALUES
-(1, 'TXN09876', 'okon@gmail.com', 'okonekpa', 'silver', 50.00000, NULL, 'USD', '30', NULL, 'investor', 'pending', '2024-08-03 10:22:58'),
-(3, 'TXN03376', 'okonji@gmail.com', 'okonji', 'Diamond', 500.00000, NULL, 'USD', '30', NULL, 'trader', 'approved', '2024-08-03 10:24:11'),
-(4, 'TXN5574', 'barto@gmail.com', 'barto', 'Platinum', 850.00000, 90.00000, 'ETH', '30', NULL, 'trader', 'pending', '2024-08-03 10:24:11'),
-(5, 'TXN9595885', 'userEmail@mail.com', 'Useremailgmail', 'Gold', 50.00000, 300.00000, 'USD', '30', 0.150, 'trader', 'approved', '2024-08-04 10:21:42');
+INSERT INTO `transaction` (`id_no`, `txn`, `user_email`, `userName`, `tpackage`, `tamount`, `tprofit`, `tcurrency`, `tduration`, `tinterest`, `trole`, `tstatus`, `approved_at`, `transact_date`) VALUES
+(1, 'TXN09876', 'okon@gmail.com', 'okonekpa', 'silver', 50.00000, NULL, 'USD', '30', NULL, 'investor', 'pending', '2024-08-22 13:47:32', '2024-08-03 10:22:58'),
+(3, 'TXN03376', 'okonji@gmail.com', 'okonji', 'Diamond', 500.00000, NULL, 'USD', '30', NULL, 'trader', 'approved', '2024-08-22 13:47:32', '2024-08-03 10:24:11'),
+(4, 'TXN5574', 'barto@gmail.com', 'barto', 'Platinum', 850.00000, 90.00000, 'ETH', '30', NULL, 'trader', 'pending', '2024-08-22 13:47:32', '2024-08-03 10:24:11'),
+(5, 'TXN9595885', 'userEmail@mail.com', 'Useremailgmail', 'Gold', 50.00000, 300.00000, 'USD', '30', 0.150, 'trader', 'approved', '2024-08-22 13:47:32', '2024-08-04 10:21:42');
 
 -- --------------------------------------------------------
 
@@ -428,7 +429,7 @@ ALTER TABLE `transaction`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `wallet_addresses`
