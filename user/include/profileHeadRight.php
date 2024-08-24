@@ -8,22 +8,15 @@
                     <div class="notify-bell" data-toggle="dropdown">
                       <span><i class="icofont-alarm"></i></span>
                     </div>
-                    <div
-                      class="
-                        dropdown-menu dropdown-menu-right
-                        notification-list
-                      "
-                    >
+                    <div class="dropdown-menu dropdown-menu-right notification-list">
                       <h4>Announcements</h4>
                       <div class="lists">
                         <a href="#" class="">
                           <div class="d-flex align-items-center">
-                            <span class="me-3 icon success"
-                              ><i class="icofont-check"></i
-                            ></span>
+                            <span class="me-3 icon success"><i class="icofont-check"></i></span>
                             <div>
                               <p>Account created successfully</p>
-                              <span>2020-11-04 12:00:23</span>
+                              <span><?php if(isset($reg_date)){echo '<strong>Registered</strong>&nbsp;'.$reg_date;} ?></span>
                             </div>
                           </div>
                         </a>
@@ -33,8 +26,8 @@
                               ><i class="icofont-close"></i
                             ></span>
                             <div>
-                              <p>2FA verification failed</p>
-                              <span>2020-11-04 12:00:23</span>
+                              <p>2FA verification not completed</p>
+                              <span><strong>Available soon</strong></span>
                             </div>
                           </div>
                         </a>
@@ -45,7 +38,7 @@
                             ></span>
                             <div>
                               <p>Device confirmation completed</p>
-                              <span>2020-11-04 12:00:23</span>
+                              <span><?= '<strong>Confirmed</strong>&nbsp;'.date('Y-m-j h:i:H');?></span>
                             </div>
                           </div>
                         </a>
@@ -56,7 +49,7 @@
                             ></span>
                             <div>
                               <p>Phone verification pending</p>
-                              <span>2020-11-04 12:00:23</span>
+                              <span><?= date('Y-m-j h:i:H');?></span>
                             </div>
                           </div>
                         </a>
@@ -70,9 +63,12 @@
 
                   <div class="profile_log dropdown">
                     <div class="user" data-toggle="dropdown">
-                      <span class="thumb"
-                        ><img src="./images/profile/2.png" alt=""
-                      /></span>
+                      <span class="thumb">
+                      <div class="initials-circle">
+                          <?= htmlspecialchars($initials); ?>
+                          <span class="position-absolute bottom-0 start-90 end-10 translate-right p-1 bg-success border border-light rounded-circle" title="Online">
+                      </div>
+                      </span>
                       <span class="arrow"
                         ><i class="icofont-angle-down"></i
                       ></span>
@@ -80,12 +76,12 @@
                     <div class="dropdown-menu dropdown-menu-right">
                       <div class="user-email">
                         <div class="user">
-                          <span class="thumb"
-                            ><img src="./images/profile/2.png" alt=""
+                          <span class="thumb"><img src="<?php if(isset($profilePicUrl) && $profilePicUrl !=null){echo $profilePicUrl;}else{echo'./images/profile/2.png';} ?>" alt="no file" title="User profile photo"
                           /></span>
+
                           <div class="user-info">
-                            <h5>Jannatul Maowa</h5>
-                            <span>XTrade Security.inc@gmail.com</span>
+                            <h5><?php if(isset($firstname) && isset($lastname)){echo $firstname . '&nbsp;'. $lastname;} ?></h5>
+                            <span><?php if(isset($user_email)){echo $user_email;} ?></span>
                           </div>
                         </div>
                       </div>
@@ -115,7 +111,7 @@
                       <a href="lock.php" class="dropdown-item">
                         <i class="icofont-lock"></i>Lock
                       </a>
-                      <a href="signin.php" class="dropdown-item logout">
+                      <a href="include/logout.php" class="dropdown-item logout">
                         <i class="icofont-logout"></i> Logout
                       </a>
                     </div>

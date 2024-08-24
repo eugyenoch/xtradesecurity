@@ -1,52 +1,5 @@
-<?php
-include '../function.php'; 
-checkUserLogin();
 
-// Fetch current prices
-$currentPrices = fetchCryptoData('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,tether,binancecoin&vs_currencies=usd');
-// Fetch historical price data for the past 30 days
-$historicalData = fetchCryptoData('https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=30');
-
-//This PHPDoc annotation is to help IntelliSense understand the type of $con
-/** @var mysqli $con */
-
-// Fetch user details from the database
-$userEmail = $_SESSION['user_session'];
-$stmt = $con->prepare("SELECT firstname, lastname, phone, user_email, userName, address, city, country, phone, photo, affid, reg_date, is_verified FROM users WHERE user_email = ? OR userName = ? ");
-$stmt->bind_param("ss", $userEmail, $userEmail);
-$stmt->execute();
-$stmt->bind_result($firstname, $lastname, $phone, $user_email, $userName, $address, $city, $country, $phone, $photoPath, $affid, $reg_date, $is_verified);
-$stmt->fetch();
-$stmt->close();
-
-// Set the URL of the profile picture
-$profilePicUrl = !empty($photoPath) ? $photoPath : '';
-
-// Optionally, store these values in session variables to access them on other pages
-$_SESSION['user_firstname'] = $firstname;
-$_SESSION['user_lastname'] = $lastname;
-$_SESSION['user_email'] = $user_email;
-$_SESSION['user_username'] = $userName;
-$_SESSION['user_profile_pic'] = $profilePicUrl;
-
-//SECTION TO CALL SPECIFIC USER INFORMATION
-// Call the function to check if the logged in user is subscribed to newsletter
-$user_subscribed_email = $user_email; // The actual email of the currently subscribed user
-
-//Call the function to check user referral count
-$user_referrer_count = $_SESSION['user_session'];
-$total_referrals = countUserReferrals($con, $user_referrer_count);
-
-//Call the function to check user P2P count
-$user_p2p_count = $_SESSION['user_session'];
-$total_p2p_count = countUserP2PTrades($con, $user_p2p_count);
-
-//Get all fund data from currently logged in user
-$funds = fetchFunds($con, $userEmail);
-?>
-<!DOCTYPE html>
-<html lang="en">
-  <?php include "include/profileHeader.php";?>
+<?php include "include/profileHeader.php";?>
   <body>
     <div id="preloader"><i>.</i><i>.</i><i>.</i></div>
 
@@ -58,7 +11,7 @@ $funds = fetchFunds($con, $userEmail);
               <div class="header-content">
                 <div class="header-left">
                   <div class="brand-logo">
-                    <a href="index.html" class="">
+                    <a href="../index.php" class="">
                       <img src="./images/logo.png" alt="" />
                       <span>XTrade Security</span>
                     </a>
@@ -92,24 +45,19 @@ $funds = fetchFunds($con, $userEmail);
                   <div class="invite-content">
                     <h4>Invite a friend and get referral</h4>
                     <p>
-                    Earn rewards by inviting friends to XTrade Security. You will receive rewards when they： 1.Buy Crypto 2.Finish Trading Tasks.
+                    Earn rewards by inviting friends to XTrade Security. You will receive rewards when they：1.Buy Crypto 2.Finish Trading Tasks.
                     3.Sign up; gain recognition when they sign up.
                     </p>
                     
                     <div class="copy-link">
                       <form action="#">
                         <div class="input-group">
-                          <input
-                            type="text"
-                            class="form-control"
-                            value="https://www.xtradesecurity.com/?affid=<?php if(isset($affid)){echo $affid;} ?>"
-                            id="myInput"
-                          />
+                          <input type="text" class="form-control" value="https://www.xtradesecurity.com/?affid=<?php if(isset($affid)){echo $affid;} ?>"
+                            id="myInput" disabled />
                           <span class="input-group-text c-pointer" onclick="myFunction()">Copy</span>
                         </div>
                       </form>
                     </div>
-
                     <!-- <div class="social-share-link">
                                         <a href="#"><span><i class="icofont-facebook"></i></span></a>
                                         <a href="#"><span><i class="icofont-twitter"></i></span></a>
@@ -138,7 +86,7 @@ $funds = fetchFunds($con, $userEmail);
 
             <div class="col-xxl-4 col-xl-4 col-lg-6">
               <div class="price-widget bg-btc">
-                <a href="price-details.html">
+                <a href="price.php">
                   <div class="price-content">
                     <div class="icon-title">
                       <i class="cc BTC-alt"></i>
@@ -152,7 +100,7 @@ $funds = fetchFunds($con, $userEmail);
             </div>
             <div class="col-xxl-4 col-xl-4 col-lg-6">
               <div class="price-widget bg-eth">
-                <a href="price-details.html">
+                <a href="price.php">
                   <div class="price-content">
                     <div class="icon-title">
                       <i class="cc ETH-alt"></i>
@@ -166,7 +114,7 @@ $funds = fetchFunds($con, $userEmail);
             </div>
             <div class="col-xxl-4 col-xl-4 col-lg-6">
               <div class="price-widget bg-usdt">
-                <a href="price-details.html">
+                <a href="price.php">
                   <div class="price-content">
                     <div class="icon-title">
                       <i class="cc USDT-alt"></i>
@@ -194,7 +142,7 @@ $funds = fetchFunds($con, $userEmail);
                   <h4>Welcome,  <?= $firstname .'&nbsp;'.$lastname; ?>!</h4>
                   <h6 class="name position-relative" title="Display Name">
                   <?php if(isset($userName)){echo '@'. $userName;} ?>
-                <span class="position-absolute top-0 start-90 translate-right p-2 bg-success border border-light rounded-circle" title="Online">
+                <span class="position-absolute top-0 start-90 translate-right p-1 bg-success border border-light rounded-circle" title="Online">
                   <span class="visually-hidden">Online</span>
                 </span>
                   </h6>
@@ -217,19 +165,10 @@ $funds = fetchFunds($con, $userEmail);
                     </li>
                     <li>
                       <a href="#">
-                        <span class="not-verified"
-                          ><i class="icofont-close-line"></i
-                        ></span>
-                        Two-factor authentication (2FA)
-                      </a>
+                        <span class="not-verified"><i class="icofont-close-line"></i></span>Two-factor authentication (2FA)</a>
                     </li>
                     <li>
-                      <a href="#">
-                        <span class="not-verified"
-                          ><i class="icofont-close-line"></i
-                        ></span>
-                        Deposit money
-                      </a>
+                      <a href="#" data-toggle="modal" data-target="#fundAccount" tabindex="-1"><span class="not-verified"><i class="icofont-close-line"></i></span>Deposit money</a>
                     </li>
                   </ul>
                 </div>
@@ -283,11 +222,7 @@ $funds = fetchFunds($con, $userEmail);
                       <a href="#">Expected rate <br />No extra fees</a>
                     </p>
 
-                    <button
-                      type="submit"
-                      name="submit"
-                      class="btn btn-success btn-block"
-                    >
+                    <button type="submit" name="exchange" class="btn btn-success btn-block">
                       Exchange Now
                     </button>
                   </form>
@@ -303,54 +238,79 @@ $funds = fetchFunds($con, $userEmail);
                   <div class="row align-items-center">
                     <div class="col-xxl-6 col-xl-6 col-lg-6">
                       <div class="balance-chart">
-                        <div id="balance-chart"></div>
-                        <h4>Total Balance = $ 5360</h4>
+                        <canvas id="moneyChart" width="150" height="75"></canvas>
+                        <h5><?php if(isset($_SESSION['user_session'])) {$userBalance = calculateUserTotalBalance();
+                            echo "Total Balance:&nbsp;<span title='Total Balance (TB) as approved'>". $userBalance ."</span>";
+                        } else {
+                            echo "Total Balance:&nbsp;<span title='Total Balance (TB) as approved'>$0.00</span>";
+                        }?></h5>
+                      </div>
+                      <div>
+                      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#fundAccount" tabindex="-1">Fund Account</button>
+                      <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#withdrawFund" tabindex="-1">Withdraw Fund</button>
                       </div>
                     </div>
                     <div class="col-xxl-6 col-xl-6 col-lg-6">
                       <ul class="balance-widget">
                         <li>
                           <div class="icon-title">
-                            <i class="cc BTC"></i>
-                            <span>Bitcoin</span>
+                            <i class="cc USDT"></i>
+                            <span>Total Approved Funds</span>
                           </div>
                           <div class="text-end">
-                            <h5>0.000242 BTC</h5>
-                            <span>0.125 USD</span>
+                            <h5><?php if(isset($_SESSION['user_session'])) {$totalFunded = getTotalApprovedFundAmount();
+                            echo "<span title='Total Approved Funded (TAF)'>". $totalFunded ."</span>";
+                        } else {
+                            echo "<span title='Total Approved Funded (TAF)'>$0.00</span>";
+                        }?></h5>
+                           <span><a href="wallet.php" title="Wallet">more</a></span>
                           </div>
                         </li>
                         <li>
                           <div class="icon-title">
                             <i class="cc USDT"></i>
-                            <span>Tether</span>
+                            <span>Total Approved Investments</span>
                           </div>
                           <div class="text-end">
-                            <h5>0.000242 USDT</h5>
-                            <span>0.125 USD</span>
+                            <h5> <?php if(isset($_SESSION['user_session'])) {$totalInvestment = getTotalApprovedTransactionAmount();
+                            echo "&nbsp;<span title='Total Approved Investments (TAI)'>". $totalInvestment ."</span>";
+                        } else {
+                            echo "&nbsp;<span title='Total Approved Investments (TAI)'>$0.00</span>";
+                        }?></h5>
+                            <span><a href="wallet.php" title="Wallet">more</a></span>
                           </div>
                         </li>
                         <li>
                           <div class="icon-title">
-                            <i class="cc XTZ"></i>
-                            <span>Tezos</span>
+                            <i class="cc USDT"></i>
+                            <span>Total Investment Profits</span>
                           </div>
                           <div class="text-end">
-                            <h5>0.000242 XTZ</h5>
-                            <span>0.125 USD</span>
+                            <h5> <?php if(isset($_SESSION['user_session'])) {$totalInvestmentProfit = getTotalApprovedTransactionProfit();
+                            echo "&nbsp;<span title='Total Approved Investments Profit (TAIP)'>". $totalInvestmentProfit ."</span>";
+                        } else {
+                            echo "&nbsp;<span title='Total Approved Investments Profit (TAIP)'>$0.00</span>";
+                        }?></h5>
+                            <span><a href="wallet.php" title="Wallet">more</a></span>
                           </div>
                         </li>
                         <li>
                           <div class="icon-title">
-                            <i class="cc XMR"></i>
-                            <span>Monero</span>
+                            <i class="cc USDT"></i>
+                            <span>Total Withdrawn</span>
                           </div>
                           <div class="text-end">
-                            <h5>0.000242 XMR</h5>
-                            <span>0.125 USD</span>
+                            <h5> <?php if(isset($_SESSION['user_session'])) {$totalWithdrawn = getTotalApprovedWithdrawAmount();
+                            echo "&nbsp;<span title='Total Approved Withdrawal (TAW)'>". $totalWithdrawn ."</span>";
+                        } else {
+                            echo "&nbsp;<span title='Total Approved Withdrawal (TAW)'>$0.00</span>";
+                        }?></h5>
+                            <span><a href="wallet.php" title="Wallet">more</a></span>
                           </div>
                         </li>
                       </ul>
-                    </div>
+                      <a href="wallet.php" type="button" class="btn btn-success position-relative top-100 start-50">View More</a>
+                    </div> 
                   </div>
                 </div>
               </div>
@@ -537,100 +497,67 @@ $funds = fetchFunds($con, $userEmail);
             <div class="col-xxl-8 col-xl-8">
               <div class="card">
                 <div class="card-header">
-                  <h4 class="card-title">Transaction</h4>
+                  <h4 class="card-title">Network Information</h4>
                 </div>
+                
                 <div class="card-body">
+                <div class="mb-3">
+                      <div class="shadow p-4 bg-primary text-white"><p class="lead"><i class="icofont-users-social"></i>&nbsp;Total Referrals
+                      <?php if(isset($total_referrals)&& $total_referrals!=null){echo "&nbsp;<span class='badge bg-warning text-primary' title='Your Network Count (NC)'>". $total_referrals ."</span>";} ?>
+                    </p></div>
+                    </div>
                   <div class="table-responsive transaction-table">
-                    <table class="table table-striped responsive-table">
-                      <thead>
-                        <tr>
-                          <th>Ledger ID</th>
-                          <th>Date</th>
-                          <th>Type</th>
-                          <th>Currency</th>
-                          <th>Amount</th>
-                          <th>Fee</th>
-                          <th>Balance</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>523640</td>
-                          <td>January 15</td>
-                          <td>
-                            <span class="danger-arrow"
-                              ><i class="icofont-arrow-down"></i> Sell</span
-                            >
-                          </td>
-                          <td class="coin-name">
-                            <i class="cc BTC"></i> Bitcoin
-                          </td>
-                          <td class="text-danger">-0.000242 BTC</td>
-                          <td>0.02%</td>
-                          <td><strong>0.25484 BTC</strong></td>
-                        </tr>
-                        <tr>
-                          <td>523640</td>
-                          <td>January 15</td>
-                          <td>
-                            <span class="success-arrow"
-                              ><i class="icofont-arrow-up"></i>Buy</span
-                            >
-                          </td>
-                          <td class="coin-name">
-                            <i class="cc LTC"></i> Litecoin
-                          </td>
-                          <td class="text-success">-0.000242 BTC</td>
-                          <td>0.02%</td>
-                          <td><strong> 0.25484 LTC</strong></td>
-                        </tr>
-                        <tr>
-                          <td>523640</td>
-                          <td>January 15</td>
-                          <td>
-                            <span class="success-arrow"
-                              ><i class="icofont-arrow-up"></i>Buy</span
-                            >
-                          </td>
-                          <td class="coin-name">
-                            <i class="cc XRP"></i> Ripple
-                          </td>
-                          <td class="text-success">-0.000242 BTC</td>
-                          <td>0.02%</td>
-                          <td><strong> 0.25484 LTC</strong></td>
-                        </tr>
-                        <tr>
-                          <td>523640</td>
-                          <td>January 15</td>
-                          <td>
-                            <span class="success-arrow"
-                              ><i class="icofont-arrow-up"></i>Buy</span
-                            >
-                          </td>
-                          <td class="coin-name">
-                            <i class="cc DASH"></i> Dash
-                          </td>
-                          <td class="text-success">-0.000242 BTC</td>
-                          <td>0.02%</td>
-                          <td><strong> 0.25484 LTC</strong></td>
-                        </tr>
-                        <tr>
-                          <td>523640</td>
-                          <td>January 15</td>
-                          <td>
-                            <span class="success-arrow"
-                              ><i class="icofont-arrow-up"></i>Buy</span
-                            >
-                          </td>
-                          <td class="coin-name">
-                            <i class="cc LTC"></i> Litecoin
-                          </td>
-                          <td class="text-success">-0.000242 BTC</td>
-                          <td>0.02%</td>
-                          <td><strong> 0.25484 LTC</strong></td>
-                        </tr>
-                      </tbody>
-                    </table>
+                  <table class="table caption-top table-striped table-hover responsive-table" id="refTable">
+                  <caption><strong>Referral Table</strong></caption>
+                  <thead>
+                      <tr class="table-primary">
+                           <th>S/N</th>
+                          <th>Affiliate</th>
+                          <th>Affiliate ID</th>
+                          <th>Date Registered</th>
+                      </tr>
+                  </thead>
+                  <tfoot>
+                  <tr class="table-primary">
+                          <th>S/N</th>
+                          <th>Affiliate</th>
+                          <th>Affiliate ID</th>
+                          <th>Date Registered</th>
+                      </tr>
+                  </tfoot>
+                 <tbody>
+                  <?php $sql_refs = "SELECT * FROM referral WHERE referrer = '$userEmail' OR referrer_email = '$userEmail'"; 
+                  $sql_ref_exec = $con->query($sql_refs);$serial_number = 1;
+                if ($sql_ref_exec->num_rows > 0): 
+                  foreach($sql_ref_exec as $ref_info):
+                      // Fetch the affid from the users table based on the referrer
+                      $referrer = $ref_info['referrer'];
+                      $sql_user = "SELECT affid FROM users WHERE userName = '$referrer'"; // Assuming 'username' is the column to match
+                      $sql_user_exec = $con->query($sql_user);
+                      $user_affid = "";
+                      
+                      if ($sql_user_exec->num_rows > 0) {
+                          $user_info = $sql_user_exec->fetch_assoc();
+                          $user_affid = $user_info['affid'];
+                      }?>
+                    <tr>
+                        <td class="coin-name"><?= $serial_number; ?></td>
+                        <td class="coin-name">
+                          <?php if(isset($ref_info['user_referred']) && $ref_info['user_referred']!=null){echo '@'.$ref_info['user_referred'];} ?>
+                        </td>
+                        <td><?php if (!empty($ref_info['user_referred_affid'])) { echo $ref_info['user_referred_affid']; } ?></td>
+                        <td class="coin-name"><?= $ref_info['date']; ?></td>
+                    </tr>
+                <?php $serial_number++; endforeach; ?>
+            <?php else: ?>
+                 </tbody>
+                <tr>
+                    <!-- <td colspan="8"><center>No user information found</center></td> -->
+                </tr>
+            <?php endif; ?>
+        </tbody>
+                 
+                </table>
                   </div>
                 </div>
               </div>
@@ -641,22 +568,4 @@ $funds = fetchFunds($con, $userEmail);
     </div>
 
     <?php include "modalForms.php"; ?>
-
-    <script src="./vendor/jquery/jquery.min.js"></script>
-    <script src="./vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <script src="./vendor/basic-table/jquery.basictable.min.js"></script>
-    <script src="./js/plugins/basic-table-init.js"></script>
-
-    <script src="./vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-    <script src="./js/plugins/perfect-scrollbar-init.js"></script>
-
-    <script src="./vendor/apexchart/apexcharts.min.js"></script>
-    <script src="./js/dashboard.js"></script>
-    <script src="./js/plugins/apex-price.js"></script>
-
-    <script src="./vendor/slick/slick.min.js"></script>
-    <script src="./js/plugins/slick-init.js"></script>
-    <script src="./js/scripts.js"></script>
-  </body>
-</html>
+    <?php include "include/footer.php"; ?>

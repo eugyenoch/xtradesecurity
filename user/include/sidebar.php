@@ -5,52 +5,42 @@
         <div class="menu">
           <ul>
             <li>
-              <a
-                href="user-profile.php"
-                data-toggle="tooltip"
-                data-placement="right"
-                title="Home"
-              >
+              <a href="user-profile.php" data-toggle="tooltip" data-placement="right" title="Home">
                 <span><i class="icofont-ui-home"></i></span>
               </a>
             </li>
             <li>
-              <a
-                href="trade.php"
-                data-toggle="tooltip"
-                data-placement="right"
-                title="Trade"
-              >
+              <a href="markets.php" data-toggle="tooltip" data-placement="right" title="Markets">
+                <span><i class="icofont-chart-growth"></i></span>
+              </a>
+            </li>
+            <li>
+              <a href="exchange.php" data-toggle="tooltip" data-placement="right" title="Exchange">
+                <span><i class="icofont-exchange"></i></span>
+              </a>
+            </li>
+            <li>
+              <a href="trade.php" data-toggle="tooltip" data-placement="right" title="Trade">
                 <span><i class="icofont-stack-exchange"></i></span>
               </a>
             </li>
             <li>
-              <a
-                href="wallet.php"
-                data-toggle="tooltip"
-                data-placement="right"
-                title="Wallet"
-              >
+              <a href="trade.php" data-toggle="tooltip" data-placement="right" title="Investment">
+                <span><i class="icofont-chart-line"></i></span>
+              </a>
+            </li>
+            <li>
+              <a href="wallet.php" data-toggle="tooltip" data-placement="right" title="Wallet">
                 <span><i class="icofont-wallet"></i></span>
               </a>
             </li>
             <li>
-              <a
-                href="price.php"
-                data-toggle="tooltip"
-                data-placement="right"
-                title="Price"
-              >
+              <a href="price.php" data-toggle="tooltip" data-placement="right" title="Price">
                 <span><i class="icofont-price"></i></span>
               </a>
             </li>
             <li class="logout">
-              <a
-                href="logout.php"
-                data-toggle="tooltip"
-                data-placement="right"
-                title="Signout"
-              >
+              <a href="logout.php" data-toggle="tooltip" data-placement="right" title="Logout of your account">
                 <span><i class="icofont-power"></i></span>
               </a>
             </li>

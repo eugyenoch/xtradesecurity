@@ -22,7 +22,7 @@
     <meta name="twitter:image" content="assets/images/logo/favicon.png">
     <meta name="twitter:site" content="@xtrade security">
 
-    <title>xtrade security | Digital Assets Exchange, Wallet, and Trading Platform</title>
+    <title>xtrade security LTD | Digital Assets Exchange, Wallet, and Trading Platform</title>
     <!-- Style CSS -->
     <link rel="stylesheet" href="../app/dist/app.css" />
     <link rel="stylesheet" href="../app/dist/magnific-popup.css" />

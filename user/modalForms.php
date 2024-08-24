@@ -5,7 +5,7 @@
             <div class="modal-header">
              <h6 class="modal-title">Upload Payment Proof </h6>
                 <a href="#" class="modal-close" data-dismiss="modal" aria-label="Close">
-                    <span class="border badge bg-warning text-black p-2 fs-2">&times;</span>
+                <span class="btn-close badge bg-outline-warning p-2 fs-4">&times;</span>
                 </a>
             </div>
                 <div class="modal-body">
@@ -46,7 +46,7 @@
             <div class="modal-content">
             <div class="modal-header">
                 <a href="#" class="modal-close" data-dismiss="modal" aria-label="Close">
-                    <span class="border badge bg-warning text-black p-2 fs-2">&times;</span>
+                <span class="btn-close badge bg-outline-warning p-2 fs-4">&times;</span>
                 </a>
             </div>
                 <div class="modal-body">
@@ -114,7 +114,7 @@
         <div class="modal-content">
         <div class="modal-header">
                 <a href="#" class="modal-close" data-dismiss="modal" aria-label="Close">
-                    <span class="border badge bg-warning text-black p-2 fs-2">&times;</span>
+                <span class="btn-close badge bg-outline-warning p-2 fs-4">&times;</span>
                 </a>
         </div>
                 <div class="modal-body">
@@ -181,7 +181,7 @@
         <div class="modal-content">
         <div class="modal-header">
                 <a href="#" class="modal-close" data-dismiss="modal" aria-label="Close">
-                    <span class="border badge bg-warning text-black p-2 fs-2">&times;</span>
+                    <span class="btn-close badge bg-outline-warning p-2 fs-4">&times;</span>
                 </a>
         </div>
                 <div class="modal-body">
@@ -218,7 +218,7 @@
 
                     <div class="form-group mb-3">
                         <label for="currency_id2" class="form-label">Select currency</label>
-                        <select class="form-select" id="currency_id2" name="dpcurrency_id" required>
+                        <select class="form-select" id="currency_id3" name="dpcurrency_id" required>
                             <option value="">Choose a currency</option>
                             <?php foreach(fetchUniqueWallets($con) as $wallet): ?>
                                 <option value="<?= htmlspecialchars($wallet['wallet']) ?>">
@@ -249,7 +249,7 @@
         <div class="modal-content">
         <div class="modal-header">
                 <a href="#" class="modal-close" data-dismiss="modal" aria-label="Close">
-                    <span class="border badge bg-warning text-black p-2 fs-2">&times;</span>
+                <span class="btn-close badge bg-outline-warning p-2 fs-4">&times;</span>
                 </a>
         </div>
                 <div class="modal-body">
@@ -285,7 +285,7 @@
 
                     <div class="form-group mb-3">
                         <label for="currency_id2" class="form-label">Select currency</label>
-                        <select class="form-select" id="currency_id2" name="gcurrency_id" required>
+                        <select class="form-select" id="currency_id4" name="gcurrency_id" required>
                             <option value="">Choose a currency</option>
                             <?php foreach(fetchUniqueWallets($con) as $wallet): ?>
                                 <option value="<?= htmlspecialchars($wallet['wallet']) ?>">
@@ -319,7 +319,7 @@
         <div class="modal-content">
         <div class="modal-header">
                 <a href="#" class="modal-close" data-dismiss="modal" aria-label="Close">
-                    <span class="border badge bg-warning text-black p-2 fs-2">&times;</span>
+                    <span class="btn-close badge bg-outline-warning p-2 fs-4">&times;</span>
                 </a>
         </div>
                 <div class="modal-body">
@@ -356,7 +356,7 @@
 
                     <div class="form-group mb-3">
                         <label for="currency_id2" class="form-label">Select currency</label>
-                        <select class="form-select" id="currency_id2" name="gpcurrency_id" required>
+                        <select class="form-select" id="currency_id5" name="gpcurrency_id" required>
                             <option value="">Choose a currency</option>
                             <?php foreach(fetchUniqueWallets($con) as $wallet): ?>
                                 <option value="<?= htmlspecialchars($wallet['wallet']) ?>">
@@ -391,7 +391,7 @@
         <div class="modal-content">
         <div class="modal-header">
                 <a href="#" class="modal-close" data-dismiss="modal" aria-label="Close">
-                    <span class="border badge bg-warning text-black p-2 fs-2">&times;</span>
+                    <span class="btn-close badge bg-outline-warning p-2 fs-4">&times;</span>
                 </a>
         </div>
                 <div class="modal-body">
@@ -428,7 +428,7 @@
 
                     <div class="form-group mb-3">
                         <label for="currency_id2" class="form-label">Select currency</label>
-                        <select class="form-select" id="currency_id2" name="vcurrency_id" required>
+                        <select class="form-select" id="currency_id6" name="vcurrency_id" required>
                             <option value="">Choose a currency</option>
                             <?php foreach(fetchUniqueWallets($con) as $wallet): ?>
                                 <option value="<?= htmlspecialchars($wallet['wallet']) ?>">
@@ -464,7 +464,7 @@
         <div class="modal-header">
             <h6>2FA <span class="color-danger">(Disabled)</span></h6>
                 <a href="#" class="modal-close" data-dismiss="modal" aria-label="Close">
-                    <span class="badge bg-warning text-black p-2 fs-4">&times;</span>
+                    <span class="btn-close badge bg-outline-warning p-2 fs-4">&times;</span>
                 </a>
         </div>
                 <div class="modal-body">
@@ -494,7 +494,7 @@
                     </div>
                   </div>
                   <div class="modal-footer">
-                  <button type="button" class="btn btn-primary">Enable 2FA verification</button>
+                  <button type="button" class="btn btn-primary" onclick="featureNotAvailable();">Enable 2FA verification</button>
                     </div>
                     </div>
                 </form>
@@ -514,7 +514,7 @@
         <div class="modal-header">
             <h6>API Access <span class="color-danger">(Disabled)</span></h6>
                 <a href="#" class="modal-close" data-dismiss="modal" aria-label="Close">
-                    <span class="badge bg-warning text-black p-2 fs-4">&times;</span>
+                    <span class="btn-close badge bg-outline-warning p-2 fs-4">&times;</span>
                 </a>
         </div>
                 <div class="modal-body">
@@ -528,7 +528,7 @@
                
         
                   <div class="modal-footer">
-                  <button type="button" class="btn btn-primary">Enable API Keys</button>
+                  <button type="button" class="btn btn-primary" onclick="featureNotAvailable();">Enable API Keys</button>
                     </div>
                 </form>
 
@@ -547,7 +547,7 @@
         <div class="modal-header">
             <h6>Change Password</span></h6>
                 <a href="#" class="modal-close" data-dismiss="modal" aria-label="Close">
-                    <span class="badge bg-warning text-black p-2 fs-4">&times;</span>
+                    <span class="btn-close badge bg-outline-warning p-2 fs-4">&times;</span>
                 </a>
         </div>
                 <div class="modal-body">
@@ -575,10 +575,137 @@
                       <input type="password" class="form-control" placeholder="confirm password"  name="confirmPassword" required />
                     </div>
                   <div class="modal-footer">
-                  <button type="submit" class="btn btn-primary" name="changePassword">Submit Data</button>
-                  <button type="reset" class="btn btn-outline-primary" name="resetData">Reset Data</button>
+                  <button type="submit" class="btn btn-primary" name="changePassword">Change Password</button>
+                  <button type="reset" class="btn btn-outline-primary" name="resetData">Clear Data</button>
                   </div>
                 </form>
+                </div>
+            </div>
+            <!-- .modal-content -->
+        </div>
+        <!-- .modal-dialog -->
+    </div>
+    <!-- Modal End -->
+
+
+     <!--FUND ACCOUNT FORM-->
+<div class="modal fade sho d-bloc" id="fundAccount" tabindex="-1" aria-labelledby="fundAccountModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-sm modal-dialog-centered">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h6>Fund Your Account</span></h6>
+                <a href="#" class="modal-close" data-dismiss="modal" aria-label="Close">
+                    <span class="btn-close badge bg-outline-warning p-2 fs-4">&times;</span>
+                </a>
+        </div>
+                <div class="modal-body">
+                    <p>Use this form to deposit funds into your account</p>
+                    <form method="POST" action="<?= htmlspecialchars($_SERVER['PHP_SELF']); ?>" name="fundingRequestForm">
+                  <div class="form-group">
+                      <input type="hidden" name="ftxn" value="<?= 'TXN' . mt_rand(100000, 999999); ?>" readonly>
+                      <input type="hidden" name="ffirstname" value="<?= isset($firstname) ? htmlspecialchars($firstname) : 'User'; ?>" readonly>
+                      <input type="hidden" name="flastname" value="<?= isset($lastname) ? htmlspecialchars($lastname) : 'User'; ?>" readonly>
+                      <input type="hidden" name="femail" value="<?= isset($user_email) ? htmlspecialchars($user_email) : 'User'; ?>" readonly>
+                      <input type="hidden" name="fusername" value="<?= isset($userName) ? htmlspecialchars($userName) : 'User'; ?>" readonly>
+                  </div>
+
+                  <div class="form-group mb-3">
+                      <label for="famount" class="form-label">Enter Amount</label>
+                      <input type="number" class="form-control" id="famount" name="famount" placeholder="Enter amount" min="0" step="0.00001" required>
+                  </div>
+                        
+                  <div class="form-group mb-3">
+                      <label for="currency_id" class="form-label">Select currency to fund</label>
+                      <select class="form-select" id="currency_id" name="fcurrency_id" required>
+                          <option value="">Choose a currency</option>
+                          <?php foreach(fetchAllWalletAddresses($con) as $allWallets): ?>
+                              <option value="<?= htmlspecialchars($allWallets['wallet']); ?>" 
+                                      data-address="<?= htmlspecialchars($allWallets['address']); ?>" 
+                                      data-qrcode="<?= htmlspecialchars($allWallets['qrcode']); ?>">
+                                      <?= htmlspecialchars($allWallets['wallet']); ?>
+                                      <?php if (!empty($allWallets['wallet_tag'])): ?>
+                                          (<?= htmlspecialchars($allWallets['wallet_tag']); ?>)
+                                      <?php endif; ?>
+                              </option>
+                          <?php endforeach; ?>
+                      </select>
+                  </div>
+                              
+                <div id="walletDetails" style="display: none;">
+                    <div class="form-group mb-3">
+                        <label for="wallet_address" class="form-label">Wallet Address to pay to</label>
+                        <input type="text" class="form-control" id="wallet_address" name="wallet_address" readonly>
+                        <button type="button" class="btn btn-outline-secondary mt-2" onclick="copyWalletAddress()">Copy Address</button>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="qrcode" class="form-label">QR Code</label><br>
+                        <img id="qrcode_image" src="" alt="QR Code" style="max-width: 200px; height:200px;" title="Scan QR code to pay">
+                    </div> 
+                </div>
+                <div class="form-text mb-3">
+                       Pay into the wallet address and keep your transaction proof for later, then come back and click proceed to continue.
+                </div>
+                <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" id="fundButton" name="fundAccount">Proceed <i class="icofont-double-right"></i></button>
+                <button type="reset" class="btn btn-outline-primary" name="resetData">Clear Data</button>
+                </div>
+            </form>
+                </div>
+            </div>
+            <!-- .modal-content -->
+        </div>
+        <!-- .modal-dialog -->
+    </div>
+    <!-- Modal End -->
+
+     <!--WITHDRAW FUND FORM-->
+<div class="modal fade sho d-bloc" id="withdrawFund" tabindex="-1" aria-labelledby="withdrawFundModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-sm modal-dialog-centered">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h6>Change Password</span></h6>
+                <a href="#" class="modal-close" data-dismiss="modal" aria-label="Close">
+                    <span class="btn-close badge bg-outline-warning p-2 fs-4">&times;</span>
+                </a>
+        </div>
+                <div class="modal-body">
+                <p>Use this form to change your account password to a new one</p>  
+                <form method="POST" action="finance.php" name="withdrawalRequestForm">
+                  <div class="form-group">
+                      <input type="hidden" name="wtxn" value="<?= 'TXN' . mt_rand(100000, 999999); ?>" readonly>
+                      <input type="hidden" name="wfirstname" value="<?php if(isset($firstname)){echo $firstname;}else{echo "User";}?>" readonly>
+                      <input type="hidden" name="wlastname" value="<?php if(isset($lastname)){echo $lastname;}else{echo "User";}?>" readonly>  
+                      <input type="hidden" name="wemail" value="<?php if(isset($user_email)){echo $user_email;}else{echo "User";}?>" readonly>
+                      <input type="hidden" name="wusername" value="<?php if(isset($userName)){echo $userName;}else{echo "User";}?>" readonly>    
+                  </div>
+
+                  <div class="form-group mb-3">
+                      <label for="amount" class="form-label">Amount</label>
+                      <input type="number" class="form-control" id="amount" name="wamount" placeholder="Enter amount" min="0" step="0.00001" required>
+                  </div>
+                  
+                  <div class="form-group mb-3">
+                      <label for="currency_id" class="form-label">Select currency</label>
+                      <select class="form-select" id="currency_id2" name="wcurrency_id" required>
+                          <option value="">Choose a currency</option>
+                          <?php foreach(fetchUniqueWallets($con) as $uniqueWallet): ?>
+                            <option value="<?= htmlspecialchars($uniqueWallet['wallet']) ?>">
+                                <?= htmlspecialchars($uniqueWallet['wallet']); ?>
+                            </option>
+                        <?php endforeach; ?>
+                      </select>
+                  </div>
+
+                  <div class="form-group mb-3">
+                      <label for="address" class="form-label">Wallet Address</label>
+                      <input type="text" class="form-control" id="amount" name="waddress" placeholder="Enter your wallet address" required>
+                  </div>
+                  <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary" name="withdraw">Proceed <i class="icofont-double-right"></i></button>
+                  <button type="reset" class="btn btn-outline-primary" name="resetData">Clear Data</button>
+                  </div>
+              </form>
+
                 </div>
             </div>
             <!-- .modal-content -->
