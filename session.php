@@ -19,7 +19,7 @@ $admin_session = "";
 // session_set_cookie_params([
 //     'lifetime' => 3600, // Cookie lifetime in seconds
 //     'path' => '/',
-//     'domain' => 'abpsecurities.com', // Adjust to your domain
+//     'domain' => 'dtradesecurity.com', // Adjust to your domain
 //     'secure' => true, // Only send cookies over HTTPS
 //     'httponly' => true, // Prevent JavaScript access to cookies
 //     'samesite' => 'Strict', // Adjust to 'Lax' or 'None' as needed

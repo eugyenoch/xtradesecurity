@@ -45,15 +45,14 @@
                   <div class="invite-content">
                     <h4>Invite a friend and get referral</h4>
                     <p>
-                    Earn rewards by inviting friends to XTrade Security. You will receive rewards when they：1.Buy Crypto 2.Finish Trading Tasks.
-                    3.Sign up; gain recognition when they sign up.
+                    Earn rewards by inviting friends to XTrade Security using your referal code. You will receive rewards when they：1.Buy Crypto 2.Finish Trading Tasks.
+                   Also gain recognition when they sign up.
                     </p>
                     
                     <div class="copy-link">
                       <form action="#">
                         <div class="input-group">
-                          <input type="text" class="form-control" value="https://www.xtradesecurity.com/?affid=<?php if(isset($affid)){echo $affid;} ?>"
-                            id="myInput" disabled />
+                          <input type="text" class="form-control" value="<?php if(isset($affid)){echo $affid;} ?>" id="myInput" disabled />
                           <span class="input-group-text c-pointer" onclick="myFunction()">Copy</span>
                         </div>
                       </form>
@@ -74,7 +73,7 @@
                   <div class="invite-content">
                     <h4>Account Security</h4>
                     <p>
-                     Get started on your account security and API keys (for developers). <br>Take advantage of the several get started points available through your dashboard.
+                     Get started on your account security and API keys (for developers). <br>Take advantage of the several get started points, available through your dashboard to secure your account.
                     </p>
                     <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#tfa" tabindex="-1">2FA (coming soon)</a>
                     <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#apiKey" tabindex="-1">API Keys(coming soon)</a>
@@ -168,7 +167,7 @@
                         <span class="not-verified"><i class="icofont-close-line"></i></span>Two-factor authentication (2FA)</a>
                     </li>
                     <li>
-                      <a href="#" data-toggle="modal" data-target="#fundAccount" tabindex="-1"><span class="not-verified"><i class="icofont-close-line"></i></span>Deposit money</a>
+                      <a href="#" data-toggle="modal" data-target="#fundAccount" tabindex="-1"><span class="not-verified"><i class="icofont-money-bag"></i></span>Deposit money</a>
                     </li>
                   </ul>
                 </div>
@@ -238,7 +237,7 @@
                   <div class="row align-items-center">
                     <div class="col-xxl-6 col-xl-6 col-lg-6">
                       <div class="balance-chart">
-                        <canvas id="moneyChart" width="150" height="75"></canvas>
+                        <canvas id="moneyChart" width="200" height="100"></canvas>
                         <h5><?php if(isset($_SESSION['user_session'])) {$userBalance = calculateUserTotalBalance();
                             echo "Total Balance:&nbsp;<span title='Total Balance (TB) as approved'>". $userBalance ."</span>";
                         } else {
@@ -318,7 +317,7 @@
             <div class="col-xxl-8 col-xl-8">
               <div class="card dashboard-select">
                 <div class="card-header">
-                  <h4 class="card-title home-chart">Analytics</h4>
+                  <h4 class="card-title home-chart">Market Analytics</h4>
                   <select
                     class="form-select d-none"
                     name="report-type"
@@ -330,38 +329,58 @@
                 </div>
                 <div class="card-body">
                   <div class="home-chart-height">
-                    <div id="chartx"></div>
+                    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+                      <script type="text/javascript">
+                        new TradingView.widget({
+                          container_id: "technical-analysis",
+                          width: "100%",
+                          height: 600,
+                          symbol: "BITSTAMP:BTCUSD",
+                          interval: "D",
+                          timezone: "exchange",
+                          theme: "red",
+                          style: "1",
+                          toolbar_bg: "#23262F",
+                          withdateranges: true,
+                          hide_side_toolbar: false,
+                          allow_symbol_change: true,
+                          save_image: false,
+                          hideideas: true,
+                          studies: [
+                            "ROC@tv-basicstudies",
+                            "StochasticRSI@tv-basicstudies",
+                            "MASimple@tv-basicstudies",
+                          ],
+                          show_popup_button: true,
+                          popup_width: "1000",
+                          popup_height: "650",
+                        });
+                      </script>
                     <div class="row">
-                      <div
-                        class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-6"
-                      >
+                      <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-6">
                         <div class="chart-price-value">
                           <span>24hr Volume</span>
-                          <h5>$236,368.00</h5>
+                          <h5>$136,368.00</h5>
                         </div>
                       </div>
-                      <div
-                        class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-6"
-                      >
+                      <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-6">
                         <div class="chart-price-value">
                           <span>Marketcap</span>
-                          <h5>$236.025B USD</h5>
+                          <h5>$236.025M USD</h5>
                         </div>
                       </div>
                       <div
                         class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-6"
                       >
                         <div class="chart-price-value">
-                          <span>24hr Volume</span>
-                          <h5>56.3 BTC</h5>
+                          <span>Most Traded Asset</span>
+                          <h5>Tether (USDT)</h5>
                         </div>
                       </div>
-                      <div
-                        class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-6"
-                      >
+                      <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-6">
                         <div class="chart-price-value">
                           <span>All Time High</span>
-                          <h5>$236,368.00</h5>
+                          <h5>$216,368.00 USD</h5>
                         </div>
                       </div>
                     </div>
@@ -372,58 +391,33 @@
             <div class="col-xxl-4 col-xl-4">
               <div class="card">
                 <div class="card-header">
-                  <h4 class="card-title">Trade Balances</h4>
+                  <h4 class="card-title">Trading News</h4>
                 </div>
                 <div class="card-body">
-                  <ul class="balance-widget trade-balance">
-                    <li>
-                      <h5>Trade Balance</h5>
-                      <div class="text-end">
-                        <h5>$0.0000</h5>
-                        <span>Total margin currency balance.</span>
-                      </div>
-                    </li>
-                    <li>
-                      <h5>Equity</h5>
-                      <div class="text-end">
-                        <h5>$0.0000</h5>
-                        <span
-                          >Trade balance combined with unrealized
-                          profit/loss</span
-                        >
-                      </div>
-                    </li>
-                    <li>
-                      <h5>Used Margin</h5>
-                      <div class="text-end">
-                        <h5>$0.0000</h5>
-                        <span>Total margin amount used in open positions.</span>
-                      </div>
-                    </li>
-                    <li>
-                      <h5>Free Margin</h5>
-                      <div class="text-end">
-                        <h5>$0.0000</h5>
-                        <span
-                          >Usable margin balance. Equal to equity minus.</span
-                        >
-                      </div>
-                    </li>
-                    <li>
-                      <h5>Margin Level</h5>
-                      <div class="text-end">
-                        <h5>$0.0000</h5>
-                        <span>Percentage ratio of equity to used margin.</span>
-                      </div>
-                    </li>
-                  </ul>
+                    <!-- TradingView Widget BEGIN -->
+                  <div class="tradingview-widget-container">
+                    <div class="tradingview-widget-container__widget"></div>
+                    <div class="tradingview-widget-copyright"><span class="blue-text">Track all markets on xTrade Security</span></div>
+                      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-timeline.js" async>
+                      {
+                      "feedMode": "all_symbols",
+                      "isTransparent": true,
+                      "displayMode": "regular",
+                      "width": "100%",
+                      "height": "100%",
+                      "colorTheme": "light",
+                      "locale": "en"
+                    }
+                      </script>
+                  </div>
+                  <!-- TradingView Widget END -->
                 </div>
               </div>
             </div>
             <div class="col-xxl-4 col-xl-4">
-              <div class="card">
+              <div class="card" style="overflow-y: auto;">
                 <div class="card-header">
-                  <h4 class="card-title">Position Valuation</h4>
+                  <h4 class="card-title">Position Valuation and Trade Balances</h4>
                 </div>
                 <div class="card-body">
                   <ul class="balance-widget position-value">
@@ -463,31 +457,38 @@
                       </div>
                     </li>
                     <li>
-                      <h5>Current Valuation</h5>
+                      <h5>Trade Balance</h5>
                       <div class="text-end">
                         <h5>$0.0000</h5>
-                        <span>Paper valuation of all open positions.</span>
+                        <span>Total margin currency balance.</span>
                       </div>
                     </li>
                     <li>
-                      <h5>Profit</h5>
-                      <div class="text-end">
-                        <h5>$0.0000 (0,00%)</h5>
-                        <span>Paper profit of all open positions..</span>
-                      </div>
-                    </li>
-                    <li>
-                      <h5>Loss</h5>
-                      <div class="text-end">
-                        <h5>$0.0000 (0,00%)</h5>
-                        <span>Paper loss of all open positions.</span>
-                      </div>
-                    </li>
-                    <li>
-                      <h5>Fees</h5>
+                      <h5>Equity</h5>
                       <div class="text-end">
                         <h5>$0.0000</h5>
-                        <span>Current Fee</span>
+                        <span>Trade balance combined with unrealized profit/loss</span>
+                      </div>
+                    </li>
+                    <li>
+                      <h5>Used Margin</h5>
+                      <div class="text-end">
+                        <h5>$0.0000</h5>
+                        <span>Total margin amount used in open positions.</span>
+                      </div>
+                    </li>
+                    <li>
+                      <h5>Free Margin</h5>
+                      <div class="text-end">
+                        <h5>$0.0000</h5>
+                        <span>Usable margin balance. Equal to equity minus.</span>
+                      </div>
+                    </li>
+                    <li>
+                      <h5>Margin Level</h5>
+                      <div class="text-end">
+                        <h5>$0.0000</h5>
+                        <span>Percentage ratio of equity to used margin.</span>
                       </div>
                     </li>
                   </ul>
@@ -497,7 +498,7 @@
             <div class="col-xxl-8 col-xl-8">
               <div class="card">
                 <div class="card-header">
-                  <h4 class="card-title">Network Information</h4>
+                  <h4 class="card-title">Referral Network Information</h4>
                 </div>
                 
                 <div class="card-body">
@@ -512,16 +513,16 @@
                   <thead>
                       <tr class="table-primary">
                            <th>S/N</th>
-                          <th>Affiliate</th>
-                          <th>Affiliate ID</th>
+                          <th>Referral</th>
+                          <th>Referral ID</th>
                           <th>Date Registered</th>
                       </tr>
                   </thead>
                   <tfoot>
                   <tr class="table-primary">
                           <th>S/N</th>
-                          <th>Affiliate</th>
-                          <th>Affiliate ID</th>
+                          <th>Referral</th>
+                          <th>Referral ID</th>
                           <th>Date Registered</th>
                       </tr>
                   </tfoot>
@@ -566,6 +567,5 @@
         </div>
       </div>
     </div>
-
     <?php include "modalForms.php"; ?>
     <?php include "include/footer.php"; ?>

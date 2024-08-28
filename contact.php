@@ -170,9 +170,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['contact'])) {
                   <input type="text" class="form-control" placeholder="Enter your last name" name="lastname" required />
                 </div>
                  <div class="form-group">
-                  <label>Your Phone number<span class="text-danger">*</span><br><small>Format:+123-456-7890000</small></label>
+                  <label>Your Phone number<span class="text-danger">*</span><br><small>Format:+1-234-5689000</small></label>
                   <input type="tel" class="form-control" placeholder="Enter your phone number" name="phone" 
-                  title="Please match the requested format, including country code" pattern="\+\d{1,3}-\d{1,4}-\d{3,4}-\d{3,4}" title="Format: +1-234-567-89000" required />
+                  title="Please match the requested format, including country code" pattern="\+\d{1,3}-\d{1,4}-\d{4,9}" title="Format: +1-234-5689000" required />
                 </div>
                 <div class="form-group">
                   <label>Email <span class="text-danger">*</span></label>

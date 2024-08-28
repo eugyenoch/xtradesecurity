@@ -43,5 +43,62 @@
       .footer.style-2 .footer__main .footer-contact form button{
         top:auto !important;
       }
+      /* Style Google Translate */
+      .goog-te-gadget {
+        font-family: Roboto, 'Open Sans', sans-serif !important;
+        text-transform: uppercase;
+      }
+      .goog-te-gadget-simple  {
+        background-color: rgba(255,255,255,0.20) !important;
+        border: 1px solid rgba(255,255,255,0.50) !important;
+        padding: 8px !important;
+        border-radius: 4px !important;
+        font-size: 1rem !important;
+        line-height:2rem !important;
+        display: inline-block;
+        cursor: pointer;
+        zoom: 1;
+      }
+      .goog-te-menu2 {
+        max-width: 100%;
+      }
+      .goog-te-menu-value {
+        color: #fff !important;
+          &:before {
+          font-family: 'Material Icons';
+          content: "\E927";
+          margin-right: 16px;
+          font-size: 2rem;
+          vertical-align: -10px;
+          } 
+      }
+      .goog-te-menu-value span:nth-child(5) {
+        display:none;
+      }
+      .goog-te-menu-value span:nth-child(3) {
+        border:none!important;
+        font-family: 'Material Icons';
+        &:after {
+          font-family: 'Material Icons';
+          content: "\E5C5";
+          font-size: 1.5rem;
+          vertical-align: -6px;
+        }  
+      }
+
+      .translate-wrapper {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+      }
+      .goog-te-gadget-icon {
+        background-image: url('https://upload.wikimedia.org/wikipedia/en/thumb/a/a4/Flag_of_the_United_States.svg/1200px-Flag_of_the_United_States.svg.png') !important;
+          background-position: 0px 0px;
+          height: 32px !important;
+          width: 32px !important;
+          margin-right: 8px !important;
+          display: inline-block;
+          vertical-align: middle;
+      }
     </style>
   </head>

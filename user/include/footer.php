@@ -1,3 +1,5 @@
+<!-- <script src="https://widget.coincodex.com/include.js?type=4&ticker=top50&period=1D&textColor=000000&borderColor=dddddd&backgroundColor=ffffff&hoverColor=transparent&currency=USD&range=1D"></script> -->
+<div id="google_translate_element"></div>
     <script src="./vendor/jquery/jquery.min.js"></script>
     <script src="./vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
@@ -16,7 +18,7 @@
     <script src="./js/scripts.js"></script>
 
     <script src="../app/js/coindata.js"></script>
-            <!--ChartJS -->
+    <!--ChartJS -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
       <!-- Datatable JS -->
@@ -50,7 +52,7 @@
         }
       };
 
-      //DataTables
+    //DataTables
     $(document).ready(function() {
     $('#refTable').DataTable({
         dom: 'Bfrtip',
@@ -124,8 +126,7 @@ $(document).ready(function() {
 function featureNotAvailable(){
     toastr.info('This feature will be available soon', 'Info');
 }
- </script>
-
+</script>
 
 <script>
 // Ensure variables are defined and convert to float
@@ -144,10 +145,10 @@ var moneyChart = new Chart(ctx2, {
             label: 'Finance ($)',
             data: [totalFunded, totalInvestmentProfit, totalInvestment, totalWithdrawn, userBalance],
             backgroundColor: [
-                'rgba(255, 0, 0, 0.4)',
+                'rgba(255,165,0,0.4)',
             ],
             borderColor: [
-                'rgba(255, 99, 132, 1)',
+                'rgba(255,165,0,1)',
             ],
             borderWidth: 1
         }]
@@ -160,10 +161,17 @@ var moneyChart = new Chart(ctx2, {
         }
     }
 });
+  </script>
 
+<!-- Google Translate -->
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+}
 </script>
-    
-  </body>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+ </body>
 </html>
 
 <?php
@@ -185,3 +193,4 @@ if(isset($toast)){
     }
   }
   $con->close();
+?>

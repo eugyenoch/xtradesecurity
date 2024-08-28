@@ -15,8 +15,8 @@
                     aria-labelledby="dropdownMenuButton"
                   >
                     <a class="dropdown-item" href="#">Visa Card (coming soon)</a>
-                    <a class="dropdown-item" href="#">Crypto Loans (coming soon)</a>
-                    <a class="dropdown-item" href="#">Binance Pay (coming soon)</a>
+                    <a class="dropdown-item" href="loan.php">Crypto Loans</a>
+                    <a class="dropdown-item" href="fund-recovery.php">Recover Funds</a>
                   </div>
                 </div>
                 <div class="dropdown">

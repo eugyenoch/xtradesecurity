@@ -10,13 +10,8 @@
               </a>
             </li>
             <li>
-              <a href="markets.php" data-toggle="tooltip" data-placement="right" title="Markets">
+              <a href="markets.php" data-toggle="tooltip" data-placement="right" title="Markets and Exchange">
                 <span><i class="icofont-chart-growth"></i></span>
-              </a>
-            </li>
-            <li>
-              <a href="exchange.php" data-toggle="tooltip" data-placement="right" title="Exchange">
-                <span><i class="icofont-exchange"></i></span>
               </a>
             </li>
             <li>

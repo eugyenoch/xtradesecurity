@@ -547,7 +547,7 @@ $historicalData = fetchCryptoData('https://api.coingecko.com/api/v3/coins/bitcoi
                   <?php if(isset($_SESSION['user_session'])) {$userBalance = calculateUserTotalBalance();
                             echo "<p title='Total Balance (TB) as approved'>Balance</p>". "<h6 class='price' title='Total Balance (TB) as approved'>". $userBalance ."</h6>";
                         } else {
-                            echo "&nbsp;<span class='badge bg-warning text-primary' title='Total Balance (TB) as approved'>$0.00<br>Login To Display Current Balance</span>";
+                            echo "&nbsp;<span class='fs-5' title='Total Balance (TB) as approved'>$0.00<br>Login To Display Current Balance</span>";
                         }?>
 
                   <div class="button">
@@ -1092,7 +1092,6 @@ $historicalData = fetchCryptoData('https://api.coingecko.com/api/v3/coins/bitcoi
         </div>
       </div>
     </section>
-
     <!-- Footer section -->
     <?php include "include/footer.php"; ?>
 

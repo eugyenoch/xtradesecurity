@@ -129,10 +129,10 @@
             <center><a href="../terms-of-use.php" title="Read the terms of use">Terms of Service</a> | <a href="../privacy-policy.php" title="Read the terms of use">Privacy policy</a></center></small>
             <hr>
             &copy; <?php echo date('Y');?>&nbsp;Xtrade Security LTD. All rights reserved. <br><br></p>
-            <p>
+            <!-- <p>
             <center><span><img src="../assets/images/icon/googleplay.png" title="Android app for Xtrade security (in Beta)" alt="Google playstore image" /></span>&nbsp;
             <span><img src="../assets/images/icon/appstore.png" title="iOS app for Xtrade security (in Beta)" alt="Apple iStore image" /></span></center>
-          </p>
+          </p> -->
         </div>
       </div>
     </footer>

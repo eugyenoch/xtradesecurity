@@ -13,9 +13,9 @@
               <div class="header-content">
                 <div class="header-left">
                   <div class="brand-logo">
-                    <a href="index.html">
+                    <a href="../index.php">
                       <img src="./images/logo.png" alt="" />
-                      <span>XTrade Security</span>
+                      <span>XTrade Security <i class="icofont-wallet"></i> Wallet</span>
                     </a>
                   </div>
                   <div class="search">
