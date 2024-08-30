@@ -291,15 +291,21 @@ function isSubscribedToNewsletter($con, $user_subscribed_email) {
     $stmt->execute();
     $result = $stmt->get_result();
 
+    // Determine the subscription status and return the appropriate HTML
+    $subscriptionStatus = '';
+
     // Check if the email was found in the newsletter table
     if ($result->num_rows > 0) {
-        echo "&nbsp;<span class='badge bg-warning text-primary' title='You are subscribed to our newsletter'><i class='fas fa-check'></i></span>";
+         $subscriptionStatus = "&nbsp;<span title='You are subscribed to our newsletter'><i class='icofont-tick-boxed'></i></span>";
     } else {
-        echo "&nbsp;<span class='badge bg-warning text-primary' title='You are not subscribed to our newsletter'><i class='fa fa-times'></i></span>";
+        $subscriptionStatus = "&nbsp;<span title='You are not subscribed to our newsletter'><i class='icofont-close-squared-alt'></i></span>";
     }
 
     // Close the statement
     $stmt->close();
+
+    // Return the subscription status
+    return $subscriptionStatus;
 }
 
 //COUNT AFFILIATES OF THE CURRENTLY LOGGED IN USER
@@ -408,6 +414,33 @@ function getTotalApprovedFundAmount() {
 
     // Return the total amount or 0 if no results found
     return "$" . number_format($row['total_funded'] ?? 0, 2);
+}
+
+//GET TOTAL APPROVED FUNDING INTEREST EARNED FOR A SINGLE USER
+function getTotalApprovedFundInterest() {
+    // Assuming you have a database connection established
+    global $con;
+
+    // Get the logged-in user's email or username from session
+    $userEmail = isset($_SESSION['user_session']) ? $_SESSION['user_session'] : null;
+
+    // Prepare the SQL query
+    $sql = "SELECT SUM(fund_profit) AS total_interest FROM fund WHERE (user_email = ? OR userName = ?) AND fund_status = 'approved'";
+
+    // Prepare and execute the statement
+    $stmt = $con->prepare($sql);
+    $stmt->bind_param("ss", $userEmail, $userEmail);
+    $stmt->execute();
+
+    // Get the result
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+
+    // Close the statement
+    $stmt->close();
+
+    // Return the total amount or 0 if no results found
+    return "$" . number_format($row['total_interest'] ?? 0, 2);
 }
 
 //GET TOTAL APPROVED INVESTMENT(TRANSACTION) FOR A SINGLE USER

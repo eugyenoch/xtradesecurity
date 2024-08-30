@@ -1,6 +1,6 @@
 <div class="sidebar">
         <div class="brand-logo">
-          <a href="user-profile.php"><img src="./images/logo.png" alt="" /> </a>
+          <a href="user-profile.php"><img src="../assets/images/logo/favicon.png" alt="icon" title="Xtrade Security LTD" /> </a>
         </div>
         <div class="menu">
           <ul>
@@ -10,7 +10,7 @@
               </a>
             </li>
             <li>
-              <a href="markets.php" data-toggle="tooltip" data-placement="right" title="Markets and Exchange">
+              <a href="exchange.php" data-toggle="tooltip" data-placement="right" title="Markets and Exchange">
                 <span><i class="icofont-chart-growth"></i></span>
               </a>
             </li>
@@ -20,7 +20,7 @@
               </a>
             </li>
             <li>
-              <a href="trade.php" data-toggle="tooltip" data-placement="right" title="Investment">
+              <a href="investment.php" data-toggle="tooltip" data-placement="right" title="Investment">
                 <span><i class="icofont-chart-line"></i></span>
               </a>
             </li>

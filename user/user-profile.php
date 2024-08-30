@@ -12,8 +12,8 @@
                 <div class="header-left">
                   <div class="brand-logo">
                     <a href="../index.php" class="">
-                      <img src="./images/logo.png" alt="" />
-                      <span>XTrade Security</span>
+                      <img src="../assets/images/logo/favicon.png" alt="icon image" title="XTrade Security LTD" />
+                      <span>XTrade Security&nbsp;<i class="icofont-user"></i>&nbsp;Dashboard</span>
                     </a>
                   </div>
                   <div class="search">
@@ -146,28 +146,31 @@
                 </span>
                   </h6>
                   <?php endif; ?>
-                  <p><?php if(isset($user_email)){echo '<strong>Email:</strong>&nbsp;'. $user_email;} ?></p>
-              <p><?php if(isset($affid)){echo '<strong>Referral Code:</strong>&nbsp;'.$affid;} ?></p>
-              <p><?php if(isset($reg_date)){echo '<strong>Registered:</strong>&nbsp;'.$reg_date;} ?></p>
                   <p>
-                    Remember to verify yourself and fill out our KYC to use the full potential of XTrade Security.
-                  </p>
-
+                    <span><?php if(isset($user_email)){echo '<strong>Email:</strong>&nbsp;'. $user_email;} ?></span><br>
+                    <span><?php if(isset($phone)){echo '<strong>Phone:</strong>&nbsp;'. $phone;} ?></span><br>
+                    <span><?php if(isset($affid)){echo '<strong>Referral Code:</strong>&nbsp;'.$affid;} ?></span><br>
+                    <span><?php if(isset($reg_date)){echo '<strong>Registered:</strong>&nbsp;'.$reg_date;} ?></span><br>
+                    <span> <?php if(isset($total_p2p_count)&& $total_p2p_count!=null){
+                      echo "<strong>P2P Trades:</strong>&nbsp;<span title='Your P2P Trade Count. Refer to the P2P section for more details'>". $total_p2p_count ."</span>";}
+                      else{echo "<strong>P2P Trades:</strong>&nbsp;<span title='No P2P trades available for your account'><i class='icofont-close-squared-alt'></i></span>";} ?>
+                    </span> <br>
+                    <span><?php $subscriptionStatus = isSubscribedToNewsletter($con, $user_subscribed_email); if($subscriptionStatus){
+                      echo '<strong>Newsletter Status:</strong>&nbsp;'. $subscriptionStatus;}?>
+                    </span>       
+                   </p>
+                  <p>Remember to verify yourself and fill out our KYC to use the full potential of XTrade Security.</p>
                   <ul>
                     <li>
                       <a href="#">
-                        <span class="verified"
-                          ><i class="icofont-check-alt"></i
-                        ></span>
-                        Verify account
-                      </a>
+                        <span class="verified"><i class="icofont-check-alt"></i></span>Verify account</a>
                     </li>
                     <li>
                       <a href="#">
                         <span class="not-verified"><i class="icofont-close-line"></i></span>Two-factor authentication (2FA)</a>
                     </li>
                     <li>
-                      <a href="#" data-toggle="modal" data-target="#fundAccount" tabindex="-1"><span class="not-verified"><i class="icofont-money-bag"></i></span>Deposit money</a>
+                      <a href="#"><span class="verified"><i class="icofont-check-alt"></i></span>Subscribe to updates</a>
                     </li>
                   </ul>
                 </div>
@@ -176,55 +179,11 @@
             <div class="col-xxl-3 col-xl-6 col-lg-6">
               <div class="card">
                 <div class="card-header">
-                  <h4 class="card-title">Quick Trade</h4>
+                  <h4 class="card-title">Trivial Crypto Game</h4>
                 </div>
                 <div class="card-body">
-                  <form
-                    method="post"
-                    name="myform"
-                    class="currency_validate trade-form row g-3"
-                  >
-                    <div class="col-12">
-                      <label class="form-label">You Send</label>
-                      <div class="input-group">
-                        <select class="form-select" name="method">
-                          <option value="bank">USD</option>
-                          <option value="master">Euro</option>
-                        </select>
-                        <input
-                          type="text"
-                          name="currency_amount"
-                          class="form-control"
-                          placeholder="0.0214 BTC"
-                        />
-                      </div>
-                    </div>
-
-                    <div class="col-12">
-                      <label class="form-label">You get</label>
-                      <div class="input-group">
-                        <select class="form-select" name="method">
-                          <option value="bank">BTC</option>
-                          <option value="master">ETH</option>
-                        </select>
-                        <input
-                          type="text"
-                          name="currency_amount"
-                          class="form-control"
-                          placeholder="0.0214 BTC"
-                        />
-                      </div>
-                    </div>
-
-                    <p class="mb-0">
-                      1 USD ~ 0.000088 BTC
-                      <a href="#">Expected rate <br />No extra fees</a>
-                    </p>
-
-                    <button type="submit" name="exchange" class="btn btn-success btn-block">
-                      Exchange Now
-                    </button>
-                  </form>
+                <script src="https://widgets.coingecko.com/gecko-random-coin-widget.js"></script>
+                <gecko-random-coin-widget locale="en" transparent-background="true"></gecko-random-coin-widget>
                 </div>
               </div>
             </div>
@@ -329,7 +288,7 @@
                 </div>
                 <div class="card-body">
                   <div class="home-chart-height">
-                    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+                    <!-- <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
                       <script type="text/javascript">
                         new TradingView.widget({
                           container_id: "technical-analysis",
@@ -355,7 +314,9 @@
                           popup_width: "1000",
                           popup_height: "650",
                         });
-                      </script>
+                      </script> -->
+                      <script src="https://widgets.coingecko.com/gecko-coin-compare-chart-widget.js"></script>
+                  <gecko-coin-compare-chart-widget locale="en" dark-mode="true" transparent-background="true" coin-ids="notcoin,dogs-2,simon-s-cat,zano,the-open-network,orderly-network,fetch-ai,sun-token,ethereum,popcat,render-token,kaspa,solana,pepe,sui" initial-currency="usd"></gecko-coin-compare-chart-widget>
                     <div class="row">
                       <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-6">
                         <div class="chart-price-value">
@@ -411,6 +372,7 @@
                       </script>
                   </div>
                   <!-- TradingView Widget END -->
+                 
                 </div>
               </div>
             </div>
@@ -567,5 +529,6 @@
         </div>
       </div>
     </div>
+    
     <?php include "modalForms.php"; ?>
     <?php include "include/footer.php"; ?>

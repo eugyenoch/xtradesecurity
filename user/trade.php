@@ -13,9 +13,9 @@
               <div class="header-content">
                 <div class="header-left">
                   <div class="brand-logo">
-                    <a href="index.html">
-                      <img src="./images/logo.png" alt="" />
-                      <span>XTrade Security</span>
+                  <a href="../index.php">
+                    <img src="../assets/images/logo/favicon.png" alt="icon image" title="XTrade Security LTD" />
+                      <span>XTrade Security&nbsp;<i class="icofont-stack-exchange"></i>&nbsp; P2P Trading</span>
                     </a>
                   </div>
                   <div class="search">
@@ -1028,13 +1028,5 @@
       </div>
     </div>
 
-    <script src="./vendor/jquery/jquery.min.js"></script>
-    <script src="./vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <script src="./vendor/basic-table/jquery.basictable.min.js"></script>
-    <script src="./js/plugins/basic-table-init.js"></script>
-
-    <script src="./js/scripts.js"></script>
-    <script></script>
-  </body>
-</html>
+    <?php include "modalForms.php"; ?>
+    <?php include "include/footer.php"; ?>

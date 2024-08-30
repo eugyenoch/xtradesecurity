@@ -204,7 +204,7 @@
                                 </tr>
                                 <tr>
                                     <td><span>Duration: 30 Trade days</span></td>
-                                    <td><span>Payout: 15%</span></td>
+                                    <td><span>Payout: 20%</span></td>
                                 </tr>
                             </table>
                         </div>
@@ -271,7 +271,7 @@
                                 </tr>
                                 <tr>
                                     <td><span>Duration: 30 Trade days</span></td>
-                                    <td><span>Payout: 20%</span></td>
+                                    <td><span>Payout: 25%</span></td>
                                 </tr>
                             </table>
                         </div>
@@ -342,7 +342,7 @@
                                 </tr>
                                 <tr>
                                     <td><span>Duration: 30 Trade days</span></td>
-                                    <td><span>Payout: 20%</span></td>
+                                    <td><span>Payout: 30%</span></td>
                                 </tr>
                             </table>
                         </div>
@@ -414,7 +414,7 @@
                                 </tr>
                                 <tr>
                                     <td><span>Duration: 30 Trade days</span></td>
-                                    <td><span>Payout: 40%</span></td>
+                                    <td><span>Payout: 35%</span></td>
                                 </tr>
                             </table>
                         </div>
@@ -615,8 +615,8 @@
                   </div>
                         
                   <div class="form-group mb-3">
-                      <label for="currency_id" class="form-label">Select currency to fund</label>
-                      <select class="form-select" id="currency_id" name="fcurrency_id" required>
+                      <label for="fcurrency_id" class="form-label">Select currency to fund</label>
+                      <select class="form-select" id="fcurrency_id" name="fcurrency_id" required>
                           <option value="">Choose a currency</option>
                           <?php foreach(fetchAllWalletAddresses($con) as $allWallets): ?>
                               <option value="<?= htmlspecialchars($allWallets['wallet']); ?>" 
@@ -630,7 +630,7 @@
                           <?php endforeach; ?>
                       </select>
                   </div>
-                              
+                               
                 <div id="walletDetails" style="display: none;">
                     <div class="form-group mb-3">
                         <label for="wallet_address" class="form-label">Wallet Address to pay to</label>
@@ -663,13 +663,13 @@
         <div class="modal-dialog modal-dialog-sm modal-dialog-centered">
         <div class="modal-content">
         <div class="modal-header">
-            <h6>Change Password</span></h6>
+            <h6>Request Withdrawal</span></h6>
                 <a href="#" class="modal-close" data-dismiss="modal" aria-label="Close">
                     <span class="btn-close badge bg-outline-warning p-2 fs-4">&times;</span>
                 </a>
         </div>
                 <div class="modal-body">
-                <p>Use this form to change your account password to a new one</p>  
+                <p>Use this form to request withdrawal</p>  
                 <form method="POST" action="finance.php" name="withdrawalRequestForm">
                   <div class="form-group">
                       <input type="hidden" name="wtxn" value="<?= 'TXN' . mt_rand(100000, 999999); ?>" readonly>

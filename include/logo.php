@@ -2,24 +2,26 @@
     <a class="light" href="index.php">
       <img
         id="site-logo"
-        src="assets/images/logo/logo-wide-cropped.jpg"
+        src="assets/images/logo/favicon.png"
         alt=""
-        width="125"
+        width="25"
         height="25"
-        data-retina="assets/images/logo/logo-wide-cropped@2x.jpg"
-        data-width="125"
+        data-retina="assets/images/logo/favicon@2x.png"
+        data-width="25"
         data-height="25"
       />
+      <big><strong>xTradeSecurity</strong></big>
     </a>
-    <a class="dark" href="index.php"> <big><strong>xTradeSecurity</strong></big>
-  <!--     <img
-        src="assets/images/logo/logo-dark.png"
+    <a class="dark" href="index.php">
+      <img
+        src="assets/images/logo/favicon.png"
         alt=""
-        width="118"
-        height="32"
-        data-retina="assets/images/logo/logo-dark@2x.png"
-        data-width="118"
-        data-height="32"
-      /> -->
+        width="25"
+        height="25"
+        data-retina="assets/images/logo/favicon@2x.png"
+        data-width="25"
+        data-height="25"
+      />
+      <big><strong>xTradeSecurity</strong></big>
     </a>
 </div>

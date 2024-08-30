@@ -102,23 +102,17 @@ $stmt->close();
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>XTrade Security - Digital Assets Exchange, Wallet, and Trading Platform</title>
     <!-- Favicon icon -->
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="./images/favicon.png"
-    />
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/logo/favicon.png" />
     <!-- Custom Stylesheet -->
     <link rel="stylesheet" type="text/css" href="./vendor/slick/slick.css" />
     <!-- <link rel="stylesheet" type="text/css" href="./vendor/slick/slick-theme.css" /> -->
     <link rel="stylesheet" href="./css/style.css" />
      <!--Toastr-->
-     <link rel="stylesheet" type="text/css" href="../app/dist/toastr.min.css">
-
+     <link rel="stylesheet" type="text/css" href="../app/dist/toastr.min.css" />
       <!-- Data table -->
-      <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+      <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css" />
       <!-- DataTables Buttons CSS -->
-      <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.7/css/buttons.dataTables.min.css">
+      <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.7/css/buttons.dataTables.min.css" />
       
     <style>
     /* Styling for the circular div */
@@ -177,70 +171,70 @@ $stmt->close();
     padding: 0.5rem 1rem; /* Padding */
     border-radius: 0.25rem; /* Rounded corners */
     box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075); /* Subtle shadow */
-}
+ }
 
-/* Style the dropdown items */
-button.dt-button.button-page-length{
-  display: block !important;
-  width: 100%;
-}
+  /* Style the dropdown items */
+  button.dt-button.button-page-length{
+    display: block !important;
+    width: 100%;
+  }
 
-/* Style Google Translate */
-.goog-te-gadget {
-  font-family: Roboto, 'Open Sans', sans-serif !important;
-  text-transform: uppercase;
-}
-.goog-te-gadget-simple  {
-  background-color: rgba(255,255,255,0.20) !important;
-  border: 1px solid rgba(255,255,255,0.50) !important;
-  padding: 8px !important;
-  border-radius: 4px !important;
-  font-size: 1rem !important;
-  line-height:2rem !important;
-  display: inline-block;
-  cursor: pointer;
-  zoom: 1;
-}
-.goog-te-menu2 {
-  max-width: 100%;
-}
-.goog-te-menu-value {
-  color: #fff !important;
-    &:before {
-    font-family: 'Material Icons';
-    content: "\E927";
-    margin-right: 16px;
-    font-size: 2rem;
-    vertical-align: -10px;
-    } 
-}
-.goog-te-menu-value span:nth-child(5) {
-  display:none;
-}
-.goog-te-menu-value span:nth-child(3) {
-  border:none!important;
-  font-family: 'Material Icons';
-  &:after {
-    font-family: 'Material Icons';
-    content: "\E5C5";
-    font-size: 1.5rem;
-    vertical-align: -6px;
-  }  
-}
-
-.translate-wrapper {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-}
-.goog-te-gadget-icon {
-  background-image: url('https://upload.wikimedia.org/wikipedia/en/thumb/a/a4/Flag_of_the_United_States.svg/1200px-Flag_of_the_United_States.svg.png') !important;
-    background-position: 0px 0px;
-    height: 32px !important;
-    width: 32px !important;
-    margin-right: 8px !important;
+  /* Style Google Translate */
+  .goog-te-gadget {
+    font-family: Roboto, 'Open Sans', sans-serif !important;
+    text-transform: uppercase;
+  }
+  .goog-te-gadget-simple  {
+    background-color: rgba(255,255,255,0.20) !important;
+    border: 1px solid rgba(255,255,255,0.50) !important;
+    padding: 8px !important;
+    border-radius: 4px !important;
+    font-size: 1rem !important;
+    line-height:2rem !important;
     display: inline-block;
-    vertical-align: middle;
-}
+    cursor: pointer;
+    zoom: 1;
+  }
+  .goog-te-menu2 {
+    max-width: 100%;
+  }
+  .goog-te-menu-value {
+    color: #fff !important;
+      &:before {
+      font-family: 'Material Icons';
+      content: "\E927";
+      margin-right: 16px;
+      font-size: 2rem;
+      vertical-align: -10px;
+      } 
+  }
+  .goog-te-menu-value span:nth-child(5) {
+    display:none;
+  }
+  .goog-te-menu-value span:nth-child(3) {
+    border:none!important;
+    font-family: 'Material Icons';
+    &:after {
+      font-family: 'Material Icons';
+      content: "\E5C5";
+      font-size: 1.5rem;
+      vertical-align: -6px;
+    }  
+  }
+
+  .translate-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  .goog-te-gadget-icon {
+    background-image: url('https://upload.wikimedia.org/wikipedia/en/thumb/a/a4/Flag_of_the_United_States.svg/1200px-Flag_of_the_United_States.svg.png') !important;
+      background-position: 0px 0px;
+      height: 32px !important;
+      width: 32px !important;
+      margin-right: 8px !important;
+      display: inline-block;
+      vertical-align: middle;
+  }
   </style>
 </head>

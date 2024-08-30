@@ -1,5 +1,20 @@
-<!-- <script src="https://widget.coincodex.com/include.js?type=4&ticker=top50&period=1D&textColor=000000&borderColor=dddddd&backgroundColor=ffffff&hoverColor=transparent&currency=USD&range=1D"></script> -->
-<div id="google_translate_element"></div>
+<div class="container">
+        <div class="footer__bottom">
+          <p>
+           xtradesecurity.com/Xtrade Security is a trademark of Xtrade Security LTD, registered in England and certified by the registrar of companies for England and Wales. Xtrade security does not provide recommendations regarding the merits of any digital asset or financial product mentioned on our platform, including in advertisements, emails, or related websites. The information provided does not consider your individual objectives, financial situation, or needs. You should assess whether these products align with your personal goals and financial circumstances, and carefully consider the risks involved. We recommend reviewing our Client Agreement before making any decisions related to Xtrade security’s products. Trading digital assets involves significant risk of loss. Only invest money that you can afford to lose. 
+
+            <br>
+            <hr>
+            <center><a href="../terms-of-use.php" title="Read the terms of use">Terms of Service</a> | <a href="../privacy-policy.php" title="Read the terms of use">Privacy policy</a></center>
+            <hr>
+            &copy; <?php echo date('Y');?>&nbsp;Xtrade Security LTD. All rights reserved. <br><br></p>
+            <p>
+            <center><span><img src="../assets/images/icon/googleplay.png" title="Android app for Xtrade security (in Beta)" alt="Google playstore image" /></span>&nbsp;
+            <span><img src="../assets/images/icon/appstore.png" title="iOS app for Xtrade security (in Beta)" alt="Apple iStore image" /></span></center>
+          </p>
+        </div>
+      </div>
+    <div id="google_translate_element"></div>
     <script src="./vendor/jquery/jquery.min.js"></script>
     <script src="./vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
