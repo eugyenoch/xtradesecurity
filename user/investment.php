@@ -50,7 +50,7 @@
         </div>
         <div class="container">
           <div class="row">
-            <div class="col-xxl-4 col-xl-6">
+            <div class="col-sm-4 col-xxl-4 col-xl-6">
               <div class="card">
                 <div class="card-header">
                   <h4 class="card-title">Silver Plan</h4>
@@ -58,6 +58,7 @@
                 </div>
                 <div class="card-body">
                  <img src="../assets/images/layout/testimonials.png" class="card-img-top" alt="layout image" width="130px" height="142px">
+                 
                           <ul class="list-group list-group-flush">
                             <li class="list-group-item">10% Monthly</li>
                             <li class="list-group-item"> 30 Trade Days Duration</li>
@@ -65,8 +66,9 @@
                           </ul>
                           <div class="card-body bg-warning">
                             <span class="text-black">MIN: $300</span>&nbsp;
-                            <span class="text-black">MAX: $1,000</span>
+                            <span class="text-black">MAX: $5,000</span>
                           </div>
+                 
                           <div class="card-footer">
                             <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#silver-pack" tabindex="-1" >Invest</button>
                           </div>
@@ -89,8 +91,8 @@
                             <li class="list-group-item">24/7 Support with our admins and managers</li>
                           </ul>
                           <div class="card-body bg-warning">
-                          <span class="text-black">MIN: $1,000</span>&nbsp;
-                          <span class="text-black">MAX: $5,000</span>
+                          <span class="text-black">MIN: $6,000</span>&nbsp;
+                          <span class="text-black">MAX: $9,000</span>
                           </div>
                           <div class="card-footer">
                           <button type="button" class="edit-diamond btn btn-warning" data-toggle="modal" data-target="#diamond-pack" tabindex="-1">Invest</button>
@@ -113,8 +115,8 @@
                             <li class="list-group-item">24/7 Support with our admins and managers</li>
                           </ul>
                           <div class="card-body bg-warning">
-                          <span class="text-black">MIN: $5,000</span>&nbsp;
-                          <span class="text-black">MAX: $10,000</span>
+                          <span class="text-black">MIN: $10,000</span>&nbsp;
+                          <span class="text-black">MAX: $19,500</span>
                           </div>
                           <div class="card-footer">
                           <button type="button" class="edit-diamond btn btn-warning" data-toggle="modal" data-target="#diamond-plus" tabindex="-1">Invest</button>
@@ -124,7 +126,7 @@
               </div>
           </div>
           <div class="row">
-            <div class="col-xxl-4 col-xl-6">
+            <div class="col-xxl-6 col-xl-6">
               <div class="card">
                 <div class="card-header">
                   <h4 class="card-title">Gold Plan</h4>
@@ -138,8 +140,8 @@
                             <li class="list-group-item">24/7 Support with our admins and managers</li>
                           </ul>
                           <div class="card-body bg-warning">
-                          <span class="text-black">MIN: $10,000</span>&nbsp;
-                          <span class="text-black">MAX: $20,000</span>
+                          <span class="text-black">MIN: $20,000</span>&nbsp;
+                          <span class="text-black">MAX: $50,000</span>
                           </div>
                           <div class="card-footer">
                           <button type="button" class="edit-diamond btn btn-warning" data-toggle="modal" data-target="#gold-pack" tabindex="-1">Invest</button>
@@ -147,7 +149,8 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-xxl-4 col-xl-6">
+                  
+                  <div class="col-xxl-6 col-xl-6">
               <div class="card">
                 <div class="card-header">
                   <h4 class="card-title">Gold Plus Plan</h4>
@@ -161,8 +164,8 @@
                             <li class="list-group-item">24/7 Support with our admins and managers</li>
                           </ul>
                           <div class="card-body bg-warning">
-                          <span class="text-black">MIN: $20,000</span>&nbsp;
-                          <span class="text-black">MAX: $40,000</span>
+                          <span class="text-black">MIN: $60,000</span>&nbsp;
+                          <span class="text-black">MAX: Unlimited</span>
                           </div>
                           <div class="card-footer">
                           <button type="button" class="edit-diamond btn btn-warning" data-toggle="modal" data-target="#gold-plus" tabindex="-1">Invest</button>
@@ -170,7 +173,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-xxl-4 col-xl-6">
+                  <!-- <div class="col-xxl-4 col-xl-6">
               <div class="card">
                 <div class="card-header">
                   <h4 class="card-title">Veteran Plan</h4>
@@ -193,7 +196,7 @@
                       </div>
                     </div>
                   </div>
-          </div>
+          </div> -->
           <div class="row">
             <div class="col-xxl-12">
               <div class="card">

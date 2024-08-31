@@ -11,7 +11,7 @@
               <div class="header-content">
                 <div class="header-left">
                   <div class="brand-logo">
-                    <a href="../index.php" class="">
+                    <a href="../index.php">
                       <img src="../assets/images/logo/favicon.png" alt="icon image" title="XTrade Security LTD" />
                       <span>XTrade Security&nbsp;<i class="icofont-user"></i>&nbsp;Dashboard</span>
                     </a>
@@ -91,7 +91,7 @@
                       <i class="cc BTC-alt"></i>
                       <span>Bitcoin</span>
                     </div>
-                    <h5><?php if ($currentPrices !== null){echo '$'.$currentPrices['bitcoin']['usd'];}else{echo "Fetching prices...";} ?></h5>
+                    <h5><?php if( $currentPrices['bitcoin']['usd'] !== null){echo '$'.$currentPrices['bitcoin']['usd'];}else{echo "Fetching prices...";} ?></h5>
                   </div>
                   <div id="chart"></div>
                 </a>
@@ -105,7 +105,7 @@
                       <i class="cc ETH-alt"></i>
                       <span>Ethereum</span>
                     </div>
-                    <h5><?php if ($currentPrices !== null){echo '$'.$currentPrices['ethereum']['usd'];}else{echo "Fetching prices...";}  ?></h5>
+                    <h5><?php if($currentPrices['ethereum']['usd'] !== null){echo '$'.$currentPrices['ethereum']['usd'];}else{echo "Fetching prices...";}  ?></h5>
                   </div>
                   <div id="chart2"></div>
                 </a>
@@ -119,7 +119,7 @@
                       <i class="cc USDT-alt"></i>
                       <span>Tether</span>
                     </div>
-                    <h5><?php if ($currentPrices !== null){echo '$'.$currentPrices['tether']['usd'];}else{echo "Fetching prices...";} ?></h5>
+                    <h5><?php if($currentPrices['tether']['usd'] !== null){echo '$'.$currentPrices['tether']['usd'];}else{echo "Fetching prices...";} ?></h5>
                   </div>
                   <div id="chart3"></div>
                 </a>
@@ -170,7 +170,7 @@
                         <span class="not-verified"><i class="icofont-close-line"></i></span>Two-factor authentication (2FA)</a>
                     </li>
                     <li>
-                      <a href="#"><span class="verified"><i class="icofont-check-alt"></i></span>Subscribe to updates</a>
+                      <a href="#"><span class="verified"><i class="icofont-exclamation"></i></span>Subscribe to updates</a>
                     </li>
                   </ul>
                 </div>

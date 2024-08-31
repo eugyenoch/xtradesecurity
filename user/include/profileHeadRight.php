@@ -108,8 +108,14 @@
                       <a href="settings-activity.php" class="dropdown-item">
                         <i class="icofont-history"></i> Activity
                       </a>
-                      <a href="lock.php" class="dropdown-item">
-                        <i class="icofont-lock"></i>Lock
+                      <a href="exchange.php" class="dropdown-item">
+                      <i class="icofont-chart-growth"></i>Trade on the Exchange
+                      </a>
+                      <a href="investment.php" class="dropdown-item">
+                      <i class="icofont-chart-line"></i>Investment
+                      </a>
+                      <a href="trade.php" class="dropdown-item">
+                      <i class="icofont-stack-exchange"></i>P2P
                       </a>
                       <a href="include/logout.php" class="dropdown-item logout">
                         <i class="icofont-logout"></i> Logout

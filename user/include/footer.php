@@ -30,7 +30,8 @@
 
     <script src="./vendor/slick/slick.min.js"></script>
     <script src="./js/plugins/slick-init.js"></script>
-    <script src="./js/scripts.js"></script>
+    <script src="./js/scripts.js"></script> 
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
 
     <script src="../app/js/coindata.js"></script>
     <!--ChartJS -->
@@ -120,7 +121,7 @@ $(document).ready(function() {
 
 //Display QR code section and Wallet address
 $(document).ready(function() {
-    $('#currency_id').change(function() {
+    $('#fcurrency_id').change(function() {
         var selectedOption = $(this).find('option:selected');
         var walletAddress = selectedOption.data('address');
         var qrcodeImage = selectedOption.data('qrcode');

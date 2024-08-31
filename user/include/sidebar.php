@@ -15,7 +15,7 @@
               </a>
             </li>
             <li>
-              <a href="trade.php" data-toggle="tooltip" data-placement="right" title="Trade">
+              <a href="trade.php" data-toggle="tooltip" data-placement="right" title="P2P Trade">
                 <span><i class="icofont-stack-exchange"></i></span>
               </a>
             </li>

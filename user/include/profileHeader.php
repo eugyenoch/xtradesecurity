@@ -106,6 +106,7 @@ $stmt->close();
     <!-- Custom Stylesheet -->
     <link rel="stylesheet" type="text/css" href="./vendor/slick/slick.css" />
     <!-- <link rel="stylesheet" type="text/css" href="./vendor/slick/slick-theme.css" /> -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <link rel="stylesheet" href="./css/style.css" />
      <!--Toastr-->
      <link rel="stylesheet" type="text/css" href="../app/dist/toastr.min.css" />
@@ -236,5 +237,9 @@ $stmt->close();
       display: inline-block;
       vertical-align: middle;
   }
+
+  .modal-backdrop {
+/* bug fix - no overlay */    
+display: none;}
   </style>
 </head>

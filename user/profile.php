@@ -1,9 +1,3 @@
-<?php
-include '../function.php'; 
-checkUserLogin();
-?>
-<!DOCTYPE html>
-<html lang="en">
 <?php include "include/profileHeader.php";?>
 
   <body>
@@ -17,9 +11,9 @@ checkUserLogin();
               <div class="header-content">
                 <div class="header-left">
                   <div class="brand-logo">
-                    <a href="index.html">
-                      <img src="./images/logo.png" alt="" />
-                      <span>XTrade Security</span>
+                  <a href="../index.php">
+                    <img src="../assets/images/logo/favicon.png" alt="icon image" title="XTrade Security LTD" />
+                    <span>XTrade Security&nbsp;<i class="icofont-user"></i>&nbsp;Profile</span>
                     </a>
                   </div>
                   <div class="search">
@@ -47,29 +41,37 @@ checkUserLogin();
             <div class="col-xxl-6 col-xl-6 col-lg-6">
               <div class="card welcome-profile">
                 <div class="card-body">
-                  <img src="./images/profile/2.png" alt="" />
-                  <h4>Welcome, Jannatul Maowa!</h4>
+                <img id="blah" src="<?php if(isset($profilePicUrl)){echo htmlspecialchars($profilePicUrl);} else{echo './images/profile/2.png" alt="" />';}?>" alt="no file" title="Display Photo" /> 
+                  <?php if(isset($firstname) && isset($lastname)): ?>
+                  <h4>Welcome,  <?= $firstname .'&nbsp;'.$lastname; ?>!</h4>
+                  <h6 class="name position-relative" title="Display Name">
+                  <?php if(isset($userName)){echo '@'. $userName;} ?>
+                <span class="position-absolute top-0 start-90 translate-right p-1 bg-success border border-light rounded-circle" title="Online">
+                  <span class="visually-hidden">Online</span>
+                </span>
+                  </h4>
+                  <?php endif; ?>
                   <p>
-                    Looks like you are not verified yet. Verify yourself to use
-                    the full potential of XTrade Security.
-                  </p>
-
-                  <ul>
+                    <span><?php if(isset($user_email)){echo '<strong>Email:</strong>&nbsp;'. $user_email;} ?></span><br>
+                    <span> <?php if(isset($total_p2p_count)&& $total_p2p_count!=null){
+                      echo "<strong>P2P Trades:</strong>&nbsp;<span title='Your P2P Trade Count. Refer to the P2P section for more details'>". $total_p2p_count ."</span>";}
+                      else{echo "<strong>P2P Trades:</strong>&nbsp;<span title='No P2P trades available for your account'><i class='icofont-close-squared-alt'></i></span>";} ?>
+                    </span> <br>
+                    <span><?php $subscriptionStatus = isSubscribedToNewsletter($con, $user_subscribed_email); if($subscriptionStatus){
+                      echo '<strong>Newsletter Status:</strong>&nbsp;'. $subscriptionStatus;}?>
+                    </span>       
+                   </p>
+                   <ul>
                     <li>
                       <a href="#">
-                        <span class="verified"
-                          ><i class="icofont-check-alt"></i
-                        ></span>
-                        Verify account
-                      </a>
+                        <span class="verified"><i class="icofont-check-alt"></i></span>Verify account</a>
                     </li>
                     <li>
                       <a href="#">
-                        <span class="not-verified"
-                          ><i class="icofont-close-line"></i
-                        ></span>
-                        Two-factor authentication (2FA)
-                      </a>
+                        <span class="not-verified"><i class="icofont-close-line"></i></span>Two-factor authentication (2FA)</a>
+                    </li>
+                    <li>
+                      <a href="#"><span class="verified"><i class="icofont-exclamation"></i></span>Subscribe to updates</a>
                     </li>
                   </ul>
                 </div>
@@ -82,9 +84,9 @@ checkUserLogin();
                 </div>
                 <div class="card-body">
                   <div class="app-link">
-                    <h5>Get Verified On Our Mobile App</h5>
+                    <h5>Get Verified On Our Mobile App (available soon)</h5>
                     <p>
-                      Verifying your identity on our mobile app more secure,
+                    Remember to verify yourself and fill out our KYC to use the full potential of XTrade Security. <br>In the future, verifying your identity on our mobile app will be more secure,
                       faster, and reliable.
                     </p>
                     <a href="#" class="btn btn-primary">
@@ -103,8 +105,8 @@ checkUserLogin();
             <div class="col-xxl-12">
               <div class="card">
                 <div class="card-header">
-                  <h4 class="card-title">Information</h4>
-                  <a href="./settings-profile.html" class="btn btn-primary"
+                  <h4 class="card-title">User Information</h4>
+                  <a href="./settings-profile.php" class="btn btn-primary"
                     >Edit</a
                   >
                 </div>
@@ -113,25 +115,25 @@ checkUserLogin();
                     <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
                       <div class="user-info">
                         <span>USER ID</span>
-                        <h4>818778</h4>
+                        <h4><?php if(isset($affid)){echo $affid;} ?></h4>
                       </div>
                     </div>
                     <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
                       <div class="user-info">
                         <span>EMAIL ADDRESS</span>
-                        <h4>email@example.com</h4>
+                        <h4><?php if(isset($user_email)){echo $user_email;} ?></h4>
+                      </div>
+                    </div>
+                    <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
+                      <div class="user-info">
+                        <span>PHONE</span>
+                        <h4><?php if(isset($phone)){echo $phone;} ?></h4>
                       </div>
                     </div>
                     <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
                       <div class="user-info">
                         <span>COUNTRY OF RESIDENCE</span>
-                        <h4>Bangladesh</h4>
-                      </div>
-                    </div>
-                    <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
-                      <div class="user-info">
-                        <span>JOINED SINCE</span>
-                        <h4>20/10/2020</h4>
+                        <h4><?php if(isset($country)){echo $country;} ?></h4>
                       </div>
                     </div>
                     <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
@@ -140,6 +142,13 @@ checkUserLogin();
                         <h4>Personal</h4>
                       </div>
                     </div>
+                    <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
+                      <div class="user-info">
+                        <span>JOINED SINCE</span>
+                        <h4><?php if(isset($reg_date)){echo $reg_date;} ?></h4>
+                      </div>
+                    </div>
+                    
                   </form>
                 </div>
               </div>
@@ -153,26 +162,27 @@ checkUserLogin();
                 <div class="card-body">
                   <h5>
                     Account Status :
-                    <span class="text-warning"
-                      >Pending <i class="icofont-warning"></i
-                    ></span>
+                    <span class="text-success">Active <i class="icofont-verification-check"></i></span>
                   </h5>
                   <p>
-                    Your account is unverified. Get verified to enable funding,
-                    trading, and withdrawal.
+                  Account verification is intended to do several things, but the most basic is to ensure the identity and capability of the account holder.
+                  <br>For XTrade Security users, account verification also activates funding, trading, and withdrawal.
                   </p>
-                  <a href="#" class="btn btn-primary"> Get Verified</a>
+                  <a href="#" class="btn btn-primary" type="button" onclick="toastr.info('Your account is verified already. Fund your account and begin trading','Notice');">
+                    Check Verification Status
+                  </a>
                 </div>
               </div>
             </div>
             <div class="col-xxl-4 col-xl-6">
               <div class="card">
                 <div class="card-header">
-                  <h4 class="card-title">Earn 30% Commission</h4>
+                  <h4 class="card-title">Earn Commission</h4>
                 </div>
                 <div class="card-body">
-                  <p>Refer your friends and earn 30% of their trading fees.</p>
-                  <a href="#" class="btn btn-primary"> Referral Program</a>
+                  <p>Refer your friends using your referral code and earn commisions off their trades and trading fees.</p>
+                  <input type="text" class="form-control" value="<?php if(isset($affid)){echo $affid;} ?>" id="myInput" disabled />
+                  <a href="#" class="btn btn-primary" onclick="myFunction()"> Copy Referral Code</a>
                 </div>
               </div>
             </div>
@@ -181,13 +191,4 @@ checkUserLogin();
       </div>
     </div>
 
-    <script src="./vendor/jquery/jquery.min.js"></script>
-    <script src="./vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <script src="./vendor/apexchart/apexcharts.min.js"></script>
-    <script src="./js/dashboard.js"></script>
-
-    <script src="./js/scripts.js"></script>
-    <script></script>
-  </body>
-</html>
+    <?php include "include/footer.php"; ?>

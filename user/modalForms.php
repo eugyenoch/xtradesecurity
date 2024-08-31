@@ -41,8 +41,8 @@
     <!-- Modal End -->
  
  <!--SILVER PLAN-->
-  <div class="modal fade sho d-bloc" id="silver-pack" tabindex="-1" aria-labelledby="investmentModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-sm modal-dialog-centered">
+  <div class="modal fade" id="silver-pack" tabindex="-1" aria-labelledby="silverInvestmentModalLabel" aria-hidden="true" role="dialog">
+        <div class="modal-dialog modal-dialog-sm modal-dialog-centered" role="document">
             <div class="modal-content">
             <div class="modal-header">
                 <a href="#" class="modal-close" data-dismiss="modal" aria-label="Close">
@@ -59,11 +59,11 @@
                         <div class="form-group">
                             <table class="table">
                                 <tr>
-                                    <th>Silver Pack</th>
+                                    <th>Silver Plan</th>
                                 </tr>
                                 <tr>
                                     <td><span>Min Capital: $300</span></td>
-                                    <td><span>Max Capital: $1,000</span></td>
+                                    <td><span>Max Capital: $5,000</span></td>
                                 </tr>
                                 <tr>
                                     <td><span>Duration: 30 Trade days</span></td>
@@ -74,8 +74,8 @@
 
                     <div class="form-group input-item input-with-label">
                         <label class="input-item-label">Input amount to invest</label>
-                        <input class="form-control" type="number" name="silver_amount" min="300" max="1000" required>
-                        <small>Min amount is $300 and max is $1000. Do not include the currency symbol in this field.</small>
+                        <input class="form-control" type="number" name="silver_amount" min="300" max="5000" required>
+                        <small>Min amount is $300 and max is $5000. Do not include the currency symbol in this field.</small>
                     </div>
 
                     <div class="form-group mb-3">
@@ -92,11 +92,11 @@
                     
                     <div class="form-group">
                         <small class="text-danger">If you want to buy with your account balance, make sure you have enough balance, or your trade request will not be approved by the admin.</small>
+                    </div>
                         <div class="modal-footer">
-                        <button type="submit" class="btn btn-outline-warning btn-between" name="silver">Proceed <i class="fa fa-forward"></i>
+                        <button type="submit" class="btn btn-outline-warning" name="silver">Proceed <i class="icofont-curved-double-right"></i>
                         </button>
                         <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
-                    </div>
                     </div>
                 </form>
                 </div>
@@ -106,10 +106,11 @@
         <!-- .modal-dialog -->
     </div>
     <!-- Modal End -->
+     
 
 
     <!--DIAMOND PLAN-->
-  <div class="modal fade sho d-bloc" id="diamond-pack" tabindex="-1" aria-labelledby="investmentModalLabel" aria-hidden="true">
+  <div class="modal fade sho d-bloc" id="diamond-pack" tabindex="-1" aria-labelledby="diamondInvestmentModalLabel" aria-hidden="true" role="dialog">
         <div class="modal-dialog modal-dialog-sm modal-dialog-centered">
         <div class="modal-content">
         <div class="modal-header">
@@ -128,11 +129,11 @@
                             <div class="select-wrapper">
                                 <table class="table">
                                     <tr>
-                                        <th>Diamond Pack</th>
+                                        <th>Diamond Plan</th>
                                     </tr>
                                     <tr>
-                                        <td><span>Min Capital: $1,000</span></td>
-                                        <td><span>Max Capital: $5,000</span></td>
+                                        <td><span>Min Capital: $6,000</span></td>
+                                        <td><span>Max Capital: $9,000</span></td>
                                     </tr>
                                     <tr>
                                         <td><span>Duration: 30 Trade days</span></td>
@@ -144,8 +145,8 @@
 
                         <div class="input-item input-with-label">
                             <label class="input-item-label">Input amount to invest</label>
-                            <input class="form-control" type="number" name="diamond_amount" min="1000" max="5000" required>
-                            <small>Min amount is $1,000 and max is $5,000. Do not include the currency symbol in this field.</small>
+                            <input class="form-control" type="number" name="diamond_amount" min="6000" max="9000" required>
+                            <small>Min amount is $6,000 and max is $9,000. Do not include the currency symbol in this field.</small>
                         </div> 
 
                         <div class="form-group mb-3">
@@ -162,7 +163,7 @@
                     
                         <small class="text-danger">If you want to buy with your account balance, make sure you have enough balance, or your trade request will not be approved by the admin.</small>
                         <div class="modal-footer">
-                        <button type="submit" class="btn btn-outline-warning btn-between" name="diamond">Proceed <i class="fa fa-forward"></i></button>
+                        <button type="submit" class="btn btn-outline-warning" name="diamond">Proceed <i class="icofont-curved-double-right"></i></button>
                         <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
                     </div>
                     </form>
@@ -176,7 +177,7 @@
     <!-- Modal End -->
 
 <!--DIAMOND PLUS PLAN-->
-<div class="modal fade sho d-bloc" id="diamond-plus" tabindex="-1" aria-labelledby="investmentModalLabel" aria-hidden="true">
+<div class="modal fade sho d-bloc" id="diamond-plus" tabindex="-1" aria-labelledby="diamondPlusInvestmentModalLabel" aria-hidden="true" role="dialog">
         <div class="modal-dialog modal-dialog-sm modal-dialog-centered">
         <div class="modal-content">
         <div class="modal-header">
@@ -196,11 +197,11 @@
                         <div class="select-wrapper">
                             <table class="table">
                                 <tr>
-                                    <th>Diamond Plus Pack</th>
+                                    <th>Diamond Plus Plan</th>
                                 </tr>
                                 <tr>
-                                    <td><span>Min Capital: $5,000</span></td>
-                                    <td><span>Max Capital: $10,000</span></td>
+                                    <td><span>Min Capital: $10,000</span></td>
+                                    <td><span>Max Capital: $19,500</span></td>
                                 </tr>
                                 <tr>
                                     <td><span>Duration: 30 Trade days</span></td>
@@ -212,8 +213,8 @@
 
                     <div class="input-item input-with-label">
                         <label class="input-item-label">Input amount to invest</label>
-                        <input class="form-control" type="number" name="diamond_plus_amount" min="5000" max="10000" required>
-                        <small>Min amount is $5,000 and max is $10,000. Do not include the currency symbol in this field.</small>
+                        <input class="form-control" type="number" name="diamond_plus_amount" min="10000" max="19500" required>
+                        <small>Min amount is $10,000 and max is $19,500. Do not include the currency symbol in this field.</small>
                     </div> 
 
                     <div class="form-group mb-3">
@@ -230,7 +231,7 @@
                     
                     <small class="text-danger">If you want to buy with your account balance, make sure you have enough balance, or your trade request will not be approved by the admin.</small>
                     <div class="modal-footer">
-                    <button type="submit" class="btn btn-outline-warning btn-between" name="diamond_plus">Proceed <i class="fa fa-forward"></i></button>
+                    <button type="submit" class="btn btn-outline-warning btn-between" name="diamond_plus">Proceed <i class="icofont-curved-double-right"></i></button>
                     <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
                     </div>
                 </form>
@@ -244,7 +245,7 @@
     <!-- Modal End -->
 
 <!--GOLD PLAN-->
-<div class="modal fade sho d-bloc" id="gold-pack" tabindex="-1" aria-labelledby="investmentModalLabel" aria-hidden="true">
+<div class="modal fade sho d-bloc" id="gold-pack" tabindex="-1" aria-labelledby="goldInvestmentModalLabel" aria-hidden="true" role="dialog">
         <div class="modal-dialog modal-dialog-sm modal-dialog-centered">
         <div class="modal-content">
         <div class="modal-header">
@@ -263,11 +264,11 @@
                         <div class="select-wrapper">
                             <table class="table">
                                 <tr>
-                                    <th>Gold Pack</th>
+                                    <th>Gold Plan</th>
                                 </tr>
                                 <tr>
-                                    <td><span>Min Capital: $10,000</span></td>
-                                    <td><span>Max Capital: $20,000</span></td>
+                                    <td><span>Min Capital: $20,000</span></td>
+                                    <td><span>Max Capital: $50,000</span></td>
                                 </tr>
                                 <tr>
                                     <td><span>Duration: 30 Trade days</span></td>
@@ -279,8 +280,8 @@
 
                     <div class="input-item input-with-label">
                         <label class="input-item-label">Input amount to invest</label>
-                        <input class="form-control" type="number" name="gold_amount" min="10000" max="20000" required>
-                        <small>Min amount is $10,000 and max is $20,000. Do not include the currency symbol in this field.</small>
+                        <input class="form-control" type="number" name="gold_amount" min="20000" max="50000" required>
+                        <small>Min amount is $20,000 and max is $50,000. Do not include the currency symbol in this field.</small>
                     </div> 
 
                     <div class="form-group mb-3">
@@ -298,8 +299,7 @@
                     <small class="text-danger">If you want to buy with your account balance, make sure you have enough balance, or your trade request will not be approved by the admin.</small>
                                 
                                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-outline-warning btn-between" name="gold">
-                        Proceed <i class="fa fa-forward"></i>
+                    <button type="submit" class="btn btn-outline-warning btn-between" name="gold">Proceed<i class="icofont-curved-double-right"></i>
                     </button>
                     <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
                     </div>
@@ -314,7 +314,7 @@
     <!-- Modal End -->
 
 <!--GOLD PLUS PLAN-->
-<div class="modal fade sho d-bloc" id="gold-plus" tabindex="-1" aria-labelledby="investmentModalLabel" aria-hidden="true">
+<div class="modal fade sho d-bloc" id="gold-plus" tabindex="-1" aria-labelledby="goldPlusInvestmentModalLabel" aria-hidden="true" role="dialog">
         <div class="modal-dialog modal-dialog-sm modal-dialog-centered">
         <div class="modal-content">
         <div class="modal-header">
@@ -334,11 +334,11 @@
                         <div class="select-wrapper">
                             <table class="table">
                                 <tr>
-                                    <th>Gold Plus Pack</th>
+                                    <th>Gold Plus Plan</th>
                                 </tr>
                                 <tr>
-                                    <td><span>Min Capital: $20,000</span></td>
-                                    <td><span>Max Capital: $40,000</span></td>
+                                    <td><span>Min Capital: $60,000</span></td>
+                                    <td><span>Max Capital: Unlimited</span></td>
                                 </tr>
                                 <tr>
                                     <td><span>Duration: 30 Trade days</span></td>
@@ -350,8 +350,8 @@
 
                     <div class="input-item input-with-label">
                         <label class="input-item-label">Input amount to invest</label>
-                        <input class="form-control" type="number" name="gold_plus_amount" min="20000" max="40000" required>
-                        <small>Min amount is $20,000 and max is $40,000. Do not include the currency symbol in this field.</small>
+                        <input class="form-control" type="number" name="gold_plus_amount" min="60000" required>
+                        <small>Min amount is $60,000 and max is unlimited. Do not include the currency symbol in this field.</small>
                     </div> 
 
                     <div class="form-group mb-3">
@@ -369,8 +369,7 @@
                     <small class="text-danger">If you want to buy with your account balance, make sure you have enough balance, or your trade request will not be approved by the admin.</small>
                                
                                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-outline-warning btn-between" name="gold_plus">
-                        Proceed <i class="fa fa-forward"></i>
+                    <button type="submit" class="btn btn-outline-warning btn-between" name="gold_plus">Proceed<i class="icofont-curved-double-right"></i>
                     </button>
                     <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
                     </div>
@@ -386,7 +385,7 @@
 
 
     <!--VETERAN PLAN-->
-<div class="modal fade sho d-bloc" id="veteran-pack" tabindex="-1" aria-labelledby="investmentModalLabel" aria-hidden="true">
+<!-- <div class="modal fade sho d-bloc" id="veteran-pack" tabindex="-1" aria-labelledby="veteranInvestmentModalLabel" aria-hidden="true" role="dialog">
         <div class="modal-dialog modal-dialog-sm modal-dialog-centered">
         <div class="modal-content">
         <div class="modal-header">
@@ -406,7 +405,7 @@
                         <div class="select-wrapper">
                             <table class="table">
                                 <tr>
-                                    <th>Veteran Pack</th>
+                                    <th>Veteran Plan</th>
                                 </tr>
                                 <tr>
                                     <td><span>Min Capital: $50,000</span></td>
@@ -430,35 +429,35 @@
                         <label for="currency_id2" class="form-label">Select currency</label>
                         <select class="form-select" id="currency_id6" name="vcurrency_id" required>
                             <option value="">Choose a currency</option>
-                            <?php foreach(fetchUniqueWallets($con) as $wallet): ?>
-                                <option value="<?= htmlspecialchars($wallet['wallet']) ?>">
-                                    <?= htmlspecialchars($wallet['wallet']) ?>
+                            <?php //foreach(fetchUniqueWallets($con) as $wallet): ?>
+                                <option value="<? //htmlspecialchars($wallet['wallet']) ?>">
+                                    <? //htmlspecialchars($wallet['wallet']) ?>
                                 </option>
-                            <?php endforeach; ?>
+                            <?php //endforeach; ?>
                         </select>
                     </div>
 
                     <small class="text-danger">If you want to buy with your account balance, ensure you have enough balance, or your trade request will not be approved by admin.</small>
                                
                     <div class="modal-footer">
-                    <button type="submit" class="btn btn-outline-warning btn-between" name="veteran">
-                        Proceed <i class="fa fa-forward"></i>
+                    <button type="submit" class="btn btn-outline-warning btn-between" name="veteran"><i class="icofont-curved-double-right"></i>
                     </button>
                     <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
                     </div>
                 </form>
 
                 </div>
-            </div>
+            </div> -->
             <!-- .modal-content -->
-        </div>
+        <!-- </div> -->
         <!-- .modal-dialog -->
-    </div>
+    <!-- </div> -->
     <!-- Modal End -->
 
 
      <!--2FA FORM-->
-<div class="modal fade sho d-bloc" id="tfa" tabindex="-1" aria-labelledby="tfaModalLabel" aria-hidden="true">
+
+     <div class="modal fade sho d-bloc" id="tfa" tabindex="-1" aria-labelledby="tfaModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-sm modal-dialog-centered">
         <div class="modal-content">
         <div class="modal-header">
@@ -486,11 +485,11 @@
                   <div class="refe">
                     <div class="form-group">
                       <label>Your Password</label>
-                      <input class="form-control" type="password" placeholder="Password" title="Enter your account password" />
+                      <input class="form-control" name="2fapwd" type="password" placeholder="Password" title="Enter your account password" />
                     </div>
                     <div class="form-group">
                       <label>2FA Code</label>
-                      <input class="form-control" type="text" placeholder="2FA code" title="Enter code received from your authenticator app" value="<?php echo mt_rand(100000,999999); ?>" disabled />
+                      <input class="form-control" type="text" name="2facode" placeholder="2FA code" title="Enter code received from your authenticator app" value="<?php echo mt_rand(100000,999999); ?>" disabled />
                     </div>
                   </div>
                   <div class="modal-footer">
@@ -619,15 +618,15 @@
                       <select class="form-select" id="fcurrency_id" name="fcurrency_id" required>
                           <option value="">Choose a currency</option>
                           <?php foreach(fetchAllWalletAddresses($con) as $allWallets): ?>
-                              <option value="<?= htmlspecialchars($allWallets['wallet']); ?>" 
-                                      data-address="<?= htmlspecialchars($allWallets['address']); ?>" 
-                                      data-qrcode="<?= htmlspecialchars($allWallets['qrcode']); ?>">
-                                      <?= htmlspecialchars($allWallets['wallet']); ?>
-                                      <?php if (!empty($allWallets['wallet_tag'])): ?>
-                                          (<?= htmlspecialchars($allWallets['wallet_tag']); ?>)
-                                      <?php endif; ?>
-                              </option>
-                          <?php endforeach; ?>
+                            <option value="<?= htmlspecialchars($allWallets['wallet']); ?>" 
+                                    data-address="<?= htmlspecialchars($allWallets['address']); ?>" 
+                                    data-qrcode="<?= htmlspecialchars($allWallets['qrcode']); ?>">
+                                <?= htmlspecialchars($allWallets['wallet']); ?>
+                                <?php if (!empty($allWallets['wallet_tag'])): ?>
+                                    (<?= htmlspecialchars($allWallets['wallet_tag']); ?>)
+                                <?php endif; ?>
+                            </option>
+                        <?php endforeach; ?>
                       </select>
                   </div>
                                
