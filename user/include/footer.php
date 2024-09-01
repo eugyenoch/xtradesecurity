@@ -1,14 +1,13 @@
 <div class="container">
-        <div class="footer__bottom">
-          <p>
-           xtradesecurity.com/Xtrade Security is a trademark of Xtrade Security LTD, registered in England and certified by the registrar of companies for England and Wales. Xtrade security does not provide recommendations regarding the merits of any digital asset or financial product mentioned on our platform, including in advertisements, emails, or related websites. The information provided does not consider your individual objectives, financial situation, or needs. You should assess whether these products align with your personal goals and financial circumstances, and carefully consider the risks involved. We recommend reviewing our Client Agreement before making any decisions related to Xtrade security’s products. Trading digital assets involves significant risk of loss. Only invest money that you can afford to lose. 
-
-            <br>
-            <hr>
+        <div class="footer__bottom mt-4">
+          <hr>
+          <p> 
+            xtradesecurity.com/Xtrade Security is a trademark of Xtrade Security LTD, registered in England and certified by the registrar of companies for England and Wales. Xtrade security does not provide recommendations regarding the merits of any digital asset or financial product mentioned on our platform, including in advertisements, emails, or related websites. The information provided does not consider your individual objectives, financial situation, or needs. You should assess whether these products align with your personal goals and financial circumstances, and carefully consider the risks involved. We recommend reviewing our Client Agreement before making any decisions related to Xtrade security’s products. Trading digital assets involves significant risk of loss. Only invest money that you can afford to lose. 
+            <center>&copy; <?php echo date('Y');?>&nbsp;Xtrade Security LTD. All rights reserved. </center><hr>
             <center><a href="../terms-of-use.php" title="Read the terms of use">Terms of Service</a> | <a href="../privacy-policy.php" title="Read the terms of use">Privacy policy</a></center>
             <hr>
-            &copy; <?php echo date('Y');?>&nbsp;Xtrade Security LTD. All rights reserved. <br><br></p>
-            <p>
+          </p>   
+          <p>
             <center><span><img src="../assets/images/icon/googleplay.png" title="Android app for Xtrade security (in Beta)" alt="Google playstore image" /></span>&nbsp;
             <span><img src="../assets/images/icon/appstore.png" title="iOS app for Xtrade security (in Beta)" alt="Apple iStore image" /></span></center>
           </p>
@@ -178,6 +177,75 @@ var moneyChart = new Chart(ctx2, {
     }
 });
   </script>
+
+<!-- Web3 Wallet -->
+<script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+
+<!-- import Web3.js -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script> -->
+<script>
+    const connectWalletButton = document.getElementById('connectWalletButton');
+    const walletDetails = document.getElementById('walletDetails');
+    const walletAddress = document.getElementById('walletAddress');
+    const walletBalance = document.getElementById('walletBalance');
+
+    // Check if wallet details are already stored
+    const storedAddress = localStorage.getItem('walletAddress');
+    const storedBalance = localStorage.getItem('walletBalance');
+
+    if (storedAddress && storedBalance) {
+        walletAddress.innerText = storedAddress;
+        walletBalance.innerText = storedBalance;
+        walletDetails.style.display = 'block';
+        console.log("Wallet details retrieved from localStorage:", storedAddress, storedBalance);
+    }
+
+    connectWalletButton.addEventListener('click', async () => {
+        // Check if MetaMask is installed
+        if (typeof window.ethereum !== 'undefined') {
+            try {
+                // Request account access if needed
+                await window.ethereum.request({ method: 'eth_requestAccounts' });
+                
+                // Initialize ethers.js provider
+                const provider = new ethers.providers.Web3Provider(window.ethereum);
+                const signer = provider.getSigner();
+                
+                // Get user wallet address
+                const address = await signer.getAddress();
+                
+                // Get wallet balance in Ether
+                const balance = await provider.getBalance(address);
+                const balanceInEth = ethers.utils.formatEther(balance);
+                
+                // Display wallet details
+                walletAddress.innerText = address;
+                walletBalance.innerText = balanceInEth;
+                walletDetails.style.display = 'block';
+                
+                // Persist wallet details in localStorage
+                localStorage.setItem('walletAddress', address);
+                localStorage.setItem('walletBalance', balanceInEth);
+                console.log("Wallet details saved to localStorage:", address, balanceInEth);
+
+            } catch (error) {
+                console.error("User rejected the request or there was an error:", error);
+            }
+        } else {
+            alert('MetaMask or another Web3 provider is not installed. Please install MetaMask or use Trust Wallet.');
+        }
+    });
+
+    // Optionally, you can clear the localStorage when the user logs out
+    function logout() {
+        localStorage.removeItem('walletAddress');
+        localStorage.removeItem('walletBalance');
+        walletDetails.style.display = 'none';
+        console.log("Wallet details removed from localStorage");
+    }
+</script>
+
+
 
 <!-- Google Translate -->
 <script type="text/javascript">

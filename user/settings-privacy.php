@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
 <?php include "include/profileHeader.php";?>
 
   <body>
@@ -13,9 +11,9 @@
               <div class="header-content">
                 <div class="header-left">
                   <div class="brand-logo">
-                    <a href="index.html">
-                      <img src="./images/logo.png" alt="" />
-                      <span>XTrade Security</span>
+                  <a href="../index.php">
+                    <img src="../assets/images/logo/favicon.png" alt="icon image" title="XTrade Security LTD" />
+                    <span>XTrade Security&nbsp;<i class="icofont-ui-settings"></i>&nbsp;Settings</span>
                     </a>
                   </div>
                   <div class="search">
@@ -48,14 +46,14 @@
               <div class="card h-unset">
                 <div class="card-header">
                   <div class="settings-menu">
-                    <a href="settings-profile.html">Profile</a>
-                    <a href="settings-application.html">Application</a>
-                    <a href="settings-security.html">Security</a>
-                    <a href="settings-activity.html">Activity</a>
-                    <a href="settings-privacy.html">Privacy</a>
-                    <a href="settings-payment-method.html">Payment Method</a>
-                    <a href="settings-api.html">API</a>
-                    <a href="settings-fees.html">Fees</a>
+                    <a href="settings-profile.php">Profile</a>
+                    <a href="settings-application.php">Application</a>
+                    <a href="settings-security.php">Security</a>
+                    <a href="settings-activity.php">Activity</a>
+                    <a href="settings-privacy.php">Privacy</a>
+                    <!-- <a href="settings-payment-method.php">Payment Method</a> -->
+                    <a href="settings-api.php">API</a>
+                    <a href="settings-fees.php">Fees</a>
                   </div>
                 </div>
                 <div class="card-body pb-0">
@@ -90,8 +88,8 @@
                             You have a number of rights over your personal data.
                             For more detailed information on these choices,
                             please read our full
-                            <a href="#">Privacy Policy</a> and our
-                            <a href="#">Cookie Policy</a>.
+                            <a href="../privacy-policy.php">Privacy Policy</a> and our
+                            <a href="../cookie-policy.php">Cookie Policy</a>.
                           </p>
 
                           <hr class="dropdown-divider my-4" />
@@ -101,7 +99,7 @@
                             <p>
                               Request a copy of my personal data held by XTrade Security.
                             </p>
-                            <a href="#" class="btn btn-outline-primary"
+                            <a href="../contact.php" class="btn btn-outline-primary"
                               >Request data</a
                             >
                           </div>
@@ -111,7 +109,7 @@
                           <div class="privacy-content">
                             <h5>Request Deletion</h5>
                             <p>Request deletion of some or all of my data</p>
-                            <a href="#" class="btn btn-outline-primary"
+                            <a href="../contact.php" class="btn btn-outline-primary"
                               >Request deletion</a
                             >
                           </div>
@@ -124,7 +122,7 @@
                               Request export of my data in a machine-readable
                               form.
                             </p>
-                            <a href="#" class="btn btn-outline-primary"
+                            <a href="../contact.php" class="btn btn-outline-primary"
                               >Request data export</a
                             >
                           </div>
@@ -136,7 +134,7 @@
                             <p>
                               Request to correct, modify, or complete my data.
                             </p>
-                            <a href="#" class="btn btn-outline-primary"
+                            <a href="../contact.php" class="btn btn-outline-primary"
                               >Request correction</a
                             >
                           </div>
@@ -152,7 +150,7 @@
                               Request that XTrade Security stops processing my personal
                               data.
                             </p>
-                            <a href="#" class="btn btn-outline-primary"
+                            <a href="../contact.php" class="btn btn-outline-primary"
                               >Request restriction</a
                             >
                           </div>
@@ -162,7 +160,7 @@
                           <div class="privacy-content">
                             <h5>Manage Cookies</h5>
                             <p>Manage your cookie preferences.</p>
-                            <a href="#" class="btn btn-outline-primary"
+                            <a href="../contact.php" class="btn btn-outline-primary"
                               >Request cookies</a
                             >
                           </div>
@@ -178,10 +176,4 @@
       </div>
     </div>
 
-    <script src="./vendor/jquery/jquery.min.js"></script>
-    <script src="./vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <script src="./js/scripts.js"></script>
-    <script></script>
-  </body>
-</html>
+    <?php include "include/footer.php"; ?>

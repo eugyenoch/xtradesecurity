@@ -41,7 +41,7 @@
             <div class="col-xxl-6 col-xl-6 col-lg-6">
               <div class="card welcome-profile">
                 <div class="card-body">
-                <img id="blah" src="<?php if(isset($profilePicUrl)){echo htmlspecialchars($profilePicUrl);} else{echo './images/profile/2.png" alt="" />';}?>" alt="no file" title="Display Photo" /> 
+                <img id="blah" src="<?php if(isset($profilePicUrl)){echo htmlspecialchars($profilePicUrl);}?>" alt="no file" title="Display Photo" /> 
                   <?php if(isset($firstname) && isset($lastname)): ?>
                   <h4>Welcome,  <?= $firstname .'&nbsp;'.$lastname; ?>!</h4>
                   <h6 class="name position-relative" title="Display Name">

@@ -30,7 +30,7 @@
               </a>
             </li>
             <li>
-              <a href="price.php" data-toggle="tooltip" data-placement="right" title="Price">
+              <a href="price.php" data-toggle="tooltip" data-placement="right" title="Prices">
                 <span><i class="icofont-price"></i></span>
               </a>
             </li>
@@ -40,7 +40,6 @@
               </a>
             </li>
           </ul>
-
-          <p class="copyright">&#169; <a href="../">xTrade Security LTD</a></p>
+          <p class="copyright">&#169;<a href="#">XTrade Security</a></p>
         </div>
       </div>

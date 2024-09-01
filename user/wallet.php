@@ -43,7 +43,7 @@
           <div class="row">
             <div class="col-xxl-3 col-xl-3 col-lg-6 col-md-6 col-sm-6">
               <div class="wallet-widget card">
-                <h5 title="User Total Balance (TB)">Total Balance</h5>
+                <h5 title="User Total Balance (TB)">Balance</h5>
                 <h2><span class="text-primary">
                 <?php if(isset($_SESSION['user_session'])) {$userBalance = calculateUserTotalBalance();
                             echo "&nbsp;<span title='Total Balance (TB) as approved'>". $userBalance ."</span>";
@@ -54,7 +54,7 @@
             </div>
             <div class="col-xxl-3 col-xl-3 col-lg-6 col-md-6 col-sm-6">
               <div class="wallet-widget card">
-                <h5 title="Total Approved Fund (TAF)">Total Approved Fund</h5>
+                <h5 title="Total Approved Fund (TAF)">Fundings</h5>
                 <h2><span class="text-success">
                 <?php if(isset($_SESSION['user_session'])){$totalFunded = getTotalApprovedFundAmount();
                             echo "&nbsp;<span title='Total Approved Funded (TAF)'>". $totalFunded ."</span>";
@@ -67,16 +67,27 @@
             </div>
             <div class="col-xxl-3 col-xl-3 col-lg-6 col-md-6 col-sm-6">
               <div class="wallet-widget card">
-                <h5>Pending Balance</h5>
-                <h2><span class="text-warning">0.000</span> <sub>USD</sub></h2>
-                <p>= 0.000000 BTC</p>
+                <h5 title="Total Approved Fund Interest (TAFI)">Interests</h5>
+                <h2><span class="text-warning">
+                <?php if(isset($_SESSION['user_session'])) {$totalInterest =  getTotalApprovedFundInterest();
+                            echo "<span title='Total Approved Fund Interest (TAFI)'>". $totalInterest ."</span>";
+                        } else {
+                            echo "<span title='Total Approved Fund Interest (TAFI)'>$0.00</span>";
+                        }?>
+                </span> <sub>USD</sub></h2>
+                <p>= <?php if(isset($_SESSION['user_session'])){$totalFunded = getTotalApprovedFundInterest(); echo $totalFunded .'USDT';}?></p>
               </div>
             </div>
             <div class="col-xxl-3 col-xl-3 col-lg-6 col-md-6 col-sm-6">
               <div class="wallet-widget card">
-                <h5>Locked Balance</h5>
-                <h2><span class="text-danger">0.000</span> <sub>USD</sub></h2>
-                <p>= 0.000000 BTC</p>
+                <h5>Profits</h5>
+                <h2> <?php if(isset($_SESSION['user_session'])) {$totalInvestmentProfit = getTotalApprovedTransactionProfit();
+                            echo "&nbsp;<span title='Total Approved Investments Profit (TAIP)'>". $totalInvestmentProfit ."</span>";
+                        } else {
+                            echo "&nbsp;<span title='Total Approved Investments Profit (TAIP)'>$0.00</span>";
+                        }?>
+                </span> <sub>USD</sub></h2>
+                <p>= <?php if(isset($_SESSION['user_session'])){$totalFunded = getTotalApprovedTransactionProfit(); echo $totalFunded .'USDT';}?></p>
               </div>
             </div>
           </div>
@@ -91,35 +102,32 @@
                     <table class="table table-striped responsive-table">
                       <thead>
                         <tr>
-                          <th>Coin Name</th>
+                          <th></th>
                           <th>Address</th>
-                          <th>QR</th>
+                          <th>Wallet Balance</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
                           <td>
                             <div class="coin-name">
-                              <i class="cc BTC"></i>
-                              <span>Bitcoin</span>
+                              <!-- <i class="cc BTC"></i> -->
+                              <span id="walletDetails"></span>
                             </div>
                           </td>
-                          <td>35Hb5B6qJa5ntYaNFN3hGYXdAjh919g2VH</td>
-                          <td>
-                            <img
-                              class="qr-img"
-                              src="./images/qr.svg"
-                              alt=""
-                              width="40"
-                            />
-                          </td>
+                          <td><span id="walletAddress"></span></td>
+                          <td><span id="walletBalance"></span></td>
                         </tr>
                       </tbody>
                     </table>
-
+                    <br>
+                    <a href="#" id="connectWalletButton" type="button" class="btn btn-success position-relative top-100 start-50">Import Wallet</a>
+                    <br>
+                    <div id="warn" style="color: red"></div>
                   </div>
                 </div>
               </div>
+              
             </div>
 
             <div class="col-xxl-6">
@@ -211,7 +219,7 @@
                           </div>
                         </li>
                       </ul>
-                      <a href="#" type="button" class="btn btn-success position-relative top-100 start-50">Import Wallet</a>
+                      <!-- <a href="#" id="connectWalletButton" type="button" class="btn btn-success position-relative top-100 start-50">Import Wallet</a> -->
                     </div> 
                   </div>
                 </div>

@@ -47,8 +47,7 @@
                     <p>
                     Earn rewards by inviting friends to XTrade Security using your referal code. You will receive rewards when they：1.Buy Crypto 2.Finish Trading Tasks.
                    Also gain recognition when they sign up.
-                    </p>
-                    
+                    </p>                    
                     <div class="copy-link">
                       <form action="#">
                         <div class="input-group">
@@ -62,7 +61,7 @@
                                         <a href="#"><span><i class="icofont-twitter"></i></span></a>
                                         <a href="#"><span><i class="icofont-whatsapp"></i></span></a>
                                         <a href="#"><span><i class="icofont-telegram"></i></span></a>
-                                    </div> -->
+                          </div> -->
                   </div>
                 </div>
               </div>
@@ -73,7 +72,7 @@
                   <div class="invite-content">
                     <h4>Account Security</h4>
                     <p>
-                     Get started on your account security and API keys (for developers). <br>Take advantage of the several get started points, available through your dashboard to secure your account.
+                     Get started on your account security and API keys (for developers).<br>Take advantage of the several get started points, available through your dashboard to secure your account.
                     </p>
                     <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#tfa" tabindex="-1">2FA (coming soon)</a>
                     <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#apiKey" tabindex="-1">API Keys(coming soon)</a>
@@ -131,7 +130,7 @@
                 <form action="upload-profile-picture.php" method="post" enctype="multipart/form-data">
                 
                 <div class="avt">
-                <img id="blah" src="<?php if(isset($profilePicUrl)){echo htmlspecialchars($profilePicUrl);} else{echo './images/profile/2.png" alt="" />';}?>" alt="no file" title="Display Photo" /> 
+                <img id="blah" src="<?php if(isset($profilePicUrl)){echo htmlspecialchars($profilePicUrl);}?>" alt="no file" title="Display Photo" /> 
                 <input type="file" class="custom-file-input" accept="image/*" id="imgInp" name="profilePic" title="Select an image" /> 
                 </div>
                 <input type="submit" class="btn" name="upload" value="Upload" title="Upload image" /> 
@@ -344,7 +343,8 @@
                           <h5>$216,368.00 USD</h5>
                         </div>
                       </div>
-                    </div>
+                    </div><br>
+                    <center><a href="exchange.php" class="btn btn-primary">Trade on XTrade Exchange</a></center>
                   </div>
                 </div>
               </div>
@@ -358,7 +358,7 @@
                     <!-- TradingView Widget BEGIN -->
                   <div class="tradingview-widget-container">
                     <div class="tradingview-widget-container__widget"></div>
-                    <div class="tradingview-widget-copyright"><span class="blue-text">Track all markets on xTrade Security</span></div>
+                    <div class="tradingview-widget-copyright"><a href="exchange.php"><span class="blue-text link-opacity-100-hover">Trade on XTRADE Exchange</span></a></div>
                       <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-timeline.js" async>
                       {
                       "feedMode": "all_symbols",

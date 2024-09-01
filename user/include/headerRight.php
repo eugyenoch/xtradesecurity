@@ -1,43 +1,23 @@
  <div class="header__right">
                 <div class="dropdown">
-                  <button
-                    class="btn dropdown-toggle"
-                    type="button"
-                    id="dropdownMenuButton"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    Assets
-                  </button>
-                  <div
-                    class="dropdown-menu"
-                    aria-labelledby="dropdownMenuButton"
-                  >
+                  <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Assets</button>
+
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" href="#">Visa Cards (coming soon)</a>
-                    <a class="dropdown-item" href="#">Loans (coming soon)</a>
-                    <a class="dropdown-item" href="#">Payments (coming soon)</a>
+                    <a class="dropdown-item" href="../loan.php">Loans</a>
+                    <a class="dropdown-item" href="../fund-recovery.php">Fund Recovery</a>
                   </div>
                 </div>
                 <div class="dropdown">
-                  <button
-                    class="btn dropdown-toggle"
-                    type="button"
-                    id="dropdownMenuButton2"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
+                  <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Orders & Trades
                   </button>
-                  <div
-                    class="dropdown-menu"
-                    aria-labelledby="dropdownMenuButton2"
-                  >
-                    <a class="dropdown-item" href="user-profile.php">Funding</a>
-                    <a class="dropdown-item" href="user-profile.php">Investment</a>
-                    <a class="dropdown-item" href="user-profile.php">Profits and Interests</a>
-                    <a class="dropdown-item" href="user-profile.php">Withdrawals</a>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                    <a class="dropdown-item" href="wallet.php">Funding</a>
+                    <a class="dropdown-item" href="investment.php">Investment</a>
+                    <a class="dropdown-item" href="wallet.php">Withdrawal</a>
+                    <a class="dropdown-item" href="exchange.php">Xtrade Exchange</a>
+                    <a class="dropdown-item" href="trade.php">P2P Trade</a>
                   </div>
                 </div>
                

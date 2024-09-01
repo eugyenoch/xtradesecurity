@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
 <?php include "include/profileHeader.php";?>
 
   <body>
@@ -13,9 +11,9 @@
               <div class="header-content">
                 <div class="header-left">
                   <div class="brand-logo">
-                    <a href="index.html">
-                      <img src="./images/logo.png" alt="" />
-                      <span>XTrade Security</span>
+                  <a href="../index.php">
+                    <img src="../assets/images/logo/favicon.png" alt="icon image" title="XTrade Security LTD" />
+                    <span>XTrade Security&nbsp;<i class="icofont-ui-settings"></i>&nbsp;Settings</span>
                     </a>
                   </div>
                   <div class="search">
@@ -42,19 +40,19 @@
           <div class="row">
             <div class="col-xxl-12">
               <div class="page-title">
-                <h4>Fees</h4>
+                <h4>Fees (Trading and Investment)</h4>
               </div>
               <div class="card h-unset">
                 <div class="card-header">
                   <div class="settings-menu">
-                    <a href="settings-profile.html">Profile</a>
-                    <a href="settings-application.html">Application</a>
-                    <a href="settings-security.html">Security</a>
-                    <a href="settings-activity.html">Activity</a>
-                    <a href="settings-privacy.html">Privacy</a>
-                    <a href="settings-payment-method.html">Payment Method</a>
-                    <a href="settings-api.html">API</a>
-                    <a href="settings-fees.html">Fees</a>
+                    <a href="settings-profile.php">Profile</a>
+                    <a href="settings-application.php">Application</a>
+                    <a href="settings-security.php">Security</a>
+                    <a href="settings-activity.php">Activity</a>
+                    <a href="settings-privacy.php">Privacy</a>
+                    <!-- <a href="settings-payment-method.php">Payment Method</a> -->
+                    <a href="settings-api.php">API</a>
+                    <a href="settings-fees.php">Fees</a>
                   </div>
                 </div>
                 <div class="card-body pb-0">
@@ -62,7 +60,7 @@
                     <div class="col-xxl-12">
                       <div class="card no-shadow h-unset">
                         <div class="card-header">
-                          <h4 class="card-title">Normal User</h4>
+                          <h4 class="card-title">Trading (Xtrade exchange and xTrade P2P)</h4>
                         </div>
                         <div class="card-body">
                           <div class="table-responsive">
@@ -71,44 +69,36 @@
                                 <tr>
                                   <th>Tier</th>
                                   <th>Total XTrade Security holding</th>
-                                  <th>30-day Trading Volume (BTC)</th>
+                                  <th>30-day Trading Volume (USDT)</th>
                                   <th>Maker Fee</th>
                                   <th>Taker Fee</th>
-                                  <th>24h Withdrawal Limit (BTC)</th>
+                                  <th>24h Withdrawal Limit (USDT)</th>
                                 </tr>
                               </thead>
                               <tbody>
                                 <tr>
                                   <td>Lv 1</td>
-                                  <td>&#60; 500</td>
-                                  <td>&#60; 1000</td>
-                                  <td>&#60; 0.100%</td>
-                                  <td>&#60; 0.150%</td>
-                                  <td>500</td>
+                                  <td>&#60; 5000</td>
+                                  <td>&#60; 100000</td>
+                                  <td>&#60; 1.100%</td>
+                                  <td>&#60; 5.150%</td>
+                                  <td>&#8804;4000</td>
                                 </tr>
                                 <tr>
-                                  <td>Lv 1</td>
-                                  <td>&#60; 500</td>
-                                  <td>&#60; 1000</td>
-                                  <td>&#60; 0.100%</td>
-                                  <td>&#60; 0.150%</td>
-                                  <td>500</td>
+                                  <td>Lv 2</td>
+                                  <td>&#60; 25000</td>
+                                  <td>&#60; 500000</td>
+                                  <td>&#60; 1.100%</td>
+                                  <td>&#60; 5.150%</td>
+                                  <td>&#8804;20000</td>
                                 </tr>
                                 <tr>
-                                  <td>Lv 1</td>
-                                  <td>&#60; 500</td>
-                                  <td>&#60; 1000</td>
-                                  <td>&#60; 0.100%</td>
-                                  <td>&#60; 0.150%</td>
-                                  <td>500</td>
-                                </tr>
-                                <tr>
-                                  <td>Lv 1</td>
-                                  <td>&#60; 500</td>
-                                  <td>&#60; 1000</td>
-                                  <td>&#60; 0.100%</td>
-                                  <td>&#60; 0.150%</td>
-                                  <td>500</td>
+                                  <td>Lv 3</td>
+                                  <td>&#60; 10000</td>
+                                  <td>&#60; 1000000</td>
+                                  <td>&#60; 1.100%</td>
+                                  <td>&#60; 5.150%</td>
+                                  <td>&#8804;800000</td>
                                 </tr>
                               </tbody>
                             </table>
@@ -119,7 +109,7 @@
                     <div class="col-xxl-12">
                       <div class="card no-shadow h-unset">
                         <div class="card-header">
-                          <h4 class="card-title">VIP User</h4>
+                          <h4 class="card-title">Investments</h4>
                         </div>
                         <div class="card-body">
                           <div class="table-responsive">
@@ -128,44 +118,52 @@
                                 <tr>
                                   <th>Tier</th>
                                   <th>Total XTrade Security holding</th>
-                                  <th>30-day Trading Volume (BTC)</th>
+                                  <th>30-day Trading Volume (USDT)</th>
                                   <th>Maker Fee</th>
                                   <th>Taker Fee</th>
-                                  <th>24h Withdrawal Limit (BTC)</th>
+                                  <th>24h Withdrawal Limit (USDT)</th>
                                 </tr>
                               </thead>
                               <tbody>
                                 <tr>
-                                  <td>Lv 1</td>
-                                  <td>&#60; 500</td>
-                                  <td>&#60; 1000</td>
-                                  <td>&#60; 0.100%</td>
-                                  <td>&#60; 0.150%</td>
-                                  <td>500</td>
+                                  <td>Silver</td>
+                                  <td>&#8804; 50</td>
+                                  <td>&#8804; 5000</td>
+                                  <td>&#60; 1.100%</td>
+                                  <td>&#60; 5.150%</td>
+                                  <td>&#8804;4000</td>
                                 </tr>
                                 <tr>
-                                  <td>Lv 1</td>
-                                  <td>&#60; 500</td>
-                                  <td>&#60; 1000</td>
-                                  <td>&#60; 0.100%</td>
-                                  <td>&#60; 0.150%</td>
-                                  <td>500</td>
+                                  <td>Diamond</td>
+                                  <td>&#8804; 90</td>
+                                  <td>&#8804; 9000</td>
+                                  <td>&#60; 1.100%</td>
+                                  <td>&#60; 5.150%</td>
+                                  <td>&#8804;7000</td>
                                 </tr>
                                 <tr>
-                                  <td>Lv 1</td>
-                                  <td>&#60; 500</td>
-                                  <td>&#60; 1000</td>
-                                  <td>&#60; 0.100%</td>
-                                  <td>&#60; 0.150%</td>
-                                  <td>500</td>
+                                  <td>Diamond Plus</td>
+                                  <td>&#8804; 20</td>
+                                  <td>&#8804; 19500</td>
+                                  <td>&#60; 1.100%</td>
+                                  <td>&#60; 5.150%</td>
+                                  <td>&#8804;15000</td>
                                 </tr>
                                 <tr>
-                                  <td>Lv 1</td>
-                                  <td>&#60; 500</td>
-                                  <td>&#60; 1000</td>
-                                  <td>&#60; 0.100%</td>
-                                  <td>&#60; 0.150%</td>
-                                  <td>500</td>
+                                  <td>Gold</td>
+                                  <td>&#8804; 500</td>
+                                  <td>&#8804; 50000</td>
+                                  <td>&#60; 1.100%</td>
+                                  <td>&#60; 5.150%</td>
+                                  <td>&#8804;40000</td>
+                                </tr>
+                                <tr>
+                                  <td>Gold Plus</td>
+                                  <td>Negotiable</td>
+                                  <td>Unlimited</td>
+                                  <td>&#60; 1.100%</td>
+                                  <td>&#60; 5.150%</td>
+                                  <td>Unlimited</td>
                                 </tr>
                               </tbody>
                             </table>
@@ -182,10 +180,4 @@
       </div>
     </div>
 
-    <script src="./vendor/jquery/jquery.min.js"></script>
-    <script src="./vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <script src="./js/scripts.js"></script>
-    <script></script>
-  </body>
-</html>
+    <?php include "include/footer.php"; ?>

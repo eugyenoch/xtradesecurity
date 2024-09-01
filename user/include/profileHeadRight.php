@@ -76,7 +76,7 @@
                     <div class="dropdown-menu dropdown-menu-right">
                       <div class="user-email">
                         <div class="user">
-                          <span class="thumb"><img src="<?php if(isset($profilePicUrl) && $profilePicUrl !=null){echo $profilePicUrl;}else{echo'./images/profile/2.png';} ?>" alt="no file" title="User profile photo"
+                          <span class="thumb"><img src="<?php if(isset($profilePicUrl) && $profilePicUrl !=null){echo $profilePicUrl;} ?>" alt="no file" title="User profile photo"
                           /></span>
 
                           <div class="user-info">
@@ -89,11 +89,16 @@
                       <div class="user-balance">
                         <div class="available">
                           <p>Available</p>
-                          <span>0.00 BTC</span>
+                          <span>
+                          <?php if(isset($_SESSION['user_session'])) {$userBalance = calculateUserTotalBalance(); echo $userBalance;} 
+                          else {echo '$0.00';}?>
+                          </span>
                         </div>
                         <div class="total">
-                          <p>Total</p>
-                          <span>0.00 USD</span>
+                          <p>P2P Trades</p>
+                          <span>
+                          <?php if(isset($total_p2p_count)){echo $total_p2p_count ."&nbsp;trades";}?>
+                          </span>
                         </div>
                       </div>
                       <a href="profile.php" class="dropdown-item">
@@ -109,7 +114,7 @@
                         <i class="icofont-history"></i> Activity
                       </a>
                       <a href="exchange.php" class="dropdown-item">
-                      <i class="icofont-chart-growth"></i>Trade on the Exchange
+                      <i class="icofont-chart-growth"></i>Xtrade Exchange
                       </a>
                       <a href="investment.php" class="dropdown-item">
                       <i class="icofont-chart-line"></i>Investment

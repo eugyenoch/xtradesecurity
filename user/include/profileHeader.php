@@ -1,11 +1,10 @@
 <?php
 include '../function.php'; 
 checkUserLogin();
-
 // Fetch current prices
-$currentPrices = fetchCryptoData('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,tether,binancecoin&vs_currencies=usd');
+$currentPrices = fetchCryptoData('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,tether,ripple,litecoin,cardano,eos,monero,tezos,nem,neo,dash,ethereum-classic,digibyte,decred,binancecoin&vs_currencies=usd');
 // Fetch historical price data for the past 30 days
-$historicalData = fetchCryptoData('https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=30');
+//$historicalData = fetchCryptoData('https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=30');
 
 //This PHPDoc annotation is to help IntelliSense understand the type of $con
 /** @var mysqli $con */
@@ -27,7 +26,15 @@ $_SESSION['user_firstname'] = $firstname;
 $_SESSION['user_lastname'] = $lastname;
 $_SESSION['user_email'] = $user_email;
 $_SESSION['user_username'] = $userName;
+$_SESSION['start_time'] = date("Y-m-d H:i:s");
 $_SESSION['user_profile_pic'] = $profilePicUrl;
+$_SESSION['browser'] = $_SERVER['HTTP_USER_AGENT'];
+$_SESSION['ip_address'] = get_user_ip();
+//$_SESSION['near'] = "Your Location Logic Here"; // You might use a service like GeoIP to determine this
+$_SESSION['current'] = true; // Logic to determine if the current session is active
+
+// Browser info from previous response
+$shortBrowserInfo = get_browser_info($_SERVER['HTTP_USER_AGENT']);
 
 //SECTION TO CALL SPECIFIC USER INFORMATION
 // Call the function to check if the logged in user is subscribed to newsletter

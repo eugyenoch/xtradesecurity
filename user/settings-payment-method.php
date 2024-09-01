@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
 <?php include "include/profileHeader.php";?>
 
   <body>
@@ -13,9 +11,9 @@
               <div class="header-content">
                 <div class="header-left">
                   <div class="brand-logo">
-                    <a href="index.html">
-                      <img src="./images/logo.png" alt="" />
-                      <span>XTrade Security</span>
+                  <a href="../index.php">
+                    <img src="../assets/images/logo/favicon.png" alt="icon image" title="XTrade Security LTD" />
+                    <span>XTrade Security&nbsp;<i class="icofont-ui-settings"></i>&nbsp;Settings</span>
                     </a>
                   </div>
                   <div class="search">
@@ -48,14 +46,14 @@
               <div class="card h-unset">
                 <div class="card-header">
                   <div class="settings-menu">
-                    <a href="settings-profile.html">Profile</a>
-                    <a href="settings-application.html">Application</a>
-                    <a href="settings-security.html">Security</a>
-                    <a href="settings-activity.html">Activity</a>
-                    <a href="settings-privacy.html">Privacy</a>
-                    <a href="settings-payment-method.html">Payment Method</a>
-                    <a href="settings-api.html">API</a>
-                    <a href="settings-fees.html">Fees</a>
+                    <a href="settings-profile.php">Profile</a>
+                    <a href="settings-application.php">Application</a>
+                    <a href="settings-security.php">Security</a>
+                    <a href="settings-activity.php">Activity</a>
+                    <a href="settings-privacy.php">Privacy</a>
+                    <a href="settings-payment-method.php">Payment Method</a>
+                    <a href="settings-api.php">API</a>
+                    <a href="settings-fees.php">Fees</a>
                   </div>
                 </div>
                 <div class="card-body pb-0">
@@ -146,7 +144,7 @@
             ></button>
           </div>
           <div class="modal-body">
-            <form action="verify-step-6.html" class="identity-upload">
+            <form action="verify-step-6.php" class="identity-upload">
               <div class="row g-3">
                 <div class="col-xl-12">
                   <label class="form-label">Routing number </label>
@@ -200,7 +198,7 @@
           <div class="modal-body">
             <div class="auth-form">
               <div class="card-body">
-                <form action="verify-step-2.html" class="identity-upload">
+                <form action="verify-step-2.php" class="identity-upload">
                   <div class="identity-content">
                     <span class="icon"><i class="icofont-check"></i></span>
                     <p class="text-dark">Congratulation. Your bank added</p>
@@ -291,7 +289,7 @@
           <div class="modal-body">
             <div class="auth-form">
               <div class="card-body">
-                <form action="verify-step-2.html" class="identity-upload">
+                <form action="verify-step-2.php" class="identity-upload">
                   <div class="identity-content">
                     <span class="icon"><i class="icofont-check"></i></span>
                     <p class="text-dark">Congratulation. Your bank added</p>
@@ -304,10 +302,4 @@
       </div>
     </div>
 
-    <script src="./vendor/jquery/jquery.min.js"></script>
-    <script src="./vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <script src="./js/scripts.js"></script>
-    <script></script>
-  </body>
-</html>
+    <?php include "include/footer.php"; ?>

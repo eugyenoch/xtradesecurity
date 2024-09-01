@@ -569,5 +569,103 @@ function fetchFunds($con, $userEmail) {
     return $funds;
 }
 
+function calculateAndUpdateTransactionProfit($con, $transactions_info) {
+    // Check if the transaction status is 'approved'
+    if ($transactions_info['tstatus'] === 'approved') {
+        // Calculate the date difference between today and the approval date
+        $current_date = new DateTime();
+        $approval_date = new DateTime($transactions_info['approval_date']);
+        $date_diff = $current_date->diff($approval_date)->days;
+
+        // Check if 30 days have passed since approval
+        if ($date_diff >= 30) {
+            // Check if the profit has already been calculated
+            if ($transactions_info['tprofit'] === null || $transactions_info['tprofit'] == 0) {
+                // Calculate the profit
+                $approved_amount = $transactions_info['tamount'];
+                $interest = $transactions_info['tinterest'];
+                $profit = $approved_amount * $interest;
+
+                // Prepare the SQL statement to update the tprofit column
+                $stmt = $con->prepare("UPDATE transaction SET tprofit = ? WHERE txn = ?");
+                $stmt->bind_param("ds", $profit, $transactions_info['txn']);
+
+                // Execute the update statement and log any errors
+                if (!$stmt->execute()) {
+                    error_log("Error updating profit for transaction " . $transactions_info['txn'] . ": " . $stmt->error);
+                }
+
+                // Close the statement
+                $stmt->close();
+
+                // Log the successful update
+                error_log("Profit calculated and updated for transaction " . $transactions_info['txn']);
+            } else {
+                // Log that the profit was already calculated
+                error_log("Profit already calculated for transaction " . $transactions_info['txn']);
+            }
+        } else {
+            // Log that 30 days have not yet passed
+            error_log("30 days have not yet passed since approval for transaction " . $transactions_info['txn']);
+        }
+    } else {
+        error_log("Transaction " . htmlspecialchars($transactions_info['txn']) . " is not approved. No profit calculated.");
+    }
+}
+
+//Get the users browser information
+function get_browser_info($userAgent) {
+    $browser = "Unknown Browser";
+    $version = "";
+
+    if (preg_match('/MSIE/i', $userAgent) && !preg_match('/Opera/i', $userAgent)) {
+        $browser = "Internet Explorer";
+        $version = "MSIE";
+    } elseif (preg_match('/Firefox/i', $userAgent)) {
+        $browser = "Mozilla Firefox";
+    } elseif (preg_match('/Chrome/i', $userAgent)) {
+        $browser = "Google Chrome";
+    } elseif (preg_match('/Safari/i', $userAgent)) {
+        $browser = "Apple Safari";
+    } elseif (preg_match('/Opera/i', $userAgent)) {
+        $browser = "Opera";
+    } elseif (preg_match('/Netscape/i', $userAgent)) {
+        $browser = "Netscape";
+    }
+
+    // Extract the version number
+    preg_match('/' . $browser . '[\/ ]?([0-9.]*)/', $userAgent, $matches);
+    if (isset($matches[1])) {
+        $version = $matches[1];
+    }
+
+    return $browser . " " . $version;
+}
+
+// Example usage
+$shortBrowserInfo = get_browser_info($_SERVER['HTTP_USER_AGENT']);
+
+//GET USER IP
+function get_user_ip() {
+    // Check if it's a shared internet IP (usually proxies)
+    if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+        $ip = $_SERVER['HTTP_CLIENT_IP'];
+    }
+    // Check if the IP is passed from a proxy
+    elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+        $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    }
+    // Default remote address
+    else {
+        $ip = $_SERVER['REMOTE_ADDR'];
+    }
+
+    // In case the IP is a comma-separated list, take the first one (which is the user's IP)
+    return explode(',', $ip)[0];
+}
+
+// Example usage
+$userIp = get_user_ip();
+
 
 ?>

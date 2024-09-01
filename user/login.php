@@ -94,7 +94,12 @@ if (isset($_POST['emailLogin']) || isset($_POST['phoneLogin'])) {
 <?php include "include/header.php"; ?>
 
   <body class="body header-fixed">
-
+    <script>
+        // Clear localStorage when accessing the login page
+        localStorage.removeItem('walletAddress');
+        localStorage.removeItem('walletBalance');
+        console.log("Wallet details removed from localStorage");
+    </script>
     <!-- Header -->
     <header id="header_main" class="header">
       <div class="container-fluid">
