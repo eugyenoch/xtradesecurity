@@ -10,18 +10,13 @@
               </a>
             </li>
             <li>
-              <a href="exchange.php" data-toggle="tooltip" data-placement="right" title="Markets and Exchange">
-                <span><i class="icofont-chart-growth"></i></span>
-              </a>
-            </li>
-            <li>
-              <a href="trade.php" data-toggle="tooltip" data-placement="right" title="P2P Trade">
-                <span><i class="icofont-stack-exchange"></i></span>
+              <a href="trade.php" data-toggle="tooltip" data-placement="right" title="Xtrade Exchange">
+              <span><i class="icofont-chart-line"></i></span>
               </a>
             </li>
             <li>
               <a href="investment.php" data-toggle="tooltip" data-placement="right" title="Investment">
-                <span><i class="icofont-chart-line"></i></span>
+                <span><i class="icofont-chart-growth"></i></span>
               </a>
             </li>
             <li>

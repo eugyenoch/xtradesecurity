@@ -10,6 +10,7 @@ if (isset($_POST['addNewAddress'])){
     $wallet = sanitize($_POST['newWallet']);
     $address = sanitize($_POST['newAddress']);
     $walletTag = sanitize($_POST['newWalletTag']);
+    $wallet_owner = "admin";
     
     // Handle file upload (optional)
     $qrcode = null;
@@ -40,8 +41,8 @@ if (isset($_POST['addNewAddress'])){
     }
     
     // Prepare and bind
-    $stmt = $con->prepare("INSERT INTO wallet_addresses (wallet, address, wallet_tag, qrcode) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("ssss", $wallet, $address, $walletTag, $qrcode);
+    $stmt = $con->prepare("INSERT INTO wallet_addresses (wallet, address, wallet_tag, qrcode, wallet_owner) VALUES (?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssss", $wallet, $address, $walletTag, $qrcode, $wallet_owner);
     
     // Execute the statement
     if ($stmt->execute()) {

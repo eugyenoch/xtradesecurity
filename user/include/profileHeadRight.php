@@ -107,20 +107,17 @@
                       <a href="wallet.php" class="dropdown-item">
                         <i class="icofont-wallet"></i>Wallet
                       </a>
-                      <a href="settings-profile.php" class="dropdown-item">
-                        <i class="icofont-ui-settings"></i> Setting
-                      </a>
                       <a href="settings-activity.php" class="dropdown-item">
                         <i class="icofont-history"></i> Activity
                       </a>
-                      <a href="exchange.php" class="dropdown-item">
+                      <a href="trade.php" class="dropdown-item">
                       <i class="icofont-chart-growth"></i>Xtrade Exchange
                       </a>
                       <a href="investment.php" class="dropdown-item">
                       <i class="icofont-chart-line"></i>Investment
                       </a>
-                      <a href="trade.php" class="dropdown-item">
-                      <i class="icofont-stack-exchange"></i>P2P
+                      <a href="settings-profile.php" class="dropdown-item">
+                        <i class="icofont-ui-settings"></i> Settings
                       </a>
                       <a href="include/logout.php" class="dropdown-item logout">
                         <i class="icofont-logout"></i> Logout

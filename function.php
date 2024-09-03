@@ -329,7 +329,7 @@ function countUserReferrals($con, $user_referrer_count) {
 //Fetch Unique Wallets
 function fetchUniqueWallets($con) {
     $wallets = [];
-    $sql = "SELECT DISTINCT wallet FROM wallet_addresses";
+    $sql = "SELECT DISTINCT wallet FROM wallet_addresses WHERE wallet_owner='admin'";
     $result = $con->query($sql);
     
     if ($result && $result->num_rows > 0) {
@@ -347,7 +347,23 @@ function fetchUniqueWallets($con) {
 // Fetch all wallet addresses
 function fetchAllWalletAddresses($con) {
     $walletAddresses = [];
-    $sql = "SELECT * FROM wallet_addresses";
+    $sql = "SELECT * FROM wallet_addresses WHERE wallet_owner='admin'";
+    $result = $con->query($sql);
+    
+    if ($result && $result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $walletAddresses[] = $row;
+        }
+    } else {
+        error_log("Error fetching wallet addresses: " . $con->error);
+    }
+    
+    return $walletAddresses;
+}
+
+function fetchAllUserWalletAddresses($con, $user_email) {
+    $walletAddresses = [];
+    $sql = "SELECT * FROM wallet_addresses WHERE wallet_owner='$user_email'";
     $result = $con->query($sql);
     
     if ($result && $result->num_rows > 0) {

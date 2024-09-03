@@ -17,20 +17,7 @@
                       <small>Prices as at today: <?= date('D-M d-Y'); ?></small>
                     </a>
                   </div>
-                  <div class="search">
-                    <form action="#">
-                      <div class="input-group">
-                        <input
-                          type="text"
-                          class="form-control"
-                          placeholder="Search Here"
-                        />
-                        <span class="input-group-text"
-                          ><i class="icofont-search"></i
-                        ></span>
-                      </div>
-                    </form>
-                  </div>
+                  <?php include './include/search-crypto.php';?>
                 </div>
                 <div><a href="exchange.php" class="btn btn-primary" title="Trade on Xtrade exchange">Xtrade Exchange <i class="icofont-price"></i></a></div>
                

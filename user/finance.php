@@ -22,10 +22,10 @@ if(isset($_POST['withdraw'])){
   $stmt->bind_param("ssssssds", $wtxn, $wemail, $wusername, $wfirstname, $wlastname, $wcurrency, $wamount, $waddress);
   if ($stmt->execute()) {
     // Success message
-    echo "<script>alert('Success: Withdrawal request submitted successfully and pending approval'); window.location='user-profile.php';</script>";
+    echo "<script>alert('Success: Withdrawal request submitted successfully and pending approval'); window.location='wallet.php';</script>";
 } else {
     // Error message
-    echo "<script>alert('Error: There was an error with your request, please try again after a while ');window.location='user-profile.php';</script>";
+    echo "<script>alert('Error: There was an error with your request, please try again after a while ');window.location='wallet.php';</script>";
 }
 
 $stmt->close();
@@ -55,10 +55,10 @@ if (isset($_POST['silver'])) {
         // Execute the query
         if ($sql_starter_update->execute()) {
             echo "<script>alert('Your request is pending approval. Do not resubmit request.')</script>";
-            echo "<script>location.href='user-profile.php'</script>";
+            echo "<script>location.href='investment.php'</script>";
         } else {
             echo "<script>alert('There was an error processing your request. Please try again later.')</script>";
-            echo "<script>location.href='user-profile.php'</script>";            
+            echo "<script>location.href='investment.php'</script>";            
         }
 
         // Close the prepared statement
@@ -96,21 +96,21 @@ if (isset($_POST['diamond'])) {
         // Execute the query
         if ($sql_diamond_update->execute()) {
             echo "<script>alert('Your request is pending approval. Do not resubmit request.')</script>";
-            echo "<script>location.href='user-profile.php'</script>";
+            echo "<script>location.href='investment.php'</script>";
         } else {
             echo "<script>alert('There was an error processing your request. Please try again later.')</script>";
-            echo "<script>location.href='user-profile.php'</script>";            
+            echo "<script>location.href='investment.php'</script>";            
         }
 
         // Close the prepared statement
         $sql_diamond_update->close();
     } else {
         echo "<script>alert('Insufficient balance. Your current balance is $" . number_format($userBalance, 2) . "')</script>";
-        echo "<script>location.href='user-profile.php'</script>";
+        echo "<script>location.href='investment.php'</script>";
     }
 } else {
     echo "<script>alert('Your request is pending. Note: if you have insufficient balance, this request will fail.')</script>";
-    echo "<script>location.href='user-profile.php'</script>";
+    echo "<script>location.href='investment.php'</script>";
     
 }
 
@@ -137,21 +137,21 @@ if (isset($_POST['diamond_plus'])) {
         // Execute the query
         if ($sql_starter_update->execute()) {
             echo "<script>alert('Your request is pending approval. Do not resubmit request.')</script>";
-            echo "<script>location.href='user-profile.php'</script>";
+            echo "<script>location.href='investment.php'</script>";
         } else {
             echo "<script>alert('There was an error processing your request. Please try again later.')</script>";
-            echo "<script>location.href='user-profile.php'</script>";            
+            echo "<script>location.href='investment.php'</script>";            
         }
 
         // Close the prepared statement
         $sql_starter_update->close();
     } else {
         echo "<script>alert('Insufficient balance. Your current balance is $" . number_format($userBalance, 2) . "')</script>";
-        echo "<script>location.href='user-profile.php'</script>";
+        echo "<script>location.href='investment.php'</script>";
     }
 } else {
     echo "<script>alert('Your request is pending. Note: if you have insufficient balance, this request will fail.')</script>";
-    echo "<script>location.href='user-profile.php'</script>";
+    echo "<script>location.href='investment.php'</script>";
 }
 
 
@@ -178,21 +178,21 @@ if (isset($_POST['gold'])) {
         // Execute the query
         if ($sql_starter_update->execute()) {
             echo "<script>alert('Your request is pending approval. Do not resubmit request.')</script>";
-            echo "<script>location.href='user-profile.php'</script>";
+            echo "<script>location.href='investment.php'</script>";
         } else {
             echo "<script>alert('There was an error processing your request. Please try again later.')</script>";
-            echo "<script>location.href='user-profile.php'</script>";            
+            echo "<script>location.href='investment.php'</script>";            
         }
 
         // Close the prepared statement
         $sql_starter_update->close();
     } else {
         echo "<script>alert('Insufficient balance. Your current balance is $" . number_format($userBalance, 2) . "')</script>";
-        echo "<script>location.href='user-profile.php'</script>";
+        echo "<script>location.href='investment.php'</script>";
     }
 } else {
     echo "<script>alert('Your request is pending. Note: if you have insufficient balance, this request will fail.')</script>";
-    echo "<script>location.href='user-profile.php'</script>";
+    echo "<script>location.href='investment.php</script>";
 }
 
    // Gold Plus subscription
@@ -217,21 +217,21 @@ if (isset($_POST['gold_plus'])) {
         // Execute the query
         if ($sql_starter_update->execute()) {
             echo "<script>alert('Your request is pending approval. Do not resubmit request.')</script>";
-            echo "<script>location.href='user-profile.php'</script>";
+            echo "<script>location.href='investment.php'</script>";
         } else {
             echo "<script>alert('There was an error processing your request. Please try again later.')</script>";
-            echo "<script>location.href='user-profile.php'</script>";            
+            echo "<script>location.href='investment.php'</script>";            
         }
 
         // Close the prepared statement
         $sql_starter_update->close();
     } else {
         echo "<script>alert('Insufficient balance. Your current balance is $" . number_format($userBalance, 2) . "')</script>";
-        echo "<script>location.href='user-profile.php'</script>";
+        echo "<script>location.href='investment.php'</script>";
     }
 } else {
     echo "<script>alert('Your request is pending. Note: if you have insufficient balance, this request will fail.')</script>";
-    echo "<script>location.href='user-profile.php'</script>";
+    echo "<script>location.href='investment.php'</script>";
 }
 
     // Veteran subscription
@@ -256,21 +256,21 @@ if (isset($_POST['veteran'])) {
         // Execute the query
         if ($sql_starter_update->execute()) {
             echo "<script>alert('Your request is pending approval. Do not resubmit request.')</script>";
-            echo "<script>location.href='user-profile.php'</script>";
+            echo "<script>location.href='investment.php'</script>";
         } else {
             echo "<script>alert('There was an error processing your request. Please try again later.')</script>";
-            echo "<script>location.href='user-profile.php'</script>";            
+            echo "<script>location.href='investment.php'</script>";            
         }
 
         // Close the prepared statement
         $sql_starter_update->close();
     } else {
         echo "<script>alert('Insufficient balance. Your current balance is $" . number_format($userBalance, 2) . "')</script>";
-        echo "<script>location.href='user-profile.php'</script>";
+        echo "<script>location.href='investment.php'</script>";
     }
 } else {
     echo "<script>alert('Your request is pending. Note: if you have insufficient balance, this request will fail.')</script>";
-    echo "<script>location.href='user-profile.php'</script>";
+    echo "<script>location.href='investment.php'</script>";
 }
 
 //FILE UPLOAD PROOF SOLUTION
@@ -316,18 +316,18 @@ if (isset($_POST['proofUpload'])){
             // Execute the query and check for success
             if ($sql_insert_fproof->execute()) {
                 echo "<script>alert('Proof submitted successfully.')</script>";
-                echo "<script>location.href='user-profile.php'</script>";
+                echo "<script>location.href='wallet.php'</script>";
             } else {
                 error_log("Database error: " . $con->error);
                 echo "<script>alert('Failed to update the database. Please try again.')</script>";
-                echo "<script>location.href='user-profile.php'</script>";
+                echo "<script>location.href='wallet.php'</script>";
             }
 
             // Close the prepared statement
             $sql_insert_fproof->close();
         } else {
             echo "<script>alert('Failed to submit proof of payment. Please try again.')</script>";
-            echo "<script>location.href='user-profile.php'</script>";
+            echo "<script>location.href='wallet.php'</script>";
         }
     } else {
         // Log errors if any exist
@@ -337,7 +337,7 @@ if (isset($_POST['proofUpload'])){
     }
 } else {
     echo "<script>alert('We are experiencing a technical glitch. Please try again later.')</script>";
-    echo "<script>location.href='user-profile.php'</script>";
+    echo "<script>location.href='wallet.php'</script>";
 }
 
      // Close the database connection

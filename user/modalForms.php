@@ -687,9 +687,12 @@
                       <label for="currency_id" class="form-label">Select currency</label>
                       <select class="form-select" id="currency_id2" name="wcurrency_id" required>
                           <option value="">Choose a currency</option>
-                          <?php foreach(fetchUniqueWallets($con) as $uniqueWallet): ?>
+                          <?php foreach(fetchAllUserWalletAddresses($con, $user_email) as $uniqueWallet): ?>
                             <option value="<?= htmlspecialchars($uniqueWallet['wallet']) ?>">
-                                <?= htmlspecialchars($uniqueWallet['wallet']); ?>
+                                <?= htmlspecialchars($uniqueWallet['wallet']) ?>
+                                <?php if (!empty($uniqueWallet['wallet_tag'])): ?>
+                                    &nbsp;(<?= htmlspecialchars($uniqueWallet['wallet_tag']) ?>)
+                                <?php endif; ?>
                             </option>
                         <?php endforeach; ?>
                       </select>
@@ -697,7 +700,15 @@
 
                   <div class="form-group mb-3">
                       <label for="address" class="form-label">Wallet Address</label>
-                      <input type="text" class="form-control" id="amount" name="waddress" placeholder="Enter your wallet address" required>
+                      <!-- <input type="text" class="form-control" id="amount" name="waddress" placeholder="Enter your wallet address" required> -->
+                      <select class="form-select" id="amount" name="waddress" required>
+                          <option value="">Choose wallet</option>
+                          <?php foreach(fetchAllUserWalletAddresses($con, $user_email) as $uniqueAddress): ?>
+                            <option value="<?= htmlspecialchars($uniqueAddress['address']) ?>">
+                                <?= htmlspecialchars($uniqueAddress['address']); ?>
+                            </option>
+                        <?php endforeach; ?>
+                      </select>
                   </div>
                   <div class="modal-footer">
                   <button type="submit" class="btn btn-primary" name="withdraw">Proceed <i class="icofont-double-right"></i></button>

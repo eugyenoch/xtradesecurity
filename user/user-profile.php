@@ -16,20 +16,7 @@
                       <span>XTrade Security&nbsp;<i class="icofont-user"></i>&nbsp;Dashboard</span>
                     </a>
                   </div>
-                  <div class="search">
-                    <form action="#">
-                      <div class="input-group">
-                        <input
-                          type="text"
-                          class="form-control"
-                          placeholder="Search Here"
-                        />
-                        <span class="input-group-text"
-                          ><i class="icofont-search"></i
-                        ></span>
-                      </div>
-                    </form>
-                  </div>
+                  <?php include './include/search-crypto.php';?>
                 </div>
 
                 <?php include "include/profileHeadRight.php";?>
@@ -344,7 +331,7 @@
                         </div>
                       </div>
                     </div><br>
-                    <center><a href="exchange.php" class="btn btn-primary">Trade on XTrade Exchange</a></center>
+                    <center><a href="trade.php" class="btn btn-primary">Trade on XTrade Exchange</a></center>
                   </div>
                 </div>
               </div>
@@ -358,7 +345,7 @@
                     <!-- TradingView Widget BEGIN -->
                   <div class="tradingview-widget-container">
                     <div class="tradingview-widget-container__widget"></div>
-                    <div class="tradingview-widget-copyright"><a href="exchange.php"><span class="blue-text link-opacity-100-hover">Trade on XTRADE Exchange</span></a></div>
+                    <div class="tradingview-widget-copyright"><a href="trade.php"><span class="blue-text link-opacity-100-hover">Trade on XTRADE Exchange</span></a></div>
                       <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-timeline.js" async>
                       {
                       "feedMode": "all_symbols",

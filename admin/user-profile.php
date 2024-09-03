@@ -695,7 +695,7 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
                       </tr>
                   </tfoot>
                  <tbody>
-                  <?php $sql_addresses = "SELECT * FROM wallet_addresses"; $sql_addresses_exec = $con->query($sql_addresses);$serial_number = 1;
+                  <?php $sql_addresses = "SELECT * FROM wallet_addresses WHERE wallet_owner='admin'"; $sql_addresses_exec = $con->query($sql_addresses);$serial_number = 1;
                     //foreach($sql_addresses_exec as $addresses_info){extract($addresses_info);
                 if ($sql_addresses_exec->num_rows > 0): ?>
                 <?php foreach($sql_addresses_exec as $addresses_info): ?>
@@ -761,7 +761,7 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
                               <input title="Enter wallet tag: e.g BTC wallet 1" class="form-control form-control-line" type="text" name="newWalletTag" placeholder="Wallet Tag" />
                           </td>
                           <td>
-                              <input class="form-control form-control-line" type="file" name="qrcode" accept="image/*" />
+                              <input class="form-control form-control-line" type="file" name="qrcode" accept="image/*" title="Select an image" />
                           </td>
                       </tr>
                       <tr>

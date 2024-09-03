@@ -16,20 +16,7 @@
                     <span>XTrade Security&nbsp;<i class="icofont-ui-settings"></i>&nbsp;Settings</span>
                     </a>
                   </div>
-                  <div class="search">
-                    <form action="#">
-                      <div class="input-group">
-                        <input
-                          type="text"
-                          class="form-control"
-                          placeholder="Search Here"
-                        />
-                        <span class="input-group-text"
-                          ><i class="icofont-search"></i
-                        ></span>
-                      </div>
-                    </form>
-                  </div>
+                  <?php include './include/search-crypto.php';?>
                 </div>
 
                 <?php include "include/profileHeadRight.php";?>
@@ -51,8 +38,8 @@
                     <a href="settings-security.php">Security</a>
                     <a href="settings-activity.php">Activity</a>
                     <a href="settings-privacy.php">Privacy</a>
-                    <!-- <a href="settings-payment-method.php">Payment Method</a> -->
-                    <a href="settings-api.php">API</a>
+                    <a href="settings-payment-method.php">Payment Method</a>
+                    <a href="#">API</a>
                     <a href="settings-fees.php">Fees</a>
                   </div>
                 </div>

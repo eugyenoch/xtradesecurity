@@ -18,20 +18,7 @@
                         <span>XTrade Security&nbsp;<i class="icofont-wallet"></i>&nbsp;Wallet</span>
                     </a>
                   </div>
-                  <div class="search">
-                    <form action="#">
-                      <div class="input-group">
-                        <input
-                          type="text"
-                          class="form-control"
-                          placeholder="Search Here"
-                        />
-                        <span class="input-group-text"
-                          ><i class="icofont-search"></i
-                        ></span>
-                      </div>
-                    </form>
-                  </div>
+                  <?php include './include/search-crypto.php';?>
                 </div>
 
 
@@ -95,35 +82,110 @@
             <div class="col-xxl-6">
               <div class="card">
                 <div class="card-header">
-                  <h4 class="card-title">Wallet Addresses</h4>
+                  <h4 class="card-title">Wallets and Banks</h4>
                 </div>
                 <div class="card-body">
                   <div class="table-responsive">
-                    <table class="table table-striped responsive-table">
+                    <table class="table table-striped table-sm responsive-table" #userWalletTable>
+                    <caption>Wallet Information Table</caption>
                       <thead>
                         <tr>
-                          <th></th>
-                          <th>Address</th>
-                          <th>Wallet Balance</th>
+                          <th>Coin</th>
+                          <th>Wallet Address</th>
+                          <th>QR Code</th>
+                          <th>Date Added</th>
+                          <th>Actions</th>
                         </tr>
                       </thead>
+                      <?php $sql_addresses_user = "SELECT * FROM wallet_addresses WHERE wallet_owner='$user_email'"; $sql_addresses_execs = $con->query($sql_addresses_user);$serial_number = 1;
+                    //foreach($sql_addresses_exec as $addresses_info){extract($addresses_info);
+                if ($sql_addresses_execs->num_rows > 0): ?>
+                <?php foreach($sql_addresses_execs as $addresses_infos): ?>
                       <tbody>
                         <tr>
                           <td>
                             <div class="coin-name">
-                              <!-- <i class="cc BTC"></i> -->
-                              <span id="walletDetails"></span>
+                              <i class="cc USDT"></i>
                             </div>
                           </td>
-                          <td><span id="walletAddress"></span></td>
-                          <td><span id="walletBalance"></span></td>
+                          <td>
+                          <?= 
+                                htmlspecialchars($addresses_infos['address']) 
+                                . (!empty($addresses_infos['wallet_tag']) 
+                                    ? '<br><span><small><strong>Tag:</strong> ' . htmlspecialchars($addresses_infos['wallet_tag']) . '</small></span>' 
+                                    : '')
+                            ?>
+                          </td>
+                          <td>
+                            <?php if (isset($addresses_infos['qrcode']) && $addresses_infos['qrcode'] !== null): ?>
+                                <img src="../assets/user-uploads/<?= $addresses_infos['qrcode']; ?>" alt="QRCode" width="30px" height="30px">
+                            <?php endif; ?>
+                        </td>
+                        <td class="coin-name"><?= $addresses_infos['date_created']; ?></td>
+                        <td class="coin-name">
+                            <a href="confirmOperation.php?dwa=<?= $addresses_infos['id_no']; ?>" class="dt-type-md">
+                                <span class="btn btn-outline-danger badge badge-outline badge-danger badge-md">Delete</span>
+                            </a>
+                        </td>
                         </tr>
+                        <?php endforeach; ?>
+                        <?php else: ?>
+                          </tbody>
+                          <tr>
+                              <td colspan="8">No wallet information found</td>
+                          </tr>
+                      <?php endif; ?>
                       </tbody>
                     </table>
-                    <br>
-                    <a href="#" id="connectWalletButton" type="button" class="btn btn-success position-relative top-100 start-50">Import Wallet</a>
-                    <br>
-                    <div id="warn" style="color: red"></div>
+                  </div>
+
+                  <div class="table-responsive">
+                    <table class="table table-striped table-sm responsive-table" #userBankTable>
+                      <caption>Bank Information Table</caption>
+                    <thead>
+                        <tr>
+                        <th>Id no.</th>
+                          <th>Coin</th>
+                          <th>Wallet Address</th>
+                          <th>QR Code</th>
+                          
+                        </tr>
+                      </thead>
+                      <?php $sql_bank_user = "SELECT * FROM bank_accounts WHERE account_owner='$user_email'"; $sql_bank_execs = $con->query($sql_bank_user);
+                    //foreach($sql_addresses_exec as $addresses_info){extract($addresses_info);
+                if ($sql_bank_execs->num_rows > 0): ?>
+                <?php foreach($sql_bank_execs as $bank_infos): ?>
+                      <tbody>
+                        <tr>
+                        <td class="coin-name"><?= $serial_number; ?></td>
+                          <td>
+                            <div class="coin-name">
+                              <i class="cc USDT"></i>
+                            </div>
+                          </td>
+                          <td>
+                          <?= 
+                                htmlspecialchars($addresses_infos['address']) 
+                                . (!empty($addresses_infos['wallet_tag']) 
+                                    ? '<br><span><small><strong>Tag:</strong> ' . htmlspecialchars($addresses_infos['wallet_tag']) . '</small></span>' 
+                                    : '')
+                            ?>
+                          </td>
+                          <td>
+                            <?php if (isset($addresses_infos['qrcode']) && $addresses_infos['qrcode'] !== null): ?>
+                                <img src="../assets/user-uploads/<?= $addresses_infos['qrcode']; ?>" alt="QRCode" width="30px" height="30px">
+                            <?php endif; ?>
+                        </td>
+                        </tr>
+                        <?php $serial_number++; endforeach; ?>
+                        <?php else: ?>
+                          </tbody>
+                          <tr>
+                              <td colspan="8">No wallet information found</td>
+                          </tr>
+                      <?php endif; ?>
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               </div>

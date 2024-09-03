@@ -18,20 +18,7 @@
                       <span>XTrade Security&nbsp;<i class="icofont-chart-line"></i>&nbsp; Investment</span>
                     </a>
                   </div>
-                  <div class="search">
-                    <form action="#">
-                      <div class="input-group">
-                        <input
-                          type="text"
-                          class="form-control"
-                          placeholder="Search Here"
-                        />
-                        <span class="input-group-text"
-                          ><i class="icofont-search"></i
-                        ></span>
-                      </div>
-                    </form>
-                  </div>
+                  <?php include './include/search-crypto.php';?>
                 </div>
 
                 <?php include "include/profileHeadRight.php";?>
