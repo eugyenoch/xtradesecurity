@@ -432,6 +432,151 @@ function getTotalApprovedFundAmount() {
     return "$" . number_format($row['total_funded'] ?? 0, 2);
 }
 
+function getTotalApprovedTransferForSeller() {
+    // Assuming you have a database connection established
+    global $con;
+
+    // Get the logged-in user's email or username from session
+    $userEmail = isset($_SESSION['user_session']) ? $_SESSION['user_session'] : null;
+
+    // Prepare the SQL query
+    $sql = "SELECT SUM(seller_amount) AS total_auto_approved 
+            FROM peer_transfer 
+            WHERE (seller_email = ? OR seller_username = ?) 
+            AND pstatus = 'auto approved'";
+
+    // Prepare and execute the statement
+    $stmt = $con->prepare($sql);
+    if ($stmt === false) {
+        // Handle SQL preparation error
+        error_log('SQL Prepare Error: ' . $con->error);
+        return "Error preparing the SQL query.";
+    }
+    
+    $stmt->bind_param("ss", $userEmail, $userEmail);
+    $stmt->execute();
+
+    // Get the result
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+
+    // Close the statement
+    $stmt->close();
+
+    // Return the total amount or 0 if no results found
+    $totalSold = $row['total_auto_approved'] ?? 0;
+    return "$" . number_format($totalSold, 2);
+}
+
+
+function getTotalApprovedTransferP2PForSeller() {
+    // Assuming you have a database connection established
+    global $con;
+
+    // Get the logged-in user's email or username from session
+    $userEmail = isset($_SESSION['user_session']) ? $_SESSION['user_session'] : null;
+
+    // Prepare the SQL query
+    $sql = "SELECT SUM(seller_amount) AS total_sold 
+            FROM peer_transfer 
+            WHERE (seller_email = ? OR seller_username = ?) 
+            AND pstatus = 'approved'";
+
+    // Prepare and execute the statement
+    $stmt = $con->prepare($sql);
+    if ($stmt === false) {
+        // Handle SQL preparation error
+        error_log('SQL Prepare Error: ' . $con->error);
+        return "Error preparing the SQL query.";
+    }
+    
+    $stmt->bind_param("ss", $userEmail, $userEmail);
+    $stmt->execute();
+
+    // Get the result
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+
+    // Close the statement
+    $stmt->close();
+
+    // Return the total amount or 0 if no results found
+    $totalSold = $row['total_sold'] ?? 0;
+    return "$" . number_format($totalSold, 2);
+}
+
+function getTotalApprovedTransferForBuyer() {
+    // Assuming you have a database connection established
+    global $con;
+
+    // Get the logged-in user's email or username from session
+    $userEmail = isset($_SESSION['user_session']) ? $_SESSION['user_session'] : null;
+
+    // Prepare the SQL query
+    $sql = "SELECT SUM(buyer_amount) AS buyer_auto_approved 
+            FROM peer_transfer 
+            WHERE (buyer_email = ? OR buyer_username = ?) 
+            AND pstatus = 'auto approved'";
+
+    // Prepare and execute the statement
+    $stmt = $con->prepare($sql);
+    if ($stmt === false) {
+        // Handle SQL preparation error
+        error_log('SQL Prepare Error: ' . $con->error);
+        return "Error preparing the buyer total amount SQL query.";
+    }
+
+    $stmt->bind_param("ss", $userEmail, $userEmail);
+    $stmt->execute();
+
+    // Get the result
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+
+    // Close the statement
+    $stmt->close();
+
+    // Return the total amount or 0 if no results found
+    $totalApproved = $row['buyer_auto_approved'] ?? 0;
+    return "$" . number_format($totalApproved, 2);
+}
+
+function getTotalApprovedTransferP2PForBuyer() {
+    // Assuming you have a database connection established
+    global $con;
+
+    // Get the logged-in user's email or username from session
+    $userEmail = isset($_SESSION['user_session']) ? $_SESSION['user_session'] : null;
+
+    // Prepare the SQL query
+    $sql = "SELECT SUM(buyer_amount) AS total_buyer_sold 
+            FROM peer_transfer 
+            WHERE (buyer_email = ? OR buyer_username = ?) 
+            AND pstatus = 'approved'";
+
+    // Prepare and execute the statement
+    $stmt = $con->prepare($sql);
+    if ($stmt === false) {
+        // Handle SQL preparation error
+        error_log('SQL Prepare Error: ' . $con->error);
+        return "Error preparing the SQL query.";
+    }
+    
+    $stmt->bind_param("ss", $userEmail, $userEmail);
+    $stmt->execute();
+
+    // Get the result
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+
+    // Close the statement
+    $stmt->close();
+
+    // Return the total amount or 0 if no results found
+    $totalSold = $row['total_buyer_sold'] ?? 0;
+    return "$" . number_format($totalSold, 2);
+}
+
 //GET TOTAL APPROVED FUNDING INTEREST EARNED FOR A SINGLE USER
 function getTotalApprovedFundInterest() {
     // Assuming you have a database connection established
@@ -531,41 +676,6 @@ function countUserP2PTrades($con, $user_p2p_count) {
     return $referral_count;
 }
 
-//CALCULATE USER TOTAL BALANCE
-function calculateUserTotalBalance() {
-    // Define an array of functions to call and their corresponding labels
-    $balanceComponents = [
-        'Funded' => 'getTotalApprovedFundAmount',
-        'Investment' => 'getTotalApprovedTransactionAmount',
-        'InvestmentProfit' => 'getTotalApprovedTransactionProfit',
-        'Withdrawn' => 'getTotalApprovedWithdrawAmount'
-    ];
-
-    $balanceValues = [];
-    
-    // Calculate each component of the balance
-    foreach ($balanceComponents as $key => $func) {
-        if (function_exists($func)) {
-            // Call the function and ensure the result is numeric
-            $result = $func();
-            // Ensure the result is stripped of formatting and converted to a float
-            $balanceValues[$key] = floatval(preg_replace('/[^\d.]/', '', $result));
-        } else {
-            error_log("Function $func does not exist.");
-            $balanceValues[$key] = 0;
-        }
-    }
-
-    // Calculate the total balance
-    $totalBalance = $balanceValues['Funded'] 
-                  + $balanceValues['InvestmentProfit'] 
-                  - $balanceValues['Investment'] 
-                  - $balanceValues['Withdrawn'];
-                  
-    // Return the total balance formatted as a currency
-    return "$" . number_format($totalBalance, 2);
-}
-
 //Fetch all from funds for currently logged in user
 function fetchFunds($con, $userEmail) {
     $sql_funds = "SELECT * FROM fund WHERE user_email = ? OR userName = ?";
@@ -629,6 +739,49 @@ function calculateAndUpdateTransactionProfit($con, $transactions_info) {
     }
 }
 
+//CALCULATE USER TOTAL BALANCE
+function calculateUserTotalBalance() {
+    // Define an array of functions to call and their corresponding labels
+    $balanceComponents = [
+        'Funded' => 'getTotalApprovedFundAmount',
+        'Investment' => 'getTotalApprovedTransactionAmount',
+        'InvestmentProfit' => 'getTotalApprovedTransactionProfit',
+        'Withdrawn' => 'getTotalApprovedWithdrawAmount',
+        'moneyTransfer' => 'getTotalApprovedTransferForSeller',
+        'p2pTransfer' => 'getTotalApprovedTransferP2PForSeller',
+        'moneyReceived' => 'getTotalApprovedTransferForBuyer',
+        'p2pReceived' => 'getTotalApprovedTransferP2PForBuyer'
+    ];
+
+    $balanceValues = [];
+    
+    // Calculate each component of the balance
+    foreach ($balanceComponents as $key => $func) {
+        if (function_exists($func)) {
+            // Call the function and ensure the result is numeric
+            $result = $func();
+            // Ensure the result is stripped of formatting and converted to a float
+            $balanceValues[$key] = floatval(preg_replace('/[^\d.]/', '', $result));
+        } else {
+            error_log("Function $func does not exist.");
+            $balanceValues[$key] = 0;
+        }
+    }
+
+    // Calculate the total balance
+    $totalBalance = $balanceValues['Funded'] 
+                  + $balanceValues['InvestmentProfit'] 
+                  + $balanceValues['moneyReceived']
+                  + $balanceValues['p2pReceived']
+                  - $balanceValues['Investment']
+                  - $balanceValues['moneyTransfer']
+                  - $balanceValues['p2pTransfer'] 
+                  - $balanceValues['Withdrawn'];
+                  
+    // Return the total balance formatted as a currency
+    return "$" . number_format($totalBalance, 2);
+}
+
 //Get the users browser information
 function get_browser_info($userAgent) {
     $browser = "Unknown Browser";
@@ -680,8 +833,12 @@ function get_user_ip() {
     return explode(',', $ip)[0];
 }
 
-// Example usage
-$userIp = get_user_ip();
-
+function generateRandomWalletAddress($length = 40) {
+    // Ensure length of the random part matches desired length
+    $randomHex = bin2hex(random_bytes($length / 2)); // Length divided by 2 because each byte gives 2 hex characters
+    
+    // Prefix with 'xt' to mimic wallet addresses
+    return 'xt' . strtoupper($randomHex);
+}
 
 ?>

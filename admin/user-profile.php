@@ -81,7 +81,33 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
           <div class="col-12">
             <div class="header__body d-flex justify-content-between">
               <div class="header__left">
-              <?php include "../include/logo.php"; ?>
+              <div class="logo">
+                  <a class="light" href="../index.php">
+                    <img
+                      id="site-logo"
+                      src="../assets/images/logo/favicon.png"
+                      alt=""
+                      width="25"
+                      height="25"
+                      data-retina="../assets/images/logo/favicon@2x.png"
+                      data-width="25"
+                      data-height="25"
+                    />
+                    <big><strong>xTradeSecurity</strong></big>
+                  </a>
+                  <a class="dark" href="../index.php">
+                    <img
+                      src="../assets/images/logo/favicon.png"
+                      alt=""
+                      width="25"
+                      height="25"
+                      data-retina="../assets/images/logo/favicon@2x.png"
+                      data-width="25"
+                      data-height="25"
+                    />
+                    <big><strong>xTradeSecurity</strong></big>
+                  </a>
+              </div>
                 <div class="left__main">
                 <?php include "include/nav.php";?>
                   <!-- /#main-nav -->
@@ -169,7 +195,10 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
                 <h6 class="fs-16"><i class="fa fa-credit-card-alt text-warning" aria-hidden="true"></i>&nbsp;Withdrawal Requests</h6>
               </li>
               <li>
-                <h6 class="fs-16"><i class="fa fa-bar-chart text-warning" aria-hidden="true"></i>&nbsp;Transactions</h6>
+                <h6 class="fs-16"><i class="fa fa-piggy-bank text-warning" aria-hidden="true"></i>&nbsp;Investments</h6>
+              </li>
+              <li>
+                <h6 class="fs-16"><i class="fa fa-bar-chart text-warning" aria-hidden="true"></i>&nbsp;Transfers</h6>
               </li>
               <li>
                 <h6 class="fs-16"><i class="fa fa-newspaper text-warning" aria-hidden="true"></i>&nbsp;Newsletter</h6>
@@ -962,10 +991,10 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
 
                 <!-- TRANSACTION SECTION BEGINS -->
               <div class="content-inner transaction" id="transaction">
-                <h6>Transaction Requests</h6>
+                <h6>Investment Subscription Requests</h6>
                 <h4>Fund Management<span>&nbsp;System</span></h4>
                 <p>
-                This page show you all the transaction requests, related to trade, that have been made on your website. From here you can approve and edit these transactions. 
+                This page show you all the transaction requests, related to investment, that have been made on your website. From here you can approve and edit these investments
                 This page is for record and editing purposes and is intended for admin use only.
                 </p>
                 <div class="main">
@@ -1071,6 +1100,101 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
                 </div>
               </div>
                 <!-- TRANSACTION SECTION ENDS -->
+
+
+                 <!-- TRANSFER SECTION BEGINS -->
+              <div class="content-inner transaction" id="transaction">
+                <h6>Transfer Requests</h6>
+                <h4>Fund Management<span>&nbsp;System</span></h4>
+                <p>
+                This page show you all the transfer requests, related to user fund transfers and P2P transfers, that have been made on your website. From here you can approve and edit these transfers
+                This page is for record and editing purposes and is intended for admin use only.
+                </p>
+                <div class="main">
+                <div class="card-body">
+                <div class="table-responsive">
+                <table class="table caption-top table-striped table-hover responsive-table" id="transactionTable">
+                  <thead>
+                      <tr class="table-secondary">
+                        <th>ID</th>
+                        <th>Sender Email</th>
+                        <th>Sender Wallet</th>
+                        <th>Recipient Email</th>
+                        <th>Recipient Wallet</th>
+                        <th>Amount Sent</th>
+                        <th>Amount Received</th>
+                        <th>Role</th>
+                        <th>Status</th>
+                        <th>Message</th>
+                        <th>Date</th>
+                        <th>Delete</th>
+                      </tr>
+                  </thead>
+                  <tfoot>
+                      <tr class="table-secondary">
+                      <th>ID</th>
+                        <th>Sender Email</th>
+                        <th>Sender Wallet</th>
+                        <th>Recipient Email</th>
+                        <th>Recipient Wallet</th>
+                        <th>Amount Sent</th>
+                        <th>Amount Received</th>
+                        <th>Role</th>
+                        <th>Status</th>
+                        <th>Message</th>
+                        <th>Date</th>
+                        <th>Delete</th>
+                      </tr>
+                  </tfoot>
+                  <tbody>
+                  <?php $sql_transfers = "SELECT * FROM peer_transfer"; $sql_transfers_exec = $con->query($sql_transfers); 
+                  if($sql_transfers_exec->num_rows > 0): ?>
+                <?php foreach($sql_transfers_exec as $transfers_info): 
+                      ?>
+                    <tr>
+                        <td class="coin-name"><?= htmlspecialchars($transfers_info['ptxn']); ?></td>
+                        <td class="coin-name"><?= htmlspecialchars($transfers_info['seller_email']) . '<br>@'. htmlspecialchars($transfers_info['seller_username']); ?></td>
+                        <td class="coin-name"><?= $transfers_info['seller_wallet']; ?></td>
+                        <td class="coin-name"><?= $transfers_info['buyer_email'] . '<br>@'. $transfers_info['buyer_username']; ?></td>
+                        <td class="coin-name"><?= $transfers_info['buyer_wallet']; ?></td>
+                        <td class="coin-name"><?= number_format($transfers_info['seller_amount'],2) . $transfers_info['first_currency']; ?></td>
+                        <td class="coin-name"><?= number_format($transfers_info['buyer_amount'],2) . $transfers_info['second_currency']; ?></td>
+                        <td class="coin-name"><?= $transfers_info['prole']; ?></td>
+                        <td class="coin-name">
+                        <span class='fs-6'><strong><?= $transfers_info['pstatus'] ?></strong></span><br>
+                            <?php if ($transfers_info['pstatus'] === 'pending'): ?>
+                                <a href="confirmOperation.php?atrade=<?= urlencode($transfers_info['id_no']); ?>">
+                                    <span class="btn btn-outline-info badge badge-outline badge-danger badge-md">Approve</span>
+                                </a>
+                            <?php elseif ($transfers_info['pstatus'] === 'approved'): ?>
+                                <a href="confirmOperation.php?dtrade=<?= urlencode($transfers_info['id_no']); ?>">
+                                    <span class="btn btn-outline-warning badge badge-outline badge-danger badge-md">Disapprove</span>
+                                </a>
+                            <?php endif; ?>
+                        </td>
+
+                        <td class="coin-name"><?= $transfers_info['recipient_message']; ?></td>
+                        <td class="coin-name"><?= $transfers_info['peer_transact_date']; ?></td>
+                        <td class="coin-name">
+                            <a title="Delete Transaction:&nbsp;<?=$transfers_info['ptxn'];?>" href="confirmOperation.php?trade=<?= $transfers_info['id_no']; ?>" class="dt-type-md">
+                                <span class="btn btn-outline-danger badge badge-outline badge-danger badge-md">Delete</span>
+                            </a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+                <?php else: ?>
+                 </tbody>
+                <tr>
+                    <!-- <td colspan="8">No transfer information found</td> -->
+                </tr>
+            <?php endif; ?>
+        </tbody>     
+                </table>
+                </div>
+                </div>
+                </div>
+              </div>
+                <!-- TRANSFER SECTION ENDS -->
 
                 <!-- NEWSLETTER SECTION BEGINS -->
               <div class="content-inner newsletter" id="newsletter">

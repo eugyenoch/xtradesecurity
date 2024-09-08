@@ -17,5 +17,19 @@ checkUserLogin();
           </script>";
   }
 
+//CONFIRM Bank DELETE
+if (isset($_GET['dba']) && !empty($_GET['dba'])) {
+  $dba = $con->real_escape_string($_GET['dba']);
+
+  // Confirm deletion with the user
+  echo "<script>
+          if (confirm('Are you sure you want to permanently delete this record?')) {
+              window.location.href = 'walletProcessor.php?confirmDeleteBank=" . $dba . "';
+          } else {
+              window.location.href = 'wallet.php';
+          }
+        </script>";
+}
+
 
 ?>

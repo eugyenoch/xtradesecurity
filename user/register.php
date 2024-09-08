@@ -14,6 +14,9 @@ require '../vendor/autoload.php';
 
 $config = require_once '../emailConfig.php';
 
+// Generate a wallet address of 40 characters in length (excluding the "xt" prefix)
+$internalWallet = generateRandomWalletAddress();
+
 // Initialize the toast variable
 $toast = '';
 
@@ -79,13 +82,13 @@ if (isset($_POST['addUser'])) {
               $toast = "checkEmail";
           } else {
               // Prepare the SQL query to insert the new user
-              $sql = "INSERT INTO users (firstname, lastname, user_email, userName, user_pass, address, city, country, phone, affid, verification_token, is_verified)
-                      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)";
+              $sql = "INSERT INTO users (firstname, lastname, user_email, userName, user_pass, address, city, country, phone, affid, asset_address, verification_token, is_verified)
+                      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)";
 
               // Initialize a statement
               $stmt = $con->prepare($sql);
               // Bind the parameters
-              $stmt->bind_param("sssssssssss", $firstname, $lastname, $email, $username, $password, $address, $city, $country, $mobile_phone, $affid, $verification_token);
+              $stmt->bind_param("ssssssssssss", $firstname, $lastname, $email, $username, $password, $address, $city, $country, $mobile_phone, $affid, $internalWallet, $verification_token);
 
               // Execute the statement
               if ($stmt->execute()) {

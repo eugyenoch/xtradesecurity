@@ -30,7 +30,7 @@
     <script src="./vendor/slick/slick.min.js"></script>
     <script src="./js/plugins/slick-init.js"></script>
     <script src="./js/scripts.js"></script> 
-    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <!-- <script src="https://unpkg.com/@popperjs/core@2"></script> -->
 
     <script src="../app/js/coindata.js"></script>
     <!--ChartJS -->
@@ -54,7 +54,7 @@
       <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js"></script>
       
       <!--Custom JS for custom JS -->
-    <script type="text/javascript" src="../app/js/custom-scripts.js"></script>
+    <!-- <script type="text/javascript" src="../app/js/custom-scripts.js"></script> -->
 
      <!--Toastr-->
      <script type="text/javascript" src="../app/js/toastr.min.js"></script>
@@ -93,7 +93,7 @@
           {extend: 'pdf', text: 'PDF', className: 'btn btn-primary text-white'},{extend: 'pageLength', text:'Show', className: 'btn btn-primary text-white'}
         ]
     });
-    $('#investmentTable').DataTable({
+    $('#userInvestmentTable').DataTable({
         dom: 'Bfrtip',
         buttons: [
           {extend: 'print', text: 'Print', className: 'btn btn-primary text-white'},{extend: 'copy', text: 'Copy', className: 'btn btn-primary text-white'},
@@ -102,6 +102,14 @@
         ]
     });
     $('#userWalletTable').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+          {extend: 'print', text: 'Print', className: 'btn btn-primary text-white'},{extend: 'copy', text: 'Copy', className: 'btn btn-primary text-white'},
+          {extend: 'excel', text: 'Excel', className: 'btn btn-primary text-white'},{extend: 'csv', text: 'CSV', className: 'btn btn-primary text-white'},
+          {extend: 'pdf', text: 'PDF', className: 'btn btn-primary text-white'},{extend: 'pageLength', text:'Show', className: 'btn btn-primary text-white'}
+        ]
+    });
+    $('#userTransferTable').DataTable({
         dom: 'Bfrtip',
         buttons: [
           {extend: 'print', text: 'Print', className: 'btn btn-primary text-white'},{extend: 'copy', text: 'Copy', className: 'btn btn-primary text-white'},
@@ -119,19 +127,27 @@
     });
 });
 
-//Upload Proof Script
-$(document).ready(function() {
-    $('#upload-proof').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget); // Button that triggered the modal
-        var ftxn = button.data('ftxn'); // Extract info from data-* attributes
-        var modal = $(this);
+// Upload Proof Script
+document.addEventListener('DOMContentLoaded', function() {
+    var uploadProofModal = document.getElementById('upload-proof');
+    if (uploadProofModal) {
+        uploadProofModal.addEventListener('show.bs.modal', function (event) {
+            var button = event.relatedTarget; // Button that triggered the modal
+            var ftxn = button.getAttribute('data-ftxn'); // Extract info from data-* attributes
 
-        // Set the value of the hidden input
-        modal.find('.modal-body input[name="utxn"]').val(ftxn);
+            // Set the value of the hidden input
+            var inputElement = this.querySelector('.modal-body input[name="utxn"]');
+            if (inputElement) {
+                inputElement.value = ftxn;
+            }
 
-        // Set the content of the span
-        modal.find('.modal-body span[name="utxn"]').text(ftxn);
-    });
+            // Set the content of the span
+            var spanElement = this.querySelector('.modal-body span[name="utxn"]');
+            if (spanElement) {
+                spanElement.textContent = ftxn;
+            }
+        });
+    }
 });
 
 //Display QR code section and Wallet address
@@ -152,6 +168,24 @@ $(document).ready(function() {
 
     // Hide the wallet details section initially
     $('#walletDetails').hide();
+
+});
+
+// Copy to clipboard functionality
+document.getElementById("copyButton").addEventListener("click", function() {
+    var copyText = document.getElementById("wallet_address").value.trim();
+
+    if (copyText === "") {
+        alert("No wallet address to copy.");
+        return;
+    }
+
+    navigator.clipboard.writeText(copyText).then(function() {
+        alert("Copied to clipboard: " + copyText);
+        document.getElementById("copiedText").innerText = "Copied: " + copyText;
+    }).catch(function(error) {
+        alert("Failed to copy text: " + error.message);
+    });
 });
 
 function featureNotAvailable(){
@@ -169,7 +203,7 @@ var userBalance = <?php echo isset($userBalance) ? floatval(preg_replace('/[^\d.
 
 var ctx2 = document.getElementById('moneyChart').getContext('2d');
 var moneyChart = new Chart(ctx2, {
-    type: 'line',
+    type: 'bar',
     data: {
         labels: ['Funded','Profit','Investments','Withdrawal','Balance'],
         datasets: [{
@@ -260,8 +294,6 @@ var moneyChart = new Chart(ctx2, {
         console.log("Wallet details removed from localStorage");
     }
 </script>
-
-
 
 <!-- Google Translate -->
 <script type="text/javascript">

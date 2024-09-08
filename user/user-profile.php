@@ -182,7 +182,7 @@
                   <div class="row align-items-center">
                     <div class="col-xxl-6 col-xl-6 col-lg-6">
                       <div class="balance-chart">
-                        <canvas id="moneyChart" width="200" height="100"></canvas>
+                        <canvas id="moneyChart" width="200" height="170"></canvas>
                         <h5><?php if(isset($_SESSION['user_session'])) {$userBalance = calculateUserTotalBalance();
                             echo "Total Balance:&nbsp;<span title='Total Balance (TB) as approved'>". $userBalance ."</span>";
                         } else {
@@ -366,7 +366,7 @@
             <div class="col-xxl-4 col-xl-4">
               <div class="card" style="overflow-y: auto;">
                 <div class="card-header">
-                  <h4 class="card-title">Position Valuation and Trade Balances</h4>
+                  <h4 class="card-title">Position Valuation and Trade Balances (available soon)</h4>
                 </div>
                 <div class="card-body">
                   <ul class="balance-widget position-value">

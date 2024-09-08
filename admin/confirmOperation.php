@@ -190,20 +190,20 @@ if (isset($_GET['atr']) && !empty($_GET['atr'])) {
           </script>";
   }
 
-//TRADE
-//CONFIRM TRADE REQUEST DELETE
-// if (isset($_GET['trade']) && !empty($_GET['trade'])) {
-//     $trade = $con->real_escape_string($_GET['trade']);
+//TRANSFER
+//CONFIRM TRANSFER REQUEST DELETE
+if (isset($_GET['trade']) && !empty($_GET['trade'])) {
+    $trade = $con->real_escape_string($_GET['trade']);
   
-//     // Confirm deletion with the user
-//     echo "<script>
-//             if (confirm('Are you sure you want to permanently delete this record?')) {
-//                 window.location.href = 'finance.php?deleteTrade=" . $trade . "';
-//             } else {
-//                 window.location.href = 'user-profile.php';
-//             }
-//           </script>";
-//   }
+    // Confirm deletion with the user
+    echo "<script>
+            if (confirm('Are you sure you want to permanently delete this record?')) {
+                window.location.href = 'finance.php?deleteTrade=" . $trade . "';
+            } else {
+                window.location.href = 'user-profile.php';
+            }
+          </script>";
+  }
 
   //CONFIRM TRADE REQUEST APPROVE
 if (isset($_GET['atrade']) && !empty($_GET['atrade'])) {
@@ -212,7 +212,7 @@ if (isset($_GET['atrade']) && !empty($_GET['atrade'])) {
     // Confirm deletion with the user
     echo "<script>
             if (confirm('Are you sure you want to approve this record?')) {
-                window.location.href = 'finance.php?approveTrade =" . $atrade . "';
+                window.location.href = 'finance.php?approveTrade=" . $atrade . "';
             } else {
                 window.location.href = 'user-profile.php';
             }
@@ -226,7 +226,7 @@ if (isset($_GET['atrade']) && !empty($_GET['atrade'])) {
     // Confirm deletion with the user
     echo "<script>
             if (confirm('Are you sure you want to disapprove this record?')) {
-                window.location.href = 'finance.php?disapproveTrade =" . $dtrade . "';
+                window.location.href = 'finance.php?disapproveTrade=" . $dtrade . "';
             } else {
                 window.location.href = 'user-profile.php';
             }

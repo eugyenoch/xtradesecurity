@@ -177,7 +177,45 @@ if (isset($_POST['updateTransaction'])) {
     }
     
 }
-    
+
+//TRADE
+//DELETE TRADE OR TRANSFER REQUEST
+if (isset($_GET['deleteTrade']) && !empty($_GET['deleteTrade'])) {
+    $deleteTrade = $con->real_escape_string($_GET['deleteTrade']);
+    //Prepare statement
+    $stmt = $con->prepare("DELETE FROM peer_transfer WHERE id_no = ?");
+    $stmt->bind_param("s", $deleteTrade);
+
+    if ($stmt->execute()) {
+        echo "<script>alert('Success: Transaction deleted successfully'); window.location='user-profile.php';</script>";
+    } else {
+        echo "<script>alert('Error: The operation could not be performed'); window.location='user-profile.php';</script>";
+    }
+}
+
+//APPROVE TRADE OR TRANSFER
+if (isset($_GET['approveTrade']) && !empty($_GET['approveTrade'])) {
+    $approveTrade = $con->real_escape_string($_GET['approveTrade']);
+    $approve_trade ="UPDATE peer_transfer SET pstatus='approved' WHERE id_no = '$approveTrade'";
+    if ($con->query($approve_trade) === TRUE) {
+        echo "<script>alert('Success:Transaction Approved'); window.location='user-profile.php';</script>";
+    } else {
+        echo "<script>alert('Error: The operation could not be performed'); window.location='user-profile.php';</script>";
+    }
+}
+
+//DISAPPROVE TRANSACTION
+if (isset($_GET['disapproveTrade']) && !empty($_GET['disapproveTrade'])) {
+    $disapproveTrade = $con->real_escape_string($_GET['disapproveTrade']);
+    $disapprove_trade = "UPDATE peer_transfer SET pstatus='pending' WHERE id_no = '$disapproveTrade'";
+    if ($con->query($disapprove_trade) === TRUE) {
+        echo "<script>alert('Success: Transaction Disapproved'); window.location='user-profile.php';</script>";
+    } else {
+        echo "<script>alert('Error: The operation could not be performed'); window.location='user-profile.php';</script>";
+    }
+}
+
+
      // Close the database connection
      $con->close();
 ?>

@@ -10,7 +10,7 @@
             </div>
             <div class="modal-body">
                 <form id="editWalletForm" action="walletProcessor.php" enctype="multipart/form-data" method="post">
-                    <input type="hidden" id="editId" name="id_no" value="<?php ?>">
+                    <input type="hidden" id="editId" name="id_no" value="">
                     <div class="form-group">
                         <label for="editWallet">Wallet</label>
                         <select class="form-control" id="selectCurrency" name="wallet"><?php include "../include/selectCurrency.html";?></select>

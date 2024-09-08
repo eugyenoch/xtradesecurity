@@ -11,10 +11,10 @@ $currentPrices = fetchCryptoData('https://api.coingecko.com/api/v3/simple/price?
 
 // Fetch user details from the database
 $userEmail = $_SESSION['user_session'];
-$stmt = $con->prepare("SELECT firstname, lastname, phone, user_email, userName, address, city, country, phone, photo, affid, reg_date, is_verified FROM users WHERE user_email = ? OR userName = ? ");
+$stmt = $con->prepare("SELECT firstname, lastname, phone, user_email, userName, address, city, country, phone, photo, affid, asset_address, reg_date, is_verified FROM users WHERE user_email = ? OR userName = ? ");
 $stmt->bind_param("ss", $userEmail, $userEmail);
 $stmt->execute();
-$stmt->bind_result($firstname, $lastname, $phone, $user_email, $userName, $address, $city, $country, $phone, $photoPath, $affid, $reg_date, $is_verified);
+$stmt->bind_result($firstname, $lastname, $phone, $user_email, $userName, $address, $city, $country, $phone, $photoPath, $affid, $asset_address, $reg_date, $is_verified);
 $stmt->fetch();
 $stmt->close();
 
@@ -26,12 +26,16 @@ $_SESSION['user_firstname'] = $firstname;
 $_SESSION['user_lastname'] = $lastname;
 $_SESSION['user_email'] = $user_email;
 $_SESSION['user_username'] = $userName;
+$_SESSION['asset_address'] = $asset_address;
 $_SESSION['start_time'] = date("Y-m-d H:i:s");
 $_SESSION['user_profile_pic'] = $profilePicUrl;
 $_SESSION['browser'] = $_SERVER['HTTP_USER_AGENT'];
 $_SESSION['ip_address'] = get_user_ip();
 //$_SESSION['near'] = "Your Location Logic Here"; // You might use a service like GeoIP to determine this
 $_SESSION['current'] = true; // Logic to determine if the current session is active
+
+// Example usage
+$userIp = get_user_ip();
 
 // Browser info from previous response
 $shortBrowserInfo = get_browser_info($_SERVER['HTTP_USER_AGENT']);
@@ -248,5 +252,12 @@ $stmt->close();
   .modal-backdrop {
 /* bug fix - no overlay */    
 display: none;}
+
+.copiedText {
+    color: green;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
   </style>
 </head>

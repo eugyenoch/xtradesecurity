@@ -21,13 +21,11 @@
 
                     <div class="input-item input-with-label">
                         <label for="formComment" class="input-item-label">Comment</label>
-                        <textarea id="formComment" class="form-control" name="comment" rows="3" placeholder="Not more than 500 words preferably" maxlength="500"></textarea>
+                        <textarea id="formComment" class="form-control" name="comment" rows="3" placeholder="Not more than 200 words, preferably" maxlength="200"></textarea>
                         <small>Anything you will love us to know should go into the comments.</small>
                     </div>
                     <div class="modal-footer">
-                    <button type="submit" class="btn btn-outline-warning btn-between" name="proofUpload">
-                        Proceed <i class="fa fa-forward"></i>
-                    </button>
+                    <button type="submit" class="btn btn-outline-warning btn-between" name="proofUpload">Proceed <i class="fa fa-forward"></i></button>
                     <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
                     </div>
                 </form>
@@ -598,7 +596,7 @@
                 </a>
         </div>
                 <div class="modal-body">
-                    <p>Use this form to deposit funds into your account</p>
+                    <p>Use this form to request funds deposit into your account</p>
                     <form method="POST" action="<?= htmlspecialchars($_SERVER['PHP_SELF']); ?>" name="fundingRequestForm">
                   <div class="form-group">
                       <input type="hidden" name="ftxn" value="<?= 'TXN' . mt_rand(100000, 999999); ?>" readonly>
@@ -634,7 +632,8 @@
                     <div class="form-group mb-3">
                         <label for="wallet_address" class="form-label">Wallet Address to pay to</label>
                         <input type="text" class="form-control" id="wallet_address" name="wallet_address" readonly>
-                        <button type="button" class="btn btn-outline-secondary mt-2" onclick="copyWalletAddress()">Copy Address</button>
+                        <button type="button" class="btn btn-outline-secondary mt-2" id="copyButton">Copy Address</button>
+                            <p id="copiedText" class="mt-2"></p>
                     </div>
                     <div class="form-group mb-3">
                         <label for="qrcode" class="form-label">QR Code</label><br>
@@ -657,6 +656,84 @@
     </div>
     <!-- Modal End -->
 
+     <!--LOCK FUND FORM-->
+<div class="modal fade sho d-bloc" id="lockFund" tabindex="-1" aria-labelledby="lockFundModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-sm modal-dialog-centered">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h6>Lock Funds For Up To 1 year, Earn 40% to 65% Guaranteed Yield(in Beta)</span></h6>
+                <a href="#" class="modal-close" data-dismiss="modal" aria-label="Close">
+                    <span class="btn-close badge bg-outline-warning p-2 fs-4">&times;</span>
+                </a>
+        </div>
+                <div class="modal-body">
+                <p>Use this form to request our guaranteed high-yield premium savings fund lock. <br>Make sure you have enough balanceas a fund request above your available balance will fail.</p>  
+                <div class="wallet-widget card">
+                        <h5 title="User Total Balance (TB)">Your Available Balance</h5>
+                        <h4><span class="text-primary">
+                        <?php if(isset($_SESSION['user_session'])) {$userBalance = calculateUserTotalBalance();
+                                    echo "&nbsp;<span title='Total Balance (TB) as approved'>". $userBalance ."</span>";
+                                } else {echo "&nbsp;<span title='Total Balance (TB) as approved'>$0.00</span>";}?>
+                                </span><sub>USD</sub>
+                            </h4>
+                        <p>= <?php if(isset($_SESSION['user_session'])){$userBalance = calculateUserTotalBalance(); echo $userBalance . 'USDT';}?> </p>
+                    </div>
+                <form method="POST" action="finance.php" name="lockRequestForm">
+                  <div class="form-group">
+                      <input type="hidden" name="ltxn" value="<?= 'TXN' . mt_rand(100000, 999999); ?>" readonly>
+                      <input type="hidden" name="lfirstname" value="<?php if(isset($firstname)){echo $firstname;}else{echo "User";}?>" readonly>
+                      <input type="hidden" name="llastname" value="<?php if(isset($lastname)){echo $lastname;}else{echo "User";}?>" readonly>  
+                      <input type="hidden" name="lemail" value="<?php if(isset($user_email)){echo $user_email;}else{echo "User";}?>" readonly>
+                      <input type="hidden" name="lusername" value="<?php if(isset($userName)){echo $userName;}else{echo "User";}?>" readonly>    
+                  </div>
+
+                  <div class="form-group mb-3">
+                      <label for="amount" class="form-label">Amount</label>
+                      <input type="number" class="form-control" id="amount" name="lock_amount" placeholder="Enter amount" min="1000" required>
+                      <small>Minimum Lock ($1,000), and, High-Yield Guaranteed(up t0 65% per annum).</small>
+                  </div>
+                  
+                  <div class="form-group mb-3">
+                      <label for="lock_currency" class="form-label">Select currency</label>
+                      <select class="form-select" id="lock_currency" name="lock_currency" required>
+                          <option value="">Choose a currency</option>
+                          <?php foreach(fetchAllUserWalletAddresses($con, $user_email) as $uniqueWallet): ?>
+                            <option value="<?= htmlspecialchars($uniqueWallet['wallet']) ?>">
+                                <?= htmlspecialchars($uniqueWallet['wallet']) ?>
+                                <?php if (!empty($uniqueWallet['wallet_tag'])): ?>
+                                    &nbsp;(<?= htmlspecialchars($uniqueWallet['wallet_tag']) ?>)
+                                <?php endif; ?>
+                            </option>
+                        <?php endforeach; ?>
+                      </select>
+                  </div>
+
+                  <div class="form-group mb-3">
+                      <label for="lock_address" class="form-label">Wallet Address</label>
+                      <!-- <input type="text" class="form-control" id="amount" name="waddress" placeholder="Enter your wallet address" required> -->
+                      <select class="form-select" id="lock_address" name="lock_address" required>
+                          <option value="">Choose wallet</option>
+                          <?php foreach(fetchAllUserWalletAddresses($con, $user_email) as $uniqueAddress): ?>
+                            <option value="<?= htmlspecialchars($uniqueAddress['address']) ?>">
+                                <?= htmlspecialchars($uniqueAddress['address']); ?>
+                            </option>
+                        <?php endforeach; ?>
+                      </select>
+                  </div>
+                  <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary" name="lock">Proceed <i class="icofont-double-right"></i></button>
+                  <button type="reset" class="btn btn-outline-primary" name="resetData">Clear Data</button>
+                  </div>
+              </form>
+
+                </div>
+            </div>
+            <!-- .modal-content -->
+        </div>
+        <!-- .modal-dialog -->
+    </div>
+    <!-- Modal End -->
+
      <!--WITHDRAW FUND FORM-->
 <div class="modal fade sho d-bloc" id="withdrawFund" tabindex="-1" aria-labelledby="withdrawFundModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-sm modal-dialog-centered">
@@ -668,7 +745,17 @@
                 </a>
         </div>
                 <div class="modal-body">
-                <p>Use this form to request withdrawal</p>  
+                <p>Use this form to request withdrawal. <br>Make sure you have enough balanceas a withdrawal request above your available balance will fail.</p>  
+                <div class="wallet-widget card">
+                        <h5 title="User Total Balance (TB)">Your Available Balance</h5>
+                        <h4><span class="text-primary">
+                        <?php if(isset($_SESSION['user_session'])) {$userBalance = calculateUserTotalBalance();
+                                    echo "&nbsp;<span title='Total Balance (TB) as approved'>". $userBalance ."</span>";
+                                } else {echo "&nbsp;<span title='Total Balance (TB) as approved'>$0.00</span>";}?>
+                                </span><sub>USD</sub>
+                            </h4>
+                        <p>= <?php if(isset($_SESSION['user_session'])){$userBalance = calculateUserTotalBalance(); echo $userBalance . 'USDT';}?> </p>
+                    </div>
                 <form method="POST" action="finance.php" name="withdrawalRequestForm">
                   <div class="form-group">
                       <input type="hidden" name="wtxn" value="<?= 'TXN' . mt_rand(100000, 999999); ?>" readonly>
@@ -679,12 +766,12 @@
                   </div>
 
                   <div class="form-group mb-3">
-                      <label for="amount" class="form-label">Amount</label>
-                      <input type="number" class="form-control" id="amount" name="wamount" placeholder="Enter amount" min="0" step="0.00001" required>
+                      <label for="wamount" class="form-label">Amount</label>
+                      <input type="number" class="form-control" id="wamount" name="wamount" placeholder="Enter amount" min="0" step="0.001" required>
                   </div>
                   
                   <div class="form-group mb-3">
-                      <label for="currency_id" class="form-label">Select currency</label>
+                      <label for="currency_id2" class="form-label">Select currency</label>
                       <select class="form-select" id="currency_id2" name="wcurrency_id" required>
                           <option value="">Choose a currency</option>
                           <?php foreach(fetchAllUserWalletAddresses($con, $user_email) as $uniqueWallet): ?>
@@ -699,9 +786,9 @@
                   </div>
 
                   <div class="form-group mb-3">
-                      <label for="address" class="form-label">Wallet Address</label>
+                      <label for="waddress" class="form-label">Wallet Address</label>
                       <!-- <input type="text" class="form-control" id="amount" name="waddress" placeholder="Enter your wallet address" required> -->
-                      <select class="form-select" id="amount" name="waddress" required>
+                      <select class="form-select" id="waddress" name="waddress" required>
                           <option value="">Choose wallet</option>
                           <?php foreach(fetchAllUserWalletAddresses($con, $user_email) as $uniqueAddress): ?>
                             <option value="<?= htmlspecialchars($uniqueAddress['address']) ?>">
@@ -712,6 +799,87 @@
                   </div>
                   <div class="modal-footer">
                   <button type="submit" class="btn btn-primary" name="withdraw">Proceed <i class="icofont-double-right"></i></button>
+                  <button type="reset" class="btn btn-outline-primary" name="resetData">Clear Data</button>
+                  </div>
+              </form>
+
+                </div>
+            </div>
+            <!-- .modal-content -->
+        </div>
+        <!-- .modal-dialog -->
+    </div>
+    <!-- Modal End -->
+
+
+<!--TRANSFER FUNDS FORM-->
+<div class="modal fade sho d-bloc" id="transferFund" tabindex="-1" aria-labelledby="transferFundModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-sm modal-dialog-centered">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h6>Transfer Funds</span></h6>
+                <a href="#" class="modal-close" data-dismiss="modal" aria-label="Close">
+                    <span class="btn-close badge bg-outline-warning p-2 fs-4">&times;</span>
+                </a>
+        </div>
+                <div class="modal-body">
+                <p>Use this form to request fund transfer.<br>Make sure you have enough balanceas any attempted transfer above your available balance will fail.</p>
+                <div class="wallet-widget card">
+                        <h5 title="User Total Balance (TB)">Your Available Balance<br>
+                        <span class="text-primary">
+                        <?php if(isset($_SESSION['user_session'])) {$userBalance = calculateUserTotalBalance();
+                                    echo "&nbsp;<span title='Total Balance (TB) as approved'>". $userBalance ."</span>";
+                                } else {echo "&nbsp;<span title='Total Balance (TB) as approved'>$0.00</span>";}?>
+                                </span><sub>USD</sub>
+                            </h5>
+                        <p>= <?php if(isset($_SESSION['user_session'])){$userBalance = calculateUserTotalBalance(); echo $userBalance . 'USDT';}?> </p>
+                        <h6><?php if(isset($asset_address) && $asset_address !=null): ?>
+                            <div class="pt-2">
+                                <p>You only require the registered user email addresses or internal wallet addresses for internal transfers on XTrade.</p>
+                            </div>
+                <?php endif; ?></h6>
+                    </div>
+                <form method="POST" action="walletProcessor.php" name="transferRequestForm">
+                  <div class="form-group">
+                  <input type="hidden" class="form-control" name="senderFirstname" value="<?php if(isset($firstname)){echo $firstname;} ?>" readonly />
+                  <input type="hidden" class="form-control" name="senderLastname" value="<?php if(isset($lastname)){echo $lastname;} ?>" readonly />
+                      <input type="hidden" class="form-control" name="senderUsername" value="<?php if(isset($userName)){echo $userName;} ?>" readonly />
+                      <input type="hidden" class="form-control" id="txnID" name="txnID" value="<?= 'TXN' . mt_rand(100000, 999999); ?>" readony />    
+                  </div>
+
+                  <div class="form-group mb-3">
+                      <label for="sender-email" class="form-label">Sender Email<span class="text-danger">*</span></label>
+                      <input type="email"  id="sender-email" class="form-control" name="senderEmail" value="<?php if(isset($user_email)){echo $user_email;}else{echo "User";}?>" readonly />
+                  </div>
+
+                  <div class="form-group mb-3">
+                      <label for="sender_wallet" class="form-label">Sender wallet<span class="text-danger">*</span></label>
+                      <input type="text"  id="sender_wallet" class="form-control" name="senderWallet" value="<?php if(isset($asset_address)){echo $asset_address;}else{echo "User";}?>" readonly />
+                  </div>
+
+                  <div class="form-group mb-3">
+                      <label for="transfer_curreny" class="form-label">Currency<span class="text-danger">*</span></label>
+                      <input type="text" class="form-control" id="transfer_curreny" name="transferCurreny" value="USDT" title="The USDT is the default site currency and is available for internal transfers"  readonly />
+                  </div>
+
+                  <div class="form-group mb-3">
+                      <label for="amount" class="form-label">Amount<span class="text-danger">*</span></label>
+                      <input type="number" class="form-control" id="amount" name="transferAmount" placeholder="Enter amount" min="1" step="0.001" required />
+                        </div>
+
+                  <div class="form-group mb-3">
+                      <label for="recipient" class="form-label">Recipient email or wallet address<span class="text-danger">*</span></label>
+                      <input type="text" class="form-control" id="recipient" name="recipient" placeholder="Enter correct recipient email or wallet address" required />
+                      <small>Enter the correct recipient email or wallet address to transfer successfully</small>
+                  </div>
+
+                  <div class="form-group mb-3">
+                      <label for="recipientMessage" class="form-label">Message to recipient</label>
+                      <textarea id="recipientMessage" class="form-control" name="recipientMessage" rows="3" placeholder="Not more than 200 words, preferably" maxlength="200"></textarea>
+                  </div>
+                  
+                  <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary" name="transferFund">Proceed <i class="icofont-double-right"></i></button>
                   <button type="reset" class="btn btn-outline-primary" name="resetData">Clear Data</button>
                   </div>
               </form>

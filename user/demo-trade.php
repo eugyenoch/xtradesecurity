@@ -197,7 +197,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Confirmation</h5>
+            <h5 class="modal-title">Confirmation (Demo)</h5>
             <button
               type="button"
               class="btn-close"
@@ -211,12 +211,12 @@
                 <tbody>
                   <tr>
                     <td><span class="text-primary">Buyer Email</span></td>
-                    <td><span class="text-primary">buyer@example.com</span></td>
+                    <td><span class="text-primary">johnwatson@gmail.com</span></td>
                   </tr>
                   <tr>
                     <td><span class="text-primary">Seller Email</span></td>
                     <td>
-                      <span class="text-primary">seller@example.com</span>
+                      <span class="text-primary">pauline@gmail.com</span>
                     </td>
                   </tr>
                   <tr>
@@ -280,7 +280,7 @@
                 </div>
               </form>
               <div class="card-footer text-center">
-                <a href="signup.html">Go to Transaction</a>
+                <a href="demo-trade.php">Back To Demo</a>
               </div>
             </div>
           </div>
@@ -305,14 +305,14 @@
             <div class="table-responsive">
               <table class="table">
                 <tbody>
-                  <tr>
+                <tr>
                     <td><span class="text-primary">Buyer Email</span></td>
-                    <td><span class="text-primary">buyer@example.com</span></td>
+                    <td><span class="text-primary">johnwatson@gmail.com</span></td>
                   </tr>
                   <tr>
                     <td><span class="text-primary">Seller Email</span></td>
                     <td>
-                      <span class="text-primary">seller@example.com</span>
+                      <span class="text-primary">pauline@gmail.com</span>
                     </td>
                   </tr>
                   <tr>
@@ -376,7 +376,7 @@
                 </div>
               </form>
               <div class="card-footer text-center">
-                <a href="signup.html">Go to Transaction</a>
+                <a href="demo-trade.php">Back To Demo</a>
               </div>
             </div>
           </div>
@@ -401,14 +401,14 @@
             <div class="table-responsive">
               <table class="table">
                 <tbody>
-                  <tr>
+                <tr>
                     <td><span class="text-primary">Buyer Email</span></td>
-                    <td><span class="text-primary">buyer@example.com</span></td>
+                    <td><span class="text-primary">johnwatson@gmail.com</span></td>
                   </tr>
                   <tr>
                     <td><span class="text-primary">Seller Email</span></td>
                     <td>
-                      <span class="text-primary">seller@example.com</span>
+                      <span class="text-primary">pauline@gmail.com</span>
                     </td>
                   </tr>
                   <tr>
@@ -472,7 +472,7 @@
                 </div>
               </form>
               <div class="card-footer text-center">
-                <a href="signup.html">Go to Transaction</a>
+                <a href="demo-trade.php">Back To Demo</a>
               </div>
             </div>
           </div>
@@ -497,14 +497,14 @@
             <div class="table-responsive">
               <table class="table">
                 <tbody>
-                  <tr>
+                <tr>
                     <td><span class="text-primary">Buyer Email</span></td>
-                    <td><span class="text-primary">buyer@example.com</span></td>
+                    <td><span class="text-primary">johnwatson@gmail.com</span></td>
                   </tr>
                   <tr>
                     <td><span class="text-primary">Seller Email</span></td>
                     <td>
-                      <span class="text-primary">seller@example.com</span>
+                      <span class="text-primary">pauline@gmail.com</span>
                     </td>
                   </tr>
                   <tr>
@@ -568,7 +568,7 @@
                 </div>
               </form>
               <div class="card-footer text-center">
-                <a href="signup.html">Go to Transaction</a>
+                <a href="demo-trade.php">Back To Demo</a>
               </div>
             </div>
           </div>

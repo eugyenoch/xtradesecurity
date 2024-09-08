@@ -153,29 +153,30 @@
             <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form action="walletProcessor.php" class="identity-upload">
+            <p>Please note that this service is in Beta</p>
+            <form action="walletProcessor.php" class="identity-upload" method="post">
               <div class="row g-3">
                 
                 <div class="col-xl-12">
                   <label class="form-label">Account name <span class="text-danger">*</span> </label>
-                  <input type="text" class="form-control" placeholder="Bank account name" required />
+                  <input type="text" class="form-control" placeholder="Bank account name" name="account_name" required />
                 </div>
                 <div class="col-xl-12">
-                  <label class="form-label">NUBAN or IBAN</label>
-                  <input type="text" class="form-control" placeholder="Bank account number" />
+                  <label class="form-label">NUBAN/IBAN/Routing Number</label>
+                  <input type="text" class="form-control" placeholder="Bank account number" name="account_number" />
                 </div>
                 <div class="col-xl-12">
-                  <label class="form-label">Routing number </label>
-                  <input type="text" class="form-control" placeholder="bank routing number" />
+                  <label class="form-label">Sortcode </label>
+                  <input type="text" class="form-control" placeholder="bank sortcode" name="sortcode" />
                 </div>
                 <div class="col-xl-12">
                   <label class="form-label">Swift Code </label>
-                  <input type="text" class="form-control" placeholder="Bank swift code" />
+                  <input type="text" class="form-control" placeholder="Bank swift code" name="swiftcode" />
                 </div>
 
                 <div class="col-xl-12">
                   <label class="form-label">Bank Name<span class="text-danger">*</span> </label>
-                  <input type="text" class="form-control" placeholder="Full bank name" required />
+                  <input type="text" class="form-control" placeholder="Full bank name" name="bank_name" required />
                 </div>
 
                 <div class="col-xl-12">
@@ -186,10 +187,10 @@
                   <img src="<?php if(isset($profilePicUrl)){echo htmlspecialchars($profilePicUrl);}?>" alt="./images/routing.png" class="img-fluid" />
                 </div>
               </div>
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" name="addBank">Confirm</button>
+              </div>
             </form>
-          </div>
-          <div class="modal-footer">
-          <button type="submit" class="btn btn-primary" name="addBank">Confirm</button>
           </div>
         </div>
       </div>
