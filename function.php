@@ -432,6 +432,42 @@ function getTotalApprovedFundAmount() {
     return "$" . number_format($row['total_funded'] ?? 0, 2);
 }
 
+//GET TOTAL APPROVED LOCKED FUNDING FOR A SINGLE USER
+function getTotalApprovedLockedFundAmount() {
+    // Assuming you have a database connection established
+    global $con;
+
+    // Get the logged-in user's email or username from session
+    $userEmail = isset($_SESSION['user_session']) ? $_SESSION['user_session'] : null;
+
+    // Prepare the SQL query
+    $sql = "SELECT SUM(fund_amount) AS total_locked 
+            FROM fund 
+            WHERE (user_email = ? OR userName = ?) 
+            AND is_locked = 'yes' 
+            AND fund_status = 'approved'";
+
+    // Prepare the statement and check for errors
+    if ($stmt = $con->prepare($sql)) {
+        // Bind the user email twice (for email and username columns)
+        $stmt->bind_param("ss", $userEmail, $userEmail);
+        $stmt->execute();
+
+        // Get the result and fetch the associative array
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+
+        // Close the statement
+        $stmt->close();
+
+        // Return the total amount or 0 if no results found
+        return $row['total_locked'] ? floatval($row['total_locked']) : 0;
+    } else {
+        // Log the error and return 0 in case of failure
+        error_log("SQL Error: " . $con->error);
+        return 0;
+    }
+}
 function getTotalApprovedTransferForSeller() {
     // Assuming you have a database connection established
     global $con;

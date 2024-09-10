@@ -90,10 +90,11 @@ $ffirstname = $_POST['ffirstname'];
 $flastname = $_POST['flastname']; 
 $fcurrency = $_POST['fcurrency_id'];
 $famount = floatval($_POST['famount']);
+$isLocked = "no";
 
 // Insert data into the fund table
-$stmt = $con->prepare("INSERT INTO fund (user_email, userName, ftxn, firstname, lastname, fund_currency, fund_amount) VALUES (?, ?, ?, ?, ?, ?, ?)");
-$stmt->bind_param("ssssssd", $femail, $fusername, $ftxn, $ffirstname, $flastname, $fcurrency, $famount);
+$stmt = $con->prepare("INSERT INTO fund (user_email, userName, ftxn, firstname, lastname, fund_currency, fund_amount, is_locked) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+$stmt->bind_param("ssssssds", $femail, $fusername, $ftxn, $ffirstname, $flastname, $fcurrency, $famount, $isLocked);
 if ($stmt->execute()) {
 // Success message
 echo "<script>alert('Success: Funding request submitted successfully and pending approval');</script>";
@@ -104,6 +105,33 @@ echo "<script>alert('Error: There was an error with your request, please try aga
 
 $stmt->close();
 }
+
+
+//Script for requesting funding
+if (isset($_POST['lock'])) {
+  //Extract variables from user input
+  $ftxn = $_POST['ftxn'];
+  $femail = $_POST['femail'];
+  $fusername = $_POST['fusername']; 
+  $ffirstname = $_POST['ffirstname'];
+  $flastname = $_POST['flastname']; 
+  $fcurrency = $_POST['fcurrency_id'];
+  $famount = floatval($_POST['famount']);
+  $isLocked = "yes";
+  
+  // Insert data into the fund table
+  $stmt = $con->prepare("INSERT INTO fund (user_email, userName, ftxn, firstname, lastname, fund_currency, fund_amount, is_locked) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+  $stmt->bind_param("ssssssds", $femail, $fusername, $ftxn, $ffirstname, $flastname, $fcurrency, $famount, $isLocked);
+  if ($stmt->execute()) {
+  // Success message
+  echo "<script>alert('Success: Lock request submitted successfully and pending approval');</script>";
+  } else {
+  // Error message
+  echo "<script>alert('Error: There was an error with your request, please try again after a while ');</script>";
+  }
+  
+  $stmt->close();
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -259,5 +287,39 @@ display: none;}
     transition: color 0.3s ease;
 }
 
+
+/* Custom styling for the modal to occupy the full screen */
+.fullscreen-trading-modal .modal-dialog {
+  width: 100vw;
+  max-width: none;
+  height: 100%;
+  margin: 0;
+}
+
+.fullscreen-trading-modal .modal-content {
+  height: 100%;
+  border: 0;
+  border-radius: 0;
+}
+
+.fullscreen-trading-modal .modal-body {
+  overflow-y: auto;
+  padding: 0;
+}
+
+.fullscreen-trading-modal #technical-analysis {
+  width: 100%;
+  height: calc(100vh - 120px); /* Adjust based on header and footer height */
+}
+
+.fullscreen-trading-modal .modal-header,
+.fullscreen-trading-modal .modal-footer {
+  background-color: #23262F;
+  color: white;
+}
+
+.fullscreen-trading-modal .btn-close {
+  filter: invert(1) grayscale(100%) brightness(200%);
+}
   </style>
 </head>

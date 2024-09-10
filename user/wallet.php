@@ -200,8 +200,8 @@
                         }?></h5>
                       </div>
                       <div>
-                      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#transferFund" tabindex="-1">Transfer Funds</button>
-                      <button type="button" class="btn btn-secondary position-relative top-100 start-0" data-toggle="modal" data-target="#lockFund" tabindex="-1">Earn 75%</button>
+                      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#transferFund" tabindex="-1">Transfer Fund</button>
+                      <button type="button" class="btn btn-secondary position-relative top-100 start-0" data-toggle="modal" data-target="#withdrawFund" tabindex="-1">Withdraw</button>
                     </div>
                   </div>
                     <div class="col-xxl-6 col-xl-6 col-lg-6">
@@ -310,20 +310,20 @@
                        <div>
                       <a href="#" id="connectWalletButton" type="button" class="btn btn-success position-relative top-100 start-0">Import External Wallet</a>
                       </div>
-                 
                 </div>
+                
               </div>
             </div>
 
             <div class="col-xxl-6">
               <div class="card">
                 <div class="card-header">
-                  <h4 class="card-title">Deposit</h4>
+                  <h4 class="card-title">Deposit Summary</h4>
                 </div>
                 <div class="card-body">
                   <div class="table-responsive">
-                  <table class="table caption-top table-striped table-hover responsive-table" id="fundTable">
-                      <caption><strong>Funding Summary</strong></caption>
+                  <table class="table table-striped table-hover responsive-table" id="fundTable">
+                      <caption><strong>Profits are for locked funds only</strong></caption>
                       <thead>
                           <tr class="table-secondary">  
                               <th>TXN ID</th>
@@ -331,6 +331,8 @@
                               <th>Profit</th>
                               <th>Status</th>
                               <th>Date</th>
+                              <th>Locked</th>
+                              <th>Duration</th>
                               <th>Payment proof</th>
                           </tr>
                       </thead>
@@ -341,6 +343,8 @@
                               <th>Profit</th>
                               <th>Status</th>
                               <th>Date</th>
+                              <th>Locked</th>
+                              <th>Duration</th>
                               <th>Payment proof</th>
                           </tr>
                       </tfoot>
@@ -354,7 +358,7 @@
                                           <?php if (!empty($funds_info['fund_profit'])): ?>
                                               <?= number_format($funds_info['fund_profit'],2) . ' ' . $funds_info['fund_currency']; ?>
                                           <?php else: ?>
-                                              <?= '0.00 ' . $funds_info['fund_currency']; ?>
+                                              <?= ' 0.00 ' . $funds_info['fund_currency']; ?>
                                           <?php endif; ?>
                                       </td>
                                       <td class="coin-name">
@@ -367,13 +371,28 @@
                                           <?php endif; ?>
                                       </td>
                                       <td><?= $funds_info['fund_request_date']; ?></td>
+                                      <td><?php if(isset($funds_info['is_locked']) && $funds_info['is_locked'] ==='yes'):?> 
+                                        <span class="badge bg-info">Yes</span>
+                                        <?php elseif(isset($funds_info['is_locked']) && $funds_info['is_locked'] ==='no'):?> 
+                                          <span class="badge bg-info">No</span>
+                                          <?php else: ?>
+                                            <?= 'Unlocked'; ?>
+                                        <?php endif; ?>
+                                      </td>
+
+                                      <td><?php if(isset($funds_info['lock_duration']) && isset($funds_info['lock_duration']) != NULL ):?> 
+                                        <span class="badge bg-info"><?= $funds_info['lock_duration']; ?></span>
+                                        <?php else: ?>
+                                          <?= "Unlocked" ?>
+                                        <?php endif; ?>
+                                      </td>
                                       <td>
                                       <?php if(!isset($funds_info['fund_proof']) || !isset($funds_info['fund_comment'])): ?>
                                         <a type="button" 
                                                 class="btn btn-outline-secondary badge badge-outline badge-danger badge-md text-black" 
                                                 title="Use this link if you need to upload payment proof" 
                                                 data-toggle="modal"
-                                                data-bs-target="#upload-proof"
+                                                data-target="#upload-proof"
                                                 data-ftxn="<?= $funds_info['ftxn']; ?>"
                                                 tabindex="-1"> 
                                                 Submit Proof
@@ -399,12 +418,12 @@
             <div class="col-xxl-6">
               <div class="card">
                 <div class="card-header">
-                  <h4 class="card-title">Withdrawals</h4>
+                  <h4 class="card-title">Withdrawal Summary</h4>
                 </div>
                 <div class="card-body">
                 <div class="table-responsive">
-                <table class="table caption-top table-striped table-hover responsive-table" id="withdrawTable">
-                  <caption><strong>Withdrawal Summary</strong></caption>
+                <table class="table table-striped table-hover responsive-table" id="withdrawTable">
+                  <caption><strong>Withdrawal Summary. Only approved requests have been paid-out</strong></caption>
                   <thead>
                       <tr class="table-secondary">
                           <th>TXN ID</th>
@@ -539,88 +558,7 @@
               </div>
             </div>
 
-            <div class="col-xxl-12">
-              <div class="card">
-                <div class="card-header">
-                  <h4 class="card-title">High-Yield Savings (up to 75%)</h4>
-                </div>
-                <div class="card-body">
-                  <div class="table-responsive">
-                  <table class="table caption-top table-striped table-hover responsive-table" id="userInvestmentTable">
-                  <caption><strong>Premium High-yield Savings Summary</strong></caption>
-                  <thead>
-                      <tr class="table-secondary">
-                        <th>Transaction ID</th>
-                        <th>Package</th>
-                        <th>Amount</th>
-                        <th>Duration</th>
-                        <th>Interest</th>
-                        <th>Profit</th>
-                        <th>Status</th>
-                        <th>Date</th>
-                      </tr>
-                  </thead>
-                  <tfoot>
-                      <tr class="table-secondary">
-                        <th>Transaction ID</th>
-                        <th>Package</th>
-                        <th>Amount</th>
-                        <th>Duration</th>
-                        <th>Interest</th>
-                        <th>Profit</th>
-                        <th>Status</th>
-                        <th>Date</th>
-                      </tr>
-                  </tfoot>
-                 <tbody>
-                  <?php $sql_transactions = "SELECT * FROM transaction WHERE user_email='$userEmail' OR userName='$userEmail'"; 
-                  $sql_transactions_exec = $con->query($sql_transactions); 
-                if ($sql_transactions_exec->num_rows > 0): ?>
-                <?php foreach($sql_transactions_exec as $transactions_info): 
-                      ?>
-                    <tr>
-                        <td class="coin-name"><?= $transactions_info['txn']; ?></td>
-                        <td class="coin-name"><?= $transactions_info['tpackage']; ?></td>
-                        <td class="coin-name"><?= number_format($transactions_info['tamount'],2) . $transactions_info['tcurrency']; ?></td>
-                        <td class="coin-name"> <?php if (!empty($transactions_info['tduration'])): ?>
-                            <?= $transactions_info['tduration']; ?>&nbsp;days
-                          <?php endif; ?>
-                        </td>
-                        <td class="coin-name"> <?php if (!empty($transactions_info['tinterest'])): ?>
-                            <?= round($transactions_info['tinterest'] * 100) . '%'; ?>
-                          <?php endif; ?>
-                        </td>
-                        <td class="coin-name">
-                        <?php if (!empty($transactions_info['tprofit'])): ?>
-                            <?= number_format($transactions_info['tprofit']) . $transactions_info['tcurrency']; ?>
-                            <?php else: ?>
-                              <?= '<span title="Profit reflects 30days after approval date">0.00</span>' . $transactions_info['tcurrency']; ?>
-                          <?php endif; ?>
-                        </td>
-                        <td class="coin-name">
-                            <?php if ($transactions_info['tstatus'] === 'pending'): ?>
-                                <span class="badge bg-warning text-black"><?= htmlspecialchars($transactions_info['tstatus']); ?></span>
-                            <?php elseif ($transactions_info['tstatus'] === 'approved'): ?>
-                                <span class="badge bg-success"><?= htmlspecialchars($transactions_info['tstatus']); ?></span>
-                            <?php else: ?>
-                                <?= "<i class='fa fa-times' aria-hidden='true'></i>"; ?>
-                            <?php endif; ?>
-                        </td>
-                        <td class="coin-name"><?= $transactions_info['transact_date']; ?></td>
-                    </tr>
-                <?php endforeach; ?>
-            <?php else: ?>
-                 </tbody>
-                <tr>
-                    <td colspan="8">No savings information found</td>
-                </tr>
-            <?php endif; ?>
-        </tbody>     
-                </table>
-                </div>
-                </div>
-              </div>
-            </div>
+           
 
                 <div class="col-xxl-12">
               <div class="card">

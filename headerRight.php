@@ -12,8 +12,8 @@
                   </button>
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" href="#">Visa Cards (coming soon)</a>
-                    <a class="dropdown-item" href="../loan.php">Loans</a>
-                    <a class="dropdown-item" href="../fund-recovery.php">Fund Recovery</a>
+                    <a class="dropdown-item" href="loan.php">Loans</a>
+                    <a class="dropdown-item" href="fund-recovery.php">Fund Recovery</a>
                   </div>
                 </div>
                 <div class="dropdown">
@@ -21,11 +21,12 @@
                     Orders & Trades
                   </button>
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-                    <a class="dropdown-item" href="wallet.php">Funding</a>
-                    <a class="dropdown-item" href="investment.php">Investment</a>
-                    <a class="dropdown-item" href="wallet.php">Withdrawal</a>
-                    <a class="dropdown-item" href="exchange.php">Xtrade Exchange</a>
-                    <a class="dropdown-item" href="trade.php">P2P Trade</a>
+                    <a class="dropdown-item" href="user/user-profile.php">Funding</a>
+                    <a class="dropdown-item" href="user/user-profile.php">Earn 75%</a>
+                    <a class="dropdown-item" href="user/investment.php">Investment</a>
+                    <a class="dropdown-item" href="user/wallet.php">Withdrawal</a>
+                    <a class="dropdown-item" href="user/trade.php">Xtrade Exchange</a>
+                    <a class="dropdown-item" href="user/wallet.php">Transfer Funds</a>
                   </div>
                 </div>
                 <div class="mode-switcher">

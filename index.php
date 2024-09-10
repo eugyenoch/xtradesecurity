@@ -65,14 +65,16 @@ $historicalData = fetchCryptoData('https://api.coingecko.com/api/v3/coins/bitcoi
               <h2 class="title">
                 We are a trusted and secure digital assets exchange.
               </h2>
-              <p class="fs-20 desc">
+              <p class="fs-20 desc py-4">
                 At XTradeSecurity, we make it easy to buy, sell, swap, convert, and trade your digital assets and currencies. Profits are guaranteed on our platform, using our strategies. <br>Buy now and get up to +10% extra bonus minimum sale amount on major assets. We accept BTC and other leading currencies.
               </p>
-              <a href="user/user-profile.php" class="btn-action"><span>Get Started Here</span></a>
+              <a href="user/user-profile.php" class="btn btn-outline-primary"><span>Get Started Here</span></a>
             </div>
-            <p>
-            <center><span><img src="assets/images/icon/googleplay.png" title="Android app for xTradeSecurity (in Beta)" alt="Google playstore image" /></span>&nbsp;
-            <span><img src="assets/images/icon/appstore.png" title="iOS app for xTradeSecurity (in Beta)" alt="Apple iStore image" /></span></center>
+            <p class="mt-4">
+              <center>
+                <span><a class="btn-action" href="user/demo-trade.php">Open Demo Trading Account</a></span>
+                <span><a class="btn-action" href="user/exchange.php">Open Live Trading Account</a></span>
+              </center>
           </p>
           </div>
           <div class="col-xl-6 col-md-12">
@@ -282,7 +284,7 @@ $historicalData = fetchCryptoData('https://api.coingecko.com/api/v3/coins/bitcoi
               <p class="desc">
                 XTradeSecurity has a variety of features that make it the best place to start trading. The steps are as clear-cut as anything. Turn your fiat money into digital money in seconds. <br> Trade digital assets with up to 1:5 leverage. You can start with as little as $100 to gain the effect of $500 capital!
               </p>
-              <a href="#" class="btn-action">Let’s Trade Now</a>
+              <a href="user/trade.php" class="btn-action">Let’s Trade Now</a>
             </div>
           </div>
         </div>
@@ -552,7 +554,7 @@ $historicalData = fetchCryptoData('https://api.coingecko.com/api/v3/coins/bitcoi
 
                   <div class="button">
                   <a href="user/user-profile.php">Deposit</a>
-                  <a href="user/user-profile.php">Withdraw</a>
+                  <a href="user/wallet.php">Withdraw</a>
                   </div>
                 </div>
               </div>
@@ -568,7 +570,7 @@ $historicalData = fetchCryptoData('https://api.coingecko.com/api/v3/coins/bitcoi
           <div class="col-md-12">
             <div class="block-text">
               <h3 class="heading">Market Update</h3>
-              <a class="btn-action" href="#">See All Coins</a>
+              <a class="btn-action" href="user/price.php">See All Coins</a>
             </div>
 
             <div class="coin-list__main">

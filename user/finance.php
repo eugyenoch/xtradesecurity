@@ -335,7 +335,6 @@ if (isset($_POST['proofUpload'])){
     echo "<script>location.href='wallet.php';</script>";
 }
 
-
      // Close the database connection
      $con->close();
 ?>

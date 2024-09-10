@@ -302,7 +302,27 @@ function googleTranslateElementInit() {
 }
 </script>
 <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<script>
+document.getElementById("copyBtn").addEventListener("click", function() {
+    // Get the wallet address from the output element
+    var walletAddress = document.getElementById("walletOutput").innerText;
 
+    // Check if the wallet address is valid
+    if (walletAddress.trim() === "" || walletAddress === "Not available; please use your email address instead") {
+        alert("No valid wallet address to copy.");
+        return;
+    }
+
+    // Copy the wallet address to the clipboard using the Clipboard API
+    navigator.clipboard.writeText(walletAddress).then(function() {
+        // Update the paragraph with a confirmation message
+        document.getElementById("copyText").innerText = "Wallet copied: " + walletAddress;
+    }).catch(function(error) {
+        // Handle any errors during the copying process
+        alert("Failed to copy text: " + error);
+    });
+});
+</script>
  </body>
 </html>
 

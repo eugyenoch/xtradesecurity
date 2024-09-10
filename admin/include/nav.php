@@ -26,7 +26,7 @@
                             <a href="../user/user-profile.php">Buy Assets</a>
                           </li>
                           <li class="menu-item">
-                            <a href="../user/user-profile.php">Sell Assets</a>
+                            <a href="../user/wallet.php">Sell Assets</a>
                           </li><li class="menu-item">
                             <a href="../index.php#platforms">Platform</a>
                           </li></ul>

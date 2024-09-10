@@ -27,44 +27,20 @@
         <div class="col-xxl-12">
               <div class="card">
                 <div class="card-header">
-                  <h4 class="card-title">Demo Transactions</h4>
+                  <h4 class="card-title">Xtrade Demo Trading Preview</h4>
                 </div>
                 <div class="card-body">
-                <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
-                  <script type="text/javascript">
-                    new TradingView.widget({
-                      container_id: "technical-analysis",
-                      width: "100%",
-                      height: 600,
-                      symbol: "BITSTAMP:BTCUSD",
-                      interval: "D",
-                      timezone: "exchange",
-                      theme: "red",
-                      style: "1",
-                      toolbar_bg: "#23262F",
-                      withdateranges: true,
-                      hide_side_toolbar: false,
-                      allow_symbol_change: true,
-                      save_image: false,
-                      hideideas: true,
-                      studies: [
-                        "ROC@tv-basicstudies",
-                        "StochasticRSI@tv-basicstudies",
-                        "MASimple@tv-basicstudies",
-                      ],
-                      show_popup_button: true,
-                      popup_width: "1000",
-                      popup_height: "650",
-                    });
-                  </script>
+                <iframe src="https://metatraderweb.app/trade?demo_all_servers=1&amp;startup_mode=open_demo&amp;startup_version=5&amp;lang=en&amp;save_password=on&amp;demo_show_phone=1&amp;utm_campaign=xtradeSecurity" allowfullscreen="allowfullscreen" style="width: 100%; height: 100vh; border: none"></iframe>
                  </div>
 
                  <div class="row">
             <div class="col-xxl-12">
               <div class="card">
                 <div class="card-header">
-                  <h4 class="card-title">This is a Demo account and the below are for demonstration purposes only</h4>
+                  <h4 class="card-title">This is a demo account. Migrate your account to live trading</h4>
                 </div>
+                  <a href="exchange.php" type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#tradingModal">Migrate Trading Account</a>
+                
               </div>
             </div>
           </div>

@@ -88,14 +88,14 @@
 
                       <div class="user-balance">
                         <div class="available">
-                          <p>Available</p>
+                          <p title="Available Balance">Balance</p>
                           <span>
                           <?php if(isset($_SESSION['user_session'])) {$userBalance = calculateUserTotalBalance(); echo $userBalance;} 
                           else {echo '$0.00';}?>
                           </span>
                         </div>
                         <div class="total">
-                          <p>P2P Trades</p>
+                          <p title="Number of internal transfers and P2P trades">Transfers and P2P</p>
                           <span>
                           <?php if(isset($total_p2p_count)){echo $total_p2p_count ."&nbsp;trades";}?>
                           </span>

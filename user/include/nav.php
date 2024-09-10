@@ -16,7 +16,7 @@
                           </svg> </a>
                         </li>
                       <li class="menu-item">
-                        <a href="transfer.php">Tranfer</a>
+                        <a href="transfer.php">Transfer</a>
                       </li>
 
                       <li class="menu-item-has-children">
@@ -25,8 +25,12 @@
                             <a href="user-profile.php">Buy Assets</a>
                           </li>
                           <li class="menu-item">
-                            <a href="user-profile.php">Sell Assets</a>
-                          </li><li class="menu-item">
+                            <a href="user-profile.php">Transfer Assets</a>
+                          </li>
+                          <li class="menu-item">
+                            <a href="wallet.php">Withdraw Assets</a>
+                          </li>
+                          <li class="menu-item">
                             <a href="../index.php#platforms">Platform</a>
                           </li></ul>
 

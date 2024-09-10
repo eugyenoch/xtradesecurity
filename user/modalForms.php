@@ -9,7 +9,8 @@
                 </a>
             </div>
                 <div class="modal-body">
-                <p><strong>Use this section to upload proof of payment for Transaction ID: <span name="utxn"></span></strong></p>
+                <p><strong>Use this section to upload proof of payment for Transaction ID <span name="utxn"></span></strong>
+                <br>You can also submit payment proof via email and via our <a href="../contact.php">contact page</a> </p>
                 <form method="POST" action="finance.php" enctype="multipart/form-data" id="uploadProofForm">
                     <div class="input-item">
                     <input type="hidden" name="utxn" value="">
@@ -641,7 +642,7 @@
                     </div> 
                 </div>
                 <div class="form-text mb-3">
-                       Pay into the wallet address and keep your transaction proof for later, then come back and click proceed to continue.
+                <small>Pay into the wallet address, then come back and click proceed to continue. Remember to keep your transaction proof for later.</small>
                 </div>
                 <div class="modal-footer">
                 <button type="submit" class="btn btn-primary" id="fundButton" name="fundAccount">Proceed <i class="icofont-double-right"></i></button>
@@ -661,7 +662,7 @@
         <div class="modal-dialog modal-dialog-sm modal-dialog-centered">
         <div class="modal-content">
         <div class="modal-header">
-            <h6>Lock Funds For Up To 1 year, Earn 40% to 65% Guaranteed Yield(in Beta)</span></h6>
+            <h6>Lock Funds For Up To 1 year, Earn 40% to 75% Guaranteed Yield(in Beta)</span></h6>
                 <a href="#" class="modal-close" data-dismiss="modal" aria-label="Close">
                     <span class="btn-close badge bg-outline-warning p-2 fs-4">&times;</span>
                 </a>
@@ -669,16 +670,15 @@
                 <div class="modal-body">
                 <p>Use this form to request our guaranteed high-yield premium savings fund lock. <br>Make sure you have enough balanceas a fund request above your available balance will fail.</p>  
                 <div class="wallet-widget card">
-                        <h5 title="User Total Balance (TB)">Your Available Balance</h5>
+                        <h5 title="User Total Balance (TB)">Your Available Locked Balance</h5>
                         <h4><span class="text-primary">
-                        <?php if(isset($_SESSION['user_session'])) {$userBalance = calculateUserTotalBalance();
-                                    echo "&nbsp;<span title='Total Balance (TB) as approved'>". $userBalance ."</span>";
+                        <?php if(isset($_SESSION['user_session'])) {$userLockedBalance =  getTotalApprovedLockedFundAmount();
+                                    echo "&nbsp;<span title='Total Balance (TB) as approved'>". $userLockedBalance ."</span>";
                                 } else {echo "&nbsp;<span title='Total Balance (TB) as approved'>$0.00</span>";}?>
                                 </span><sub>USD</sub>
                             </h4>
-                        <p>= <?php if(isset($_SESSION['user_session'])){$userBalance = calculateUserTotalBalance(); echo $userBalance . 'USDT';}?> </p>
                     </div>
-                <form method="POST" action="finance.php" name="lockRequestForm">
+                <form method="POST" action="<?= htmlspecialchars($_SERVER['PHP_SELF']); ?>" name="lockRequestForm">
                   <div class="form-group">
                       <input type="hidden" name="ltxn" value="<?= 'TXN' . mt_rand(100000, 999999); ?>" readonly>
                       <input type="hidden" name="lfirstname" value="<?php if(isset($firstname)){echo $firstname;}else{echo "User";}?>" readonly>
@@ -690,18 +690,20 @@
                   <div class="form-group mb-3">
                       <label for="amount" class="form-label">Amount</label>
                       <input type="number" class="form-control" id="amount" name="lock_amount" placeholder="Enter amount" min="1000" required>
-                      <small>Minimum Lock ($1,000), and, High-Yield Guaranteed(up t0 65% per annum).</small>
+                      <small>Minimum Lock ($1,000), and, High-Yield Guaranteed(up to 75% per annum).</small>
                   </div>
                   
                   <div class="form-group mb-3">
-                      <label for="lock_currency" class="form-label">Select currency</label>
-                      <select class="form-select" id="lock_currency" name="lock_currency" required>
+                      <label for="fcurrency_id" class="form-label">Select currency to fund</label>
+                      <select class="form-select" id="fcurrency_id" name="fcurrency_id" required>
                           <option value="">Choose a currency</option>
-                          <?php foreach(fetchAllUserWalletAddresses($con, $user_email) as $uniqueWallet): ?>
-                            <option value="<?= htmlspecialchars($uniqueWallet['wallet']) ?>">
-                                <?= htmlspecialchars($uniqueWallet['wallet']) ?>
-                                <?php if (!empty($uniqueWallet['wallet_tag'])): ?>
-                                    &nbsp;(<?= htmlspecialchars($uniqueWallet['wallet_tag']) ?>)
+                          <?php foreach(fetchAllWalletAddresses($con) as $allWallets): ?>
+                            <option value="<?= htmlspecialchars($allWallets['wallet']); ?>" 
+                                    data-address="<?= htmlspecialchars($allWallets['address']); ?>" 
+                                    data-qrcode="<?= htmlspecialchars($allWallets['qrcode']); ?>">
+                                <?= htmlspecialchars($allWallets['wallet']); ?>
+                                <?php if (!empty($allWallets['wallet_tag'])): ?>
+                                    (<?= htmlspecialchars($allWallets['wallet_tag']); ?>)
                                 <?php endif; ?>
                             </option>
                         <?php endforeach; ?>
@@ -709,17 +711,33 @@
                   </div>
 
                   <div class="form-group mb-3">
-                      <label for="lock_address" class="form-label">Wallet Address</label>
-                      <!-- <input type="text" class="form-control" id="amount" name="waddress" placeholder="Enter your wallet address" required> -->
-                      <select class="form-select" id="lock_address" name="lock_address" required>
-                          <option value="">Choose wallet</option>
-                          <?php foreach(fetchAllUserWalletAddresses($con, $user_email) as $uniqueAddress): ?>
-                            <option value="<?= htmlspecialchars($uniqueAddress['address']) ?>">
-                                <?= htmlspecialchars($uniqueAddress['address']); ?>
-                            </option>
-                        <?php endforeach; ?>
+                      <label for="lockDuration" class="form-label">Duration</label>
+                      <select class="form-select" id="lockDuration" name="lockDuration" required>
+                          <option value="">Choose Duration</option> 
+                          <option value="1">1 Year (minimum lock)</option> 
+                          <option value="2">2 Years (median lock)</option> 
+                          <option value="3">3 Years (median lock)</option> 
+                          <option value="4">4 Years (median lock)</option> 
+                          <option value="5">5 Years (maximum lock)</option> 
                       </select>
                   </div>
+                               
+                <div id="walletDetails" style="display: none;">
+                    <div class="form-group mb-3">
+                        <label for="wallet_address" class="form-label">Wallet Address to pay to</label>
+                        <input type="text" class="form-control" id="wallet_address" name="wallet_address" readonly>
+                        <button type="button" class="btn btn-outline-secondary mt-2" id="copyButton">Copy Address</button>
+                            <p id="copiedText" class="mt-2"></p>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="qrcode" class="form-label">QR Code</label><br>
+                        <img id="qrcode_image" src="" alt="QR Code" style="max-width: 200px; height:200px;" title="Scan QR code to pay">
+                    </div> 
+                </div>
+                <div class="form-text mb-3">
+                       <small>Pay into the wallet address, then come back and click proceed to continue. Remember to keep your transaction proof for later.</small>
+                </div>
+
                   <div class="modal-footer">
                   <button type="submit" class="btn btn-primary" name="lock">Proceed <i class="icofont-double-right"></i></button>
                   <button type="reset" class="btn btn-outline-primary" name="resetData">Clear Data</button>
@@ -848,17 +866,17 @@
                   </div>
 
                   <div class="form-group mb-3">
-                      <label for="sender-email" class="form-label">Sender Email<span class="text-danger">*</span></label>
+                      <label for="sender-email" class="form-label">Sender Email</label>
                       <input type="email"  id="sender-email" class="form-control" name="senderEmail" value="<?php if(isset($user_email)){echo $user_email;}else{echo "User";}?>" readonly />
                   </div>
 
                   <div class="form-group mb-3">
-                      <label for="sender_wallet" class="form-label">Sender wallet<span class="text-danger">*</span></label>
+                      <label for="sender_wallet" class="form-label">Sender wallet</label>
                       <input type="text"  id="sender_wallet" class="form-control" name="senderWallet" value="<?php if(isset($asset_address)){echo $asset_address;}else{echo "User";}?>" readonly />
                   </div>
 
                   <div class="form-group mb-3">
-                      <label for="transfer_curreny" class="form-label">Currency<span class="text-danger">*</span></label>
+                      <label for="transfer_curreny" class="form-label">Currency</label>
                       <input type="text" class="form-control" id="transfer_curreny" name="transferCurreny" value="USDT" title="The USDT is the default site currency and is available for internal transfers"  readonly />
                   </div>
 
@@ -891,3 +909,30 @@
         <!-- .modal-dialog -->
     </div>
     <!-- Modal End -->
+
+
+    <!-- INTERNAL WALLET ADDRESS FIELD -->
+<div class="modal fade sho d-bloc" id="showInternalWalletAddress" tabindex="-1" aria-labelledby="showInternalWalletAddressLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-sm modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6>XTradeSecurity Internal Wallet Address</h6>
+                <a href="#" class="modal-close" data-dismiss="modal" aria-label="Close">
+                    <span class="btn-close badge bg-outline-warning p-2 fs-4">&times;</span>
+                </a>
+            </div>
+            <div class="modal-body">
+                <p class="fs-6">Use this wallet address only for internal transfers within XTrade Exchange. You can use the import external wallet option on your wallet dashboard to import your external wallet and balance to XtradeSecurity</p>
+                <form name="showInternalWalletAddress">
+                    <div class="form-group mx-3">
+                        <output class="form-control border-0 fs-6" id="walletOutput"><?php if(isset($asset_address) && $asset_address != null){echo $asset_address;}else{echo "Not available; please use your email address instead";}?></output>
+                    </div>         
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="copyBtn">Copy Wallet Address</button>
+                        <p id="copyText" class="mt-2"></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
