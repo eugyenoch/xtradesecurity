@@ -34,7 +34,7 @@
                  
                   <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#tradingModal">View Advanced Chart</button>
                 </div>
-                  <iframe frameborder="0" width="100%" height="390" src="https://www.mql5.com/en/signals/widget/top/6zak?f=0&t=red"></iframe>
+                  <iframe frameborder="0" width="100%" height="390" src="https://www.mql5.com/en/signals/widget/top/6zak?f=0&t=gray"></iframe>
                 <div class="card-body pt-5">
                   <h4>Transfer Assets From XTrade Security To Your Other Wallets</h4>
                 <iframe id='iframe-widget' src='https://changenow.io/embeds/exchange-widget/v2/widget.html?FAQ=true&amount=0.1&amountFiat=1500&backgroundColor=FFFFFF&darkMode=false&from=btc&fromFiat=eur&horizontal=true&isFiat&lang=en-US&link_id=3969d24d1a8606&locales=true&logo=false&primaryColor=00C26F&to=eth&toFiat=eth&toTheMoon=true' style="height: 205px; width: 100%; border: none"></iframe>
