@@ -662,7 +662,7 @@
         <div class="modal-dialog modal-dialog-sm modal-dialog-centered">
         <div class="modal-content">
         <div class="modal-header">
-            <h6>Lock Funds For Up To 1 year, Earn 40% to 75% Guaranteed Yield(in Beta)</span></h6>
+            <h6>Lock Funds For Up To 5 years, Earn 75% to 105% Guaranteed Yield(in Beta)</span></h6>
                 <a href="#" class="modal-close" data-dismiss="modal" aria-label="Close">
                     <span class="btn-close badge bg-outline-warning p-2 fs-4">&times;</span>
                 </a>
@@ -690,7 +690,19 @@
                   <div class="form-group mb-3">
                       <label for="amount" class="form-label">Amount</label>
                       <input type="number" class="form-control" id="amount" name="lock_amount" placeholder="Enter amount" min="1000" required>
-                      <small>Minimum Lock ($1,000), and, High-Yield Guaranteed(up to 75% per annum).</small>
+                      <small>Minimum Lock ($1,000), and, High-Yield Guaranteed(up to 105% per annum).</small>
+                  </div>
+
+                  <div class="form-group mb-3">
+                      <label for="lockDuration" class="form-label">Duration</label>
+                      <select class="form-select" id="lockDuration" name="lock_duration" required>
+                          <option value="">Choose Duration</option> 
+                          <option value="1">1 Year (minimum lock)</option> 
+                          <option value="2">2 Years (median lock)</option> 
+                          <option value="3">3 Years (median lock)</option> 
+                          <option value="4">4 Years (median lock)</option> 
+                          <option value="5">5 Years (maximum lock)</option> 
+                      </select>
                   </div>
                   
                   <div class="form-group mb-3">
@@ -709,18 +721,6 @@
                         <?php endforeach; ?>
                       </select>
                   </div>
-
-                  <div class="form-group mb-3">
-                      <label for="lockDuration" class="form-label">Duration</label>
-                      <select class="form-select" id="lockDuration" name="lockDuration" required>
-                          <option value="">Choose Duration</option> 
-                          <option value="1">1 Year (minimum lock)</option> 
-                          <option value="2">2 Years (median lock)</option> 
-                          <option value="3">3 Years (median lock)</option> 
-                          <option value="4">4 Years (median lock)</option> 
-                          <option value="5">5 Years (maximum lock)</option> 
-                      </select>
-                  </div>
                                
                 <div id="walletDetails" style="display: none;">
                     <div class="form-group mb-3">
@@ -735,7 +735,7 @@
                     </div> 
                 </div>
                 <div class="form-text mb-3">
-                       <small>Pay into the wallet address, then come back and click proceed to continue. Remember to keep your transaction proof for later.</small>
+                <small>Pay into the wallet address, then come back and click proceed to continue. Remember to keep your transaction proof for later.</small>
                 </div>
 
                   <div class="modal-footer">

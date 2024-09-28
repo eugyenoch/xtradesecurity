@@ -22,24 +22,189 @@
                 <?php include "include/profileHeadRight.php";?>
       <?php include "include/sidebar.php";?>
 
-      <div class="content-body">
-        <div class="container">
+<div class="content-body">
+ <div class="container-fluid">  
+  <div class="row">
+        <div class="col-xl-9">
+              <div class="card bg-transparent">
+                <!-- <div class="card-header">
+                  <h4 class="card-title">Live Trading Environment</h4>
+                </div> -->
+                <div class="card-body bg-dark">
+    <!-- TradingView Widget BEGIN -->
+    <div class="tradingview-widget-container" style="height:900px; width:100%;">
+        <div class="tradingview-widget-container__widget" style="height:900px; width:100%;"></div>
+        <div class="tradingview-widget-copyright">
+            <a href="#0" rel="noopener nofollow" target="_blank"><span class="blue-text">Track all markets on Xtrade Security LTD</span></a>
+        </div>
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+            {
+            "autosize": false,
+            "height": "900",
+            "symbol": "BINANCE:BTCUSDT",
+            "timezone": "Etc/UTC",
+            "theme": "dark",
+            "style": "1",
+            "locale": "en",
+            "backgroundColor": "rgba(0, 0, 0, 1)",
+            "withdateranges": true,
+            "range": "6M",
+            "hide_side_toolbar": false,
+            "allow_symbol_change": true,
+            "compareSymbols": [
+              {
+                "symbol": "BINANCE:ETHUSDT",
+                "position": "SameScale"
+              },
+              {
+                "symbol": "BINANCE:BTCUSDT",
+                "position": "SameScale"
+              }
+            ],
+            "details": true,
+            "hotlist": true,
+            "calendar": false,
+            "studies": [
+              "STD;24h%Volume"
+            ],
+            "show_popup_button": true,
+            "popup_width": "1000",
+            "popup_height": "650",
+            "support_host": "https://www.tradingview.com"
+          }
+            </script>
+    </div>
+    <!-- TradingView Widget END -->
+</div>
+              </div>
+        </div>
+
+        <!-- <div class="col-xl-3">
+              <div class="card">
+                <div class="card-header">
+                  <h4 class="card-title">Order Book</h4>
+                </div>
+                <div class="card-body">
+                      [Placeholder]
+                </div>
+              </div>
+        </div> -->
+
+        <div class="col-xl-3">
+              <div class="card bg-dark">
+                <div class="card-header">
+                  <h4 class="card-title text-white">Spot</h4>
+                </div>
+                <div class="card-body">
+                <div class="order-create">
+            <form id="orderForm" action="<?php htmlentities($_SERVER['PHP_SELF']);?>" method="POST">
+
+            <div class="form-group">
+                      <input type="" name="txn" value="<?= 'TXN' . mt_rand(100000, 999999); ?>" readonly>
+                      <input type="" name="firstname" value="<?php if(isset($firstname)){echo $firstname;}else{echo "User";}?>" readonly>
+                      <input type="" name="lastname" value="<?php if(isset($lastname)){echo $lastname;}else{echo "User";}?>" readonly>  
+                      <input type="" name="email" value="<?php if(isset($user_email)){echo $user_email;}else{echo "User";}?>" readonly>
+                      <input type="" name="username" value="<?php if(isset($userName)){echo $userName;}else{echo "User";}?>" readonly>    
+                  </div>
+
+                <div class="btn-group w-100 mb-3" role="group">
+                    <input type="radio" class="btn-check" name="orderTypeBuy" id="buyOrder" value="buy" checked>
+                    <label class="btn btn-outline-primary text-white" for="buyOrder">Buy</label>
+                    <input type="radio" class="btn-check" name="orderTypeSell" id="sellOrder" value="sell">
+                    <label class="btn btn-outline-primary text-white" for="sellOrder">Sell</label>
+                </div>
+                
+                <div class="mb-3">
+                    <select class="form-select" name="orderMethod">
+                        <option value="limit" selected>Limit</option>
+                        <option value="market">Market</option>
+                        <option value="tp_sl">TP/SL</option>
+                    </select>
+                </div>
+                
+                <div class="d-flex justify-content-between mb-3">
+                    <span class="text-muted">Available Balance</span>
+                    <div>
+                        <span class="fw-bold me-1 text-muted" id="availableBalance">
+                          <?php if(isset($_SESSION['user_session'])) {$userBalance = calculateUserTotalBalance(); echo $userBalance;}
+                          else{echo "0.00";}?>
+                        </span>
+                        <span class="text-muted">USD</span>
+                    </div>
+                </div>
+                
+                <div class="limit-area" id="sfeLimitArea">
+                    <div class="mb-3">
+                        <label for="orderLimitPrice" class="form-label text-white">Order Price</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="orderLimitPrice" name="orderPrice" placeholder="63526.32">
+                            <span class="input-group-text">USDT</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="orderLimitQuantity" class="form-label text-white">Qty</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="orderLimitQuantity" name="orderQuantity">
+                            <span class="input-group-text">BTC</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3 slider-custom">
+                        <input type="range" class="form-range" min="0" max="100" step="25" id="customRange" name="orderPercentage">
+                        <div class="d-flex justify-content-between">
+                            <span class="text-white">0</span>
+                            <span class="text-white">25</span>
+                            <span class="text-white">50</span>
+                            <span class="text-white">75</span>
+                            <span class="text-white">100%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="orderLimitAmount" class="form-label text-white">Order Value</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="orderLimitAmount" name="orderValue">
+                            <span class="input-group-text">USDT</span>
+                        </div>
+                        <p class="text-muted mt-1">-- USD</p>
+                    </div>
+                </div>
+                
+                <div class="order-submit-area" id="sfeOrderSubmit">
+                    <button type="submit" class="btn btn-primary w-100 mb-2" name="trade" value="trade">Place Trade</button>
+                    <button type="reset" class="btn btn-secondary w-100 mb-2" name="clear" value="reset">Clear Data</button>
+                    <div class="text-center">
+                        <a href="#" class="text-decoration-none">XTrade Live Trading</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>          </div>
+              </div>
+        </div>
+  </div>
+
+      <div class="row">
         <div class="col-xxl-12">
               <div class="card">
                 <div class="card-header">
-                  <h4 class="card-title">Live Trading Environment</h4>
+                  <h4 class="card-title">Expand Trading Arena</h4>
                 </div>
                 <div class="card-body">
-                <iframe src="https://metatraderweb.app/trade?demo_all_servers=1&amp;startup_mode=open_demo&amp;startup_version=5&amp;lang=en&amp;save_password=off&amp;demo_show_phone=1&amp;utm_campaign=xtradeSecurity" allowfullscreen="allowfullscreen" style="width: 100%; height: 100vh; border: none"></iframe>
-                 
                   <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#tradingModal">View Advanced Chart</button>
+                  
                 </div>
-                  <iframe frameborder="0" width="100%" height="390" src="https://www.mql5.com/en/signals/widget/top/6zak?f=0&t=gray"></iframe>
+                <iframe frameborder="0" width="100%" height="390" src="https://www.mql5.com/en/signals/widget/top/6zak?f=0&t=gray"></iframe>
                 <div class="card-body pt-5">
                   <h4>Transfer Assets From XTrade Security To Your Other Wallets</h4>
                 <iframe id='iframe-widget' src='https://changenow.io/embeds/exchange-widget/v2/widget.html?FAQ=true&amount=0.1&amountFiat=1500&backgroundColor=FFFFFF&darkMode=false&from=btc&fromFiat=eur&horizontal=true&isFiat&lang=en-US&link_id=3969d24d1a8606&locales=true&logo=false&primaryColor=00C26F&to=eth&toFiat=eth&toTheMoon=true' style="height: 205px; width: 100%; border: none"></iframe>
                   <script defer type='text/javascript' src='https://changenow.io/embeds/exchange-widget/v2/stepper-connector.js'></script>
                  </div>
+              </div>
+           
+        </div>
+          </div>
           <div class="row">
             <div class="col-xxl-3 col-xl-6">
               <div class="card">
@@ -96,12 +261,12 @@
             <div class="col-xxl-12">
               <div class="card">
                 <div class="card-header">
-                  <h4 class="card-title">Fund Transactions</h4>
+                  <h4 class="card-title">Trading Transactions</h4>
                 </div>
                 <div class="card-body">
                 <div class="table-responsive">
                   <table class="table table-striped table-hover responsive-table" id="fundTable">
-                      <caption><strong>Profits are for locked funds only</strong></caption>
+                      <caption><strong>Profits are for winning bids only</strong></caption>
                       <thead>
                           <tr class="table-secondary">  
                               <th>TXN ID</th>
@@ -111,7 +276,6 @@
                               <th>Date</th>
                               <th>Locked</th>
                               <th>Duration</th>
-                              <th>Payment proof</th>
                           </tr>
                       </thead>
                       <tfoot>
@@ -123,7 +287,6 @@
                               <th>Date</th>
                               <th>Locked</th>
                               <th>Duration</th>
-                              <th>Payment proof</th>
                           </tr>
                       </tfoot>
                       <tbody>
@@ -164,21 +327,6 @@
                                           <?= "Unlocked" ?>
                                         <?php endif; ?>
                                       </td>
-                                      <td>
-                                      <?php if(!isset($funds_info['fund_proof']) || !isset($funds_info['fund_comment'])): ?>
-                                        <a type="button" 
-                                                class="btn btn-outline-secondary badge badge-outline badge-danger badge-md text-black" 
-                                                title="Use this link if you need to upload payment proof" 
-                                                data-toggle="modal"
-                                                data-target="#upload-proof"
-                                                data-ftxn="<?= $funds_info['ftxn']; ?>"
-                                                tabindex="-1"> 
-                                                Submit Proof
-                                              </a>
-                                        <?php else: ?>
-                                          <span><i class="text-success fa fa-check"></i><br>Proof Submitted</span>
-                                          <?php endif; ?>
-                                    </td>
                                   </tr>
                                   <?php //$serial_number++; 
                               endforeach; 
@@ -190,68 +338,6 @@
                       </tbody>
                   </table>
                   </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-xxl-12">
-              <div class="card">
-                <div class="card-header">
-                  <h4 class="card-title">Withdraw Transactions</h4>
-                </div>
-                <div class="card-body">
-                <div class="table-responsive">
-                <table class="table table-striped table-hover responsive-table" id="withdrawTable">
-                  <caption><strong>Withdrawal Summary. Only approved requests have been paid-out</strong></caption>
-                  <thead>
-                      <tr class="table-secondary">
-                          <th>TXN ID</th>
-                          <th>Amount</th>
-                          <th>Receiving address</th>
-                          <th>Status</th>
-                          <th>Date</th>
-                          
-                      </tr>
-                  </thead>
-                  <tfoot>
-                      <tr class="table-secondary">
-                          <th>TXN ID</th>
-                          <th>Amount</th>
-                          <th>Receiving address</th>
-                          <th>Status</th>
-                          <th>Date</th>
-                      </tr>
-                  </tfoot>
-                 <tbody>
-                  <?php $sql_withdraws = "SELECT * FROM withdraw WHERE user_email='$userEmail' OR userName='$userEmail'"; 
-                  $sql_withdraws_exec = $con->query($sql_withdraws); $serial_number = 1;
-                if ($sql_withdraws_exec->num_rows > 0): ?>
-                <?php foreach($sql_withdraws_exec as $withdraws_info): ?>
-                    <tr>  
-                        <td class="coin-name"><?= $withdraws_info['wtxn']; ?></td>
-                        <td class="coin-name"><?= number_format($withdraws_info['withdraw_amount'],2) . $withdraws_info['withdraw_currency']; ?></td>
-                        <td class="coin-name"><?= $withdraws_info['withdraw_address']; ?></td>
-                        <td class="coin-name">
-                            <?php if ($withdraws_info['withdraw_status'] === 'pending'): ?>
-                                <span class="badge bg-warning text-black"><?= htmlspecialchars($withdraws_info['withdraw_status']); ?></span>
-                            <?php elseif ($withdraws_info['withdraw_status'] === 'approved'): ?>
-                                <span class="badge bg-success"><?= htmlspecialchars($withdraws_info['withdraw_status']); ?></span>
-                            <?php else: ?>
-                                <?= htmlspecialchars($withdraws_info['withdraw_status']); ?>
-                            <?php endif; ?>
-                        </td>
-                        <td class="coin-name"><?= $withdraws_info['withdraw_request_date']; ?></td>
-                    </tr>
-                <?php endforeach; ?>
-            <?php else: ?>
-                 </tbody>
-                <tr>
-                    <td colspan="8">No withdrawal information found</td>
-                </tr>
-            <?php endif; ?>
-        </tbody>     
-                </table>
-
-                </div>
                 </div>
               </div>
             </div>
@@ -648,7 +734,7 @@
       </div>
     </div>
 
-    <div class="modal fade fullscreen-trading-modal" id="tradingModal" tabindex="-1" aria-labelledby="tradingModalLabel" aria-hidden="true">
+<div class="modal fade fullscreen-trading-modal" id="tradingModal" tabindex="-1" aria-labelledby="tradingModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-fullscreen">
     <div class="modal-content">
       <div class="modal-header">
@@ -695,3 +781,19 @@
 
     <?php include "modalForms.php"; ?>
     <?php include "include/footer.php"; ?>
+
+<?php
+// Check if the form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  // Collect form data
+  
+  $orderTypeBuy = $_POST["orderTypeBuy"];
+  $orderTypeSell = $_POST["orderTypeSell"];
+  $orderMethod = $_POST["orderMethod"];
+  $orderPrice = $_POST["orderPrice"];
+  $orderQuantity = $_POST["orderQuantity"];
+  $orderPercentage = $_POST["orderPercentage"];
+  $orderValue = $_POST["orderValue"];
+  //$action = $_POST["action"];
+}
+?>

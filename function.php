@@ -89,7 +89,7 @@ function checkUserLogin() {
 
 // Function to verify reCAPTCHA
 function verifyReCaptcha($recaptcha_response) {
-    $recaptcha_secret = '6Ld5Px8qAAAAABT4wTXKHJNpXt6-iEROX-VqoSwr';
+    $recaptcha_secret = '6LcYqkMqAAAAADF4n51X14l_kfodGjhMqEuXcj43';
     $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
     $recaptcha_data = [
         'secret' => $recaptcha_secret,
@@ -465,7 +465,7 @@ function getTotalApprovedLockedFundAmount() {
     } else {
         // Log the error and return 0 in case of failure
         error_log("SQL Error: " . $con->error);
-        return 0;
+        return "$0.00";
     }
 }
 function getTotalApprovedTransferForSeller() {

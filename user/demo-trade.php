@@ -23,23 +23,164 @@
       <?php include "include/sidebar.php";?>
 
       <div class="content-body">
-        <div class="container">
-        <div class="col-xxl-12">
+        <div class="container-fluid">
+        <div class="row">
+        <div class="col-xl-9">
+              <div class="card bg-transparent">
+                <!-- <div class="card-header">
+                  <h4 class="card-title">Live Trading Environment</h4>
+                </div> -->
+                <div class="card-body bg-dark">
+    <!-- TradingView Widget BEGIN -->
+    <div class="tradingview-widget-container" style="height:900px; width:100%;">
+        <div class="tradingview-widget-container__widget" style="height:900px; width:100%;"></div>
+        <div class="tradingview-widget-copyright">
+            <a href="#0" rel="noopener nofollow" target="_blank"><span class="blue-text">Track all markets on Xtrade Security LTD</span></a>
+        </div>
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+            {
+            "autosize": false,
+            "height": "900",
+            "symbol": "BINANCE:BTCUSDT",
+            "timezone": "Etc/UTC",
+            "theme": "dark",
+            "style": "1",
+            "locale": "en",
+            "backgroundColor": "rgba(0, 0, 0, 1)",
+            "withdateranges": true,
+            "range": "6M",
+            "hide_side_toolbar": false,
+            "allow_symbol_change": true,
+            "compareSymbols": [
+              {
+                "symbol": "BINANCE:ETHUSDT",
+                "position": "SameScale"
+              },
+              {
+                "symbol": "BINANCE:BTCUSDT",
+                "position": "SameScale"
+              }
+            ],
+            "details": true,
+            "hotlist": true,
+            "calendar": false,
+            "studies": [
+              "STD;24h%Volume"
+            ],
+            "show_popup_button": true,
+            "popup_width": "1000",
+            "popup_height": "650",
+            "support_host": "https://www.tradingview.com"
+          }
+            </script>
+    </div>
+    <!-- TradingView Widget END -->
+</div>
+              </div>
+        </div>
+
+        <!-- <div class="col-xl-3">
               <div class="card">
                 <div class="card-header">
-                  <h4 class="card-title">Xtrade Demo Trading Preview</h4>
+                  <h4 class="card-title">Order Book</h4>
                 </div>
                 <div class="card-body">
-                <iframe src="https://metatraderweb.app/trade?demo_all_servers=1&amp;startup_mode=open_demo&amp;startup_version=5&amp;lang=en&amp;save_password=on&amp;&amp;utm_campaign=xtradeSecurityDemo" allowfullscreen="allowfullscreen" style="width: 100%; height: 100vh; border: none"></iframe>
-                 </div>
+                      [Placeholder]
+                </div>
+              </div>
+        </div> -->
 
+        <div class="col-xl-3">
+              <div class="card bg-dark">
+                <div class="card-header">
+                  <h4 class="card-title text-white">Spot (not available in demo)</h4>
+                </div>
+                <div class="card-body">
+                <div class="order-create">
+            <form id="orderForm" action="process_order.php" method="POST">
+                <div class="btn-group w-100 mb-3" role="group">
+                    <input type="radio" class="btn-check" name="orderType" id="buyOrder" value="buy" checked>
+                    <label class="btn btn-outline-primary text-white" for="buyOrder">Buy</label>
+                    <input type="radio" class="btn-check" name="orderType" id="sellOrder" value="sell">
+                    <label class="btn btn-outline-primary text-white" for="sellOrder">Sell</label>
+                </div>
+                
+                <div class="mb-3">
+                    <select class="form-select" name="orderMethod">
+                        <option value="limit" selected>Limit</option>
+                        <option value="market">Market</option>
+                        <option value="tp_sl">TP/SL</option>
+                    </select>
+                </div>
+                
+                <div class="d-flex justify-content-between mb-3">
+                    <span class="text-muted">Available Balance</span>
+                    <div>
+                        <span class="fw-bold me-1" id="availableBalance">--</span>
+                        <span>USDT</span>
+                    </div>
+                </div>
+                
+                <div class="limit-area" id="sfeLimitArea">
+                    <div class="mb-3">
+                        <label for="orderLimitPrice" class="form-label text-white">Order Price</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="orderLimitPrice" name="orderPrice" value="63526.32">
+                            <span class="input-group-text">USDT</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="orderLimitQuantity" class="form-label text-white">Qty</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="orderLimitQuantity" name="orderQuantity">
+                            <span class="input-group-text">BTC</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3 slider-custom">
+                        <input type="range" class="form-range" min="0" max="100" step="25" id="customRange" name="orderPercentage">
+                        <div class="d-flex justify-content-between">
+                            <span class="text-white">0</span>
+                            <span class="text-white">25</span>
+                            <span class="text-white">50</span>
+                            <span class="text-white">75</span>
+                            <span class="text-white">100%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="orderLimitAmount" class="form-label text-white">Order Value</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="orderLimitAmount" name="orderValue">
+                            <span class="input-group-text">USDT</span>
+                        </div>
+                        <p class="text-muted mt-1">-- USD</p>
+                    </div>
+                </div>
+                <div class="order-submit-area" id="sfeOrderSubmit">
+                <button type="submit" class="btn btn-primary w-100 mb-2" name="trade" value="trade">Place Trade</button>
+                <button type="reset" class="btn btn-secondary w-100 mb-2" name="clear" value="reset">Clear Data</button>
+                    <div class="text-center">
+                        <a href="#" class="text-decoration-none">XTrade Demo Trading</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>         
+  
+  
+  </div></div></div>
+  </div>
+        <div class="col-xxl-12">
+              <div class="card">
                  <div class="row">
             <div class="col-xxl-12">
               <div class="card">
                 <div class="card-header">
                   <h4 class="card-title">This is a demo account. Migrate your account to live trading</h4>
                 </div>
-                  <a href="exchange.php" type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#tradingModal">Migrate Trading Account</a>
+                  <a href="exchange.php" type="button" class="btn btn-primary btn-block">Migrate Trading Account</a>
                 
               </div>
             </div>

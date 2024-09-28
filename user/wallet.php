@@ -34,7 +34,6 @@
                             echo "&nbsp;<span title='Total Balance (TB) as approved'>". $userBalance ."</span>";
                         } else {echo "&nbsp;<span title='Total Balance (TB) as approved'>$0.00</span>";}?>
                         </span> <sub>USD</sub></h3>
-                <p>= <?php if(isset($_SESSION['user_session'])){$userBalance = calculateUserTotalBalance(); echo $userBalance . 'USDT';}?> </p>
               </div>
             </div>
             <div class="col-xxl-3 col-xl-3 col-lg-6 col-md-6 col-sm-6">
@@ -47,7 +46,6 @@
                             echo "&nbsp;<span title='Total Approved Funded (TAF)'>$0.00</span>";
                         }?>
                 </span> <sub>USD</sub></h3>
-                <p>= <?php if(isset($_SESSION['user_session'])){$totalFunded = getTotalApprovedFundAmount(); echo $totalFunded .'USDT';}?></p>
               </div>
             </div>
             <div class="col-xxl-3 col-xl-3 col-lg-6 col-md-6 col-sm-6">
@@ -60,7 +58,6 @@
                             echo "<span title='Total Approved Fund Interest (TAFI)'>$0.00</span>";
                         }?>
                 </span> <sub>USD</sub></h3>
-                <p>= <?php if(isset($_SESSION['user_session'])){$totalFunded = getTotalApprovedFundInterest(); echo $totalFunded .'USDT';}?></p>
               </div>
             </div>
             <div class="col-xxl-3 col-xl-3 col-lg-6 col-md-6 col-sm-6">
@@ -72,7 +69,6 @@
                             echo "&nbsp;<span title='Total Approved Investments Profit (TAIP)'>$0.00</span>";
                         }?>
                 </span> <sub>USD</sub></h3>
-                <p>= <?php if(isset($_SESSION['user_session'])){$totalFunded = getTotalApprovedTransactionProfit(); echo $totalFunded .'USDT';}?></p>
               </div>
             </div>
           </div>
@@ -192,12 +188,19 @@
                   <div class="row align-items-center">
                     <div class="col-xxl-6 col-xl-6 col-lg-6">
                       <div class="balance-chart">
-                        <canvas id="moneyChart" width="200" height="180"></canvas>
+                        <canvas id="moneyChart" width="200" height="150"></canvas>
+                        <canvas id="moneyPie" width="200" height="150"></canvas>
                         <h5><?php if(isset($_SESSION['user_session'])) {$userBalance = calculateUserTotalBalance();
                             echo "Available Balance:&nbsp;<span title='Total Balance (TB) as approved'>". $userBalance ."</span>";
                         } else {
                             echo "Available Balance:&nbsp;<span title='Total Balance (TB) as approved'>$0.00</span>";
                         }?></h5>
+
+                      <h5>
+                        <?php if(isset($_SESSION['user_session'])) {$userLockedBalance =  getTotalApprovedLockedFundAmount();
+                                    echo "<i class='icofont-lock'></i>Locked Balance:&nbsp;<span title='Total Locked Balance (TLB) as approved'>". $userLockedBalance ."</span>";
+                                } else {echo "<i class='icofont-lock'></i>Locked Balance:&nbsp;<span title='Total Locked Balance (TLB) as approved'>$0.00</span>";}?>
+                            </h5>
                       </div>
                       <div>
                       <button type="button" class="btn btn-success" data-toggle="modal" data-target="#transferFund" tabindex="-1">Transfer Fund</button>
@@ -329,10 +332,11 @@
                               <th>TXN ID</th>
                               <th>Amount</th>
                               <th>Profit</th>
-                              <th>Status</th>
                               <th>Date</th>
                               <th>Locked</th>
                               <th>Duration</th>
+                              <th>Unlock Date</th>
+                              <th>Status</th>
                               <th>Payment proof</th>
                           </tr>
                       </thead>
@@ -341,10 +345,11 @@
                               <th>TXN ID</th>
                               <th>Amount</th>
                               <th>Profit</th>
-                              <th>Status</th>
-                              <th>Date</th>
+                              <th>Date Added/Approved</th>
                               <th>Locked</th>
                               <th>Duration</th>
+                              <th>Unlock Date</th>
+                              <th>Status</th>
                               <th>Payment proof</th>
                           </tr>
                       </tfoot>
@@ -361,6 +366,24 @@
                                               <?= ' 0.00 ' . $funds_info['fund_currency']; ?>
                                           <?php endif; ?>
                                       </td>
+                                     
+                                      <td><?= $funds_info['fund_request_date']; ?></td>
+                                      <td><?php if(isset($funds_info['is_locked']) && $funds_info['is_locked'] ==='yes'):?> 
+                                        <span class="badge bg-info">Yes</span>
+                                        <?php elseif(isset($funds_info['is_locked']) && $funds_info['is_locked'] ==='no'):?> 
+                                          <span class="badge bg-info">No</span>
+                                          <?php else: ?>
+                                            <span class="badge bg-info">Unlocked</span>
+                                        <?php endif; ?>
+                                      </td>
+
+                                      <td><?php if(isset($funds_info['lock_duration']) && $funds_info['lock_duration'] != NULL ):?> 
+                                        <span class="badge bg-info"><?= $funds_info['lock_duration'] . '&nbsp;Year(s)'; ?></span>
+                                        <?php else: ?>
+                                          <span class="badge bg-info">Unlocked</span>
+                                        <?php endif; ?>
+                                      </td>
+                                      <td></td>
                                       <td class="coin-name">
                                           <?php if ($funds_info['fund_status'] === 'pending'): ?>
                                               <span class="badge bg-warning text-black"><?= $funds_info['fund_status']; ?></span>
@@ -369,22 +392,6 @@
                                           <?php else: ?>
                                               <?= $funds_info['fund_status']; ?>
                                           <?php endif; ?>
-                                      </td>
-                                      <td><?= $funds_info['fund_request_date']; ?></td>
-                                      <td><?php if(isset($funds_info['is_locked']) && $funds_info['is_locked'] ==='yes'):?> 
-                                        <span class="badge bg-info">Yes</span>
-                                        <?php elseif(isset($funds_info['is_locked']) && $funds_info['is_locked'] ==='no'):?> 
-                                          <span class="badge bg-info">No</span>
-                                          <?php else: ?>
-                                            <?= 'Unlocked'; ?>
-                                        <?php endif; ?>
-                                      </td>
-
-                                      <td><?php if(isset($funds_info['lock_duration']) && isset($funds_info['lock_duration']) != NULL ):?> 
-                                        <span class="badge bg-info"><?= $funds_info['lock_duration']; ?></span>
-                                        <?php else: ?>
-                                          <?= "Unlocked" ?>
-                                        <?php endif; ?>
                                       </td>
                                       <td>
                                       <?php if(!isset($funds_info['fund_proof']) || !isset($funds_info['fund_comment'])): ?>

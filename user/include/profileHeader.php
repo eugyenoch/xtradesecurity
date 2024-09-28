@@ -110,18 +110,19 @@ $stmt->close();
 //Script for requesting funding
 if (isset($_POST['lock'])) {
   //Extract variables from user input
-  $ftxn = $_POST['ftxn'];
-  $femail = $_POST['femail'];
-  $fusername = $_POST['fusername']; 
-  $ffirstname = $_POST['ffirstname'];
-  $flastname = $_POST['flastname']; 
+  $ftxn = $_POST['ltxn'];
+  $femail = $_POST['lemail'];
+  $fusername = $_POST['lusername']; 
+  $ffirstname = $_POST['lfirstname'];
+  $flastname = $_POST['llastname']; 
   $fcurrency = $_POST['fcurrency_id'];
-  $famount = floatval($_POST['famount']);
+  $famount = floatval($_POST['lock_amount']);
   $isLocked = "yes";
+  $lockDuration = $_POST['lock_duration'];
   
   // Insert data into the fund table
-  $stmt = $con->prepare("INSERT INTO fund (user_email, userName, ftxn, firstname, lastname, fund_currency, fund_amount, is_locked) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-  $stmt->bind_param("ssssssds", $femail, $fusername, $ftxn, $ffirstname, $flastname, $fcurrency, $famount, $isLocked);
+  $stmt = $con->prepare("INSERT INTO fund (user_email, userName, ftxn, firstname, lastname, fund_currency, fund_amount, is_locked, lock_duration) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+  $stmt->bind_param("ssssssdsd", $femail, $fusername, $ftxn, $ffirstname, $flastname, $fcurrency, $famount, $isLocked, $lockDuration);
   if ($stmt->execute()) {
   // Success message
   echo "<script>alert('Success: Lock request submitted successfully and pending approval');</script>";

@@ -22,7 +22,10 @@ if (isset($_GET['deleteFund']) && !empty($_GET['deleteFund'])) {
 //APPROVE FUND
 if (isset($_GET['approveFund']) && !empty($_GET['approveFund'])) {
     $approveFund = $con->real_escape_string($_GET['approveFund']);
-    $approve_fund ="UPDATE fund SET fund_status='approved' WHERE id_no = '$approveFund'";
+    
+    // Corrected SQL query
+    $approve_fund = "UPDATE fund SET fund_status='approved', approved_at=NOW() WHERE id_no = '$approveFund'";
+    
     if ($con->query($approve_fund) === TRUE) {
         echo "<script>alert('Success: Funding Approved'); window.location='user-profile.php';</script>";
     } else {
@@ -30,16 +33,21 @@ if (isset($_GET['approveFund']) && !empty($_GET['approveFund'])) {
     }
 }
 
+
 //DISAPPROVE FUND
 if (isset($_GET['disapproveFund']) && !empty($_GET['disapproveFund'])) {
     $disapproveFund = $con->real_escape_string($_GET['disapproveFund']);
-    $disapprove_fund = "UPDATE fund SET fund_status='pending' WHERE id_no = '$disapproveFund'";
+    
+    // Corrected SQL query
+    $disapprove_fund = "UPDATE fund SET fund_status='pending', approved_at=NULL WHERE id_no = '$disapproveFund'";
+    
     if ($con->query($disapprove_fund) === TRUE) {
         echo "<script>alert('Success: Funding Disapproved'); window.location='user-profile.php';</script>";
     } else {
         echo "<script>alert('Error: The operation could not be performed'); window.location='user-profile.php';</script>";
     }
 }
+
 
 // UPDATE FUND
 if (isset($_POST['updateFund'])) {
@@ -87,7 +95,7 @@ if (isset($_GET['deleteWithdraw']) && !empty($_GET['deleteWithdraw'])) {
 //APPROVE WITHDRAWAL
 if (isset($_GET['approveWithdraw']) && !empty($_GET['approveWithdraw'])) {
     $approveWithdraw = $con->real_escape_string($_GET['approveWithdraw']);
-    $approve_withdraw ="UPDATE withdraw SET withdraw_status='approved' WHERE id_no = '$approveWithdraw'";
+    $approve_withdraw ="UPDATE withdraw SET withdraw_status='approved', approved_at=NOW() WHERE id_no = '$approveWithdraw'";
     if ($con->query($approve_withdraw) === TRUE) {
         echo "<script>alert('Success: Withdrawal Approved'); window.location='user-profile.php';</script>";
     } else {
@@ -98,7 +106,7 @@ if (isset($_GET['approveWithdraw']) && !empty($_GET['approveWithdraw'])) {
 //DISAPPROVE WITHDRAWAL
 if (isset($_GET['disapproveWithdraw']) && !empty($_GET['disapproveWithdraw'])) {
     $disapproveWithdraw = $con->real_escape_string($_GET['disapproveWithdraw']);
-    $disapprove_withdraw = "UPDATE withdraw SET withdraw_status='pending' WHERE id_no = '$disapproveWithdraw'";
+    $disapprove_withdraw = "UPDATE withdraw SET withdraw_status='pending', approved_at=NULL WHERE id_no = '$disapproveWithdraw'";
     if ($con->query($disapprove_withdraw) === TRUE) {
         echo "<script>alert('Success: Withdrawal Disapproved'); window.location='user-profile.php';</script>";
     } else {
@@ -125,7 +133,7 @@ if (isset($_GET['deleteTransaction']) && !empty($_GET['deleteTransaction'])) {
 //APPROVE TRANSACTION
 if (isset($_GET['approveTransaction']) && !empty($_GET['approveTransaction'])) {
     $approveTransaction = $con->real_escape_string($_GET['approveTransaction']);
-    $approve_transaction ="UPDATE transaction SET tstatus='approved' WHERE id_no = '$approveTransaction'";
+    $approve_transaction ="UPDATE transaction SET tstatus='approved', approved_at=NOW() WHERE id_no = '$approveTransaction'";
     if ($con->query($approve_transaction) === TRUE) {
         echo "<script>alert('Success:Transaction Approved'); window.location='user-profile.php';</script>";
     } else {
@@ -136,7 +144,7 @@ if (isset($_GET['approveTransaction']) && !empty($_GET['approveTransaction'])) {
 //DISAPPROVE TRANSACTION
 if (isset($_GET['disapproveTransaction']) && !empty($_GET['disapproveTransaction'])) {
     $disapproveTransaction = $con->real_escape_string($_GET['disapproveTransaction']);
-    $disapprove_transaction = "UPDATE transaction SET tstatus='pending' WHERE id_no = '$disapproveTransaction'";
+    $disapprove_transaction = "UPDATE transaction SET tstatus='pending', approved_at=NULL WHERE id_no = '$disapproveTransaction'";
     if ($con->query($disapprove_transaction) === TRUE) {
         echo "<script>alert('Success: Transaction Disapproved'); window.location='user-profile.php';</script>";
     } else {
@@ -196,7 +204,7 @@ if (isset($_GET['deleteTrade']) && !empty($_GET['deleteTrade'])) {
 //APPROVE TRADE OR TRANSFER
 if (isset($_GET['approveTrade']) && !empty($_GET['approveTrade'])) {
     $approveTrade = $con->real_escape_string($_GET['approveTrade']);
-    $approve_trade ="UPDATE peer_transfer SET pstatus='approved' WHERE id_no = '$approveTrade'";
+    $approve_trade ="UPDATE peer_transfer SET pstatus='approved', approved_at=NOW() WHERE id_no = '$approveTrade'";
     if ($con->query($approve_trade) === TRUE) {
         echo "<script>alert('Success:Transaction Approved'); window.location='user-profile.php';</script>";
     } else {
@@ -207,7 +215,7 @@ if (isset($_GET['approveTrade']) && !empty($_GET['approveTrade'])) {
 //DISAPPROVE TRANSACTION
 if (isset($_GET['disapproveTrade']) && !empty($_GET['disapproveTrade'])) {
     $disapproveTrade = $con->real_escape_string($_GET['disapproveTrade']);
-    $disapprove_trade = "UPDATE peer_transfer SET pstatus='pending' WHERE id_no = '$disapproveTrade'";
+    $disapprove_trade = "UPDATE peer_transfer SET pstatus='pending', approved_at=NULL WHERE id_no = '$disapproveTrade'";
     if ($con->query($disapprove_trade) === TRUE) {
         echo "<script>alert('Success: Transaction Disapproved'); window.location='user-profile.php';</script>";
     } else {

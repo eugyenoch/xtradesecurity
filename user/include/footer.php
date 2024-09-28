@@ -209,12 +209,39 @@ var moneyChart = new Chart(ctx2, {
         datasets: [{
             label: 'Finance ($)',
             data: [totalFunded, totalInvestmentProfit, totalInvestment, totalWithdrawn, userBalance],
-            backgroundColor: [
-                'rgba(255,165,0,0.4)',
-            ],
-            borderColor: [
-                'rgba(255,165,0,1)',
-            ],
+            // backgroundColor: [
+            //     'rgba(255,165,0,0.4)',
+            // ],
+            // borderColor: [
+            //     'rgba(255,165,0,1)',
+            // ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+
+
+var ctx3 = document.getElementById('moneyPie').getContext('2d');
+var moneyChart = new Chart(ctx3, {
+    type: 'doughnut',
+    data: {
+        labels: ['Funded','Profit','Investments','Withdrawal','Balance'],
+        datasets: [{
+            label: 'Finance ($)',
+            data: [totalFunded, totalInvestmentProfit, totalInvestment, totalWithdrawn, userBalance],
+            // backgroundColor: [
+            //     'rgba(255,165,0,0.4)',
+            // ],
+            // borderColor: [
+            //     'rgba(255,165,0,1)',
+            // ],
             borderWidth: 1
         }]
     },

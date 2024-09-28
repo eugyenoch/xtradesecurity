@@ -828,13 +828,15 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
                           <th>Comment</th>
                           <th>Status</th>
                           <th>Date</th>
+                          <th>Lock</th>
+                          <th>Lock Duration</th>
                           <th>Edit</th>
                           <th>Delete</th>
                       </tr>
                   </thead>
                   <tfoot>
                       <tr class="table-secondary">
-                          <th>ID</th>
+                      <th>ID</th>
                           <th>Email</th>
                           <th>Fullname</th>
                           <th>Amount</th>
@@ -843,6 +845,8 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
                           <th>Comment</th>
                           <th>Status</th>
                           <th>Date</th>
+                          <th>Lock</th>
+                          <th>Lock Duration</th>
                           <th>Edit</th>
                           <th>Delete</th>
                       </tr>
@@ -884,6 +888,22 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
                                   <?php endif; ?>
                               </td>
                         <td class="coin-name"><?= $funds_info['fund_request_date']; ?></td>
+                        <td>
+                          <?php if(isset($funds_info['is_locked']) && $funds_info['is_locked'] ==='yes'):?> 
+                          <span class="badge bg-info">Yes</span>
+                          <?php elseif(isset($funds_info['is_locked']) && $funds_info['is_locked'] ==='no'):?> 
+                            <span class="badge bg-info">No</span>
+                            <?php else: ?>
+                              <span class="badge bg-info">Unlocked</span>
+                          <?php endif; ?>
+                        </td>
+
+                        <td><?php if(isset($funds_info['lock_duration']) && isset($funds_info['lock_duration']) != NULL ):?> 
+                          <span class="badge bg-info"><?= $funds_info['lock_duration'] . 'Year(s)'; ?></span>
+                          <?php else: ?>
+                            <span class="badge bg-info">Unlocked</span>
+                          <?php endif; ?>
+                        </td>
                       <td class="coin-name">
                           <button type="button" class="edit-btn btn btn-outline-secondary badge badge-outline badge-danger badge-md">Edit</button>
                       </td>

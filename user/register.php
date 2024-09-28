@@ -49,7 +49,7 @@ if (isset($_POST['addUser'])) {
   // Check if the reCAPTCHA response is set
   if (isset($_POST['g-recaptcha-response']) && !empty($_POST['g-recaptcha-response'])) {
       // reCAPTCHA validation
-      $recaptcha_secret = '6Ld5Px8qAAAAABT4wTXKHJNpXt6-iEROX-VqoSwr';
+      $recaptcha_secret = '6LcYqkMqAAAAADF4n51X14l_kfodGjhMqEuXcj43';
       $recaptcha_response = $_POST['g-recaptcha-response'];
 
       $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
@@ -309,7 +309,7 @@ if (isset($_POST['addUser'])) {
                           <input type="checkbox" name="checkbox" required />By submitting this form, I agree to the website <a href="../terms-of-use.php">terms of use</a> and <a href="../privacy-policy.php">privacy policy</a><span class="text-danger">*</span>
                       </div>
 
-                      <div class="g-recaptcha" data-sitekey="6Ld5Px8qAAAAAOqOnYeBL8ELqirvPKqMAauzHrnT" data-callback='onSubmit' data-action='submit'></div>
+                      <div class="g-recaptcha" data-sitekey="6LcYqkMqAAAAAHvHe1pXU8m064xvQDN8rMjuMK7t" data-callback='onSubmit' data-action='submit'></div>
 
                       <button type="submit" class="btn-action" name="addUser">Create Account</button>
 

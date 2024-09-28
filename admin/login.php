@@ -193,7 +193,7 @@ if (isset($_POST['emailLogin']) || isset($_POST['phoneLogin'])) {
                       </div>
                       <p><a class="small" href="check.php">Forgot Password?</a></p>
                     </div>
-                    <div class="g-recaptcha" data-sitekey="6Ld5Px8qAAAAAOqOnYeBL8ELqirvPKqMAauzHrnT" data-callback='onSubmit' data-action='submit'></div>
+                    <div class="g-recaptcha" data-sitekey="6LcYqkMqAAAAAHvHe1pXU8m064xvQDN8rMjuMK7t" data-callback='onSubmit' data-action='submit'></div>
 
                     <button type="submit" class="btn-action" name="emailLogin">Login</button>
                     <div class="bottom">
@@ -225,7 +225,7 @@ if (isset($_POST['emailLogin']) || isset($_POST['phoneLogin'])) {
                       </div>
                       <p><a class="small" href="check.php">Forgot Password?</a></p>
                     </div>
-                    <div class="g-recaptcha" data-sitekey="6Ld5Px8qAAAAAOqOnYeBL8ELqirvPKqMAauzHrnT" data-callback='onSubmit' data-action='submit'></div>
+                    <div class="g-recaptcha" data-sitekey="6LcYqkMqAAAAAHvHe1pXU8m064xvQDN8rMjuMK7t" data-callback='onSubmit' data-action='submit'></div>
 
                     <button type="submit" class="btn-action" name="phoneLogin">Login</button>
                     <div class="bottom">
