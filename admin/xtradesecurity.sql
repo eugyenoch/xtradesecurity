@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 08, 2024 at 11:18 AM
+-- Generation Time: Oct 01, 2024 at 09:29 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -269,24 +269,27 @@ CREATE TABLE `users` (
   `asset_address` varchar(512) NOT NULL,
   `reg_date` datetime NOT NULL DEFAULT current_timestamp(),
   `verification_token` varchar(512) NOT NULL,
-  `is_verified` int(11) NOT NULL
+  `is_verified` int(11) NOT NULL,
+  `id_type` varchar(255) DEFAULT NULL,
+  `id_front` varchar(255) DEFAULT NULL,
+  `id_back` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id_no`, `firstname`, `lastname`, `user_email`, `userName`, `user_pass`, `address`, `city`, `country`, `phone`, `photo`, `affid`, `asset_address`, `reg_date`, `verification_token`, `is_verified`) VALUES
-(1, 'Daniel', 'John', 'danjohn@gmail.com', 'danjohn', 'bfa2cfa3e62d924082d642fb35072aea', NULL, 'Lagos', 'Nigeria', '07030000000', NULL, 3454545, 'xt22987654321qwertyui567890lkjhgfdsav234\r\n', '2024-08-02 15:58:07', '', 0),
-(15, 'DU', 'Enoch', 'yhamemail@gmail.com', 'yhamer', '1c77bb6831e107d5982f0b436c9b7c47', 'plot 1024', 'agbani', 'Nigeria', '+9307032553325', NULL, 835952, '', '2024-08-06 17:56:51', '64f088da1fc190bef77b3ebae3138616', 1),
-(17, 'xtradesecurity', 'user', 'info@xtradesecurity.com', 'xtradeinfo', 'bfa2cfa3e62d924082d642fb35072aea', '123 Central Area, West London', 'London', 'Djibouti', '+6599876544', '../assets/user-uploads/dashboard 1.png', 812781, 'xt0987654321qwertyui567890lkjhgfdsav2345', '2024-08-07 16:06:27', 'b0a755904cbc26665d7600413feac603', 1),
-(19, 'Softa', 'Demo', 'demos@softa.com', 'Softaculos', 'a434ec7efd5efb4315804e331ed4a474', '', '', 'French Guiana', '+93999484848', NULL, 155121, '', '2024-08-10 17:17:17', '62018b58a88b225bee04b571f9f8a577', 0),
-(20, 'OPI', 'Special', 'oip@nsk.com', 'opis', '954246cd631c1c8390ff5831235b774c', '', '', 'Costa Rica', '+43999484866', NULL, 528090, '', '2024-08-10 18:29:52', '5cf8b449f1a07fd9a54ec12124992b35', 0),
-(21, 'Splintos', 'Group', 'splintosgroup@gmail.com', 'opis00', 'e14d69b484bb4f17e03a422b785e4b32', '', '', 'Afghanistan', '+6187654567890', NULL, 122331, '', '2024-08-10 18:39:02', '5e3a279b12a7b19c83b397dba5942b47', 0),
-(22, 'Poch', 'Roch', 'pooo@pooo.com', 'poooo', '15a044d3532e48280e5cfa36596c1b88', '', '', 'Afghanistan', '+2299876543456', NULL, 137120, '', '2024-08-10 19:05:08', '9a82be28bf3f1c2f82c6f25ebfe7f18e', 0),
-(23, 'Poch', 'Roch', 'events@childtraumaconsult.co.uk', 'Event Planner', 'ce1958be5fa5776dea21d7156f2ab526', '', '', 'Afghanistan', '+93876543464', NULL, 158628, '', '2024-08-10 19:07:55', '0ccfa4985e2ce3d8da446d120524f4ad', 0),
-(24, 'Google', 'Police', 'police@gmail.com', 'GooglePolice', '326abe6733e9888571f744a8a63b0fcc', '', '', 'Afghanistan', '+939876545678', NULL, 952980, '', '2024-08-10 19:32:37', 'd9e9e45d5d4624168dccba1416d2547a', 0),
-(25, 'mark', 'morrison', 'poiuiou@gmail.com', 'POihug', '1cbd75844ada1fb98355ff338efc0727', '', '', 'Afghanistan', '+93876545678', NULL, 647197, '', '2024-08-10 19:33:29', '62d8a13ec2d8557a1d28738cb86b4b38', 0);
+INSERT INTO `users` (`id_no`, `firstname`, `lastname`, `user_email`, `userName`, `user_pass`, `address`, `city`, `country`, `phone`, `photo`, `affid`, `asset_address`, `reg_date`, `verification_token`, `is_verified`, `id_type`, `id_front`, `id_back`) VALUES
+(1, 'Daniel', 'John', 'danjohn@gmail.com', 'danjohn', 'bfa2cfa3e62d924082d642fb35072aea', NULL, 'Lagos', 'Nigeria', '07030000000', NULL, 3454545, 'xt22987654321qwertyui567890lkjhgfdsav234\r\n', '2024-08-02 15:58:07', '', 0, NULL, NULL, NULL),
+(15, 'DU', 'Enoch', 'yhamemail@gmail.com', 'yhamer', '1c77bb6831e107d5982f0b436c9b7c47', 'plot 1024', 'agbani', 'Nigeria', '+9307032553325', NULL, 835952, '', '2024-08-06 17:56:51', '64f088da1fc190bef77b3ebae3138616', 1, NULL, NULL, NULL),
+(17, 'xtradesecurity', 'user', 'info@xtradesecurity.com', 'xtradeinfo', 'bfa2cfa3e62d924082d642fb35072aea', '123 Central Area, West London', 'London', 'Djibouti', '+6599876544', '../assets/user-uploads/dashboard 1.png', 812781, 'xt0987654321qwertyui567890lkjhgfdsav2345', '2024-08-07 16:06:27', 'b0a755904cbc26665d7600413feac603', 1, NULL, NULL, NULL),
+(19, 'Softa', 'Demo', 'demos@softa.com', 'Softaculos', 'a434ec7efd5efb4315804e331ed4a474', '', '', 'French Guiana', '+93999484848', NULL, 155121, '', '2024-08-10 17:17:17', '62018b58a88b225bee04b571f9f8a577', 0, NULL, NULL, NULL),
+(20, 'OPI', 'Special', 'oip@nsk.com', 'opis', '954246cd631c1c8390ff5831235b774c', '', '', 'Costa Rica', '+43999484866', NULL, 528090, '', '2024-08-10 18:29:52', '5cf8b449f1a07fd9a54ec12124992b35', 0, NULL, NULL, NULL),
+(21, 'Splintos', 'Group', 'splintosgroup@gmail.com', 'opis00', 'e14d69b484bb4f17e03a422b785e4b32', '', '', 'Afghanistan', '+6187654567890', NULL, 122331, '', '2024-08-10 18:39:02', '5e3a279b12a7b19c83b397dba5942b47', 0, NULL, NULL, NULL),
+(22, 'Poch', 'Roch', 'pooo@pooo.com', 'poooo', '15a044d3532e48280e5cfa36596c1b88', '', '', 'Afghanistan', '+2299876543456', NULL, 137120, '', '2024-08-10 19:05:08', '9a82be28bf3f1c2f82c6f25ebfe7f18e', 0, NULL, NULL, NULL),
+(23, 'Poch', 'Roch', 'events@childtraumaconsult.co.uk', 'Event Planner', 'ce1958be5fa5776dea21d7156f2ab526', '', '', 'Afghanistan', '+93876543464', NULL, 158628, '', '2024-08-10 19:07:55', '0ccfa4985e2ce3d8da446d120524f4ad', 0, NULL, NULL, NULL),
+(24, 'Google', 'Police', 'police@gmail.com', 'GooglePolice', '326abe6733e9888571f744a8a63b0fcc', '', '', 'Afghanistan', '+939876545678', NULL, 952980, '', '2024-08-10 19:32:37', 'd9e9e45d5d4624168dccba1416d2547a', 0, NULL, NULL, NULL),
+(25, 'mark', 'morrison', 'poiuiou@gmail.com', 'POihug', '1cbd75844ada1fb98355ff338efc0727', '', '', 'Afghanistan', '+93876545678', NULL, 647197, '', '2024-08-10 19:33:29', '62d8a13ec2d8557a1d28738cb86b4b38', 0, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
