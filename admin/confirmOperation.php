@@ -190,8 +190,8 @@ if (isset($_GET['atr']) && !empty($_GET['atr'])) {
           </script>";
   }
 
-//TRANSFER
-//CONFIRM TRANSFER REQUEST DELETE
+//TRADE
+//CONFIRM TRADE REQUEST DELETE
 if (isset($_GET['trade']) && !empty($_GET['trade'])) {
     $trade = $con->real_escape_string($_GET['trade']);
   
@@ -243,6 +243,50 @@ if (isset($_GET['dnews']) && !empty($_GET['dnews'])) {
     echo "<script>
             if (confirm('Are you sure you want to permanently delete this subscriber?')) {
                 window.location.href = 'userProcessor.php?deleteNewsletter=" . $dnews . "';
+            } else {
+                window.location.href = 'user-profile.php';
+            }
+          </script>";
+  }
+
+
+  //EXCHANGE
+//CONFIRM EXCHANGE TRANSACTION DELETE
+if (isset($_GET['exDel']) && !empty($_GET['exDel'])) {
+    $exDel = $con->real_escape_string($_GET['exDel']);
+  
+    // Confirm deletion with the user
+    echo "<script>
+            if (confirm('Are you sure you want to permanently delete this record?')) {
+                window.location.href = 'finance.php?deleteExchange=" .  $exDel . "';
+            } else {
+                window.location.href = 'user-profile.php';
+            }
+          </script>";
+  }
+
+  //CONFIRM EXCHANGE TRANSACTION MARK WIN
+if (isset($_GET['exW']) && !empty($_GET['exW'])) {
+    $exW = $con->real_escape_string($_GET['exW']);
+  
+    // Confirm deletion with the user
+    echo "<script>
+            if (confirm('Are you sure you want to approve this record?')) {
+                window.location.href = 'finance.php?approveExchange=" . $exW . "';
+            } else {
+                window.location.href = 'user-profile.php';
+            }
+          </script>";
+  }
+
+   //CONFIRM EXCHANGE TRANSACTION MARK LOOSE
+   if (isset($_GET['exL']) && !empty($_GET['exL'])) {
+    $exL = $con->real_escape_string($_GET['exL']);
+  
+    // Confirm deletion with the user
+    echo "<script>
+            if (confirm('Are you sure you want to disapprove this record?')) {
+                window.location.href = 'finance.php?disapproveExchange=" . $exL . "';
             } else {
                 window.location.href = 'user-profile.php';
             }

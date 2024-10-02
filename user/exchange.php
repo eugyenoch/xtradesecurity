@@ -97,31 +97,32 @@
                 </div>
                 <div class="card-body">
                 <div class="order-create">
-            <form id="orderForm" action="<?php htmlentities($_SERVER['PHP_SELF']);?>" method="POST">
+                <form id="orderForm" action="<?php htmlentities($_SERVER['PHP_SELF']);?>" method="POST">
+                 <!-- Hidden Fields -->
+                  <input type="hidden" name="txn" value="<?= 'TXN' . mt_rand(100000, 999999); ?>" readonly>
+                  <input type="hidden" name="firstname" value="<?= isset($firstname) ? $firstname : 'Firstname'; ?>" readonly>
+                  <input type="hidden" name="lastname" value="<?= isset($lastname) ? $lastname : 'Lastname'; ?>" readonly>
+                  <input type="hidden" name="email" value="<?= isset($user_email) ? $user_email : 'Email'; ?>" readonly>
+                  <input type="hidden" name="username" value="<?= isset($userName) ? $userName : 'User'; ?>" readonly>
 
-            <div class="form-group">
-                      <input type="hidden" name="txn" value="<?= 'TXN' . mt_rand(100000, 999999); ?>" readonly>
-                      <input type="hidden" name="firstname" value="<?php if(isset($firstname)){echo $firstname;}else{echo "User";}?>" readonly>
-                      <input type="hidden" name="lastname" value="<?php if(isset($lastname)){echo $lastname;}else{echo "User";}?>" readonly>  
-                      <input type="hidden" name="email" value="<?php if(isset($user_email)){echo $user_email;}else{echo "User";}?>" readonly>
-                      <input type="hidden" name="username" value="<?php if(isset($userName)){echo $userName;}else{echo "User";}?>" readonly>    
-                  </div>
 
+                <!-- Buy/Sell Toggle -->
                 <div class="btn-group w-100 mb-3" role="group">
-                    <input type="radio" class="btn-check" name="orderTypeBuy" id="buyOrder" value="buy" checked>
+                    <input type="radio" class="btn-check" name="orderType" id="buyOrder" value="buy" checked>
                     <label class="btn btn-outline-primary text-white" for="buyOrder">Buy</label>
-                    <input type="radio" class="btn-check" name="orderTypeSell" id="sellOrder" value="sell">
+                    <input type="radio" class="btn-check" name="orderType" id="sellOrder" value="sell">
                     <label class="btn btn-outline-primary text-white" for="sellOrder">Sell</label>
                 </div>
-                
-                <div class="mb-3">
-                    <select class="form-select" name="orderMethod">
+
+                <!-- Order Type Selection (Limit/Market/TP-SL) -->
+                <div class="mb-3" id="orderTypeSection">
+                    <select class="form-select" name="orderMethod" id="orderMethod">
                         <option value="limit" selected>Limit</option>
                         <option value="market">Market</option>
                         <option value="tp_sl">TP/SL</option>
                     </select>
                 </div>
-                
+
                 <div class="d-flex justify-content-between mb-3">
                     <span class="text-muted">Available Balance</span>
                     <div>
@@ -132,26 +133,27 @@
                         <span class="text-muted">USD</span>
                     </div>
                 </div>
-                
+
                 <div class="limit-area" id="sfeLimitArea">
                     <div class="mb-3">
-                        <label for="orderLimitPrice" class="form-label text-white">Order Price</label>
+                        <label for="orderLimitPrice" class="form-label text-white">Order Price (<span id="priceLabel">Buy</span>)</label>
                         <div class="input-group">
                             <input type="number" class="form-control" id="orderLimitPrice" name="orderPrice" required>
                             <span class="input-group-text">USDT</span>
                         </div>
                     </div>
-                    
+
                     <div class="mb-3">
-                        <label for="orderLimitQuantity" class="form-label text-white">Qty</label>
+                        <label for="orderLimitQuantity" class="form-label text-white">Qty (<span id="quantityLabel">Buy</span>)</label>
                         <div class="input-group">
                             <input type="text" class="form-control" id="orderLimitQuantity" name="orderQuantity" readonly>
                             <span class="input-group-text">BTC</span>
                         </div>
                     </div>
-                    
+
+                    <!-- Custom Range Slider -->
                     <div class="mb-3 slider-custom">
-                        <input type="range" class="form-range" min="0" max="100" step="25" value="0" id="customRange" name="orderPercentage">
+                        <input type="range" class="form-range" min="1" max="100" step="25" value="0" id="customRange" name="orderPercentage">
                         <div class="d-flex justify-content-between">
                             <span class="text-white">0</span>
                             <span class="text-white">25%</span>
@@ -160,23 +162,25 @@
                             <span class="text-white">100%</span>
                         </div>
                     </div>
-                    
+
+                    <!-- Order Value -->
                     <div class="mb-3">
-                      <label for="orderLimitAmount" class="form-label text-white">Order Value</label>
-                      <div class="input-group">
-                          <input type="text" class="form-control" id="orderLimitAmount" name="orderValue" placeholder="0" readonly>
-                          <span class="input-group-text">USDT</span>
-                      </div>
-                  </div>
-                
-                <div class="order-submit-area" id="sfeOrderSubmit">
-                    <button type="submit" class="btn btn-primary w-100 mb-2" name="trade" value="trade">Place Trade</button>
-                    <button type="reset" class="btn btn-secondary w-100 mb-2" name="clear" value="reset">Clear Data</button>
-                    <div class="text-center">
-                        <span class="text-decoration-none">XTrade Live Trading</span>
+                        <label for="orderLimitAmount" class="form-label text-white">Order Value</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="orderLimitAmount" name="orderValue" placeholder="0" readonly>
+                            <span class="input-group-text">USDT</span>
+                        </div>
+                    </div>
+
+                    <div class="order-submit-area" id="sfeOrderSubmit">
+                        <button type="submit" class="btn btn-primary w-100 mb-2" id="submitButton" name="trade" value="trade">Place Buy Order</button>
+                        <button type="reset" class="btn btn-secondary w-100 mb-2" name="clear" value="reset">Clear Data</button>
+                        <div class="text-center">
+                            <span class="text-decoration-none">XTrade Live Trading</span>
+                        </div>
                     </div>
                 </div>
-            </form>
+                </form>
         </div>
     </div>          </div>
               </div>
@@ -259,82 +263,114 @@
             <div class="col-xxl-12">
               <div class="card">
                 <div class="card-header">
-                  <h4 class="card-title">Trading Transactions</h4>
+                  <h4 class="card-title">Exchange Transactions</h4>
                 </div>
                 <div class="card-body">
                 <div class="table-responsive">
-                  <table class="table table-striped table-hover responsive-table" id="fundTable">
-                      <caption><strong>Profits are for winning bids only</strong></caption>
-                      <thead>
-                          <tr class="table-secondary">  
-                              <th>TXN ID</th>
-                              <th>Amount</th>
-                              <th>Profit</th>
-                              <th>Status</th>
-                              <th>Date</th>
-                              <th>Locked</th>
-                              <th>Duration</th>
-                          </tr>
-                      </thead>
-                      <tfoot>
-                          <tr class="table-secondary">  
-                              <th>TXN ID</th>
-                              <th>Amount</th>
-                              <th>Profit</th>
-                              <th>Status</th>
-                              <th>Date</th>
-                              <th>Locked</th>
-                              <th>Duration</th>
-                          </tr>
-                      </tfoot>
-                      <tbody>
-                      <?php if (!empty($funds)): ?>
-                        <?php foreach ($funds as $funds_info): ?>
-                                  <tr>  
-                                      <td><?= $funds_info['ftxn']; ?></td>
-                                      <td><?= number_format($funds_info['fund_amount'],2) . ' ' . $funds_info['fund_currency']; ?></td>
-                                      <td>
-                                          <?php if (!empty($funds_info['fund_profit'])): ?>
-                                              <?= number_format($funds_info['fund_profit'],2) . ' ' . $funds_info['fund_currency']; ?>
-                                          <?php else: ?>
-                                              <?= ' 0.00 ' . $funds_info['fund_currency']; ?>
-                                          <?php endif; ?>
-                                      </td>
-                                      <td class="coin-name">
-                                          <?php if ($funds_info['fund_status'] === 'pending'): ?>
-                                              <span class="badge bg-warning text-black"><?= $funds_info['fund_status']; ?></span>
-                                          <?php elseif ($funds_info['fund_status'] === 'approved'): ?>
-                                              <span class="badge bg-success"><?= $funds_info['fund_status']; ?></span>
-                                          <?php else: ?>
-                                              <?= $funds_info['fund_status']; ?>
-                                          <?php endif; ?>
-                                      </td>
-                                      <td><?= $funds_info['fund_request_date']; ?></td>
-                                      <td><?php if(isset($funds_info['is_locked']) && $funds_info['is_locked'] ==='yes'):?> 
-                                        <span class="badge bg-info">Yes</span>
-                                        <?php elseif(isset($funds_info['is_locked']) && $funds_info['is_locked'] ==='no'):?> 
-                                          <span class="badge bg-info">No</span>
-                                          <?php else: ?>
-                                            <?= 'Unlocked'; ?>
-                                        <?php endif; ?>
-                                      </td>
+                <table class="table table-striped table-hover table-sm responsive-table" id="userExchangeTable"> 
+                <caption><strong>Profits are for winning bids only</strong></caption>
+    <thead>
+        <tr class="table-secondary">  
+            <th>TXN ID</th>
+            <th>Order Type</th>
+            <th>Order Price</th>
+            <th>Quantity</th>
+            <th>Order Value</th>
+            <th>Order Method</th>
+            <th>Date</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr class="table-secondary">  
+            <th>TXN ID</th>
+            <th>Order Type</th>
+            <th>Order Price</th>
+            <th>Quantity</th>
+            <th>Order Value</th>
+            <th>Order Method</th>
+            <th>Date</th>
+            <th>Status</th>
+        </tr>
+    </tfoot>
+    <?php 
+    // Get the current logged-in user's username or email from the session
+    $currentUser = $_SESSION['user_session']; // Assuming 'user_session' holds username or email
 
-                                      <td><?php if(isset($funds_info['lock_duration']) && isset($funds_info['lock_duration']) != NULL ):?> 
-                                        <span class="badge bg-info"><?= $funds_info['lock_duration']; ?></span>
-                                        <?php else: ?>
-                                          <?= "Unlocked" ?>
-                                        <?php endif; ?>
-                                      </td>
-                                  </tr>
-                                  <?php //$serial_number++; 
-                              endforeach; 
-                          else: ?>
-                              <tr>
-                                  <td colspan="7">No funding information found</td>
-                              </tr>
-                          <?php endif; ?>
-                      </tbody>
-                  </table>
+    // SQL query to fetch all records from the exchanger table where username or email matches the current user
+    $sql = "SELECT * FROM exchanger WHERE username = ? OR email = ?";
+    $stmt = $con->prepare($sql);
+    $stmt->bind_param('ss', $currentUser, $currentUser);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $exchanges = $result->fetch_all(MYSQLI_ASSOC);
+    
+    ?>
+    <tbody>
+    <?php if (!empty($exchanges)): ?>
+        <?php foreach ($exchanges as $exchange): ?>
+            <tr>  
+                <td><?= htmlspecialchars($exchange['txn']); ?></td>
+                <td>
+                <?php 
+                      if (!empty($exchange['order_status'])) {
+                          switch ($exchange['order_status']) {
+                              case 'ongoing':
+                                  echo "<i class='icofont-spinner-alt-5 text-warning'></i>";
+                                  break;
+                              case 'win':
+                                  echo "<i class='icofont-arrow-up text-success'></i>";
+                                  break;
+                              case 'loose':
+                                  echo "<i class='icofont-arrow-down text-danger'></i>";
+                                  break;
+                              default:
+                                  echo "<i class='icofont-minus-circle text-secondary'></i>";
+                                  break;
+                          }
+                      } else {
+                          echo "<i class='icofont-minus-circle text-secondary'></i>";
+                      }
+                  ?>
+                  <?= ucfirst(htmlspecialchars($exchange['order_type'])); ?>
+                </td>
+                <td><?= number_format($exchange['order_price'], 2) . ' USDT'; ?></td>
+                <td><?= number_format($exchange['order_quantity'], 8) . ' BTC'; ?></td>
+                <td><?= number_format($exchange['order_value'], 2) . ' USDT'; ?></td>
+                <td><?= ucfirst(htmlspecialchars($exchange['order_method'])); ?></td>
+                <td><?= date('Y-m-d H:i:s', strtotime($exchange['created_at'])); ?></td>
+                <td>
+                  <?php 
+                      if (!empty($exchange['order_status'])) {
+                          switch ($exchange['order_status']) {
+                              case 'ongoing':
+                                  echo "<i class='icofont-spinner-alt-5 text-warning'></i>&nbsp;<span class='badge bg-warning'>Ongoing</span>";
+                                  break;
+                              case 'win':
+                                  echo "<i class='icofont-arrow-up text-success'></i>&nbsp;<span class='badge bg-success'>Win</span>";
+                                  break;
+                              case 'loose':
+                                  echo "<i class='icofont-arrow-down text-danger'></i>&nbsp;<span class='badge bg-danger'>Loose</span>";
+                                  break;
+                              default:
+                                  echo "<i class='icofont-minus-circle text-secondary'></i>>&nbsp;<span class='badge bg-secondary'>Unknown</span>";
+                                  break;
+                          }
+                      } else {
+                          echo "<i class='icofont-minus-circle text-secondary'></i>>&nbsp;<span class='badge bg-secondary'>Unknown</span>";
+                      }
+                  ?>
+              </td>
+            </tr>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <tr>
+            <td colspan="7">No trade data found for your current session</td>
+        </tr>
+    <?php endif; ?>
+    </tbody>
+</table>
+
                   </div>
                 </div>
               </div>
@@ -793,73 +829,7 @@
   });
 </script>
 <!-- JavaScript for BTC Quantity Calculation -->
-<script>
-    // const orderPriceInput = document.getElementById('orderLimitPrice');  // Input for USDT price
-    // const orderQuantityInput = document.getElementById('orderLimitQuantity');  // Output for BTC quantity
-    // const customRangeInput = document.getElementById('customRange');  // Slider for percentage adjustment
-
-    // let usdtToBtcRate = null;  // Variable to hold the current USDT to BTC rate
-    // let orderPercentage = 100;  // Default order percentage (100%)
-
-    // // Function to fetch the current USDT to BTC conversion rate
-    // async function fetchConversionRate() {
-    //     try {
-    //         const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd');
-    //         const data = await response.json();
-    //         console.log('API Response:', data); // Log the entire response
-
-    //         // Check if the response structure is valid
-    //         if (data && data.bitcoin && data.bitcoin.usd) {
-    //             usdtToBtcRate = 1 / data.bitcoin.usd;  // Calculate the rate
-    //         } else {
-    //             console.error('Invalid API response structure:', data);
-    //             usdtToBtcRate = null;  // Reset rate if structure is invalid
-    //         }
-
-    //         console.log(`Updated USDT to BTC rate: ${usdtToBtcRate}`);  // Log the rate
-    //     } catch (error) {
-    //         console.error('Error fetching the USDT to BTC rate:', error);
-    //         usdtToBtcRate = null;  // Reset rate if there's an error
-    //     }
-    // }
-
-    // // Function to update the BTC quantity based on the order price and percentage
-    // async function updateBTCQuantity() {
-    //     // If the rate is null, fetch it again
-    //     if (usdtToBtcRate === null) {
-    //         await fetchConversionRate();  // Wait for the conversion rate to be fetched
-    //     }
-
-    //     const orderPrice = parseFloat(orderPriceInput.value);  // Get the order price in USDT
-    //     const adjustedPrice = (orderPrice * orderPercentage) / 100;  // Calculate adjusted price based on the percentage
-
-    //     console.log(`Order Price: ${orderPrice}, Adjusted Price: ${adjustedPrice}, Rate: ${usdtToBtcRate}`);
-
-    //     // Calculate BTC quantity if valid
-    //     if (!isNaN(adjustedPrice) && adjustedPrice > 0 && !isNaN(usdtToBtcRate)) {
-    //         const btcQuantity = adjustedPrice * usdtToBtcRate;  // Convert adjusted price to BTC
-    //         orderQuantityInput.value = btcQuantity.toFixed(8);  // Set the output field with increased precision
-    //         console.log(`Calculated BTC Quantity: ${btcQuantity.toFixed(8)}`);
-    //     } else {
-    //         orderQuantityInput.value = '';  // Clear field if input is invalid
-    //         console.log('Invalid input or rate not available');
-    //     }
-    // }
-
-    // // Function to handle changes in the custom range slider
-    // function updateBasedOnRange() {
-    //     orderPercentage = parseInt(customRangeInput.value);  // Get the current slider value as an integer
-    //     console.log(`Slider value updated: ${orderPercentage}%`);
-    //     updateBTCQuantity();  // Update the BTC quantity based on the new percentage
-    // }
-
-    // // Fetch the conversion rate when the page loads
-    // window.addEventListener('load', fetchConversionRate);
-
-    // // Attach event listeners for input changes
-    // orderPriceInput.addEventListener('input', updateBTCQuantity);  // Update BTC quantity when order price changes
-    // customRangeInput.addEventListener('input', updateBasedOnRange);  // Update BTC quantity when slider changes
-    
+<script>  
     const orderPriceInput = document.getElementById('orderLimitPrice');  // Input for USDT price
     const orderQuantityInput = document.getElementById('orderLimitQuantity');  // Output for BTC quantity
     const customRangeInput = document.getElementById('customRange');  // Slider for percentage adjustment
@@ -943,22 +913,79 @@
     });
 </script>
 
+<script>
+    // Get references to Buy/Sell radio buttons, labels, and other elements
+    const buyOrderRadio = document.getElementById('buyOrder');
+    const sellOrderRadio = document.getElementById('sellOrder');
+    const priceLabel = document.getElementById('priceLabel');
+    const quantityLabel = document.getElementById('quantityLabel');
+    const submitButton = document.getElementById('submitButton');
 
-    <?php include "modalForms.php"; ?>
-    <?php include "include/footer.php"; ?>
+    // Function to update the form based on Buy or Sell selection
+    function updateForm() {
+        if (buyOrderRadio.checked) {
+            priceLabel.textContent = "Buy Price";  // Adjust the label for Buy
+            quantityLabel.textContent = "Buy Quantity";
+            submitButton.textContent = "Place Buy Order";  // Change the submit button text
+        } else if (sellOrderRadio.checked) {
+            priceLabel.textContent = "Sell Price";  // Adjust the label for Sell
+            quantityLabel.textContent = "Sell Quantity";
+            submitButton.textContent = "Place Sell Order";  // Change the submit button text
+        }
+    }
+
+    // Add event listeners to Buy and Sell radio buttons
+    buyOrderRadio.addEventListener('change', updateForm);
+    sellOrderRadio.addEventListener('change', updateForm);
+
+    // Initialize form on page load
+    window.addEventListener('load', updateForm);
+</script>
 
 <?php
-// Check if the form is submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  // Collect form data
-  
-  $orderTypeBuy = $_POST["orderTypeBuy"];
-  $orderTypeSell = $_POST["orderTypeSell"];
-  $orderMethod = $_POST["orderMethod"];
-  $orderPrice = $_POST["orderPrice"];
-  $orderQuantity = $_POST["orderQuantity"];
-  $orderPercentage = $_POST["orderPercentage"];
-  $orderValue = $_POST["orderValue"];
-  //$action = $_POST["action"];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  // Capture form data
+  $txn = $_POST['txn'];
+  $firstname = $_POST['firstname'];
+  $lastname = $_POST['lastname'];
+  $email = $_POST['email'];
+  $username = $_POST['username'];
+  $orderType = $_POST['orderType'];  // buy or sell
+  $orderMethod = $_POST['orderMethod'];  // limit, market, tp_sl
+  $orderPrice = $_POST['orderPrice'];
+  $orderPercentage = $_POST['orderPercentage'];
+  $orderQuantity = $_POST['orderQuantity'];
+  $orderValue = $_POST['orderValue'];
+  $orderStatus = "ongoing";
+
+  // Prepare SQL query to insert the data into the exchanger table
+  $sql = "INSERT INTO exchanger (txn, firstname, lastname, email, username, order_type, order_method, order_price, order_quantity, order_quantity_percentage, order_value, order_status)
+          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+  // Prepare statement
+  if ($stmt = $con->prepare($sql)) {
+      // Bind parameters to the SQL query
+      $stmt->bind_param('sssssssdddds', $txn, $firstname, $lastname, $email, $username, $orderType, $orderMethod, $orderPrice, $orderQuantity, $orderPercentage, $orderValue, $orderStatus);
+
+      // Execute the statement
+      if ($stmt->execute()) {
+        //echo "<script>alert('Order submitted successfully!');</script>";
+        $toast = "success";
+    } else {
+        // Log error to a file (optional but recommended for debugging)
+        error_log("Error executing statement: " . $stmt->error);
+        echo "<script>alert('Error: Could not execute the query. Try again after a while or contact support for help');</script>";
+    }
+
+    // Close the statement
+    $stmt->close();
+} else {
+    // Log preparation error
+    error_log("Error preparing statement: " . $con->error);
+    echo "<script>alert('Error: Could not prepare the statement. You should contact support for help');</script>";
+}
 }
 ?>
+    
+    <?php include "include/footer.php"; ?>
+

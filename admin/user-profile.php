@@ -195,10 +195,13 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
                 <h6 class="fs-16"><i class="fa fa-credit-card-alt text-warning" aria-hidden="true"></i>&nbsp;Withdrawal Requests</h6>
               </li>
               <li>
+                <h6 class="fs-16"><i class="fa fa-line-chart text-warning" aria-hidden="true"></i>&nbsp;Exchange</h6>
+              </li>
+              <li>
                 <h6 class="fs-16"><i class="fa fa-piggy-bank text-warning" aria-hidden="true"></i>&nbsp;Investments</h6>
               </li>
               <li>
-                <h6 class="fs-16"><i class="fa fa-bar-chart text-warning" aria-hidden="true"></i>&nbsp;Transfers</h6>
+                <h6 class="fs-16"><i class="fa fa-exchange text-warning" aria-hidden="true"></i>&nbsp;Transfers</h6>
               </li>
               <li>
                 <h6 class="fs-16"><i class="fa fa-newspaper text-warning" aria-hidden="true"></i>&nbsp;Newsletter</h6>
@@ -1009,7 +1012,113 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
               </div>
                 <!-- WITHDRAW SECTION ENDS -->
 
-                <!-- TRANSACTION SECTION BEGINS -->
+                 <!-- EXCHANGE TRANSACTION SECTION BEGINS -->
+              <div class="content-inner transaction" id="exchange">
+                <h6>Exchange Transactions </h6>
+                <h4>XTrade Exchange<span>&nbsp;System</span></h4>
+                <p>
+                This page show you all the transaction requests, related to exchange buy/sell actions, that have been made on your website. From here you can mark as win or loose
+                This page is for record and editing purposes and is intended for admin use only.
+                </p>
+                <div class="main">
+                <div class="card-body">
+                <div class="table-responsive">
+                <table class="table caption-top table-striped table-hover responsive-table" id="exchangeTable">
+                  <thead>
+                      <tr class="table-secondary">
+                        <th>ID</th>
+                        <th>Email</th>
+                        <th>Username</th>
+                        <th>Order</th>
+                        <th>Order Price</th>
+                        <th>Order Quantity</th>
+                        <th>Order Percentage</th>
+                        <th>Final Value</th>
+                        <th>Status</th>
+                        <th>Timestamp</th>
+                        <th>Actions</th>
+                      </tr>
+                  </thead>
+                  <tfoot>
+                      <tr class="table-secondary">
+                      <th>ID</th>
+                        <th>Email</th>
+                        <th>Username</th>
+                        <th>Order</th>
+                        <th>Order Price</th>
+                        <th>Order Quantity</th>
+                        <th>Order Percentage</th>
+                        <th>Final Value</th>
+                        <th>Status</th>
+                        <th>Timestamp</th>
+                        <th>Actions</th>
+                      </tr>
+                  </tfoot>
+                 <tbody>
+                  <?php $sql_exchanger = "SELECT * FROM exchanger"; $sql_exchanger_exec = $con->query($sql_exchanger);//$serial_number = 1;
+                if ($sql_exchanger_exec->num_rows > 0): ?>
+                <?php foreach($sql_exchanger_exec as $exchanger_info): ?>
+                    <tr>
+                        <td class="coin-name"><?= $exchanger_info['txn']; ?></td>
+                        <td class="coin-name">
+                          <?= $exchanger_info['email']; ?>
+                        </td>
+                        <td class="coin-name">
+                            <?= $exchanger_info['username'] ?>
+                            <?php if (!empty($exchanger_info['firstname']) || !empty($exchanger_info['lastname'])): ?>
+                                <br><small><strong>Fullname:&nbsp;</strong><?= $exchanger_info['firstname'] ."&nbsp;". $exchanger_info['lastname']; ?></small>
+                            <?php endif; ?>
+                        </td>
+                        <td class="coin-name">
+                        <?php if (!empty($exchanger_info['order_type']) || !empty($exchanger_info['order_method'])): ?>
+                                <small><strong>Type:&nbsp;</strong>
+                                <?= $exchanger_info['order_type'] ."<br><strong>Method:</strong>&nbsp;".$exchanger_info['order_method']; ?></small>
+                            <?php endif; ?>
+                        </td>
+                        <td class="coin-name"><?= number_format($exchanger_info['order_price'], 2) . $exchanger_info['order_currency']; ?></td>
+                        <td class="coin-name"><?= number_format($exchanger_info['order_quantity'], 2) . $exchanger_info['exchanged_currency']; ?></td>
+                        <td class="coin-name"> <?php if (!empty($exchanger_info['order_quantity_percentage'])): ?>
+                            <?= round($exchanger_info['order_quantity_percentage'] * 100) . '%'; ?>
+                          <?php endif; ?>
+                        </td>
+                        <td class="coin-name"> <?php if (!empty($exchanger_info['order_value'])): ?>
+                            <?= number_format($exchanger_info['order_value'],2) . $exchanger_info['order_currency']; ?>
+                          <?php endif; ?>
+                        </td>
+                        <td class="coin-name">
+                            <span class='fs-6'><strong><?= $exchanger_info['order_status'] ?></strong></span><br>
+                            <?php if ($exchanger_info['order_status'] === 'ongoing'): ?>
+                                <a href="confirmOperation.php?exW=<?= $exchanger_info['id']; ?>">
+                                    <span type="submit" class="btn btn-outline-success badge badge-outline badge-success badge-md">Mark Win</span>
+                                </a> <br>
+                                <a href="confirmOperation.php?exL=<?= $exchanger_info['id']; ?>">
+                                    <span type="submit" class="btn btn-outline-danger badge badge-outline badge-danger badge-md">Mark Loose</span>
+                                </a>
+                            <?php endif; ?>
+                        </td>
+                        <td class="coin-name"><?= $exchanger_info['created_at']; ?></td>
+                        <td class="coin-name">
+                            <a title="Delete Transaction:&nbsp;<?=$exchanger_info['txn'];?>" href="confirmOperation.php?exDel=<?= $exchanger_info['id']; ?>" class="dt-type-md">
+                                <span class="btn btn-outline-danger badge badge-outline badge-danger badge-md">Delete</span>
+                            </a>
+                        </td>
+                    </tr>
+                <?php endforeach; //$serial_number++; ?>
+            <?php else: ?>
+                 </tbody>
+                <tr>
+                    <td colspan="8">No exchange transactions information found</td>
+                </tr>
+            <?php endif; ?>
+        </tbody>     
+                </table>
+                </div>
+                </div>
+                </div>
+              </div>
+                <!-- EXCHANGE TRANSACTION SECTION ENDS -->
+
+                <!-- INVESTMENT TRANSACTION SECTION BEGINS -->
               <div class="content-inner transaction" id="transaction">
                 <h6>Investment Subscription Requests</h6>
                 <h4>Fund Management<span>&nbsp;System</span></h4>
@@ -1119,7 +1228,7 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
                 </div>
                 </div>
               </div>
-                <!-- TRANSACTION SECTION ENDS -->
+                <!-- INVESTMENT TRANSACTION SECTION ENDS -->
 
 
                  <!-- TRANSFER SECTION BEGINS -->
@@ -1404,6 +1513,14 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
         ]
     });
     $('#transactionTable').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+          {extend: 'print', text: 'Print', className: 'btn btn-primary text-white'},{extend: 'copy', text: 'Copy', className: 'btn btn-primary text-white'},
+          {extend: 'excel', text: 'Excel', className: 'btn btn-primary text-white'},{extend: 'csv', text: 'CSV', className: 'btn btn-primary text-white'},
+          {extend: 'pdf', text: 'PDF', className: 'btn btn-primary text-white'},{extend: 'pageLength', text:'Show', className: 'btn btn-primary text-white'}
+        ]
+    });
+    $('#exchangeTable').DataTable({
         dom: 'Bfrtip',
         buttons: [
           {extend: 'print', text: 'Print', className: 'btn btn-primary text-white'},{extend: 'copy', text: 'Copy', className: 'btn btn-primary text-white'},

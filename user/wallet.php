@@ -80,7 +80,7 @@
                 </div>
                 <div class="card-body">
                   <div class="table-responsive">
-                    <table class="table table-striped table-sm responsive-table" #userWalletTable>
+                    <table class="table table-striped table-sm responsive-table" id="userWalletTable">
                     <caption>Wallet Information Table</caption>
                       <thead>
                         <tr>

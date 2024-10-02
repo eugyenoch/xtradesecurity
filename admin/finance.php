@@ -224,6 +224,44 @@ if (isset($_GET['disapproveTrade']) && !empty($_GET['disapproveTrade'])) {
 }
 
 
+//EXCHANGE TRANSACTION
+//DELETE EXCHANGE TRANSACTION REQUEST
+if (isset($_GET['deleteExchange']) && !empty($_GET['deleteExchange'])) {
+    $deleteExchange = $con->real_escape_string($_GET['deleteExchange']);
+    //Prepare statement
+    $stmt = $con->prepare("DELETE FROM exchanger WHERE id = ?");
+    $stmt->bind_param("s", $deleteExchange);
+
+    if ($stmt->execute()) {
+        echo "<script>alert('Success: Exchange transaction deleted successfully'); window.location='user-profile.php';</script>";
+    } else {
+        echo "<script>alert('Error: The operation could not be performed'); window.location='user-profile.php';</script>";
+    }
+}
+
+//MARK EXCHANGE TRANSACTION AS WIN
+if (isset($_GET['approveExchange']) && !empty($_GET['approveExchange'])) {
+    $approveExchange = $con->real_escape_string($_GET['approveExchange']);
+    $approve_exchange ="UPDATE exchanger SET order_status='win', approved_at=NOW() WHERE id = '$approveExchange'";
+    if ($con->query($approve_exchange) === TRUE) {
+        echo "<script>alert('Success: Exchange transaction marked as win'); window.location='user-profile.php';</script>";
+    } else {
+        echo "<script>alert('Error: The operation could not be performed'); window.location='user-profile.php';</script>";
+    }
+}
+
+//MARK EXCHANGE TRANSACTION AS LOOSE
+if (isset($_GET['disapproveExchange']) && !empty($_GET['disapproveExchange'])) {
+    $disapproveExchange = $con->real_escape_string($_GET['disapproveExchange']);
+    $disapprove_exchange = "UPDATE exchanger SET order_status='loose', approved_at=NULL WHERE id = '$disapproveExchange'";
+    if ($con->query($disapprove_exchange) === TRUE) {
+        echo "<script>alert('Success: Exchange transaction marked as loose'); window.location='user-profile.php';</script>";
+    } else {
+        echo "<script>alert('Error: The operation could not be performed'); window.location='user-profile.php';</script>";
+    }
+}
+
+
      // Close the database connection
      $con->close();
 ?>

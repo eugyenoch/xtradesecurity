@@ -117,6 +117,14 @@
           {extend: 'pdf', text: 'PDF', className: 'btn btn-primary text-white'},{extend: 'pageLength', text:'Show', className: 'btn btn-primary text-white'}
         ]
     });
+    $('#userExchangeTable').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+          {extend: 'print', text: 'Print', className: 'btn btn-primary text-white'},{extend: 'copy', text: 'Copy', className: 'btn btn-primary text-white'},
+          {extend: 'excel', text: 'Excel', className: 'btn btn-primary text-white'},{extend: 'csv', text: 'CSV', className: 'btn btn-primary text-white'},
+          {extend: 'pdf', text: 'PDF', className: 'btn btn-primary text-white'},{extend: 'pageLength', text:'Show', className: 'btn btn-primary text-white'}
+        ]
+    });
     $('#userBankTable').DataTable({
         dom: 'Bfrtip',
         buttons: [
@@ -356,7 +364,7 @@ document.getElementById("copyBtn").addEventListener("click", function() {
 <?php
 if(isset($toast)){
     if($toast==='success'){
-      echo "<script>toastr.success('You will be redirected shortly', 'Success');</script>";
+      echo "<script>toastr.success('Your operation was successful', 'Success');</script>";
     }
 
     if($toast==='Subsuccess'){

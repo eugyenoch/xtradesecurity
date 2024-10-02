@@ -98,50 +98,52 @@
                 <div class="card-body">
                 <div class="order-create">
             <form id="orderForm" method="Get">
-                <div class="btn-group w-100 mb-3" role="group">
+               <!-- Buy/Sell Toggle -->
+               <div class="btn-group w-100 mb-3" role="group">
                     <input type="radio" class="btn-check" name="orderType" id="buyOrder" value="buy" checked>
                     <label class="btn btn-outline-primary text-white" for="buyOrder">Buy</label>
                     <input type="radio" class="btn-check" name="orderType" id="sellOrder" value="sell">
                     <label class="btn btn-outline-primary text-white" for="sellOrder">Sell</label>
                 </div>
-                
-                <div class="mb-3">
-                    <select class="form-select" name="orderMethod">
+
+                <!-- Order Type Selection (Limit/Market/TP-SL) -->
+                <div class="mb-3" id="orderTypeSection">
+                    <select class="form-select" name="orderMethod" id="orderMethod">
                         <option value="limit" selected>Limit</option>
                         <option value="market">Market</option>
                         <option value="tp_sl">TP/SL</option>
                     </select>
                 </div>
-                
+
                 <div class="d-flex justify-content-between mb-3">
                     <span class="text-muted">Available Balance</span>
                     <div>
-                    <span class="fw-bold me-1 text-muted" id="availableBalance">
+                        <span class="fw-bold me-1 text-muted" id="availableBalance">
                           <?php if(isset($_SESSION['user_session'])) {$userBalance = calculateUserTotalBalance(); echo $userBalance;}
                           else{echo "0.00";}?>
                         </span>
-                        <span class="fw-bold me-1" id="availableBalance">--</span>
-                        <span>USDT</span>
+                        <span class="text-muted">USD</span>
                     </div>
                 </div>
-                
+
                 <div class="limit-area" id="sfeLimitArea">
                     <div class="mb-3">
-                        <label for="orderLimitPrice" class="form-label text-white">Order Price</label>
+                        <label for="orderLimitPrice" class="form-label text-white">Order Price (<span id="priceLabel">Buy</span>)</label>
                         <div class="input-group">
-                            <input type="number" class="form-control" id="orderLimitPrice" name="orderPrice">
+                            <input type="number" class="form-control" id="orderLimitPrice" name="orderPrice" required>
                             <span class="input-group-text">USDT</span>
                         </div>
                     </div>
-                    
+
                     <div class="mb-3">
-                        <label for="orderLimitQuantity" class="form-label text-white">Qty</label>
+                        <label for="orderLimitQuantity" class="form-label text-white">Qty (<span id="quantityLabel">Buy</span>)</label>
                         <div class="input-group">
                             <input type="text" class="form-control" id="orderLimitQuantity" name="orderQuantity" readonly>
                             <span class="input-group-text">BTC</span>
                         </div>
                     </div>
-                    
+
+                    <!-- Custom Range Slider -->
                     <div class="mb-3 slider-custom">
                         <input type="range" class="form-range" min="0" max="100" step="25" value="0" id="customRange" name="orderPercentage">
                         <div class="d-flex justify-content-between">
@@ -152,14 +154,16 @@
                             <span class="text-white">100%</span>
                         </div>
                     </div>
-                    
+
+                    <!-- Order Value -->
                     <div class="mb-3">
-                      <label for="orderLimitAmount" class="form-label text-white">Order Value</label>
-                      <div class="input-group">
-                          <input type="text" class="form-control" id="orderLimitAmount" name="orderValue" placeholder="0" readonly>
-                          <span class="input-group-text">USDT</span>
-                      </div>
-                  </div>
+                        <label for="orderLimitAmount" class="form-label text-white">Order Value</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="orderLimitAmount" name="orderValue" placeholder="0" readonly>
+                            <span class="input-group-text">USDT</span>
+                        </div>
+                    </div>
+
                 <div class="order-submit-area" id="sfeOrderSubmit">
                 <button type="button" class="btn btn-primary w-100 mb-2" data-toggle="modal" data-target="#demoTradeModal">Place Trade</button>
                 <button type="reset" class="btn btn-secondary w-100 mb-2" name="clear" value="reset">Clear Data</button>
@@ -519,7 +523,7 @@
                 </div>
               </form>
               <div class="card-footer text-center">
-                <a class="btn btn-outline-primary" href="demo-trade.php">Back To Demo</a>&nbsp;&nbsp;<a class="btn btn-outline-primary" href="exchange.php">Trade Live</a>
+                <a class="btn btn-primary" data-dismiss="modal" aria-label="Close">Back To Demo</a>&nbsp;&nbsp;<a class="btn btn-primary" href="exchange.php">Trade Live</a>
               </div>
             </div>
           </div>
@@ -602,73 +606,7 @@ document.getElementById('transferNowBtn').addEventListener('click', function() {
 </script>
 
 <!-- JavaScript for BTC Quantity Calculation -->
-<script>
-    // const orderPriceInput = document.getElementById('orderLimitPrice');  // Input for USDT price
-    // const orderQuantityInput = document.getElementById('orderLimitQuantity');  // Output for BTC quantity
-    // const customRangeInput = document.getElementById('customRange');  // Slider for percentage adjustment
-
-    // let usdtToBtcRate = null;  // Variable to hold the current USDT to BTC rate
-    // let orderPercentage = 100;  // Default order percentage (100%)
-
-    // // Function to fetch the current USDT to BTC conversion rate
-    // async function fetchConversionRate() {
-    //     try {
-    //         const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd');
-    //         const data = await response.json();
-    //         console.log('API Response:', data); // Log the entire response
-
-    //         // Check if the response structure is valid
-    //         if (data && data.bitcoin && data.bitcoin.usd) {
-    //             usdtToBtcRate = 1 / data.bitcoin.usd;  // Calculate the rate
-    //         } else {
-    //             console.error('Invalid API response structure:', data);
-    //             usdtToBtcRate = null;  // Reset rate if structure is invalid
-    //         }
-
-    //         console.log(`Updated USDT to BTC rate: ${usdtToBtcRate}`);  // Log the rate
-    //     } catch (error) {
-    //         console.error('Error fetching the USDT to BTC rate:', error);
-    //         usdtToBtcRate = null;  // Reset rate if there's an error
-    //     }
-    // }
-
-    // // Function to update the BTC quantity based on the order price and percentage
-    // async function updateBTCQuantity() {
-    //     // If the rate is null, fetch it again
-    //     if (usdtToBtcRate === null) {
-    //         await fetchConversionRate();  // Wait for the conversion rate to be fetched
-    //     }
-
-    //     const orderPrice = parseFloat(orderPriceInput.value);  // Get the order price in USDT
-    //     const adjustedPrice = (orderPrice * orderPercentage) / 100;  // Calculate adjusted price based on the percentage
-
-    //     console.log(`Order Price: ${orderPrice}, Adjusted Price: ${adjustedPrice}, Rate: ${usdtToBtcRate}`);
-
-    //     // Calculate BTC quantity if valid
-    //     if (!isNaN(adjustedPrice) && adjustedPrice > 0 && !isNaN(usdtToBtcRate)) {
-    //         const btcQuantity = adjustedPrice * usdtToBtcRate;  // Convert adjusted price to BTC
-    //         orderQuantityInput.value = btcQuantity.toFixed(8);  // Set the output field with increased precision
-    //         console.log(`Calculated BTC Quantity: ${btcQuantity.toFixed(8)}`);
-    //     } else {
-    //         orderQuantityInput.value = '';  // Clear field if input is invalid
-    //         console.log('Invalid input or rate not available');
-    //     }
-    // }
-
-    // // Function to handle changes in the custom range slider
-    // function updateBasedOnRange() {
-    //     orderPercentage = parseInt(customRangeInput.value);  // Get the current slider value as an integer
-    //     console.log(`Slider value updated: ${orderPercentage}%`);
-    //     updateBTCQuantity();  // Update the BTC quantity based on the new percentage
-    // }
-
-    // // Fetch the conversion rate when the page loads
-    // window.addEventListener('load', fetchConversionRate);
-
-    // // Attach event listeners for input changes
-    // orderPriceInput.addEventListener('input', updateBTCQuantity);  // Update BTC quantity when order price changes
-    // customRangeInput.addEventListener('input', updateBasedOnRange);  // Update BTC quantity when slider changes
-    
+<script> 
     const orderPriceInput = document.getElementById('orderLimitPrice');  // Input for USDT price
     const orderQuantityInput = document.getElementById('orderLimitQuantity');  // Output for BTC quantity
     const customRangeInput = document.getElementById('customRange');  // Slider for percentage adjustment
@@ -752,6 +690,32 @@ document.getElementById('transferNowBtn').addEventListener('click', function() {
     });
 </script>
 
+<script>
+    // Get references to Buy/Sell radio buttons, labels, and other elements
+    const buyOrderRadio = document.getElementById('buyOrder');
+    const sellOrderRadio = document.getElementById('sellOrder');
+    const priceLabel = document.getElementById('priceLabel');
+    const quantityLabel = document.getElementById('quantityLabel');
+    const submitButton = document.getElementById('submitButton');
 
-    <?php include "modalForms.php"; ?>
+    // Function to update the form based on Buy or Sell selection
+    function updateForm() {
+        if (buyOrderRadio.checked) {
+            priceLabel.textContent = "Buy Price";  // Adjust the label for Buy
+            quantityLabel.textContent = "Buy Quantity";
+            submitButton.textContent = "Place Buy Order";  // Change the submit button text
+        } else if (sellOrderRadio.checked) {
+            priceLabel.textContent = "Sell Price";  // Adjust the label for Sell
+            quantityLabel.textContent = "Sell Quantity";
+            submitButton.textContent = "Place Sell Order";  // Change the submit button text
+        }
+    }
+
+    // Add event listeners to Buy and Sell radio buttons
+    buyOrderRadio.addEventListener('change', updateForm);
+    sellOrderRadio.addEventListener('change', updateForm);
+
+    // Initialize form on page load
+    window.addEventListener('load', updateForm);
+</script>
     <?php include "include/footer.php"; ?>

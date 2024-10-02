@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 01, 2024 at 09:29 PM
+-- Generation Time: Oct 02, 2024 at 11:19 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -73,6 +73,40 @@ CREATE TABLE `bank_accounts` (
 INSERT INTO `bank_accounts` (`id`, `account_name`, `account_number`, `sortcode`, `swiftcode`, `bank_name`, `account_owner`, `date_created`) VALUES
 (1, 'Samson Delilah', '0987654321', '0987654', '09876543', 'Barclays Bank', 'info@xtradesecurity.com', '2024-09-04 14:07:16'),
 (3, 'Jonah Wales', '98712345623', '45637829', '564738920', 'Arsenal Bank LTD', 'info@xtradesecurity.com', '2024-09-04 14:10:24');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `exchanger`
+--
+
+CREATE TABLE `exchanger` (
+  `id` int(11) NOT NULL,
+  `txn` varchar(50) DEFAULT NULL,
+  `firstname` varchar(100) DEFAULT NULL,
+  `lastname` varchar(100) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `username` varchar(100) DEFAULT NULL,
+  `order_type` varchar(100) DEFAULT NULL,
+  `order_method` varchar(100) DEFAULT NULL,
+  `order_price` decimal(18,8) DEFAULT NULL,
+  `order_currency` varchar(100) DEFAULT NULL,
+  `order_quantity` decimal(18,8) DEFAULT NULL,
+  `exchanged_currency` varchar(100) DEFAULT NULL,
+  `order_quantity_percentage` decimal(18,8) DEFAULT NULL,
+  `order_value` decimal(18,8) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `order_status` varchar(100) DEFAULT NULL,
+  `approved_at` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `exchanger`
+--
+
+INSERT INTO `exchanger` (`id`, `txn`, `firstname`, `lastname`, `email`, `username`, `order_type`, `order_method`, `order_price`, `order_currency`, `order_quantity`, `exchanged_currency`, `order_quantity_percentage`, `order_value`, `created_at`, `order_status`, `approved_at`) VALUES
+(1, 'TXN225817', 'xtradesecurity', 'user', 'info@xtradesecurity.com', 'xtradeinfo', 'buy', 'limit', 99.00000000, NULL, 0.00163148, NULL, 0.00000000, 99.00000000, '2024-10-01 21:11:43', 'ongoing', NULL),
+(2, 'TXN190478', 'xtradesecurity', 'user', 'info@xtradesecurity.com', 'xtradeinfo', 'sell', 'market', 90.00000000, NULL, 0.00148317, NULL, 0.00000000, 90.00000000, '2024-10-01 21:15:28', 'ongoing', NULL);
 
 -- --------------------------------------------------------
 
@@ -367,6 +401,12 @@ ALTER TABLE `bank_accounts`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `exchanger`
+--
+ALTER TABLE `exchanger`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `fund`
 --
 ALTER TABLE `fund`
@@ -435,6 +475,12 @@ ALTER TABLE `admin`
 --
 ALTER TABLE `bank_accounts`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `exchanger`
+--
+ALTER TABLE `exchanger`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `fund`
