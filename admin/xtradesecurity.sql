@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 02, 2024 at 11:19 AM
+-- Generation Time: Oct 02, 2024 at 12:52 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -93,7 +93,7 @@ CREATE TABLE `exchanger` (
   `order_currency` varchar(100) DEFAULT NULL,
   `order_quantity` decimal(18,8) DEFAULT NULL,
   `exchanged_currency` varchar(100) DEFAULT NULL,
-  `order_quantity_percentage` decimal(18,8) DEFAULT NULL,
+  `quantity_percent` float(6,2) DEFAULT NULL,
   `order_value` decimal(18,8) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `order_status` varchar(100) DEFAULT NULL,
@@ -104,9 +104,10 @@ CREATE TABLE `exchanger` (
 -- Dumping data for table `exchanger`
 --
 
-INSERT INTO `exchanger` (`id`, `txn`, `firstname`, `lastname`, `email`, `username`, `order_type`, `order_method`, `order_price`, `order_currency`, `order_quantity`, `exchanged_currency`, `order_quantity_percentage`, `order_value`, `created_at`, `order_status`, `approved_at`) VALUES
-(1, 'TXN225817', 'xtradesecurity', 'user', 'info@xtradesecurity.com', 'xtradeinfo', 'buy', 'limit', 99.00000000, NULL, 0.00163148, NULL, 0.00000000, 99.00000000, '2024-10-01 21:11:43', 'ongoing', NULL),
-(2, 'TXN190478', 'xtradesecurity', 'user', 'info@xtradesecurity.com', 'xtradeinfo', 'sell', 'market', 90.00000000, NULL, 0.00148317, NULL, 0.00000000, 90.00000000, '2024-10-01 21:15:28', 'ongoing', NULL);
+INSERT INTO `exchanger` (`id`, `txn`, `firstname`, `lastname`, `email`, `username`, `order_type`, `order_method`, `order_price`, `order_currency`, `order_quantity`, `exchanged_currency`, `quantity_percent`, `order_value`, `created_at`, `order_status`, `approved_at`) VALUES
+(1, 'TXN225817', 'xtradesecurity', 'user', 'info@xtradesecurity.com', 'xtradeinfo', 'buy', 'limit', 99.00000000, NULL, 0.00163148, NULL, 0.00, 99.00000000, '2024-10-01 21:11:43', 'loose', NULL),
+(2, 'TXN190478', 'xtradesecurity', 'user', 'info@xtradesecurity.com', 'xtradeinfo', 'sell', 'market', 90.00000000, NULL, 0.00148317, NULL, 0.00, 90.00000000, '2024-10-01 21:15:28', 'win', '2024-10-02'),
+(3, 'TXN623266', 'xtradesecurity', 'user', 'info@xtradesecurity.com', 'xtradeinfo', 'Buy', 'limit', 90.00000000, 'USDT', 0.00036569, 'BTC', 25.00, 22.50000000, '2024-10-02 10:35:46', 'ongoing', NULL);
 
 -- --------------------------------------------------------
 
@@ -480,7 +481,7 @@ ALTER TABLE `bank_accounts`
 -- AUTO_INCREMENT for table `exchanger`
 --
 ALTER TABLE `exchanger`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `fund`

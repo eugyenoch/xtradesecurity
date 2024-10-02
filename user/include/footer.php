@@ -372,7 +372,7 @@ if(isset($toast)){
     }
 
     if($toast==='Subfail'){
-      echo "<script>toastr.error('A problem was encountered while performing that operation', 'Error');</script>";
+      echo "<script>toastr.error('A problem was encountered while performing that operation. Contact support', 'Error');</script>";
     }
 
     if($toast==='fail'){

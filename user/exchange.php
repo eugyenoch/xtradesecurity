@@ -108,9 +108,9 @@
 
                 <!-- Buy/Sell Toggle -->
                 <div class="btn-group w-100 mb-3" role="group">
-                    <input type="radio" class="btn-check" name="orderType" id="buyOrder" value="buy" checked>
+                    <input type="radio" class="btn-check" name="orderType" id="buyOrder" value="Buy" checked>
                     <label class="btn btn-outline-primary text-white" for="buyOrder">Buy</label>
-                    <input type="radio" class="btn-check" name="orderType" id="sellOrder" value="sell">
+                    <input type="radio" class="btn-check" name="orderType" id="sellOrder" value="Sell">
                     <label class="btn btn-outline-primary text-white" for="sellOrder">Sell</label>
                 </div>
 
@@ -147,13 +147,21 @@
                         <label for="orderLimitQuantity" class="form-label text-white">Qty (<span id="quantityLabel">Buy</span>)</label>
                         <div class="input-group">
                             <input type="text" class="form-control" id="orderLimitQuantity" name="orderQuantity" readonly>
-                            <span class="input-group-text">BTC</span>
+                            <!-- <span class="input-group-text">BTC</span> -->
+                            <select class="input-group-text" name="exchanged_currency">
+                            <option value="BTC">BTC</option>
+                            <?php foreach(fetchUniqueWallets($con) as $wallet): ?>
+                                <option value="<?= htmlspecialchars($wallet['wallet']) ?>">
+                                    <?= htmlspecialchars($wallet['wallet']) ?>
+                                </option>
+                            <?php endforeach; ?>
+                            </select>
                         </div>
                     </div>
 
                     <!-- Custom Range Slider -->
                     <div class="mb-3 slider-custom">
-                        <input type="range" class="form-range" min="1" max="100" step="25" value="0" id="customRange" name="orderPercentage">
+                        <input type="range" class="form-range" min="0" max="100" step="25" value="0" id="customRange" name="orderPercentage">
                         <div class="d-flex justify-content-between">
                             <span class="text-white">0</span>
                             <span class="text-white">25%</span>
@@ -263,12 +271,12 @@
             <div class="col-xxl-12">
               <div class="card">
                 <div class="card-header">
-                  <h4 class="card-title">Exchange Transactions</h4>
+                  <h4 class="card-title">My Order Book</h4>
                 </div>
                 <div class="card-body">
                 <div class="table-responsive">
                 <table class="table table-striped table-hover table-sm responsive-table" id="userExchangeTable"> 
-                <caption><strong>Profits are for winning bids only</strong></caption>
+                <caption><strong>Exchange Transactions Summary</strong></caption>
     <thead>
         <tr class="table-secondary">  
             <th>TXN ID</th>
@@ -945,27 +953,40 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   // Capture form data
-  $txn = $_POST['txn'];
-  $firstname = $_POST['firstname'];
-  $lastname = $_POST['lastname'];
-  $email = $_POST['email'];
-  $username = $_POST['username'];
-  $orderType = $_POST['orderType'];  // buy or sell
-  $orderMethod = $_POST['orderMethod'];  // limit, market, tp_sl
+  $txn = htmlspecialchars($_POST['txn']);
+  $firstname = htmlspecialchars($_POST['firstname']);
+  $lastname = htmlspecialchars($_POST['lastname']);
+  $email = htmlspecialchars($_POST['email']);
+  $username = htmlspecialchars($_POST['username']);
+  $orderType = htmlspecialchars($_POST['orderType']);  // buy or sell
+  $orderMethod = htmlspecialchars($_POST['orderMethod']);  // limit, market, tp_sl
   $orderPrice = $_POST['orderPrice'];
-  $orderPercentage = $_POST['orderPercentage'];
+  $orderPercent = $_POST['orderPercentage'];
   $orderQuantity = $_POST['orderQuantity'];
   $orderValue = $_POST['orderValue'];
   $orderStatus = "ongoing";
+  $orderCurrency = "USDT";
+  $exchangedCurrency = htmlspecialchars($_POST['exchanged_currency']);
+
+  // Calculate user's available balance
+  $availableBalance = calculateUserTotalBalance(); // This function returns the user's balance
+
+  // Check if the user's balance is enough for the order
+  if ($orderValue > $availableBalance) {
+      // Set toast or error message for insufficient balance
+      echo "<script>alert('Insufficient balance. You cannot place an order higher than your available balance.');</script>";
+      // Stop further processing
+      exit;
+  }
 
   // Prepare SQL query to insert the data into the exchanger table
-  $sql = "INSERT INTO exchanger (txn, firstname, lastname, email, username, order_type, order_method, order_price, order_quantity, order_quantity_percentage, order_value, order_status)
-          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+  $sql = "INSERT INTO exchanger (txn, firstname, lastname, email, username, order_type, order_method, order_price, order_currency, order_quantity, exchanged_currency, quantity_percent, order_value, order_status)
+          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
   // Prepare statement
   if ($stmt = $con->prepare($sql)) {
       // Bind parameters to the SQL query
-      $stmt->bind_param('sssssssdddds', $txn, $firstname, $lastname, $email, $username, $orderType, $orderMethod, $orderPrice, $orderQuantity, $orderPercentage, $orderValue, $orderStatus);
+      $stmt->bind_param('sssssssdsdsdds', $txn, $firstname, $lastname, $email, $username, $orderType, $orderMethod, $orderPrice, $orderCurrency, $orderQuantity, $exchangedCurrency, $orderPercent, $orderValue, $orderStatus);
 
       // Execute the statement
       if ($stmt->execute()) {
@@ -974,7 +995,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         // Log error to a file (optional but recommended for debugging)
         error_log("Error executing statement: " . $stmt->error);
-        echo "<script>alert('Error: Could not execute the query. Try again after a while or contact support for help');</script>";
+        //echo "<script>alert('Error: Could not execute the query. Try again after a while or contact support for help');</script>";
+        $toast = "Subfail";
     }
 
     // Close the statement

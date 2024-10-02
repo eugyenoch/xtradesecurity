@@ -1032,7 +1032,7 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
                         <th>Order</th>
                         <th>Order Price</th>
                         <th>Order Quantity</th>
-                        <th>Order Percentage</th>
+                        <th>Quantity Percent</th>
                         <th>Final Value</th>
                         <th>Status</th>
                         <th>Timestamp</th>
@@ -1047,7 +1047,7 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
                         <th>Order</th>
                         <th>Order Price</th>
                         <th>Order Quantity</th>
-                        <th>Order Percentage</th>
+                        <th>Quantity Percent</th>
                         <th>Final Value</th>
                         <th>Status</th>
                         <th>Timestamp</th>
@@ -1077,8 +1077,8 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
                         </td>
                         <td class="coin-name"><?= number_format($exchanger_info['order_price'], 2) . $exchanger_info['order_currency']; ?></td>
                         <td class="coin-name"><?= number_format($exchanger_info['order_quantity'], 2) . $exchanger_info['exchanged_currency']; ?></td>
-                        <td class="coin-name"> <?php if (!empty($exchanger_info['order_quantity_percentage'])): ?>
-                            <?= round($exchanger_info['order_quantity_percentage'] * 100) . '%'; ?>
+                        <td class="coin-name"> <?php if (!empty($exchanger_info['quantity_percent'])): ?>
+                            <?= round($exchanger_info['quantity_percent'] * 100) . '%'; ?>
                           <?php endif; ?>
                         </td>
                         <td class="coin-name"> <?php if (!empty($exchanger_info['order_value'])): ?>
@@ -1086,14 +1086,19 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
                           <?php endif; ?>
                         </td>
                         <td class="coin-name">
-                            <span class='fs-6'><strong><?= $exchanger_info['order_status'] ?></strong></span><br>
                             <?php if ($exchanger_info['order_status'] === 'ongoing'): ?>
+                              <?= "<span class='bg-warning badge badge-outline badge-warning badge-md'>Ongoing</span>"; ?><br>
                                 <a href="confirmOperation.php?exW=<?= $exchanger_info['id']; ?>">
                                     <span type="submit" class="btn btn-outline-success badge badge-outline badge-success badge-md">Mark Win</span>
                                 </a> <br>
                                 <a href="confirmOperation.php?exL=<?= $exchanger_info['id']; ?>">
                                     <span type="submit" class="btn btn-outline-danger badge badge-outline badge-danger badge-md">Mark Loose</span>
                                 </a>
+                                <?php elseif ($exchanger_info['order_status'] === 'win'): ?>
+                                  <?= "<i class='fa fa-arrow-up text-success' aria-hidden='true'></i>&nbsp;<span class='bg-success badge badge-outline badge-success badge-md'>Win</span>"; ?>
+
+                                  <?php elseif ($exchanger_info['order_status'] === 'loose'): ?>
+                                    <?= "<i class='fa fa-arrow-down text-danger' aria-hidden='true'></i>&nbsp;<span class='bg-danger badge badge-outline badge-danger badge-md'>Loose</span>"; ?>
                             <?php endif; ?>
                         </td>
                         <td class="coin-name"><?= $exchanger_info['created_at']; ?></td>
