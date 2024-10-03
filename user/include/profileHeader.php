@@ -52,6 +52,10 @@ $total_referrals = countUserReferrals($con, $user_referrer_count);
 $user_p2p_count = $_SESSION['user_session'];
 $total_p2p_count = countUserP2PTrades($con, $user_p2p_count);
 
+//Call the function to check user Order Book
+$user_order_count = $_SESSION['user_session'];
+$total_order_count = countUserOrderBook($con, $user_order_count);
+
 //Get all fund data from currently logged in user
 $funds = fetchFunds($con, $userEmail);
 

@@ -253,6 +253,7 @@ function getTotalTransactionAmount($con) {
     }
 }
 
+
 //GET TOTAL TRANSACTION PROFITandBONUSES
 function getTotalTransactionProfit($con) {
     $sql = "SELECT SUM(tprofit) as total FROM transaction";
@@ -710,6 +711,24 @@ function countUserP2PTrades($con, $user_p2p_count) {
     $stmt->close();
 
     return $referral_count;
+}
+
+//COUNT EXCHANGE ORDER OF THE CURRENTLY LOGGED IN USER
+function countUserOrderBook($con, $user_order_count) {
+    // Prepare the SQL statement to count the referrals
+    $stmt = $con->prepare("SELECT COUNT(*) as total_order_trades FROM exchanger WHERE email = ? OR username = ?");
+    $stmt->bind_param("ss", $user_order_count, $user_order_count);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    // Fetch the result and return the referral count
+    $row = $result->fetch_assoc();
+    $order_count = $row['total_order_trades'];
+
+    // Close the statement
+    $stmt->close();
+
+    return $order_count;
 }
 
 //Fetch all from funds for currently logged in user

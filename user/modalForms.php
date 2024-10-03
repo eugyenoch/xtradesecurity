@@ -38,6 +38,63 @@
         <!-- .modal-dialog -->
     </div>
     <!-- Modal End -->
+
+
+     <!--KYC FORM-->
+ <div class="modal fade sho d-bloc" id="KYCForm" tabindex="-1" aria-labelledby="KYCModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-sm modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+             <h6 class="modal-title">KYC Form </h6>
+                <a href="#" class="modal-close" data-dismiss="modal" aria-label="Close">
+                <span class="btn-close badge bg-outline-warning p-2 fs-4">&times;</span>
+                </a>
+            </div>
+                <div class="modal-body">
+                <p>Should you encounter any issues or need any help, reach out to us on the <a href="../contact.php">contact page</a> </p>
+                <form method="POST" action="finance.php" enctype="multipart/form-data" id="uploadProofForm">
+                    
+                <div class="input-item input-with-label">
+                        <label for="id_type" class="input-item-label">ID Type</label>
+                            <select class="form-control" id="exampleFormControlSelect2" name="id_type" required>
+                                 <option value="Drivers License">Drivers License</option>
+                                 <option value="Passport">Passport</option>
+                                 <option value="ID Card">National ID Card</option>
+                            </select>
+                    </div>
+
+                    <div class="input-item input-with-label">
+                        <label for="country" class="input-item-label">Issuing Country</label>
+                            <select class="form-control" id="exampleFormControlSelect" name="country" required>
+                                  <?php include "../include/selectCountry.html";?>
+                            </select>
+                    </div>
+ 
+                    
+                    <div class="input-item input-with-label">
+                        <label for="formFile" class="input-item-label">Card Front page</label>
+                        <input class="form-control" type="file" accept="image/*" name="frontCard" id="formFile" required><br>
+                    </div>
+
+                    <div class="input-item input-with-label">
+                        <label for="formFile2" class="input-item-label">Card back page</label>
+                        <input class="form-control" type="file" accept="image/*" name="backCard" id="formFile2" required><br>
+                    </div>
+
+                    <div class="modal-footer">
+                    <button type="submit" class="btn btn-outline-warning btn-between" name="KYCUpload">Proceed <i class="fa fa-forward"></i></button>
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+
+                </div>
+            </div>
+            <!-- .modal-content -->
+        </div>
+        <!-- .modal-dialog -->
+    </div>
+    <!-- Modal End -->
+
  
  <!--SILVER PLAN-->
   <div class="modal fade" id="silver-pack" tabindex="-1" aria-labelledby="silverInvestmentModalLabel" aria-hidden="true" role="dialog">

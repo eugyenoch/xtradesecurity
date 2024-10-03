@@ -141,22 +141,27 @@
                       echo "<strong>P2P Trades:</strong>&nbsp;<span title='Your P2P Trade Count. Refer to the P2P section for more details'>". $total_p2p_count ."</span>";}
                       else{echo "<strong>P2P Trades:</strong>&nbsp;<span title='No P2P trades available for your account'><i class='icofont-close-squared-alt'></i></span>";} ?>
                     </span> <br>
+                    <span> <?php if(isset($total_order_count)&& $total_order_count!=null){
+                      echo "<strong>Order Book:</strong>&nbsp;<span title='Your Order Book Items. Refer to the exchange for more details'>". $total_order_count ."</span>";}
+                      else{echo "<strong>Order Book:</strong>&nbsp;<span title='No entry available for your account'><i class='icofont-close-squared-alt'></i></span>";} ?>
+                    </span> <br>
                     <span><?php $subscriptionStatus = isSubscribedToNewsletter($con, $user_subscribed_email); if($subscriptionStatus){
                       echo '<strong>Newsletter Status:</strong>&nbsp;'. $subscriptionStatus;}?>
                     </span>       
                    </p>
-                  <p>Remember to verify yourself and fill out our KYC to use the full potential of XTrade Security.</p>
+                  <p>Remember to verify yourself and fill out KYC to use the full potential of XTrade Security.</p>
                   <ul>
                     <li>
                       <a href="#">
-                        <span class="verified"><i class="icofont-check-alt"></i></span>Verify account</a>
+                        <span class="verified"><i class="icofont-check-alt"></i></span>Account Verified</a>
                     </li>
                     <li>
                       <a href="#">
                         <span class="not-verified"><i class="icofont-close-line"></i></span>Two-factor authentication (2FA)</a>
                     </li>
                     <li>
-                      <a href="#"><span class="verified"><i class="icofont-exclamation"></i></span>Subscribe to updates</a>
+                      <a href="settings-security.php">
+                        <span class="not-verified"><i class="icofont-exclamation"></i></span>Fill out KYC</a>
                     </li>
                   </ul>
                 </div>

@@ -112,3 +112,56 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['govt-id-verification']
     echo "<script>alert('Error: Invalid Request. Try again after some time'); window.location='user-profile.php'</script>";
 }
     ?>
+
+
+<?php
+// NOT USED
+if (isset($_POST['KYCUpload'])) {
+    // Capture form data
+    $idType = $_POST['id_type'];
+    $country = $_POST['country'];
+
+    // File upload configurations
+    $targetDir = "uploads/kyc_docs/"; // Directory to save uploaded files
+    $frontCard = $_FILES['frontCard']['name'];
+    $backCard = $_FILES['backCard']['name'];
+
+    $frontCardTmp = $_FILES['frontCard']['tmp_name'];
+    $backCardTmp = $_FILES['backCard']['tmp_name'];
+
+    // Generate unique filenames for the uploaded files
+    $frontCardNewName = uniqid() . '_' . basename($frontCard);
+    $backCardNewName = uniqid() . '_' . basename($backCard);
+
+    $frontCardTarget = $targetDir . $frontCardNewName;
+    $backCardTarget = $targetDir . $backCardNewName;
+
+    // Validate and move the uploaded files to the target directory
+    if (move_uploaded_file($frontCardTmp, $frontCardTarget) && move_uploaded_file($backCardTmp, $backCardTarget)) {
+        // Files uploaded successfully, proceed to save data into the database
+
+        // Prepare SQL query to update the users table
+        $sql = "UPDATE users SET id_type = ?, country = ?, id_front = ?, id_back = ? WHERE username = ? OR email = ?";
+
+        if ($stmt = $con->prepare($sql)) {
+            // Bind parameters to the SQL query
+            // Assuming that you have the current user's username stored in session or a similar mechanism
+            $stmt->bind_param('ssssss', $idType, $country, $frontCardNewName, $backCardNewName, $_SESSION['user_session'], $_SESSION['user_session']);
+
+            // Execute the query
+            if ($stmt->execute()) {
+                echo "<script>alert('KYC submission successful!');</script>";
+            } else {
+                echo "<script>alert('Error: Could not submit KYC. Please try again.');</script>";
+            }
+
+            // Close the statement
+            $stmt->close();
+        } else {
+            echo "<script>alert('Error: Could not prepare the database statement.');</script>";
+        }
+    } else {
+        echo "<script>alert('Error: Could not upload files. Please try again.');</script>";
+    }
+}
+?>
