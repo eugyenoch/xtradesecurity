@@ -158,6 +158,15 @@
                         </div>
                       </div>
                     </div>
+                    <div class="col-xxl-12">
+                    <div class="card no-shadow h-unset">
+                        <div class="card-header">
+                          <h4 class="card-title">Pay Commissions and Fees</h4>
+                        </div>
+                        <div class="card-body">
+                        <button type="button" class="btn btn-secondary position-relative top-100 start-0" data-toggle="modal" data-target="#commission" tabindex="-1">Payment Details</button>
+                        </div>
+                      </div>
                   </div>
                 </div>
               </div>
@@ -166,5 +175,5 @@
         </div>
       </div>
     </div>
-
+    <?php include "modalForms.php"; ?>
     <?php include "include/footer.php"; ?>

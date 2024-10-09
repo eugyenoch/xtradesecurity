@@ -1101,12 +1101,21 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
                                     <?= "<i class='fa fa-arrow-down text-danger' aria-hidden='true'></i>&nbsp;<span class='bg-danger badge badge-outline badge-danger badge-md'>Loose</span>"; ?>
                             <?php endif; ?>
                         </td>
-                        <td class="coin-name"><?= $exchanger_info['created_at']; ?></td>
+                        <td class="coin-name"><?= date('Y-m-d H:i:s', strtotime($exchanger_info['created_at'])); ?></td>
                         <td class="coin-name">
-                            <a title="Delete Transaction:&nbsp;<?=$exchanger_info['txn'];?>" href="confirmOperation.php?exDel=<?= $exchanger_info['id']; ?>" class="dt-type-md">
+                          <button type="button" 
+                                  class="edit-exchange btn btn-outline-secondary badge badge-outline badge-danger badge-md"
+                                  title="Edit Order Value:&nbsp;<?=$exchanger_info['txn'];?>" 
+                                  data-toggle="modal" 
+                                  data-target="#editExchangeModal"
+                                  data-txn="<?= $exchanger_info['txn']; ?>" 
+                                  data-email="<?= $exchanger_info['email']; ?>" 
+                                  data-amount="<?= $exchanger_info['order_value']; ?>" >Edit
+                          </button>
+                          <a title="Delete Transaction:&nbsp;<?=$exchanger_info['txn'];?>" href="confirmOperation.php?exDel=<?= $exchanger_info['id']; ?>" class="dt-type-md">
                                 <span class="btn btn-outline-danger badge badge-outline badge-danger badge-md">Delete</span>
-                            </a>
-                        </td>
+                          </a>
+                      </td>
                     </tr>
                 <?php endforeach; //$serial_number++; ?>
             <?php else: ?>
@@ -1628,6 +1637,69 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
         });
     });
 });
+</script> 
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    // Get all edit buttons
+    var editButton = document.querySelectorAll('.edit-exchange');
+
+    // Add click event listener to each edit button
+    editButton.forEach(function(button) {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            // Get the row data
+            var row = this.closest('tr');
+            var txn = row.cells[0].textContent;
+            var email = row.cells[1].textContent;
+            var package = row.cells[3].textContent;
+            var amountWithCurrency = row.cells[4].textContent;
+            var amount = amountWithCurrency.replace(/[^\d.-]/g, '');
+            var currency = amountWithCurrency.replace(/[\d.-]/g, '');
+            var interest = row.cells[6].textContent.replace('%', '') / 100;
+            var profit = row.cells[7].textContent.replace(/[^\d.-]/g, '');
+
+            // Populate the modal form
+            document.getElementById('txn').value = txn;
+            document.getElementById('transactionEmail').value = email;
+            document.getElementById('package').value = package;
+            document.getElementById('transactionAmount').value = amount;
+            document.getElementById('transactionCurrency').value = currency;
+            document.getElementById('transactionInterest').value = interest;
+            document.getElementById('transactionProfit').value = profit;
+
+            // Open the modal
+            var modal = new bootstrap.Modal(document.getElementById('editExchangeModal'));
+            modal.show();
+        });
+    });
+});
+
+
+// JavaScript to handle populating the edit modal
+document.addEventListener('DOMContentLoaded', function () {
+    const editExchangeModal = document.getElementById('editExchangeModal');
+    const txnInput = document.getElementById('exchangeTXN');
+    const emailInput = document.getElementById('exchangeEmail');
+    const amountInput = document.getElementById('exchangeAmount');
+
+    // Event delegation to handle click on edit button
+    document.querySelectorAll('.edit-exchange').forEach(button => {
+        button.addEventListener('click', function () {
+            // Get data from the clicked button
+            const txn = this.getAttribute('data-txn');
+            const email = this.getAttribute('data-email');
+            const amount = this.getAttribute('data-amount');
+
+            // Populate the modal inputs
+            txnInput.value = txn;
+            emailInput.value = email;
+            amountInput.value = amount;
+        });
+    });
+});
+
 </script> 
 
 <script>

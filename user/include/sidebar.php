@@ -29,6 +29,11 @@
                 <span><i class="icofont-price"></i></span>
               </a>
             </li>
+            <li>
+              <a href="settings-profile.php" data-toggle="tooltip" data-placement="right" title="Settings">
+                <span><i class="icofont-ui-settings"></i></span>
+              </a>
+            </li>
             <li class="logout">
               <a href="logout.php" data-toggle="tooltip" data-placement="right" title="Logout of your account">
                 <span><i class="icofont-power"></i></span>

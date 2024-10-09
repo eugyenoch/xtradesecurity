@@ -18,7 +18,7 @@ $config = require_once '../emailConfig.php';
 // Check if the form was submitted
 if (isset($_POST['addNewAddress'])) {
     // Sanitize and extract the user input
-    $wallet = "USDT"; // Default wallet type (could be dynamic if needed)
+    $wallet = sanitize($_POST['cryptocurrency']);; // Default wallet type (could be dynamic if needed)
     $address = sanitize($_POST['newAddress']);
     $walletTag = sanitize($_POST['newWalletTag']);
     $wallet_owner = sanitize($_POST['user']);
@@ -240,8 +240,8 @@ if (isset($_POST['transferFund'])) {
         $mail->addAddress($recipientEmail);
         $mail->isHTML(true);
         $mail->Subject = 'You Have Received a Fund Transfer';
-        $mail->Body    = "Dear $recipientFirstname  $recipientLastname,<br>
-                          You have received $transferAmount $transferCurrency from $senderFirstname $senderLastname.<br>
+        $mail->Body    = "Dear $recipientFirstname &nbsp; $recipientLastname,<br>
+                          You have received $transferAmount $transferCurrency from $senderFirstname &nbsp; $senderLastname.<br>
                           Transaction ID: $txnID.<br>
                           Message: $recipientMessage.<br><br>
                           Thank you for using our service.";

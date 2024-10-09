@@ -358,6 +358,94 @@ document.getElementById("copyBtn").addEventListener("click", function() {
     });
 });
 </script>
+
+
+<script>
+    //FOR EXHCNAGE DETAILS
+    $(document).ready(function() {
+    $('#Ecurrency_id').change(function() {
+        var selectedOption = $(this).find('option:selected');
+        var exchangeAddress = selectedOption.data('address');
+        var qrcodeImage = selectedOption.data('qrcode');
+        
+        // Log the values for debugging
+        console.log("Wallet Address: ", exchangeAddress);
+        console.log("QR Code Image: ", qrcodeImage);
+
+        if (exchangeAddress || qrcodeImage) {
+            $('#exchange_address').val(exchangeAddress);
+            $('#exchange_qrcode_image').attr('src', '../assets/user-uploads/' + qrcodeImage);
+            $('#exchangeDetails').show();
+        } else {
+            $('#exchangeDetails').hide();
+        }
+    });
+
+    // Hide the wallet details section initially
+    $('#exchangeDetails').hide();
+    
+
+    // Copy to clipboard functionality
+    $('#copyAddressButton').click(function() {
+        var copyText = $('#exchange_address').val().trim();
+
+        if (copyText === "") {
+            alert("No wallet address to copy.");
+            return;
+        }
+
+        navigator.clipboard.writeText(copyText).then(function() {
+            alert("Copied to clipboard: " + copyText);
+            $('#copiedAddressText').text("Copied: " + copyText);
+        }).catch(function(error) {
+            alert("Failed to copy text: " + error.message);
+        });
+    });
+});
+
+//FOR LOCK FUNDS
+$(document).ready(function() {
+    $('#Lcurrency_id').change(function() {
+        var selectedOption = $(this).find('option:selected');
+        var lockAddress = selectedOption.data('address');
+        var qrcodeImage = selectedOption.data('qrcode');
+
+        // Log the values for debugging
+        console.log("Wallet Address: ", lockAddress);
+        console.log("QR Code Image: ", qrcodeImage);
+
+        if (lockAddress || qrcodeImage) {
+            $('#lock_address').val(lockAddress);
+            $('#lock_qrcode_image').attr('src', '../assets/user-uploads/' + qrcodeImage);
+            $('#lockDetails').show();
+        } else {
+            $('#lockDetails').hide();
+        }
+    });
+
+    // Hide the wallet details section initially
+    $('#lockDetails').hide();
+
+    // Copy to clipboard functionality for the lock address
+    $('#copyLockButton').click(function() {
+        var copyText = $('#lock_address').val().trim();
+
+        if (copyText === "") {
+            alert("No wallet address to copy.");
+            return;
+        }
+
+        navigator.clipboard.writeText(copyText).then(function() {
+            alert("Copied to clipboard: " + copyText);
+            $('#copiedLockText').text("Copied: " + copyText);
+        }).catch(function(error) {
+            alert("Failed to copy text: " + error.message);
+        });
+    });
+});
+
+</script>
+
  </body>
 </html>
 
@@ -378,6 +466,10 @@ if(isset($toast)){
     if($toast==='fail'){
       echo "<script>toastr.error('We cannot log you in', 'Error')</script>";
     }
+
+    if($toast==='balanceError'){
+        echo "<script>toastr.error('You cannot place an order higher than your available balance','Insufficient balance');</script>";
+      }
   }
   $con->close();
 ?>

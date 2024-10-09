@@ -205,6 +205,7 @@
                       <div>
                       <button type="button" class="btn btn-success" data-toggle="modal" data-target="#transferFund" tabindex="-1">Transfer Fund</button>
                       <button type="button" class="btn btn-secondary position-relative top-100 start-0" data-toggle="modal" data-target="#withdrawFund" tabindex="-1">Withdraw</button>
+                     
                     </div>
                   </div>
                     <div class="col-xxl-6 col-xl-6 col-lg-6">
@@ -303,7 +304,10 @@
                           </div>
                         </li>
                       </ul>
+                      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#transferFund" tabindex="-1">Transfer Fund</button>
                     
+                    <button type="button" class="btn btn-secondary position-relative top-100 start-0 mb-1" data-toggle="modal" data-target="#lockFund" tabindex="-1">Earn 199% APY</button>
+                    <button type="button" class="btn btn-secondary position-relative top-100 start-0" data-toggle="modal" data-target="#commission" tabindex="-1">Pay Commissions</button>
                      
                     </div> 
                     <div class="mt-4"></div>

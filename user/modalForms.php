@@ -719,7 +719,7 @@
         <div class="modal-dialog modal-dialog-sm modal-dialog-centered">
         <div class="modal-content">
         <div class="modal-header">
-            <h6>Lock Funds For Up To 5 years, Earn 75% to 105% Guaranteed Yield(in Beta)</span></h6>
+            <h6>Lock Funds For Up To 5 years, Earn 75% to 155% Guaranteed Yield</span></h6>
                 <a href="#" class="modal-close" data-dismiss="modal" aria-label="Close">
                     <span class="btn-close badge bg-outline-warning p-2 fs-4">&times;</span>
                 </a>
@@ -746,25 +746,25 @@
 
                   <div class="form-group mb-3">
                       <label for="amount" class="form-label">Amount</label>
-                      <input type="number" class="form-control" id="amount" name="lock_amount" placeholder="Enter amount" min="1000" required>
-                      <small>Minimum Lock ($1,000), and, High-Yield Guaranteed(up to 105% per annum).</small>
+                      <input type="number" class="form-control" id="amount" name="lock_amount" placeholder="Enter amount" min="2500" step="1000" max="55000" required>
+                      <small>Minimum Lock ($2,500), and, High-Yield Guaranteed(up to 199% per annum). Maximum Lock ($55,000)</small>
                   </div>
 
                   <div class="form-group mb-3">
                       <label for="lockDuration" class="form-label">Duration</label>
                       <select class="form-select" id="lockDuration" name="lock_duration" required>
                           <option value="">Choose Duration</option> 
-                          <option value="1">1 Year (minimum lock)</option> 
-                          <option value="2">2 Years (median lock)</option> 
-                          <option value="3">3 Years (median lock)</option> 
-                          <option value="4">4 Years (median lock)</option> 
-                          <option value="5">5 Years (maximum lock)</option> 
+                          <option value="1">1 Year (minimum lock - Earn up to 75%)</option> 
+                          <option value="2">2 Years (median lock - Earn up to 105%)</option> 
+                          <option value="3">3 Years (median lock - Earn up to 135%)</option> 
+                          <option value="4">4 Years (median lock - Earn up to 165%)</option> 
+                          <option value="5">5 Years (maximum lock - Earn up to 199%)</option> 
                       </select>
                   </div>
                   
                   <div class="form-group mb-3">
-                      <label for="fcurrency_id" class="form-label">Select currency to fund</label>
-                      <select class="form-select" id="fcurrency_id" name="fcurrency_id" required>
+                      <label for="Lcurrency_id" class="form-label">Select currency to fund</label>
+                      <select class="form-select" id="Lcurrency_id" name="Lcurrency_id" required>
                           <option value="">Choose a currency</option>
                           <?php foreach(fetchAllWalletAddresses($con) as $allWallets): ?>
                             <option value="<?= htmlspecialchars($allWallets['wallet']); ?>" 
@@ -779,16 +779,16 @@
                       </select>
                   </div>
                                
-                <div id="walletDetails" style="display: none;">
+                <div id="lockDetails" style="display: none;">
                     <div class="form-group mb-3">
-                        <label for="wallet_address" class="form-label">Wallet Address to pay to</label>
-                        <input type="text" class="form-control" id="wallet_address" name="wallet_address" readonly>
-                        <button type="button" class="btn btn-outline-secondary mt-2" id="copyButton">Copy Address</button>
-                            <p id="copiedText" class="mt-2"></p>
+                        <label for="lock_address" class="form-label">Wallet Address to pay to</label>
+                        <input type="text" class="form-control" id="lock_address" name="lock_address" readonly>
+                        <button type="button" class="btn btn-outline-secondary mt-2" id="copyLockButton">Copy Address</button>
+                            <p id="copiedLockText" class="mt-2"></p>
                     </div>
                     <div class="form-group mb-3">
-                        <label for="qrcode" class="form-label">QR Code</label><br>
-                        <img id="qrcode_image" src="" alt="QR Code" style="max-width: 200px; height:200px;" title="Scan QR code to pay">
+                        <label for="lock_qrcode_image" class="form-label">QR Code</label><br>
+                        <img id="lock_qrcode_image" src="" alt="QR Code" style="max-width: 200px; height:200px;" title="Scan QR code to pay" name="lock_qrcode">
                     </div> 
                 </div>
                 <div class="form-text mb-3">
@@ -809,6 +809,65 @@
     </div>
     <!-- Modal End -->
 
+    
+     <!--PAY COMMISSION FORM-->
+<div class="modal fade sho d-bloc" id="commission" tabindex="-1" aria-labelledby="commissionModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-sm modal-dialog-centered">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h6>Pay Commission and Fees</span></h6>
+                <a href="#" class="modal-close" data-dismiss="modal" aria-label="Close">
+                    <span class="btn-close badge bg-outline-warning p-2 fs-4">&times;</span>
+                </a>
+        </div>
+                <div class="modal-body">
+                <p>Use this form for commision and fees payment. Pay to the address shown on the form.</p>  
+              
+                <form method="GET" action="" name="commissionForm">
+            
+                  <div class="form-group mb-3">
+                      <label for="Ecurrency_id" class="form-label">Select currency</label>
+                      <select class="form-select" id="Ecurrency_id" name="Ecurrency_id" required>
+                          <option value="">Choose a currency</option>
+                          <?php foreach(fetchAllWalletAddresses($con) as $allWallets): ?>
+                            <option value="<?= htmlspecialchars($allWallets['wallet']); ?>" 
+                                    data-address="<?= htmlspecialchars($allWallets['address']); ?>" 
+                                    data-qrcode="<?= htmlspecialchars($allWallets['qrcode']); ?>">
+                                <?= htmlspecialchars($allWallets['wallet']); ?>
+                                <?php if (!empty($allWallets['wallet_tag'])): ?>
+                                    (<?= htmlspecialchars($allWallets['wallet_tag']); ?>)
+                                <?php endif; ?>
+                            </option>
+                        <?php endforeach; ?>
+                      </select>
+                  </div>
+                               
+                <div id="exchangeDetails" style="display:none;">
+                    <div class="form-group mb-3">
+                        <label for="exchange_address" class="form-label">Wallet Address for payment</label>
+                        <input type="text" class="form-control" id="exchange_address" name="exchange_address" readonly>
+                        <button type="button" class="btn btn-outline-secondary mt-2" id="copyAddressButton">Copy Address</button>
+                            <p id="copiedAddressText" class="mt-2"></p>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="exchange_qrcode_image" class="form-label">QR Code</label><br>
+                        <img id="exchange_qrcode_image" src="" alt="QR Code" style="max-width: 200px; height:200px;" title="Scan QR code to pay">
+                    </div> 
+                </div>
+                  <!-- <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary" name="withdraw">Proceed <i class="icofont-double-right"></i></button>
+                  </div> -->
+              </form>
+
+                </div>
+            </div>
+            <!-- .modal-content -->
+        </div>
+        <!-- .modal-dialog -->
+    </div>
+    <!-- Modal End -->
+
+
      <!--WITHDRAW FUND FORM-->
 <div class="modal fade sho d-bloc" id="withdrawFund" tabindex="-1" aria-labelledby="withdrawFundModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-sm modal-dialog-centered">
@@ -820,7 +879,7 @@
                 </a>
         </div>
                 <div class="modal-body">
-                <p>Use this form to request withdrawal. <br>Make sure you have enough balanceas a withdrawal request above your available balance will fail.</p>  
+                <p>Use this form to request withdrawal. <br>Make sure you have enough balance, as a withdrawal request above your available balance will fail.</p>  
                 <div class="wallet-widget card">
                         <h5 title="User Total Balance (TB)">Your Available Balance</h5>
                         <h4><span class="text-primary">
@@ -993,3 +1052,4 @@
         </div>
     </div>
 </div>
+

@@ -79,17 +79,6 @@
               </div>
         </div>
 
-        <!-- <div class="col-xl-3">
-              <div class="card">
-                <div class="card-header">
-                  <h4 class="card-title">Order Book</h4>
-                </div>
-                <div class="card-body">
-                      [Placeholder]
-                </div>
-              </div>
-        </div> -->
-
         <div class="col-xl-3">
               <div class="card bg-dark">
                 <div class="card-header">
@@ -161,7 +150,7 @@
 
                     <!-- Custom Range Slider -->
                     <div class="mb-3 slider-custom">
-                        <input type="range" class="form-range" min="0" max="100" step="25" value="0" id="customRange" name="orderPercentage">
+                        <input type="range" class="form-range" min="0" max="100" step="25" value="100" id="customRange" name="orderPercentage">
                         <div class="d-flex justify-content-between">
                             <span class="text-white">0</span>
                             <span class="text-white">25%</span>
@@ -175,7 +164,7 @@
                     <div class="mb-3">
                         <label for="orderLimitAmount" class="form-label text-white">Order Value</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" id="orderLimitAmount" name="orderValue" placeholder="0" readonly>
+                            <input type="number" class="form-control" id="orderLimitAmount" name="orderValue" placeholder="0" readonly>
                             <span class="input-group-text">USDT</span>
                         </div>
                     </div>
@@ -195,79 +184,7 @@
         </div>
   </div>
 
-      <div class="row">
-        <div class="col-xxl-12">
-              <div class="card">
-                <div class="card-header">
-                  <h4 class="card-title">Expand Trading Arena</h4>
-                </div>
-                <div class="card-body">
-                  <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#tradingModal">View Advanced Chart</button>
-                  
-                </div>
-                <iframe frameborder="0" width="100%" height="390" src="https://www.mql5.com/en/signals/widget/top/6zak?f=0&t=gray"></iframe>
-                <div class="card-body pt-5">
-                  <h4>Transfer Assets From XTrade Security To Your Other Wallets</h4>
-                <iframe id='iframe-widget' src='https://changenow.io/embeds/exchange-widget/v2/widget.html?FAQ=true&amount=0.1&amountFiat=1500&backgroundColor=FFFFFF&darkMode=false&from=btc&fromFiat=eur&horizontal=true&isFiat&lang=en-US&link_id=3969d24d1a8606&locales=true&logo=false&primaryColor=00C26F&to=eth&toFiat=eth&toTheMoon=true' style="height: 205px; width: 100%; border: none"></iframe>
-                  <script defer type='text/javascript' src='https://changenow.io/embeds/exchange-widget/v2/stepper-connector.js'></script>
-                 </div>
-              </div>
-           
-        </div>
-          </div>
-          <div class="row">
-            <div class="col-xxl-3 col-xl-6">
-              <div class="card">
-                <div class="card-header">
-                  <h4 class="card-title">Fund Account</h4>
-                </div>
-                <div class="card-body">
-                <p>The Fund Account section allows users to securely deposit money into their accounts. With various supported payment options, users can easily top up their balances to facilitate smooth transactions, exchanges, and services. All deposits are processed promptly, ensuring that funds are available for immediate use.</p>
-                </div>
-                <div class="card-footer">
-                <a href="user-profile.php" class="btn btn-primary btn-block">Fund Account</a>
-                </div>
-              </div>
-            </div>
-            <div class="col-xxl-3 col-xl-6">
-              <div class="card">
-                <div class="card-header">
-                  <h4 class="card-title">Fund Transfer</h4>
-                </div>
-                <div class="card-body">
-                <p>The Transfer Fund section allows users to send funds to other accounts, internally, within the Xtrade platform. With a secure interface and real-time processing, users can transfer money effortlessly, whether for personal transactions or business-related payments. This feature enhances the platform's financial flexibility and user convenience.</p>
-                </div>
-                <div class="card-footer">
-                <a href="user-profile.php" class="btn btn-primary btn-block">Transfer Fund</a>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-xxl-3 col-xl-6">
-              <div class="card">
-                <div class="card-header">
-                  <h4 class="card-title">Fund Withdrawal</h4>
-                </div>
-                <div class="card-body">
-                <p>The Withdraw Fund feature enables users to seamlessly request payouts from their account balances to their external wallets and bank accounts(in beta). Withdrawals are processed swiftly, with multiple secure withdrawal options available. Users can track the status of their withdrawal requests and access their funds quickly and conveniently.</p>
-                </div>
-                <div class="card-footer">
-                <a href="wallet.php" class="btn btn-success btn-block">Withdraw Fund</a>
-                </div>
-              </div>
-            </div>
-            <div class="col-xxl-3 col-xl-6">
-              <div class="card">
-                <div class="card-header">
-                  <h4 class="card-title">Currency Converter</h4>
-                </div>
-                <div class="card-body">
-                <div id="currency-converter-892836"><script type="text/javascript" src="https://www.cashbackforex.com/Content/remote/remote-widgets.js"></script><script type="text/javascript"> RemoteCalc({"Url":"https://www.cashbackforex.com", "TopPaneStyle":"YmFja2dyb3VuZDogdHJhbnNwYXJlbnQgIWltcG9ydGFudDsgY29sb3I6IGJsYWNrOyBib3JkZXI6IG5vbmU7IGJvcmRlci1ib3R0b206IG5vbmU7IA==","BottomPaneStyle":"YmFja2dyb3VuZDogdHJhbnNwYXJlbnQgIWltcG9ydGFudDsgYm9yZGVyOiBzb2xpZCAxcHggZ3JleTsgY29sb3I6IGJsYWNrOw==","ButtonStyle":"YmFja2dyb3VuZDogYmxhY2s7IGNvbG9yOiB3aGl0ZTsgYm9yZGVyLXJhZGl1czogMjBweDs=","TitleStyle":"dGV4dC1hbGlnbjogbGVmdDsgZm9udC1zaXplOiAxNnB4OyBmb250LXdlaWdodDogNTAwOw==","TextboxStyle":"YmFja2dyb3VuZC1jb2xvcjogdHJhbnNwYXJlbnQgIWltcG9ydGFudCAhaW1wb3J0YW50OyBjb2xvcjogYmxhY2s7IGJvcmRlcjogMXB4IHNvbGlkIGdyZXk7","ContainerWidth":"250","HighlightColor":"#ffff00","IsDisplayTitle":false,"IsShowEmbedButton":false,"CompactType":"small","DefaultCurrencyFrom":"USD","DefaultCurrencyTo":"USD","Calculator":"currency-converter","ContainerId":"currency-converter-892836"});</script></div>
-                   </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
+  <div class="row">
             <div class="col-xxl-12">
               <div class="card">
                 <div class="card-header">
@@ -383,6 +300,83 @@
                 </div>
               </div>
             </div>
+            
+
+      <div class="row">
+        <div class="col-xxl-12">
+              <div class="card">
+                <div class="card-header">
+                  <h4 class="card-title">Expand Trading Arena</h4>
+                </div>
+                <div class="card-body">
+                  <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#tradingModal">View Advanced Chart</button>
+                  
+                </div>
+                <iframe frameborder="0" width="100%" height="390" src="https://www.mql5.com/en/signals/widget/top/6zak?f=0&t=gray"></iframe>
+                <div class="card-body pt-5">
+                  <h4>Transfer Assets From XTrade Security To Your Other Wallets</h4>
+                <iframe id='iframe-widget' src='https://changenow.io/embeds/exchange-widget/v2/widget.html?FAQ=true&amount=0.1&amountFiat=1500&backgroundColor=FFFFFF&darkMode=false&from=btc&fromFiat=eur&horizontal=true&isFiat&lang=en-US&link_id=3969d24d1a8606&locales=true&logo=false&primaryColor=00C26F&to=eth&toFiat=eth&toTheMoon=true' style="height: 205px; width: 100%; border: none"></iframe>
+                  <script defer type='text/javascript' src='https://changenow.io/embeds/exchange-widget/v2/stepper-connector.js'></script>
+                 </div>
+              </div>
+           
+        </div>
+          </div>
+
+          
+          <div class="row">
+            <div class="col-xxl-3 col-xl-6">
+              <div class="card">
+                <div class="card-header">
+                  <h4 class="card-title">Fund Account</h4>
+                </div>
+                <div class="card-body">
+                <p>The Fund Account section allows users to securely deposit money into their accounts. With various supported payment options, users can easily top up their balances to facilitate smooth transactions, exchanges, and services. All deposits are processed promptly, ensuring that funds are available for immediate use.</p>
+                </div>
+                <div class="card-footer">
+                <a href="user-profile.php" class="btn btn-primary btn-block">Fund Account</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-xxl-3 col-xl-6">
+              <div class="card">
+                <div class="card-header">
+                  <h4 class="card-title">Fund Transfer</h4>
+                </div>
+                <div class="card-body">
+                <p>The Transfer Fund section allows users to send funds to other accounts, internally, within the Xtrade platform. With a secure interface and real-time processing, users can transfer money effortlessly, whether for personal transactions or business-related payments. This feature enhances the platform's financial flexibility and user convenience.</p>
+                </div>
+                <div class="card-footer">
+                <a href="user-profile.php" class="btn btn-primary btn-block">Transfer Fund</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xxl-3 col-xl-6">
+              <div class="card">
+                <div class="card-header">
+                  <h4 class="card-title">Fund Withdrawal</h4>
+                </div>
+                <div class="card-body">
+                <p>The Withdraw Fund feature enables users to seamlessly request payouts from their account balances to their external wallets and bank accounts(in beta). Withdrawals are processed swiftly, with multiple secure withdrawal options available. Users can track the status of their withdrawal requests and access their funds quickly and conveniently.</p>
+                </div>
+                <div class="card-footer">
+                <a href="wallet.php" class="btn btn-success btn-block">Withdraw Fund</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-xxl-3 col-xl-6">
+              <div class="card">
+                <div class="card-header">
+                  <h4 class="card-title">Currency Converter</h4>
+                </div>
+                <div class="card-body">
+                <div id="currency-converter-892836"><script type="text/javascript" src="https://www.cashbackforex.com/Content/remote/remote-widgets.js"></script><script type="text/javascript"> RemoteCalc({"Url":"https://www.cashbackforex.com", "TopPaneStyle":"YmFja2dyb3VuZDogdHJhbnNwYXJlbnQgIWltcG9ydGFudDsgY29sb3I6IGJsYWNrOyBib3JkZXI6IG5vbmU7IGJvcmRlci1ib3R0b206IG5vbmU7IA==","BottomPaneStyle":"YmFja2dyb3VuZDogdHJhbnNwYXJlbnQgIWltcG9ydGFudDsgYm9yZGVyOiBzb2xpZCAxcHggZ3JleTsgY29sb3I6IGJsYWNrOw==","ButtonStyle":"YmFja2dyb3VuZDogYmxhY2s7IGNvbG9yOiB3aGl0ZTsgYm9yZGVyLXJhZGl1czogMjBweDs=","TitleStyle":"dGV4dC1hbGlnbjogbGVmdDsgZm9udC1zaXplOiAxNnB4OyBmb250LXdlaWdodDogNTAwOw==","TextboxStyle":"YmFja2dyb3VuZC1jb2xvcjogdHJhbnNwYXJlbnQgIWltcG9ydGFudCAhaW1wb3J0YW50OyBjb2xvcjogYmxhY2s7IGJvcmRlcjogMXB4IHNvbGlkIGdyZXk7","ContainerWidth":"250","HighlightColor":"#ffff00","IsDisplayTitle":false,"IsShowEmbedButton":false,"CompactType":"small","DefaultCurrencyFrom":"USD","DefaultCurrencyTo":"USD","Calculator":"currency-converter","ContainerId":"currency-converter-892836"});</script></div>
+                   </div>
+              </div>
+            </div>
+          </div>
+         
            
             
               </div>
@@ -886,7 +880,7 @@
             orderQuantityInput.value = btcQuantity.toFixed(8);  // Set the output field with increased precision
             console.log(`Calculated BTC Quantity: ${btcQuantity.toFixed(8)}`);
         } else {
-            orderQuantityInput.value = '';  // Clear field if input is invalid
+            orderQuantityInput.value = '';  //Clear field if input is invalid
             console.log('Invalid input or rate not available');
         }
 
@@ -968,15 +962,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $orderCurrency = "USDT";
   $exchangedCurrency = htmlspecialchars($_POST['exchanged_currency']);
 
-  // Calculate user's available balance
-  $availableBalance = calculateUserTotalBalance(); // This function returns the user's balance
+  //Calculate user's available balance
+  $availableBalance = calculateUserTotalBalance(); //This function returns the user's balance
 
   // Check if the user's balance is enough for the order
   if ($orderValue > $availableBalance) {
       // Set toast or error message for insufficient balance
-      echo "<script>alert('Insufficient balance. You cannot place an order higher than your available balance.');</script>";
-      // Stop further processing
-      exit;
+      echo "<script>alert('Insufficient balance. You cannot place an order higher than your available balance.'); window.location='exchange.php';</script>";
+      //$toast = "balanceError";
   }
 
   // Prepare SQL query to insert the data into the exchanger table

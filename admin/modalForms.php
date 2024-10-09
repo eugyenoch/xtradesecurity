@@ -41,7 +41,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h6 class="modal-title" id="editFundModalLabel">Edit Funding Record</h6>
-                <button type="button" class="close btn btn-outline-primary" data-bs-dismiss="editModal" aria-label="Close" onclick="editModal.style.display = 'none';">
+                <button type="button" class="close btn btn-outline-primary" data-dismiss="modal" aria-label="Close">
                     &times;
                 </button>
                 </div>
@@ -84,7 +84,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h6 class="modal-title" id="editTransactionModalLabel">Edit Transaction Record</h6>
-                <button type="button" class="close btn btn-outline-primary" data-bs-dismiss="editTransactionModal" aria-label="Close" onclick="editTransactionModal.style.display='none';">
+                <button type="button" class="close btn btn-outline-primary" data-dismiss="modal" aria-label="Close">
                     &times;
                 </button>
                 </div>
@@ -125,4 +125,43 @@
         </div>
     </div>
 </div>
+
+
+<!-- Modal Form for edit exchange -->
+<div class="modal" id="editExchangeModal" aria-labelledby="editExchangeModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title" id="editExchangeModalLabel">Edit Exchange Record</h6>
+                <button type="button" class="close btn btn-outline-primary" data-dismiss="modal" aria-label="Close">
+                    &times;
+                </button>
+                </div>
+                    <div class="modal-body">
+                    <form id="editExchangeForm" method="POST" action="finance.php" name="editExchangeForm">
+                    <div class="form-group">
+                    <input type="text" class="form-control" name="exchange_txn" id="exchangeTXN" readonly>
+                    </div>
+                    
+                    <div class="form-group">
+                    <input type="text" class="form-control" name="exchange_email" id="exchangeEmail">
+                    </div>
+
+                    <div class="form-group">
+                    <label for="editAmount">Final Order Value</label>
+                    <input type="number" step="0.00001" min="0" class="form-control" name="exchange_amount" id="exchangeAmount">
+                    </div>
+
+                    <div class="modal-footer">
+                    <div class="form-group mt-2">
+                    <button type="submit" class="btn btn-outline-primary" name="updateExchange">Update</button>
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 

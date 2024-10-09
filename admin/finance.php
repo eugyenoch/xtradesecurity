@@ -1,4 +1,8 @@
 <?php
+use phpmailer\phpmailer\PHPMailer;
+use phpmailer\phpmailer\SMTP;
+use phpmailer\phpmailer\Exception;
+
 // Include required files
 include "../function.php"; 
 checkAdminLogin();
@@ -92,16 +96,82 @@ if (isset($_GET['deleteWithdraw']) && !empty($_GET['deleteWithdraw'])) {
     }
 }
 
-//APPROVE WITHDRAWAL
+// APPROVE WITHDRAWAL
 if (isset($_GET['approveWithdraw']) && !empty($_GET['approveWithdraw'])) {
     $approveWithdraw = $con->real_escape_string($_GET['approveWithdraw']);
-    $approve_withdraw ="UPDATE withdraw SET withdraw_status='approved', approved_at=NOW() WHERE id_no = '$approveWithdraw'";
-    if ($con->query($approve_withdraw) === TRUE) {
-        echo "<script>alert('Success: Withdrawal Approved'); window.location='user-profile.php';</script>";
+
+    // Fetch user information based on the withdrawal request
+    $userQuery = "SELECT user_email, firstname, lastname, withdraw_amount FROM withdraw WHERE id_no = '$approveWithdraw'";
+    $userResult = $con->query($userQuery);
+
+    if ($userResult->num_rows > 0) {
+        $userInfo = $userResult->fetch_assoc();
+        $userEmail = $userInfo['user_email'];
+        $userFirstname = $userInfo['firstname'];
+        $userLastname = $userInfo['lastname'];
+        $withdrawAmount = $userInfo['withdraw_amount'];
+        $formatted_withdraw_amount = '$'.number_format($withdrawAmount,2);
+
+        // Update the withdrawal status
+        $approve_withdraw = "UPDATE withdraw SET withdraw_status='approved', approved_at=NOW() WHERE id_no = '$approveWithdraw'";
+        if ($con->query($approve_withdraw) === TRUE) {
+
+            require '../vendor/phpmailer/phpmailer/src/Exception.php';
+            require '../vendor/phpmailer/phpmailer/src/PHPMailer.php';
+            require '../vendor/phpmailer/phpmailer/src/SMTP.php';
+
+            // Load Composer's autoloader
+            require '../vendor/autoload.php';
+
+            $config = require_once '../emailConfig.php';
+
+            // Send verification email
+            $mail = new PHPMailer(true);
+            try {
+                // Server settings
+                $mail->isSMTP();
+                $mail->Host = $config['smtp']['host'];
+                $mail->SMTPAuth = true;
+                $mail->Username = $config['smtp']['username'];
+                $mail->Password = $config['smtp']['password'];
+                $mail->Port = $config['smtp']['port'];
+
+                // Set encryption based on config
+                if ($config['smtp']['encryption'] === 'tls') {
+                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                } elseif ($config['smtp']['encryption'] === 'ssl') {
+                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+                }
+
+                // Recipients
+                $mail->setFrom($config['email']['from_address'], $config['email']['from_name']);
+                $mail->addAddress($userEmail, $userFirstname . ' ' . $userLastname);
+
+                // Email Content
+                $mail->isHTML(true);
+                $mail->Subject = 'Withdrawal Notification';
+                $mail->Body = "Dear $userFirstname $userLastname,<br><br>Your withdrawal request for the sum of $formatted_withdraw_amount was approved and has been paid to you.<br><br>Best Regards,<br>XTrade Security LTD";
+                $mail->AltBody = "Dear $userFirstname $userLastname,\n\nYour withdrawal request for the sum of $formatted_withdraw_amount was approved and has been paid to you.\n\nBest Regards,\nXTrade Security LTD";
+
+                $mail->send();
+
+                // Show success message
+                echo "<script>alert('Success: Withdrawal Approved and Email Sent'); window.location='user-profile.php';</script>";
+
+            } catch (Exception $e) {
+                // Log error and show partial success message
+                error_log("Email sending failed: " . $mail->ErrorInfo);
+                echo "<script>alert('Success: Withdrawal Approved, but the email could not be sent.'); window.location='user-profile.php';</script>";
+            }
+
+        } else {
+            echo "<script>alert('Error: The operation could not be performed'); window.location='user-profile.php';</script>";
+        }
     } else {
-        echo "<script>alert('Error: The operation could not be performed'); window.location='user-profile.php';</script>";
+        echo "<script>alert('Error: No matching withdrawal record found'); window.location='user-profile.php';</script>";
     }
 }
+
 
 //DISAPPROVE WITHDRAWAL
 if (isset($_GET['disapproveWithdraw']) && !empty($_GET['disapproveWithdraw'])) {
@@ -262,6 +332,37 @@ if (isset($_GET['disapproveExchange']) && !empty($_GET['disapproveExchange'])) {
 }
 
 
+// UPDATE EXCHANGE
+if (isset($_POST['updateExchange'])) {
+    // Retrieve and sanitize user input
+    $EXtxn = $_POST['exchange_txn'];
+    $EXemail= $_POST['exchange_email'];
+    $EXamount = $_POST['exchange_amount'];
+    // Remove any '%' symbol for interest if present
+    // $percentageInput = str_replace('%', '', $percentageInput);
+
+    // Convert to decimal
+   // $decimalValue = $percentageInput / 100;
+
+   // Update query
+   $stmt = $con->prepare("UPDATE exchanger SET order_value = ? WHERE txn = ? AND email = ?");
+    
+   // Bind parameters
+   // Assuming fund_amount and fund_profit are decimal values, and ftxn is a string.
+   // Adjust the parameter types as needed (e.g., "d" for double/decimal, "s" for string).
+   $stmt->bind_param("dss", $EXamount, $EXtxn, $EXemail);
+
+
+    // Execute the statement
+    if ($stmt->execute()) {
+       echo "<script>alert('Success: Transaction updated'); window.location='user-profile.php';</script>";
+        echo  $stmt->error;
+    } else {
+       echo "<script>alert('Error: Could not update transaction'); window.location='user-profile.php';</script>";
+        echo $stmt->error;
+    }
+    
+}
      // Close the database connection
      $con->close();
 ?>

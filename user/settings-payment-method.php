@@ -118,10 +118,22 @@
       <div class="modal-body">
         <form action="walletProcessor.php" method="POST" class="identity-upload" enctype="multipart/form-data">
           <div class="row g-3">
+          <div class="col-xl-12">
+              <label class="form-label">Cryptocurrency<span class="text-danger">*</span></label>
+              <select class="input-group-text" name="cryptocurrency">
+                            <?php foreach(fetchUniqueWallets($con) as $wallet): ?>
+                                <option value="<?= htmlspecialchars($wallet['wallet']) ?>">
+                                    <?= htmlspecialchars($wallet['wallet']) ?>
+                                </option>
+                            <?php endforeach; ?>
+                </select>
+          </div>
+
             <div class="col-xl-12">
-              <label class="form-label">Wallet Address for Tether (USDT) on BSC Blockchain <span class="text-danger">*</span></label>
+              <label class="form-label">Wallet Address for your chosen cryptocurrency<span class="text-danger">*</span></label>
               <input title="Enter wallet address or number" type="text" class="form-control" placeholder="Wallet address here" name="newAddress" required />
             </div>
+            
             <div class="col-xl-12">
               <label class="form-label">Wallet Tag</label>
               <input title="Enter wallet tag: e.g. USDT wallet 1" class="form-control" type="text" name="newWalletTag" placeholder="Give wallet a tag name" />

@@ -145,7 +145,7 @@
 
                     <!-- Custom Range Slider -->
                     <div class="mb-3 slider-custom">
-                        <input type="range" class="form-range" min="0" max="100" step="25" value="0" id="customRange" name="orderPercentage">
+                        <input type="range" class="form-range" min="0" max="100" step="25" value="100" id="customRange" name="orderPercentage">
                         <div class="d-flex justify-content-between">
                             <span class="text-white">0</span>
                             <span class="text-white">25%</span>
@@ -186,7 +186,7 @@
                 <div class="card-header">
                   <h4 class="card-title">This is a demo account. Migrate your account to live trading</h4>
                 </div>
-                  <a href="exchange.php" type="button" class="btn btn-primary btn-block">Go To Live Trading</a>
+                  <a href="exchange.php" type="button" class="btn btn-primary btn-block">Switch To Live</a>
                 
               </div>
             </div>
