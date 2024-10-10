@@ -68,6 +68,7 @@
                     <div class="modal-footer">
                     <div class="form-group mt-2">
                     <button type="submit" class="btn btn-outline-primary" name="updateFund">Update</button>
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
                     </div>
                     </div>
                 </form>
@@ -118,6 +119,7 @@
                     <div class="modal-footer">
                     <div class="form-group mt-2">
                     <button type="submit" class="btn btn-outline-primary" name="updateTransaction">Update</button>
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
                     </div>
                     </div>
                 </form>
@@ -148,8 +150,8 @@
                     </div>
 
                     <div class="form-group">
-                    <label for="editAmount">Final Order Value</label>
-                    <input type="number" step="0.00001" min="0" class="form-control" name="exchange_amount" id="exchangeAmount">
+                    <label for="editAmount">Profit from exchange</label>
+                    <input type="number" class="form-control" name="exchange_amount" id="exchangeAmount">
                     </div>
 
                     <div class="modal-footer">

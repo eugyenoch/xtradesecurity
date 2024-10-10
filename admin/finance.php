@@ -43,7 +43,7 @@ if (isset($_GET['disapproveFund']) && !empty($_GET['disapproveFund'])) {
     $disapproveFund = $con->real_escape_string($_GET['disapproveFund']);
     
     // Corrected SQL query
-    $disapprove_fund = "UPDATE fund SET fund_status='pending', approved_at=NULL WHERE id_no = '$disapproveFund'";
+    $disapprove_fund = "UPDATE fund SET fund_status='pending', is_locked = 'no', lock_duration = NULL, approved_at=NULL WHERE id_no = '$disapproveFund'";
     
     if ($con->query($disapprove_fund) === TRUE) {
         echo "<script>alert('Success: Funding Disapproved'); window.location='user-profile.php';</script>";
@@ -345,7 +345,7 @@ if (isset($_POST['updateExchange'])) {
    // $decimalValue = $percentageInput / 100;
 
    // Update query
-   $stmt = $con->prepare("UPDATE exchanger SET order_value = ? WHERE txn = ? AND email = ?");
+   $stmt = $con->prepare("UPDATE exchanger SET profit = ? WHERE txn = ? AND email = ?");
     
    // Bind parameters
    // Assuming fund_amount and fund_profit are decimal values, and ftxn is a string.

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 02, 2024 at 12:52 PM
+-- Generation Time: Oct 10, 2024 at 03:01 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -97,6 +97,7 @@ CREATE TABLE `exchanger` (
   `order_value` decimal(18,8) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `order_status` varchar(100) DEFAULT NULL,
+  `profit` decimal(19,5) NOT NULL,
   `approved_at` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -104,10 +105,12 @@ CREATE TABLE `exchanger` (
 -- Dumping data for table `exchanger`
 --
 
-INSERT INTO `exchanger` (`id`, `txn`, `firstname`, `lastname`, `email`, `username`, `order_type`, `order_method`, `order_price`, `order_currency`, `order_quantity`, `exchanged_currency`, `quantity_percent`, `order_value`, `created_at`, `order_status`, `approved_at`) VALUES
-(1, 'TXN225817', 'xtradesecurity', 'user', 'info@xtradesecurity.com', 'xtradeinfo', 'buy', 'limit', 99.00000000, NULL, 0.00163148, NULL, 0.00, 99.00000000, '2024-10-01 21:11:43', 'loose', NULL),
-(2, 'TXN190478', 'xtradesecurity', 'user', 'info@xtradesecurity.com', 'xtradeinfo', 'sell', 'market', 90.00000000, NULL, 0.00148317, NULL, 0.00, 90.00000000, '2024-10-01 21:15:28', 'win', '2024-10-02'),
-(3, 'TXN623266', 'xtradesecurity', 'user', 'info@xtradesecurity.com', 'xtradeinfo', 'Buy', 'limit', 90.00000000, 'USDT', 0.00036569, 'BTC', 25.00, 22.50000000, '2024-10-02 10:35:46', 'ongoing', NULL);
+INSERT INTO `exchanger` (`id`, `txn`, `firstname`, `lastname`, `email`, `username`, `order_type`, `order_method`, `order_price`, `order_currency`, `order_quantity`, `exchanged_currency`, `quantity_percent`, `order_value`, `created_at`, `order_status`, `profit`, `approved_at`) VALUES
+(1, 'TXN225817', 'xtradesecurity', 'user', 'info@xtradesecurity.com', 'xtradeinfo', 'buy', 'limit', 99.00000000, NULL, 0.00163148, NULL, 0.00, 99.00000000, '2024-10-01 21:11:43', 'loose', 0.00000, NULL),
+(2, 'TXN190478', 'xtradesecurity', 'user', 'info@xtradesecurity.com', 'xtradeinfo', 'sell', 'market', 90.00000000, NULL, 0.00148317, NULL, 0.00, 90.00000000, '2024-10-01 21:15:28', 'win', 0.00000, '2024-10-02'),
+(7, 'TXN652642', 'xtradesecurity', 'user', 'info@xtradesecurity.com', 'xtradeinfo', 'Buy', 'limit', 90.00000000, 'USDT', 0.00144963, 'BTC', 100.00, 1200.00000000, '2024-10-06 09:46:55', 'ongoing', 0.00000, NULL),
+(8, 'TXN804072', 'xtradesecurity', 'user', 'info@xtradesecurity.com', 'xtradeinfo', 'Buy', 'limit', 8765.00000000, 'USDT', 0.14117742, 'BTC', 100.00, 8765.00000000, '2024-10-06 09:47:10', 'ongoing', 0.00000, NULL),
+(9, 'TXN291484', 'xtradesecurity', 'user', 'info@xtradesecurity.com', 'xtradeinfo', 'Buy', 'limit', 900.00000000, 'USDT', 0.01444832, 'BTC', 100.00, 900.00000000, '2024-10-06 13:44:05', 'ongoing', 0.00000, NULL);
 
 -- --------------------------------------------------------
 
@@ -128,6 +131,7 @@ CREATE TABLE `fund` (
   `fund_proof` varchar(255) DEFAULT NULL,
   `fund_comment` varchar(1024) DEFAULT NULL,
   `is_locked` varchar(255) DEFAULT NULL,
+  `lock_duration` int(11) DEFAULT NULL,
   `fund_status` varchar(255) NOT NULL DEFAULT 'pending',
   `approved_at` date DEFAULT NULL,
   `fund_request_date` datetime DEFAULT current_timestamp()
@@ -137,10 +141,11 @@ CREATE TABLE `fund` (
 -- Dumping data for table `fund`
 --
 
-INSERT INTO `fund` (`id_no`, `user_email`, `userName`, `ftxn`, `firstname`, `lastname`, `fund_currency`, `fund_amount`, `fund_profit`, `fund_proof`, `fund_comment`, `is_locked`, `fund_status`, `approved_at`, `fund_request_date`) VALUES
-(2, 'danjohn@gmail.com', '', 'TXN765434', 'Daniel', 'John', 'BTC', 2.00000, 7.98700, '2(1).png', 'Nothing more to do', NULL, 'approved', NULL, '2024-08-02 21:43:39'),
-(5, 'emeka@gmail.com', '', 'TXN09855', 'Emeka', 'Bold', 'SOL', 4.03000, 10.67800, '2(1).png', 'There is more to come', NULL, 'pending', NULL, '2024-08-02 22:05:18'),
-(8, 'info@xtradesecurity.com', 'xtradeinfo', 'TXN251668', 'xtradesecurity', 'user', 'BSC', 1000.00000, NULL, NULL, NULL, NULL, 'approved', NULL, '2024-09-07 16:58:37');
+INSERT INTO `fund` (`id_no`, `user_email`, `userName`, `ftxn`, `firstname`, `lastname`, `fund_currency`, `fund_amount`, `fund_profit`, `fund_proof`, `fund_comment`, `is_locked`, `lock_duration`, `fund_status`, `approved_at`, `fund_request_date`) VALUES
+(10, 'info@xtradesecurity.com', 'xtradeinfo', 'TXN284246', 'xtradesecurity', 'user', 'BSC', 6998.00000, NULL, NULL, NULL, 'no', NULL, 'approved', '2024-10-09', '2024-10-09 20:39:47'),
+(11, 'info@xtradesecurity.com', 'xtradeinfo', 'TXN284246', 'xtradesecurity', 'user', 'BSC', 6998.00000, NULL, NULL, NULL, 'yes', 2, 'approved', '2024-10-10', '2024-10-09 20:45:07'),
+(13, 'info@xtradesecurity.com', 'xtradeinfo', 'TXN159735', 'xtradesecurity', 'user', 'BSC', 8998.00000, NULL, NULL, NULL, 'yes', 1, 'approved', '2024-10-10', '2024-10-10 12:27:45'),
+(15, 'info@xtradesecurity.com', 'xtradeinfo', 'TXN589523', 'xtradesecurity', 'user', 'BSC', 9000.00000, NULL, NULL, NULL, 'no', NULL, 'pending', NULL, '2024-10-10 12:32:19');
 
 -- --------------------------------------------------------
 
@@ -351,8 +356,9 @@ INSERT INTO `wallet_addresses` (`id_no`, `wallet`, `address`, `wallet_tag`, `qrc
 (19, 'BSC', '0x345tyuiijhgfdsdfgh76543234565432', 'BSC 2', '1 (1).png', 'admin', '2024-09-03 09:51:36'),
 (20, 'BTC', 'b3126jdyujhgtyuytrdvbxzxczaqaqawsdf', '', '2 (1).png', 'admin', '2024-09-03 09:52:10'),
 (21, 'DOGE', '098765dddffdddderty765432345678', '', '3.png', 'admin', '2024-09-03 09:52:39'),
-(22, 'USDT', '0x0948594948594', 'BSC 1', 'dashboard 1.png', 'info@xtradesecurity.com', '2024-09-03 18:25:30'),
-(25, 'USDT', '0x094859494859409876543212345678', '', 'bitcrypto.png', 'info@xtradesecurity.com', '2024-09-04 13:13:44');
+(25, 'USDT', '0x094859494859409876543212345678', '', 'bitcrypto.png', 'info@xtradesecurity.com', '2024-09-04 13:13:44'),
+(26, 'USDT', '0x0987654567876545678765456', 'My USDT Wallet', NULL, 'info@xtradesecurity.com', '2024-10-07 20:15:45'),
+(28, 'BTC', '098jfjvndhjdfhjvbsah0987654309876587654', 'BTC 1', NULL, 'info@xtradesecurity.com', '2024-10-09 15:32:35');
 
 -- --------------------------------------------------------
 
@@ -383,7 +389,9 @@ INSERT INTO `withdraw` (`id_no`, `wtxn`, `user_email`, `userName`, `firstname`, 
 (3, 'TXN098765', 'i@gmail.com', '', 'Ionus', 'Ike', 'SOL', 9.00000, '0x0987654321234567890', 'approved', NULL, '2024-08-03 09:28:29'),
 (4, 'TXN0987654', 'wr@gmail.com', '', 'Wright', 'Brothers', 'USD', 9.00000, '0x8767898767jhgvbn', 'pending', NULL, '2024-08-05 09:10:56'),
 (5, 'TXN09876665', 'opi@gmail.com', '', 'OPI', 'Nsukka', 'NGN', 9.00000, '0x09876567uhghjh', 'pending', NULL, '2024-08-05 09:10:56'),
-(6, 'TXN653863', 'info@xtradesecurity.com', 'INFO', 'xtradesecurity', 'user', 'USDT', 0.90000, '0x9EA8d6272B724AfB813A9E7C4eaF07C7aF4FE996', 'pending', NULL, '2024-09-03 18:45:09');
+(6, 'TXN653863', 'info@xtradesecurity.com', 'INFO', 'xtradesecurity', 'user', 'USDT', 0.90000, '0x9EA8d6272B724AfB813A9E7C4eaF07C7aF4FE996', 'pending', NULL, '2024-09-03 18:45:09'),
+(7, 'TXN902518', 'info@xtradesecurity.com', 'xtradeinfo', 'xtradesecurity', 'user', 'BTC', 99.98600, '098jfjvndhjdfhjvbsah0987654309876587654', 'pending', NULL, '2024-10-09 15:34:40'),
+(8, 'TXN340069', 'info@xtradesecurity.com', 'xtradeinfo', 'xtradesecurity', 'user', 'USDT', 900.00000, '0x094859494859409876543212345678', 'pending', NULL, '2024-10-09 15:35:09');
 
 --
 -- Indexes for dumped tables
@@ -481,13 +489,13 @@ ALTER TABLE `bank_accounts`
 -- AUTO_INCREMENT for table `exchanger`
 --
 ALTER TABLE `exchanger`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `fund`
 --
 ALTER TABLE `fund`
-  MODIFY `id_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `newsletter`
@@ -529,13 +537,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `wallet_addresses`
 --
 ALTER TABLE `wallet_addresses`
-  MODIFY `id_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `withdraw`
 --
 ALTER TABLE `withdraw`
-  MODIFY `id_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

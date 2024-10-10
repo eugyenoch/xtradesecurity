@@ -266,18 +266,35 @@ function getTotalTransactionProfit($con) {
         return "$0.00"; // Return $0.00 if no records are found
     }
 }
+
+
+//GET TOTAL EXCHANGE PROFITandBONUSES
+function getTotalExchangeProfit($con) {
+    $sql = "SELECT SUM(profit) as total FROM exchanger";
+    $result = $con->query($sql);
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        return $row['total'];
+    } else {
+        return "$0.00"; // Return $0.00 if no records are found
+    }
+}
+
 //GET SITE TOTAL BALANCE
 function getTotalSiteBalance($con) {
     $totalFundAmount = getTotalFundAmount($con);
     $totalTransactionAmount = getTotalTransactionAmount($con);
     $totalFundProfits = getTotalFundProfit($con);
     $totalTransactionProfit = getTotalTransactionProfit($con);
+    $totalExchangeWin = getTotalExchangeProfit($con);
     $totalWithdrawAmount = getTotalWithdrawAmount($con);
 
     // Calculate the total site balance
     $totalSiteBalance = $totalFundAmount 
                        + $totalFundProfits
                        + $totalTransactionProfit
+                       + $totalExchangeWin
                        - $totalTransactionAmount  
                        - $totalWithdrawAmount;
 
@@ -415,7 +432,7 @@ function getTotalApprovedFundAmount() {
     $userEmail = isset($_SESSION['user_session']) ? $_SESSION['user_session'] : null;
 
     // Prepare the SQL query
-    $sql = "SELECT SUM(fund_amount) AS total_funded FROM fund WHERE (user_email = ? OR userName = ?) AND fund_status = 'approved'";
+    $sql = "SELECT SUM(fund_amount) AS total_funded FROM fund WHERE (user_email = ? OR userName = ?) AND is_locked = 'no' AND fund_status = 'approved'";
 
     // Prepare and execute the statement
     $stmt = $con->prepare($sql);
@@ -695,6 +712,34 @@ function getTotalApprovedTransactionProfit() {
     return "$" . number_format($row['total_invested_profit'] ?? 0, 2);
 }
 
+
+//GET TOTAL APPROVED EXCHANGE(TRANSACTION) PROFIT FOR A SINGLE USER
+function getTotalApprovedExchangeProfit() {
+    // Assuming you have a database connection established
+    global $con;
+
+    // Get the logged-in user's email or username from session
+    $userEmail = isset($_SESSION['user_session']) ? $_SESSION['user_session'] : null;
+
+    // Prepare the SQL query
+    $sql = "SELECT SUM(profit) AS total_exchange_profit FROM exchanger WHERE (email = ? OR username = ?) AND order_status = 'win'";
+
+    // Prepare and execute the statement
+    $stmt = $con->prepare($sql);
+    $stmt->bind_param("ss", $userEmail, $userEmail);
+    $stmt->execute();
+
+    // Get the result
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+
+    // Close the statement
+    $stmt->close();
+
+    // Return the total amount or 0 if no results found
+    return "$" . number_format($row['total_exchange_profit'] ?? 0, 2);
+}
+
 //COUNT P2P TRADES OF THE CURRENTLY LOGGED IN USER
 function countUserP2PTrades($con, $user_p2p_count) {
     // Prepare the SQL statement to count the referrals
@@ -732,23 +777,23 @@ function countUserOrderBook($con, $user_order_count) {
 }
 
 //Fetch all from funds for currently logged in user
-function fetchFunds($con, $userEmail) {
-    $sql_funds = "SELECT * FROM fund WHERE user_email = ? OR userName = ?";
-    $stmt = $con->prepare($sql_funds);
-    $stmt->bind_param('ss', $userEmail, $userEmail);
-    $stmt->execute();
-    $result = $stmt->get_result();
+// function fetchFunds($con, $userEmail) {
+//     $sql_funds = "SELECT * FROM fund WHERE user_email = ? OR userName = ?";
+//     $stmt = $con->prepare($sql_funds);
+//     $stmt->bind_param('ss', $userEmail, $userEmail);
+//     $stmt->execute();
+//     $result = $stmt->get_result();
 
-    $funds = [];
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            $funds[] = $row;
-        }
-    }
+//     $funds = [];
+//     if ($result->num_rows > 0) {
+//         while ($row = $result->fetch_assoc()) {
+//             $funds[] = $row;
+//         }
+//     }
 
-    $stmt->close();
-    return $funds;
-}
+//     $stmt->close();
+//     return $funds;
+// }
 
 function calculateAndUpdateTransactionProfit($con, $transactions_info) {
     // Check if the transaction status is 'approved'
@@ -805,7 +850,8 @@ function calculateUserTotalBalance() {
         'moneyTransfer' => 'getTotalApprovedTransferForSeller',
         'p2pTransfer' => 'getTotalApprovedTransferP2PForSeller',
         'moneyReceived' => 'getTotalApprovedTransferForBuyer',
-        'p2pReceived' => 'getTotalApprovedTransferP2PForBuyer'
+        'p2pReceived' => 'getTotalApprovedTransferP2PForBuyer',
+        'exchangeProfit' => 'getTotalApprovedExchangeProfit'
     ];
 
     $balanceValues = [];
@@ -828,6 +874,7 @@ function calculateUserTotalBalance() {
                   + $balanceValues['InvestmentProfit'] 
                   + $balanceValues['moneyReceived']
                   + $balanceValues['p2pReceived']
+                  + $balanceValues['exchangeProfit']
                   - $balanceValues['Investment']
                   - $balanceValues['moneyTransfer']
                   - $balanceValues['p2pTransfer'] 
@@ -894,6 +941,17 @@ function generateRandomWalletAddress($length = 40) {
     
     // Prefix with 'xt' to mimic wallet addresses
     return 'xt' . strtoupper($randomHex);
+}
+
+function convertToFloat($value) {
+    // Remove any non-numeric characters except for the decimal point
+    $cleaned = preg_replace('/[^0-9.]/', '', $value);
+    
+    // Convert to float
+    $float = floatval($cleaned);
+    
+    // Ensure it's a valid number
+    return is_finite($float) ? $float : 0.0;
 }
 
 ?>

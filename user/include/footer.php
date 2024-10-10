@@ -204,25 +204,37 @@ function featureNotAvailable(){
 <script>
 // Ensure variables are defined and convert to float
 var totalFunded = <?php echo isset($totalFunded) ? floatval(preg_replace('/[^\d.]/', '', $totalFunded)) : 0; ?>;
-var totalInvestmentProfit = <?php echo isset($totalInvestmentProfit) ? floatval(str_replace('$', '', $totalInvestmentProfit)) : 0; ?>;
-var totalInvestment = <?php echo isset($totalInvestment) ? floatval(str_replace('$', '', $totalInvestment)) : 0; ?>;
-var totalWithdrawn = <?php echo isset($totalWithdrawn) ? floatval(str_replace('$', '', $totalWithdrawn)) : 0; ?>;
+var totalInvestmentProfit = <?php echo isset($totalInvestmentProfit) ? floatval(preg_replace('/[^\d.]/', '', $totalInvestmentProfit)) : 0; ?>;
+var totalExchangeProfit = <?php echo isset($totalExchangeProfit) ? floatval(preg_replace('/[^\d.]/', '', $totalExchangeProfit)) : 0; ?>;
+var totalInvestment = <?php echo isset($totalInvestment) ? floatval(preg_replace('/[^\d.]/', '', $totalInvestment)) : 0; ?>;
+var totalWithdrawn = <?php echo isset($totalWithdrawn) ? floatval(preg_replace('/[^\d.]/', '', $totalWithdrawn)) : 0; ?>;
 var userBalance = <?php echo isset($userBalance) ? floatval(preg_replace('/[^\d.]/', '', $userBalance)) : 0; ?>;
 
+// Chart.js setup
 var ctx2 = document.getElementById('moneyChart').getContext('2d');
 var moneyChart = new Chart(ctx2, {
     type: 'bar',
     data: {
-        labels: ['Funded','Profit','Investments','Withdrawal','Balance'],
+        labels: ['Funded', 'Profit', 'Investments', 'Exchange', 'Withdrawal', 'Balance'],
         datasets: [{
             label: 'Finance ($)',
-            data: [totalFunded, totalInvestmentProfit, totalInvestment, totalWithdrawn, userBalance],
-            // backgroundColor: [
-            //     'rgba(255,165,0,0.4)',
-            // ],
-            // borderColor: [
-            //     'rgba(255,165,0,1)',
-            // ],
+            data: [totalFunded, totalInvestment, totalInvestmentProfit, totalExchangeProfit, totalWithdrawn, userBalance],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.6)',
+                'rgba(54, 162, 235, 0.6)',
+                'rgba(255, 206, 86, 0.6)',
+                'rgba(75, 192, 192, 0.6)',
+                'rgba(153, 102, 255, 0.6)',
+                'rgba(255, 159, 64, 0.6)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
             borderWidth: 1
         }]
     },
@@ -240,10 +252,10 @@ var ctx3 = document.getElementById('moneyPie').getContext('2d');
 var moneyChart = new Chart(ctx3, {
     type: 'doughnut',
     data: {
-        labels: ['Funded','Profit','Investments','Withdrawal','Balance'],
+        labels: ['Funded','Profit','Investments','Exchange','Withdrawal','Balance'],
         datasets: [{
             label: 'Finance ($)',
-            data: [totalFunded, totalInvestmentProfit, totalInvestment, totalWithdrawn, userBalance],
+            data: [totalFunded, totalInvestment, totalInvestmentProfit, totalExchangeProfit, totalWithdrawn, userBalance],
             // backgroundColor: [
             //     'rgba(255,165,0,0.4)',
             // ],

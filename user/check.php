@@ -68,7 +68,7 @@ if (isset($_POST['confirm'])) {
           </div>
           <div class="col-md-6">
             <ul class="breadcrumb">
-              <li><a href="../index.php">Home</a></li>
+              <li><a href="login.php">Home</a></li>
               <li><p class="fs-18">/</p></li>
               <li><p class="fs-18">User verification</p></li>
             </ul>
@@ -85,7 +85,7 @@ if (isset($_POST['confirm'])) {
             <div class="block-text center">
               <h3 class="heading">Password Recovery</h3>
               <p class="desc fs-20">
-             <small> Confirm your registered email address and phone number. If found, you will be re-directed to update your password effectively</small>
+             <small> Confirm your registered email address and phone number. If found, you will be re-directed to update your password</small>
               </p>
             </div>
           </div>

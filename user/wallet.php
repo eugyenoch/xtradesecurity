@@ -63,10 +63,10 @@
             <div class="col-xxl-3 col-xl-3 col-lg-6 col-md-6 col-sm-6">
               <div class="wallet-widget card">
                 <h5>Profits</h5>
-                <h3> <?php if(isset($_SESSION['user_session'])) {$totalInvestmentProfit = getTotalApprovedTransactionProfit();
-                            echo "&nbsp;<span title='Total Approved Investments Profit (TAIP)'>". $totalInvestmentProfit ."</span>";
+                <h3> <?php if(isset($_SESSION['user_session'])) {$totalExchangeProfit = getTotalApprovedExchangeProfit();
+                            echo "&nbsp;<span title='Total Approved Exchange Profit (TAEP)'>". $totalExchangeProfit ."</span>";
                         } else {
-                            echo "&nbsp;<span title='Total Approved Investments Profit (TAIP)'>$0.00</span>";
+                            echo "&nbsp;<span title='Total Approved Exchange Profit (TAEP)'>$0.00</span>";
                         }?>
                 </span> <sub>USD</sub></h3>
               </div>
@@ -198,13 +198,13 @@
 
                       <h5>
                         <?php if(isset($_SESSION['user_session'])) {$userLockedBalance =  getTotalApprovedLockedFundAmount();
-                                    echo "<i class='icofont-lock'></i>Locked Balance:&nbsp;<span title='Total Locked Balance (TLB) as approved'>". $userLockedBalance ."</span>";
+                                    echo "<i class='icofont-lock'></i>Locked Balance:&nbsp;<span title='Total Locked Balance (TLB) as approved'>$". number_format($userLockedBalance, 2) ."</span>";
                                 } else {echo "<i class='icofont-lock'></i>Locked Balance:&nbsp;<span title='Total Locked Balance (TLB) as approved'>$0.00</span>";}?>
                             </h5>
                       </div>
                       <div>
                       <button type="button" class="btn btn-success" data-toggle="modal" data-target="#transferFund" tabindex="-1">Transfer Fund</button>
-                      <button type="button" class="btn btn-secondary position-relative top-100 start-0" data-toggle="modal" data-target="#withdrawFund" tabindex="-1">Withdraw</button>
+                      <button type="button" class="btn btn-success position-relative top-100 start-0" data-toggle="modal" data-target="#lockFund" tabindex="-1">Earn 199% APY</button>
                      
                     </div>
                   </div>
@@ -262,6 +262,21 @@
                         }?></h6>
                           </div>
                         </li>
+
+                        <li>
+                        <div class="icon-title">
+                            <i class="cc USDT"></i>
+                            <span class="fs-6">Total Exchange Profits</span>
+                          </div>
+                          <div class="text-end">
+                            <h6> <?php if(isset($_SESSION['user_session'])) {$totalExchangeProfit = getTotalApprovedExchangeProfit();
+                            echo "&nbsp;<span title='Total Approved Exchange Profit (TAEP)'>". $totalExchangeProfit ."</span>";
+                        } else {
+                            echo "&nbsp;<span title='Total Approved Exchange Profit (TAEP)'>$0.00</span>";
+                        }?></h6>
+                          </div>
+                        </li>
+
                         <li>
                           <div class="icon-title">
                             <i class="cc USDT"></i>
@@ -304,15 +319,13 @@
                           </div>
                         </li>
                       </ul>
-                      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#transferFund" tabindex="-1">Transfer Fund</button>
-                    
-                    <button type="button" class="btn btn-secondary position-relative top-100 start-0 mb-1" data-toggle="modal" data-target="#lockFund" tabindex="-1">Earn 199% APY</button>
+                    <button type="button" class="btn btn-secondary position-relative top-100 start-0" data-toggle="modal" data-target="#withdrawFund" tabindex="-1">Withdraw</button>
                     <button type="button" class="btn btn-secondary position-relative top-100 start-0" data-toggle="modal" data-target="#commission" tabindex="-1">Pay Commissions</button>
                      
                     </div> 
                     <div class="mt-4"></div>
                     <h6><span title="Fetched Wallet Address" id="walletAddress"></span>&nbsp;&nbsp;<span title="Fetched Wallet Balance" id="walletBalance"></span></h6> 
-                    <!-- <span id="walletDetails"></span> -->
+                   
                        </div>
                        <div>
                       <a href="#" id="connectWalletButton" type="button" class="btn btn-success position-relative top-100 start-0">Import External Wallet</a>
@@ -330,17 +343,18 @@
                 <div class="card-body">
                   <div class="table-responsive">
                   <table class="table table-striped table-hover responsive-table" id="fundTable">
-                      <caption><strong>Profits are for locked funds only</strong></caption>
+                      <caption><strong>Profits, where applicable, are for locked funds only</strong></caption>
                       <thead>
                           <tr class="table-secondary">  
                               <th>TXN ID</th>
                               <th>Amount</th>
                               <th>Profit</th>
-                              <th>Date</th>
+                              <th>Request Date</th>
                               <th>Locked</th>
                               <th>Duration</th>
+                              <th>Approval/Disaproval Date</th>
                               <th>Unlock Date</th>
-                              <th>Status</th>
+                              <th>Status</th> 
                               <th>Payment proof</th>
                           </tr>
                       </thead>
@@ -349,21 +363,24 @@
                               <th>TXN ID</th>
                               <th>Amount</th>
                               <th>Profit</th>
-                              <th>Date Added/Approved</th>
+                              <th>Request Date</th>
                               <th>Locked</th>
                               <th>Duration</th>
+                              <th>Approval/Disaproval Date</th>
                               <th>Unlock Date</th>
                               <th>Status</th>
                               <th>Payment proof</th>
                           </tr>
                       </tfoot>
                       <tbody>
-                      <?php if (!empty($funds)): ?>
-                        <?php foreach ($funds as $funds_info): ?>
+                      <?php $funding = "SELECT * FROM fund WHERE user_email='$userEmail' OR userName='$userEmail'"; 
+                  $funding_exec = $con->query($funding); //$serial_number = 1;
+                if ($funding_exec->num_rows > 0): ?>
+                        <?php foreach ($funding_exec as $funds_info): ?>
                                   <tr>  
-                                      <td><?= $funds_info['ftxn']; ?></td>
-                                      <td><?= number_format($funds_info['fund_amount'],2) . ' ' . $funds_info['fund_currency']; ?></td>
-                                      <td>
+                                      <td class="coin-name"><?= $funds_info['ftxn']; ?></td>
+                                      <td class="coin-name"><?= number_format($funds_info['fund_amount'],2) . ' ' . $funds_info['fund_currency']; ?></td>
+                                      <td class="coin-name">
                                           <?php if (!empty($funds_info['fund_profit'])): ?>
                                               <?= number_format($funds_info['fund_profit'],2) . ' ' . $funds_info['fund_currency']; ?>
                                           <?php else: ?>
@@ -371,8 +388,8 @@
                                           <?php endif; ?>
                                       </td>
                                      
-                                      <td><?= $funds_info['fund_request_date']; ?></td>
-                                      <td><?php if(isset($funds_info['is_locked']) && $funds_info['is_locked'] ==='yes'):?> 
+                                      <td class="coin-name"><?= $funds_info['fund_request_date']; ?></td>
+                                      <td class="coin-name"><?php if(isset($funds_info['is_locked']) && $funds_info['is_locked'] ==='yes'):?> 
                                         <span class="badge bg-info">Yes</span>
                                         <?php elseif(isset($funds_info['is_locked']) && $funds_info['is_locked'] ==='no'):?> 
                                           <span class="badge bg-info">No</span>
@@ -381,16 +398,52 @@
                                         <?php endif; ?>
                                       </td>
 
-                                      <td><?php if(isset($funds_info['lock_duration']) && $funds_info['lock_duration'] != NULL ):?> 
+                                      <td class="coin-name"><?php if(isset($funds_info['lock_duration']) && $funds_info['lock_duration'] != NULL ):?> 
                                         <span class="badge bg-info"><?= $funds_info['lock_duration'] . '&nbsp;Year(s)'; ?></span>
                                         <?php else: ?>
-                                          <span class="badge bg-info">Unlocked</span>
+                                          <span class="badge bg-warning">Not locked</span>
                                         <?php endif; ?>
+                                      </td> 
+                                      <td class="coin-name">
+                                      <?php 
+                                          if (isset($funds_info['approved_at']) && $funds_info['approved_at']!= NULL){echo $funds_info['approved_at']; }else{
+                                            echo  '<span class="badge bg-success">pending</span>';
+                                          }
+                                          ?> 
                                       </td>
-                                      <td></td>
+                                      <td class="coin-name">
+                                        <?php 
+                                        if (!empty($funds_info['lock_duration']) && !empty($funds_info['approved_at'])) {
+                                            $approvedDate = new DateTime($funds_info['approved_at']);
+                                            $lockDurationYears = (int)$funds_info['lock_duration'];
+
+                                            // Add the duration in years
+                                            $approvedDate->modify("+$lockDurationYears years");
+
+                                            // Get the final date
+                                            $finalDate = $approvedDate->format('Y-m-d');
+                                            
+                                            // Calculate the difference between the current date and the final date
+                                            $currentDate = new DateTime();
+                                            $interval = $currentDate->diff($approvedDate);
+
+                                            // Check if the final date is in the future
+                                            if ($currentDate < $approvedDate) {
+                                                $daysRemaining = $interval->days;
+                                                echo $finalDate . "<br>" . $daysRemaining . " days remaining";
+                                            } else {
+                                                echo "Expired on: " . $finalDate;
+                                            }
+                                        } else {
+                                            echo "<span class='badge bg-warning'>Not applicable</span>";
+                                        }
+                                        ?>
+
+                                      </td>
+
                                       <td class="coin-name">
                                           <?php if ($funds_info['fund_status'] === 'pending'): ?>
-                                              <span class="badge bg-warning text-black"><?= $funds_info['fund_status']; ?></span>
+                                              <span class="badge bg-warning"><?= $funds_info['fund_status']; ?></span>
                                           <?php elseif ($funds_info['fund_status'] === 'approved'): ?>
                                               <span class="badge bg-success"><?= $funds_info['fund_status']; ?></span>
                                           <?php else: ?>

@@ -56,33 +56,38 @@ $total_p2p_count = countUserP2PTrades($con, $user_p2p_count);
 $user_order_count = $_SESSION['user_session'];
 $total_order_count = countUserOrderBook($con, $user_order_count);
 
-//Get all fund data from currently logged in user
-$funds = fetchFunds($con, $userEmail);
+//Call the function to check user Withdrawals
+$totalWithdrawn = getTotalApprovedWithdrawAmount();
 
-// Extract and combine the initials
-$firstInitial = substr($firstname, 0, 1);
-$lastInitial = substr($lastname, 0, 1);
-$initials = $firstInitial . $lastInitial;
+//Call the function to get user total approved funding
+$totalFunded = getTotalApprovedFundAmount();
 
-// At the top of your PHP file
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['fcurrency_id']) || isset($_POST['fcurrency_id1']) || isset($_POST['fcurrency_id2']) || isset($_POST['fcurrency_id3']) || isset($_POST['fcurrency_id4']) || isset($_POST['fcurrency_id5']) || isset($_POST['fcurrency_id6'])) {
-  $selected_currency = $_POST['fcurrency_id'];
+//Call the function to get user total approved locked funding
+$totalLockFunded = getTotalApprovedLockedFundAmount();
 
-// Fetch wallet address and QR code from database
-$stmt = $con->prepare("SELECT address, qrcode FROM wallet_addresses WHERE wallet = ?");
-$stmt->bind_param("s", $selected_currency);
-$stmt->execute();
-$result = $stmt->get_result();
+//Call the function to get user total approved transfer
+$totalTransfer = getTotalApprovedTransferForSeller();
 
-if ($row = $result->fetch_assoc()) {
-    $wallet_address = $row['address'];
-    $qrcode_image = $row['qrcode'];
-} else {
-    $wallet_address = "";
-    $qrcode_image = "";
-}
-$stmt->close();
-}
+//Call the function to get user total approved transfer seller
+$totalSellerTransfer = getTotalApprovedTransferForSeller();
+
+//Call the function to get user total approved transfer buyer
+$totalBuyerTransfer = getTotalApprovedTransferForBuyer();
+
+//Call the function to get user total approved fund interest
+$totalFundInterest = getTotalApprovedFundInterest();
+
+//Call the function to get user total approved transaction amount
+$totalInvestment = getTotalApprovedTransactionAmount();
+
+//Call the function to get user total approved transaction profit
+$totalInvestmentProfit = getTotalApprovedTransactionProfit();
+
+//Call the function to get user total exchange wins
+$totalExchangeProfit = getTotalApprovedExchangeProfit();
+
+//Call the function to get user total balance
+$userBalance = calculateUserTotalBalance();
 
 //Script for requesting funding
 if (isset($_POST['fundAccount'])) {
@@ -119,7 +124,7 @@ if (isset($_POST['lock'])) {
   $fusername = $_POST['lusername']; 
   $ffirstname = $_POST['lfirstname'];
   $flastname = $_POST['llastname']; 
-  $fcurrency = $_POST['fcurrency_id'];
+  $fcurrency = $_POST['Lcurrency_id'];
   $famount = floatval($_POST['lock_amount']);
   $isLocked = "yes";
   $lockDuration = $_POST['lock_duration'];
@@ -137,6 +142,34 @@ if (isset($_POST['lock'])) {
   
   $stmt->close();
   }
+
+  //Get all fund data from currently logged in user
+//$funds = fetchFunds($con, $userEmail);
+
+// Extract and combine the initials
+$firstInitial = substr($firstname, 0, 1);
+$lastInitial = substr($lastname, 0, 1);
+$initials = $firstInitial . $lastInitial;
+
+// At the top of your PHP file
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['fcurrency_id']) || isset($_POST['fcurrency_id1']) || isset($_POST['fcurrency_id2']) || isset($_POST['fcurrency_id3']) || isset($_POST['fcurrency_id4']) || isset($_POST['fcurrency_id5']) || isset($_POST['fcurrency_id6'])) {
+  $selected_currency = $_POST['fcurrency_id'];
+
+// Fetch wallet address and QR code from database
+$stmt = $con->prepare("SELECT address, qrcode FROM wallet_addresses WHERE wallet = ?");
+$stmt->bind_param("s", $selected_currency);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($row = $result->fetch_assoc()) {
+    $wallet_address = $row['address'];
+    $qrcode_image = $row['qrcode'];
+} else {
+    $wallet_address = "";
+    $qrcode_image = "";
+}
+$stmt->close();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

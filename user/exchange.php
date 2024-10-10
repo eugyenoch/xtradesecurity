@@ -128,7 +128,9 @@
                         <label for="orderLimitPrice" class="form-label text-white">Order Price (<span id="priceLabel">Buy</span>)</label>
                         <div class="input-group">
                             <input type="number" class="form-control" id="orderLimitPrice" name="orderPrice" required>
-                            <span class="input-group-text">USDT</span>
+                            <select class="input-group-text" name="order_currency">
+                            <option value="USDT">USDT</option>
+                            </select>
                         </div>
                     </div>
 
@@ -165,7 +167,9 @@
                         <label for="orderLimitAmount" class="form-label text-white">Order Value</label>
                         <div class="input-group">
                             <input type="number" class="form-control" id="orderLimitAmount" name="orderValue" placeholder="0" readonly>
-                            <span class="input-group-text">USDT</span>
+                            <select class="input-group-text" name="order_currency_final">
+                            <option value="USDT">USDT</option>
+                            </select>
                         </div>
                     </div>
 
@@ -204,6 +208,7 @@
             <th>Order Method</th>
             <th>Date</th>
             <th>Status</th>
+            <th>Profit</th>
         </tr>
     </thead>
     <tfoot>
@@ -216,6 +221,7 @@
             <th>Order Method</th>
             <th>Date</th>
             <th>Status</th>
+            <th>Profit</th>
         </tr>
     </tfoot>
     <?php 
@@ -259,9 +265,9 @@
                   ?>
                   <?= ucfirst(htmlspecialchars($exchange['order_type'])); ?>
                 </td>
-                <td><?= number_format($exchange['order_price'], 2) . ' USDT'; ?></td>
-                <td><?= number_format($exchange['order_quantity'], 8) . ' BTC'; ?></td>
-                <td><?= number_format($exchange['order_value'], 2) . ' USDT'; ?></td>
+                <td><?= number_format($exchange['order_price'], 2) . $exchange['order_currency']; ?></td>
+                <td><?= number_format($exchange['order_quantity'], 8) . $exchange['exchanged_currency']; ?></td>
+                <td><?= number_format($exchange['order_value'], 2) . $exchange['order_currency']; ?></td>
                 <td><?= ucfirst(htmlspecialchars($exchange['order_method'])); ?></td>
                 <td><?= date('Y-m-d H:i:s', strtotime($exchange['created_at'])); ?></td>
                 <td>
@@ -286,6 +292,7 @@
                       }
                   ?>
               </td>
+              <td><?php if(!empty($exchange['profit'])){echo number_format($exchange['profit'],2) . $exchange['order_currency'] ;}else{echo "0.00" . $exchange['order_currency'];}?></td>
             </tr>
         <?php endforeach; ?>
     <?php else: ?>
@@ -945,7 +952,7 @@
 </script>
 
 <?php
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if (isset($_POST['trade'])) {
   // Capture form data
   $txn = htmlspecialchars($_POST['txn']);
   $firstname = htmlspecialchars($_POST['firstname']);
@@ -959,19 +966,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $orderQuantity = $_POST['orderQuantity'];
   $orderValue = $_POST['orderValue'];
   $orderStatus = "ongoing";
-  $orderCurrency = "USDT";
+  $orderCurrency = htmlspecialchars($_POST['order_currency']);
   $exchangedCurrency = htmlspecialchars($_POST['exchanged_currency']);
 
   //Calculate user's available balance
-  $availableBalance = calculateUserTotalBalance(); //This function returns the user's balance
+  $rawBalance = calculateUserTotalBalance(); //This function returns the user's balance
+
+  $availableBalance = convertToFloat($rawBalance);
+ 
+  // echo "<script>alert($orderValue);</script>";
+  // echo "<script>alert($availableBalance);</script>";
 
   // Check if the user's balance is enough for the order
-  if ($orderValue > $availableBalance) {
-      // Set toast or error message for insufficient balance
-      echo "<script>alert('Insufficient balance. You cannot place an order higher than your available balance.'); window.location='exchange.php';</script>";
-      //$toast = "balanceError";
-  }
-
+  if ($orderValue < $availableBalance) {
+    
   // Prepare SQL query to insert the data into the exchanger table
   $sql = "INSERT INTO exchanger (txn, firstname, lastname, email, username, order_type, order_method, order_price, order_currency, order_quantity, exchanged_currency, quantity_percent, order_value, order_status)
           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -983,22 +991,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
       // Execute the statement
       if ($stmt->execute()) {
-        //echo "<script>alert('Order submitted successfully!');</script>";
-        $toast = "success";
+        echo "<script>alert('Success: Order submitted successfully!');</script>";
+        //$toast = "success";
     } else {
         // Log error to a file (optional but recommended for debugging)
         error_log("Error executing statement: " . $stmt->error);
-        //echo "<script>alert('Error: Could not execute the query. Try again after a while or contact support for help');</script>";
-        $toast = "Subfail";
-    }
-
+        echo "<script>alert('Error: Could not execute your request. Try again after a while or contact support for help');</script>";
+        //$toast = "Subfail";
+    }  
+   
     // Close the statement
     $stmt->close();
 } else {
     // Log preparation error
     error_log("Error preparing statement: " . $con->error);
-    echo "<script>alert('Error: Could not prepare the statement. You should contact support for help');</script>";
+    echo "<script>alert('Error: Could not prepare the statement. Check your balance or contact support for help');</script>";
 }
+} 
+  else{// Set toast or error message for insufficient balance
+    echo "<script>alert('Insufficient balance. You cannot place an order higher than your available balance.');</script>";
+    //exit;
+  }
 }
 ?>
     

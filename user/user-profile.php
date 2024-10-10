@@ -218,13 +218,13 @@
                         <li>
                           <div class="icon-title">
                             <i class="cc USDT"></i>
-                            <span>Total Approved Investments</span>
+                            <span>Total Exchange Profits</span>
                           </div>
                           <div class="text-end">
-                            <h5> <?php if(isset($_SESSION['user_session'])) {$totalInvestment = getTotalApprovedTransactionAmount();
-                            echo "&nbsp;<span title='Total Approved Investments (TAI)'>". $totalInvestment ."</span>";
+                            <h5> <?php if(isset($_SESSION['user_session'])) {$totalExchangeProfit = getTotalApprovedExchangeProfit();
+                            echo "&nbsp;<span title='Total Approved Exchange Profit (TAEP)'>". $totalExchangeProfit ."</span>";
                         } else {
-                            echo "&nbsp;<span title='Total Approved Investments (TAI)'>$0.00</span>";
+                            echo "&nbsp;<span title='Total Approved Exchange Profit (TAEP)'>$0.00</span>";
                         }?></h5>
                             <span><a href="wallet.php" title="Wallet">more</a></span>
                           </div>
@@ -262,7 +262,7 @@
                     </div> 
                     
                     <div class="mt-4">
-                    <button type="button" class="btn btn-secondary position-relative top-100 start-0" data-toggle="modal" data-target="#commission" tabindex="-1">Pay Commissions</button>
+                    <button type="button" class="btn btn-success position-relative top-100 start-0" data-toggle="modal" data-target="#commission" tabindex="-1">Pay Commissions</button>
                       </div>
                     
                   </div>

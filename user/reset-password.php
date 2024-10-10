@@ -9,12 +9,12 @@ include "../cookie.php";
 $toast = '';
 
 if (isset($_POST['resetPassword'])) {
-  if (!isset($_SESSION['admin_email'])) {
+  if (!isset($_SESSION['user_email'])) {
     echo "<script>alert('Unauthorized access!'); window.location.href = 'login.php';</script>";
     exit;
     }
 
-    $admin_email = $_SESSION['admin_email'];
+   $user_email = $_SESSION['user_email'];
     $new_password = md5($_POST['newPassword']);
     $reset_password = md5($_POST['confirmPassword']);
 
@@ -24,8 +24,8 @@ if (isset($_POST['resetPassword'])) {
     }
 
     // Use prepared statements to prevent SQL injection
-    $stmt = $con->prepare("UPDATE admin SET user_pass = ? WHERE user_email = ?");
-    $stmt->bind_param("ss", $new_password, $admin_email);
+    $stmt = $con->prepare("UPDATE users SET user_pass = ? WHERE user_email = ?");
+    $stmt->bind_param("ss", $new_password, $user_email);
 
     if ($stmt->execute()) {
         echo "<script>alert('Password updated successfully.'); window.location.href = 'login.php';</script>";
@@ -41,7 +41,7 @@ if (isset($_POST['resetPassword'])) {
 <!DOCTYPE html>
 <html lang="en">
 
-<?php include "header.php"; ?>
+<?php include "include/header.php"; ?>
 
   <body class="body header-fixed">
     <!-- Header -->
@@ -55,12 +55,12 @@ if (isset($_POST['resetPassword'])) {
                <?php include "logo.php"; ?>
                
                 <div class="left__main">
-                <?php include "nav.php";?>
+                <?php include "include/nav.php";?>
                   <!-- /#main-nav -->
                 </div>
               </div>
 
-              <?php include "headerRight.php";?>
+              <?php include "include/headerRight.php";?>
             </div>
           </div>
         </div>
@@ -77,7 +77,7 @@ if (isset($_POST['resetPassword'])) {
           </div>
           <div class="col-md-6">
             <ul class="breadcrumb">
-              <li><a href="../index.php">Home</a></li>
+              <li><a href="login.php">Home</a></li>
               <li><p class="fs-18">/</p></li>
               <li><p class="fs-18">Password change</p></li>
             </ul>
@@ -92,7 +92,7 @@ if (isset($_POST['resetPassword'])) {
         <div class="row">
           <div class="col-md-12">
             <div class="block-text center">
-              <h3 class="heading">Admin Password Reset</h3>
+              <h3 class="heading">User Password Reset</h3>
               <p class="desc fs-20">Please use the form to set a new password</p>
             </div>
           </div>
@@ -108,7 +108,7 @@ if (isset($_POST['resetPassword'])) {
               <div class="content-tab">
                 <div class="content-inner">
                 
-                  <form action="<?php htmlentities($_SERVER['PHP_SELF']);?>" method="post" name="adminResetPasswordForm">
+                  <form action="<?php htmlentities($_SERVER['PHP_SELF']);?>" method="post" name="userResetPasswordForm">
                   <div class="form-group s1">
                       <label>New Password</label>
                       <input type="password" class="form-control" placeholder="Please enter a password." name="newPassword" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required />
@@ -135,7 +135,7 @@ if (isset($_POST['resetPassword'])) {
       </div>
     </section>
 
-  <?php include "footer.php"; ?>
+  <?php include "include/footer.php"; ?>
 
     <script src="../app/js/aos.js"></script>
     <script src="../app/js/jquery.min.js"></script>

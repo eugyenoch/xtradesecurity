@@ -719,7 +719,7 @@
         <div class="modal-dialog modal-dialog-sm modal-dialog-centered">
         <div class="modal-content">
         <div class="modal-header">
-            <h6>Lock Funds For Up To 5 years, Earn 75% to 155% Guaranteed Yield</span></h6>
+            <h6>Lock Funds For Up To 5 years, Earn 75% to 199% Guaranteed Yield</span></h6>
                 <a href="#" class="modal-close" data-dismiss="modal" aria-label="Close">
                     <span class="btn-close badge bg-outline-warning p-2 fs-4">&times;</span>
                 </a>
@@ -728,12 +728,12 @@
                 <p>Use this form to request our guaranteed high-yield premium savings fund lock. <br>Make sure you have enough balanceas a fund request above your available balance will fail.</p>  
                 <div class="wallet-widget card">
                         <h5 title="User Total Balance (TB)">Your Available Locked Balance</h5>
-                        <h4><span class="text-primary">
+                        <h5><span class="text-primary">
                         <?php if(isset($_SESSION['user_session'])) {$userLockedBalance =  getTotalApprovedLockedFundAmount();
-                                    echo "&nbsp;<span title='Total Balance (TB) as approved'>". $userLockedBalance ."</span>";
+                                    echo "&nbsp;<span title='Total Balance (TB) as approved'>$". number_format($userLockedBalance,2) ."</span>";
                                 } else {echo "&nbsp;<span title='Total Balance (TB) as approved'>$0.00</span>";}?>
                                 </span><sub>USD</sub>
-                            </h4>
+                            </h5>
                     </div>
                 <form method="POST" action="<?= htmlspecialchars($_SERVER['PHP_SELF']); ?>" name="lockRequestForm">
                   <div class="form-group">
@@ -746,19 +746,19 @@
 
                   <div class="form-group mb-3">
                       <label for="amount" class="form-label">Amount</label>
-                      <input type="number" class="form-control" id="amount" name="lock_amount" placeholder="Enter amount" min="2500" step="1000" max="55000" required>
-                      <small>Minimum Lock ($2,500), and, High-Yield Guaranteed(up to 199% per annum). Maximum Lock ($55,000)</small>
+                      <input type="number" class="form-control" id="amount" name="lock_amount" placeholder="Enter amount" min="2500" max="55000" required>
+                      <small>Minimum Lock ($2,500), and, High-Yield Earning Guaranteed(up to 199% APY). Maximum Lock ($55,000)</small>
                   </div>
 
                   <div class="form-group mb-3">
                       <label for="lockDuration" class="form-label">Duration</label>
                       <select class="form-select" id="lockDuration" name="lock_duration" required>
                           <option value="">Choose Duration</option> 
-                          <option value="1">1 Year (minimum lock - Earn up to 75%)</option> 
-                          <option value="2">2 Years (median lock - Earn up to 105%)</option> 
-                          <option value="3">3 Years (median lock - Earn up to 135%)</option> 
-                          <option value="4">4 Years (median lock - Earn up to 165%)</option> 
-                          <option value="5">5 Years (maximum lock - Earn up to 199%)</option> 
+                          <option value="1">1 Year (minimum lock - Up to 75% APY)</option> 
+                          <option value="2">2 Years (median lock - Up to 105% APY)</option> 
+                          <option value="3">3 Years (median lock - Up to 135% APY)</option> 
+                          <option value="4">4 Years (median lock - Up to 165% APY)</option> 
+                          <option value="5">5 Years (maximum lock - Up to 199% APY)</option> 
                       </select>
                   </div>
                   
@@ -792,7 +792,7 @@
                     </div> 
                 </div>
                 <div class="form-text mb-3">
-                <small>Pay into the wallet address, then come back and click proceed to continue. Remember to keep your transaction proof for later.</small>
+                <span>Pay into the wallet address, then come back and click proceed to continue. Remember to keep your transaction proof for later.</span>
                 </div>
 
                   <div class="modal-footer">

@@ -2,30 +2,40 @@
 include '../function.php';
 checkUserLogin();
 
-//SCRIPT FOR THE REQUEST WITHDRAWAL FORM
-if(isset($_POST['withdraw'])){
-  //Extract variables from user input
-  $wtxn = $_POST['wtxn'];
-  $wemail = $_POST['wemail'];
-  $wusername = $_POST['wusername']; 
-  $wfirstname = $_POST['wfirstname'];
-  $wlastname = $_POST['wlastname']; 
-  $wcurrency = $_POST['wcurrency_id'];
-  $wamount = floatval($_POST['wamount']);
-  $waddress = sanitize($_POST['waddress']);
+if(isset($_POST['withdraw'])) {
+    // Extract variables from user input 
+    $wtxn = $_POST['wtxn'];
+    $wemail = $_POST['wemail'];
+    $wusername = $_POST['wusername'];
+    $wfirstname = $_POST['wfirstname'];
+    $wlastname = $_POST['wlastname'];
+    $wcurrency = $_POST['wcurrency_id'];
+    $wamount = $_POST['wamount'];
+    $waddress = $_POST['waddress'];
 
-  // Insert data into the withdraw table
-  $stmt = $con->prepare("INSERT INTO withdraw (wtxn, user_email, userName, firstname, lastname, withdraw_currency, withdraw_amount, withdraw_address) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-  $stmt->bind_param("ssssssds", $wtxn, $wemail, $wusername, $wfirstname, $wlastname, $wcurrency, $wamount, $waddress);
-  if ($stmt->execute()) {
-    // Success message
-    echo "<script>alert('Success: Withdrawal request submitted successfully and pending approval'); window.location='wallet.php';</script>";
-} else {
-    // Error message
-    echo "<script>alert('Error: There was an error with your request, please try again after a while ');window.location='wallet.php';</script>";
+    // Get the user's current balance
+    $rawBalance = calculateUserTotalBalance(); 
+    $currentBalance = convertToFloat($rawBalance);
+
+    // Check if the withdrawal amount is less than or equal to the current balance
+    if ($wamount <= $currentBalance) {
+        // Insert data into the withdraw table 
+        $stmt = $con->prepare("INSERT INTO withdraw (wtxn, user_email, userName, firstname, lastname, withdraw_currency, withdraw_amount, withdraw_address) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssssssds", $wtxn, $wemail, $wusername, $wfirstname, $wlastname, $wcurrency, $wamount, $waddress);
+        
+        if ($stmt->execute()) {
+            // Success message 
+            echo "<script>alert('Success: Withdrawal request submitted successfully and pending approval'); window.location='wallet.php';</script>";
+        } else {
+            // Error message 
+            echo "<script>alert('Error: There was an error with your request, please try again after a while'); window.location='wallet.php';</script>";
+        }
+        $stmt->close();
+    } else {
+        // Insufficient balance message
+        echo "<script>alert('Error: Insufficient balance. Your current balance is " . $currentBalance . "'); window.location='wallet.php';</script>";
+    }
 }
-$stmt->close();
- }
 
 //THE SUBSCRIPTION PLANS
 // Silver subscription

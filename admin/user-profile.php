@@ -53,6 +53,11 @@ $totalTransactionProfit = getTotalTransactionProfit($con);
 // Format the total withdraw amount as currency
 $formattedTotalTransactionProfit = number_format($totalTransactionProfit, 2);
 
+// Call the function to get the total number of transaction profit
+$totalExchangeProfit = getTotalExchangeProfit($con);
+// Format the total withdraw amount as currency
+$formattedTotalExchangeProfit = number_format($totalExchangeProfit, 2);
+
 //Call the function to get the total site balance
 $totalSiteBalance = getTotalSiteBalance($con) ?? 0.00;
 $formattedTotalSiteBalance = number_format($totalSiteBalance, 2);
@@ -250,7 +255,7 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
                     </div>
 
                     <div class="col-md-4">
-                      <div class="shadow p-4 mb-3 bg-primary text-white"><p class="lead"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;Site Managers<?php if(isset($totalAdmins) && $totalAdmins!=null){echo "&nbsp;<span class='badge bg-warning text-primary' title='Total site admins'>".$totalAdmins ."</strong>";} ?></p></div>
+                      <div class="shadow p-4 mb-3 bg-primary text-white"><p class="lead"><i class="fa fa-usd" aria-hidden="true"></i>&nbsp;Exchange<?php if(isset($formattedTotalExchangeProfit) && $formattedTotalExchangeProfit!=null){echo "&nbsp;<span class='badge bg-warning text-primary' title='Total exchange wins made'>$".$formattedTotalExchangeProfit ."</strong>";} ?></p></div>
                       </div>
 
                     <div class="col-md-4">
@@ -363,6 +368,9 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
                   <h6 class="card-title">Hello <?php if(isset($firstname) && $firstname!=null){echo $firstname;}else{echo "Administrator";} ?>!</h6>
                   <p class="card-text">You have access to all the tools and resources to manage the platform efficiently. Use the navigation menu to manage users, monitor transactions, and oversee the system's performance. For detailed insights, check out the reports section.<br>
                       You can also add a new admin and manager to aid in the running of the system.<br>
+                      <div class="col-md-4">
+                      <div class="shadow p-2 my-2 bg-warning text-white"><p><i class="fa fa-user" aria-hidden="true"></i>&nbsp;Current Site Managers<?php if(isset($totalAdmins) && $totalAdmins!=null){echo "&nbsp;<span class='badge bg-primary' title='Total site admins'>".$totalAdmins ."</strong>";} ?></p></div>
+                      </div>
                   <a type="button" href="add-admin.php" class="btn btn-outline-warning">Add New Manager&nbsp;<i class="fa fa-user-circle" aria-hidden="true"></i></a>
                   </p>
                 </div>
@@ -830,9 +838,11 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
                           <th>Proof</th>
                           <th>Comment</th>
                           <th>Status</th>
-                          <th>Date</th>
+                          <th>Request Date</th>
+                          <th>Approval/Disapproval Date</th>
                           <th>Lock</th>
                           <th>Lock Duration</th>
+                          <th>Unlock Date</th>
                           <th>Edit</th>
                           <th>Delete</th>
                       </tr>
@@ -847,9 +857,11 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
                           <th>Proof</th>
                           <th>Comment</th>
                           <th>Status</th>
-                          <th>Date</th>
+                          <th>Request Date</th>
+                          <th>Approval/Disapproval Date</th>
                           <th>Lock</th>
                           <th>Lock Duration</th>
+                          <th>Unlock Date</th>
                           <th>Edit</th>
                           <th>Delete</th>
                       </tr>
@@ -891,6 +903,13 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
                                   <?php endif; ?>
                               </td>
                         <td class="coin-name"><?= $funds_info['fund_request_date']; ?></td>
+                        <td class="coin-name">
+                                      <?php 
+                                          if (isset($funds_info['approved_at']) && $funds_info['approved_at']!= NULL){echo $funds_info['approved_at']; }else{
+                                            echo  '<span class="badge bg-success">pending</span>';
+                                          }
+                                          ?> 
+                                      </td>
                         <td>
                           <?php if(isset($funds_info['is_locked']) && $funds_info['is_locked'] ==='yes'):?> 
                           <span class="badge bg-info">Yes</span>
@@ -904,8 +923,36 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
                         <td><?php if(isset($funds_info['lock_duration']) && isset($funds_info['lock_duration']) != NULL ):?> 
                           <span class="badge bg-info"><?= $funds_info['lock_duration'] . 'Year(s)'; ?></span>
                           <?php else: ?>
-                            <span class="badge bg-info">Unlocked</span>
+                            <span class="badge bg-info">Not locked</span>
                           <?php endif; ?>
+                        </td>
+                        <td class="coin-name">
+                        <?php 
+                                        if (!empty($funds_info['lock_duration']) && !empty($funds_info['approved_at'])) {
+                                            $approvedDate = new DateTime($funds_info['approved_at']);
+                                            $lockDurationYears = (int)$funds_info['lock_duration'];
+
+                                            // Add the duration in years
+                                            $approvedDate->modify("+$lockDurationYears years");
+
+                                            // Get the final date
+                                            $finalDate = $approvedDate->format('Y-m-d');
+                                            
+                                            // Calculate the difference between the current date and the final date
+                                            $currentDate = new DateTime();
+                                            $interval = $currentDate->diff($approvedDate);
+
+                                            // Check if the final date is in the future
+                                            if ($currentDate < $approvedDate) {
+                                                $daysRemaining = $interval->days;
+                                                echo $finalDate . "<br><small>" . $daysRemaining . " days remaining</small>";
+                                            } else {
+                                                echo "Expired on: " . $finalDate;
+                                            }
+                                        } else {
+                                            echo "<span class='badge bg-warning'>Not applicable</span>";
+                                        }
+                                        ?>
                         </td>
                       <td class="coin-name">
                           <button type="button" class="edit-btn btn btn-outline-secondary badge badge-outline badge-danger badge-md">Edit</button>
@@ -976,7 +1023,7 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
                         <td class="coin-name"><?= $withdraws_info['wtxn']; ?></td>
                         <td class="coin-name"><?= $withdraws_info['user_email']; ?></td>
                         <td class="coin-name"><?= $withdraws_info['firstname'] . '&nbsp;' . $withdraws_info['lastname']; ?></td>
-                        <td class="coin-name"><?= $withdraws_info['withdraw_amount'] . $withdraws_info['withdraw_currency']; ?></td>
+                        <td class="coin-name"><?= number_format($withdraws_info['withdraw_amount'],2) . $withdraws_info['withdraw_currency']; ?></td>
                         <td class="coin-name"><?= $withdraws_info['withdraw_address']; ?></td>
                               <td class="coin-name">
                                   <span><strong><?= $withdraws_info['withdraw_status'] ?></strong></span><br>
@@ -1035,6 +1082,7 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
                         <th>Quantity Percent</th>
                         <th>Final Value</th>
                         <th>Status</th>
+                        <th>Profit</th>
                         <th>Timestamp</th>
                         <th>Actions</th>
                       </tr>
@@ -1050,6 +1098,7 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
                         <th>Quantity Percent</th>
                         <th>Final Value</th>
                         <th>Status</th>
+                        <th>Profit</th>
                         <th>Timestamp</th>
                         <th>Actions</th>
                       </tr>
@@ -1078,7 +1127,7 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
                         <td class="coin-name"><?= number_format($exchanger_info['order_price'], 2) . $exchanger_info['order_currency']; ?></td>
                         <td class="coin-name"><?= number_format($exchanger_info['order_quantity'], 2) . $exchanger_info['exchanged_currency']; ?></td>
                         <td class="coin-name"> <?php if (!empty($exchanger_info['quantity_percent'])): ?>
-                            <?= round($exchanger_info['quantity_percent'] * 100) . '%'; ?>
+                            <?= round($exchanger_info['quantity_percent']) . '%'; ?>
                           <?php endif; ?>
                         </td>
                         <td class="coin-name"> <?php if (!empty($exchanger_info['order_value'])): ?>
@@ -1101,6 +1150,7 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
                                     <?= "<i class='fa fa-arrow-down text-danger' aria-hidden='true'></i>&nbsp;<span class='bg-danger badge badge-outline badge-danger badge-md'>Loose</span>"; ?>
                             <?php endif; ?>
                         </td>
+                        <td class="coin-name"><?php if(!empty($exchanger_info['profit'])){echo number_format($exchanger_info['profit'], 2) . $exchanger_info['order_currency'] ;}else{echo "0.00" . $exchanger_info['order_currency'];}?></td>
                         <td class="coin-name"><?= date('Y-m-d H:i:s', strtotime($exchanger_info['created_at'])); ?></td>
                         <td class="coin-name">
                           <button type="button" 
@@ -1110,7 +1160,7 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
                                   data-target="#editExchangeModal"
                                   data-txn="<?= $exchanger_info['txn']; ?>" 
                                   data-email="<?= $exchanger_info['email']; ?>" 
-                                  data-amount="<?= $exchanger_info['order_value']; ?>" >Edit
+                                  data-amount="<?= $exchanger_info['profit']; ?>" >Edit
                           </button>
                           <a title="Delete Transaction:&nbsp;<?=$exchanger_info['txn'];?>" href="confirmOperation.php?exDel=<?= $exchanger_info['id']; ?>" class="dt-type-md">
                                 <span class="btn btn-outline-danger badge badge-outline badge-danger badge-md">Delete</span>
@@ -1739,9 +1789,10 @@ document.addEventListener('DOMContentLoaded', function () {
 <script>
          //FOR MONEY CHART
         var totalFunding = <?php if(!empty($totalFunding)){echo $totalFunding;} else{echo 0;}; ?>;
-        var totalProfit = <?php if(!empty($totalFundProfit)){echo $totalFundProfit;} else{echo 0;}; ?>;
+        var totalInterest = <?php if(!empty($totalFundProfit)){echo $totalFundProfit;} else{echo 0;}; ?>;
         var totalTransaction = <?php if(!empty($totalTransaction)){echo $totalTransaction;} else{echo 0;};?>;
-        var totalInterest = <?php if(!empty($totalTransactionProfit)){echo $totalTransactionProfit;} else{echo 0;}; ?>;
+        var totalProfit = <?php if(!empty($totalTransactionProfit)){echo $totalTransactionProfit;} else{echo 0;}; ?>;
+        var totalWins = <?php if(!empty($totalExchangeProfit)){echo $totalExchangeProfit;} else{echo 0;}; ?>;
         var totalWithdraw = <?php if(!empty($totalWithdraw)){echo $totalWithdraw;} else{echo 0;}; ?>;
         var totalSiteBalance = <?php if(!empty($totalSiteBalance)){echo $totalSiteBalance;} else{echo 0;}; ?>;
         
@@ -1753,7 +1804,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 labels: ['Funding','Profit','Investments','Interest','Withdrawal','Site Balance'],
                 datasets: [{
                     label: 'Finance Management ($)',
-                    data: [totalFunding, totalProfit, totalTransaction, totalInterest, totalWithdraw, totalSiteBalance],
+                    data: [totalFunding, totalInterest, totalTransaction, totalWins, totalProfit, totalWithdraw, totalSiteBalance],
                     backgroundColor: [
                      'rgba(255, 0, 0, 0.4)',
                 ],

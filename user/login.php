@@ -133,7 +133,7 @@ if (isset($_POST['emailLogin']) || isset($_POST['phoneLogin'])) {
           </div>
           <div class="col-md-6">
             <ul class="breadcrumb">
-              <li><a href="../index.php">Home</a></li>
+              <li><a href="">Home</a></li>
               <li><p class="fs-18">/</p></li>
               <li><p class="fs-18">Login</p></li>
             </ul>
