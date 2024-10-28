@@ -32,4 +32,18 @@ if (isset($_GET['dba']) && !empty($_GET['dba'])) {
 }
 
 
+//CONFIRM Bank DELETE
+if (isset($_GET['ops']) && !empty($_GET['ops'])) {
+  $ops = $con->real_escape_string($_GET['ops']);
+
+  // Confirm deletion with the user
+  echo "<script>
+          if (confirm('Are you sure you want to cancel this trade?')) {
+              window.location.href = 'walletProcessor.php?confirmTradeCancel=" . $ops . "';
+          } else {
+              window.location.href = 'wallet.php';
+          }
+        </script>";
+}
+
 ?>

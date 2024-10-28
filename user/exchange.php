@@ -247,7 +247,7 @@
                       if (!empty($exchange['order_status'])) {
                           switch ($exchange['order_status']) {
                               case 'ongoing':
-                                  echo "<i class='icofont-spinner-alt-5 text-warning'></i>";
+                                  echo "<i class='icofont-spinner-alt-5 text-warning'></i><br>";
                                   break;
                               case 'win':
                                   echo "<i class='icofont-arrow-up text-success'></i>";
@@ -275,7 +275,8 @@
                       if (!empty($exchange['order_status'])) {
                           switch ($exchange['order_status']) {
                               case 'ongoing':
-                                  echo "<i class='icofont-spinner-alt-5 text-warning'></i>&nbsp;<span class='badge bg-warning'>Ongoing</span>";
+                                  echo "<i class='icofont-spinner-alt-5 text-warning'></i>&nbsp;<span class='badge bg-warning'>Ongoing</span>
+                                  <br><a href='confirmOperation.php?ops=" . htmlspecialchars($exchange['id']) . "' title='Cancel this trade'><span class='badge bg-danger'>Cancel trade</span></a>";  
                                   break;
                               case 'win':
                                   echo "<i class='icofont-arrow-up text-success'></i>&nbsp;<span class='badge bg-success'>Win</span>";
@@ -283,15 +284,19 @@
                               case 'loose':
                                   echo "<i class='icofont-arrow-down text-danger'></i>&nbsp;<span class='badge bg-danger'>Loose</span>";
                                   break;
+                              case 'cancelled':
+                                  echo "<i class='icofont-close text-warning'></i>&nbsp;<span class='badge bg-warning'>Cancelled</span>";
+                                  break;
                               default:
-                                  echo "<i class='icofont-minus-circle text-secondary'></i>>&nbsp;<span class='badge bg-secondary'>Unknown</span>";
+                                  echo "<i class='icofont-minus-circle text-secondary'></i>&nbsp;<span class='badge bg-secondary'>Unknown</span>";
                                   break;
                           }
                       } else {
-                          echo "<i class='icofont-minus-circle text-secondary'></i>>&nbsp;<span class='badge bg-secondary'>Unknown</span>";
+                          echo "<i class='icofont-minus-circle text-secondary'></i>&nbsp;<span class='badge bg-secondary'>Unknown</span>";
                       }
                   ?>
               </td>
+
               <td><?php if(!empty($exchange['profit'])){echo number_format($exchange['profit'],2) . $exchange['order_currency'] ;}else{echo "0.00" . $exchange['order_currency'];}?></td>
             </tr>
         <?php endforeach; ?>
@@ -331,34 +336,8 @@
           </div>
 
           
+         
           <div class="row">
-            <div class="col-xxl-3 col-xl-6">
-              <div class="card">
-                <div class="card-header">
-                  <h4 class="card-title">Fund Account</h4>
-                </div>
-                <div class="card-body">
-                <p>The Fund Account section allows users to securely deposit money into their accounts. With various supported payment options, users can easily top up their balances to facilitate smooth transactions, exchanges, and services. All deposits are processed promptly, ensuring that funds are available for immediate use.</p>
-                </div>
-                <div class="card-footer">
-                <a href="user-profile.php" class="btn btn-primary btn-block">Fund Account</a>
-                </div>
-              </div>
-            </div>
-            <div class="col-xxl-3 col-xl-6">
-              <div class="card">
-                <div class="card-header">
-                  <h4 class="card-title">Fund Transfer</h4>
-                </div>
-                <div class="card-body">
-                <p>The Transfer Fund section allows users to send funds to other accounts, internally, within the Xtrade platform. With a secure interface and real-time processing, users can transfer money effortlessly, whether for personal transactions or business-related payments. This feature enhances the platform's financial flexibility and user convenience.</p>
-                </div>
-                <div class="card-footer">
-                <a href="user-profile.php" class="btn btn-primary btn-block">Transfer Fund</a>
-                </div>
-              </div>
-            </div>
-
             <div class="col-xxl-3 col-xl-6">
               <div class="card">
                 <div class="card-header">
@@ -372,6 +351,21 @@
                 </div>
               </div>
             </div>
+
+            <div class="col-xxl-3 col-xl-6">
+              <div class="card">
+                <div class="card-header">
+                  <h4 class="card-title">Fund Account</h4>
+                </div>
+                <div class="card-body">
+                <p>The Fund Account section allows users to securely deposit money into their accounts. With various supported payment options, users can easily top up their balances to facilitate smooth transactions, exchanges, and services. All deposits are processed promptly, ensuring that funds are available for immediate use.</p>
+                </div>
+                <div class="card-footer">
+                <a href="user-profile.php" class="btn btn-primary btn-block">Fund Account</a>
+                </div>
+              </div>
+            </div>
+
             <div class="col-xxl-3 col-xl-6">
               <div class="card">
                 <div class="card-header">
@@ -382,10 +376,37 @@
                    </div>
               </div>
             </div>
-          </div>
          
            
-            
+            <div class="col-xxl-3 col-xl-6">
+              <div class="card">
+                <div class="card-header">
+                  <h4 class="card-title">Today's News</h4>
+                </div>
+                <div class="card-body">
+                   <!-- TradingView Widget BEGIN -->
+                   <div class="tradingview-widget-container">
+                    <div class="tradingview-widget-container__widget"></div>
+                    <div class="tradingview-widget-copyright"><a href="#"><span class="blue-text link-opacity-100-hover">Early access to the market</span></a></div>
+                      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-timeline.js" async>
+                      {
+                      "feedMode": "all_symbols",
+                      "isTransparent": true,
+                      "displayMode": "regular",
+                      "width": "100%",
+                      "height": "100%",
+                      "colorTheme": "light",
+                      "locale": "en"
+                    }
+                      </script>
+                  </div>
+                  <!-- TradingView Widget END -->
+                </div>
+                <!-- <div class="card-footer"></div> -->
+              </div>
+            </div>
+
+
               </div>
             </div>
           </div>

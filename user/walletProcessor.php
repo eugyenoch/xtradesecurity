@@ -126,7 +126,19 @@ if (isset($_GET['confirmDeleteBank']) && !empty($_GET['confirmDeleteBank'])) {
         else{
             echo "<script>alert('Error: We could not perform this operation. Contact support for assistance');window.location='wallet.php';</script>";
         }
-       }
+}
+
+//UPDATE ORDER STATUS TO CANCELLED
+if (isset($_GET['confirmTradeCancel']) && !empty($_GET['confirmTradeCancel'])) {
+    $confirmTradeCancel = $con->real_escape_string($_GET['confirmTradeCancel']);
+        echo"<script>window.alert('Success: Action carried out successfully. Click the OK button to proceed')</script>";
+        $update_user_trade ="UPDATE `exchanger` SET `order_status` = 'cancelled' WHERE `id`='$confirmTradeCancel'";
+        if($con->query( $update_user_trade)){echo "<script>window.location='exchange.php'</script>";}
+        else{
+            echo "<script>alert('Error: We could not perform this operation. Contact support for assistance');window.location='exchange.php';</script>";
+        }
+}
+
 
  //TRANSFER MONEY PROCESSOR
     // Check if the form is submitted

@@ -204,13 +204,13 @@
                         <li>
                           <div class="icon-title">
                             <i class="cc USDT"></i>
-                            <span>Total Approved Funds</span>
+                            <span>Total Approved Deposits</span>
                           </div>
                           <div class="text-end">
                             <h5><?php if(isset($_SESSION['user_session'])) {$totalFunded = getTotalApprovedFundAmount();
-                            echo "<span title='Total Approved Funded (TAF)'>". $totalFunded ."</span>";
+                            echo "<span title='Total Approved Deposits (TAD)'>". $totalFunded ."</span>";
                         } else {
-                            echo "<span title='Total Approved Funded (TAF)'>$0.00</span>";
+                            echo "<span title='Total Approved Deposits (TAD)'>$0.00</span>";
                         }?></h5>
                            <span><a href="wallet.php" title="Wallet">more</a></span>
                           </div>

@@ -38,12 +38,12 @@
             </div>
             <div class="col-xxl-3 col-xl-3 col-lg-6 col-md-6 col-sm-6">
               <div class="wallet-widget card">
-                <h5 title="Total Approved Fund (TAF)">Fundings</h5>
+                <h5 title="Total Approved Deposits (TAD)">Deposits</h5>
                 <h3><span class="text-success">
                 <?php if(isset($_SESSION['user_session'])){$totalFunded = getTotalApprovedFundAmount();
-                            echo "&nbsp;<span title='Total Approved Funded (TAF)'>". $totalFunded ."</span>";
+                            echo "&nbsp;<span title='Total Approved Deposits (TAD)'>". $totalFunded ."</span>";
                         } else {
-                            echo "&nbsp;<span title='Total Approved Funded (TAF)'>$0.00</span>";
+                            echo "&nbsp;<span title='Total Approved Deposits (TAD)'>$0.00</span>";
                         }?>
                 </span> <sub>USD</sub></h3>
               </div>
@@ -213,13 +213,13 @@
                         <li>
                           <div class="icon-title">
                             <i class="cc USDT"></i>
-                            <span class="fs-6">Total Approved Funded</span>
+                            <span class="fs-6">Total Approved Deposits</span>
                           </div>
                           <div class="text-end">
                             <h6><?php if(isset($_SESSION['user_session'])) {$totalFunded = getTotalApprovedFundAmount();
-                            echo "<span title='Total Approved Funded (TAF)'>". $totalFunded ."</span>";
+                            echo "<span title='Total Approved Deposits (TAD)'>". $totalFunded ."</span>";
                         } else {
-                            echo "<span title='Total Approved Funded (TAF)'>$0.00</span>";
+                            echo "<span title='Total Approved Deposits (TAD)'>$0.00</span>";
                         }?></h6>
                           </div>
                         </li>

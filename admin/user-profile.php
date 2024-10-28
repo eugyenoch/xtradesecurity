@@ -1148,6 +1148,9 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
 
                                   <?php elseif ($exchanger_info['order_status'] === 'loose'): ?>
                                     <?= "<i class='fa fa-arrow-down text-danger' aria-hidden='true'></i>&nbsp;<span class='bg-danger badge badge-outline badge-danger badge-md'>Loose</span>"; ?>
+
+                                    <?php elseif ($exchanger_info['order_status'] === 'cancelled'): ?>
+                                      <?= "<span class='bg-warning badge badge-outline badge-warning badge-md'>Cancelled</span>"; ?>  
                             <?php endif; ?>
                         </td>
                         <td class="coin-name"><?php if(!empty($exchanger_info['profit'])){echo number_format($exchanger_info['profit'], 2) . $exchanger_info['order_currency'] ;}else{echo "0.00" . $exchanger_info['order_currency'];}?></td>
