@@ -130,7 +130,9 @@
             <hr>
             &copy; <?php echo date('Y');?>&nbsp;Xtrade Security LTD. All rights reserved. <br><br></p>
             <p>
-            <center><span><img src="./assets/images/icon/googleplay.png" title="Android app for Xtrade security (in Beta)" alt="Google playstore image" /></span>&nbsp;
+            <center><span><a href="https://xtradesecurity.com/mobile-app/app-release.apk" rel="download">
+                                <img src="../assets/images/icon/googleplay.png" title="Android app for Xtrade Security (in Beta)" alt="Google Play Store image" />
+                            </a></span>&nbsp;
             <span><img src="./assets/images/icon/appstore.png" title="iOS app for Xtrade security (in Beta)" alt="Apple iStore image" /></span></center>
           </p>
         </div>

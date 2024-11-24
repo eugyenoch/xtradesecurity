@@ -116,7 +116,7 @@ $stmt->close();
 }
 
 
-//Script for requesting funding
+//Script for locking funding
 if (isset($_POST['lock'])) {
   //Extract variables from user input
   $ftxn = $_POST['ltxn'];

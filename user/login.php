@@ -108,7 +108,33 @@ if (isset($_POST['emailLogin']) || isset($_POST['phoneLogin'])) {
             <div class="header__body d-flex justify-content-between">
               <div class="header__left">
 
-               <?php include "../include/logo.php"; ?>
+              <div class="logo">
+                <a class="light" href="../index.php">
+                  <img
+                    id="site-logo"
+                    src="../assets/images/logo/favicon.png"
+                    alt=""
+                    width="25"
+                    height="25"
+                    data-retina="../assets/images/logo/favicon@2x.png"
+                    data-width="25"
+                    data-height="25"
+                  />
+                  <big><strong>xTradeSecurity</strong></big>
+                </a>
+                <a class="dark" href="../index.php">
+                  <img
+                    src="../assets/images/logo/favicon.png"
+                    alt=""
+                    width="25"
+                    height="25"
+                    data-retina="../assets/images/logo/favicon@2x.png"
+                    data-width="25"
+                    data-height="25"
+                  />
+                  <big><strong>xTradeSecurity</strong></big>
+                </a>
+            </div>
 
                 <div class="left__main">
                 <?php include "include/nav.php";?>
@@ -125,11 +151,11 @@ if (isset($_POST['emailLogin']) || isset($_POST['phoneLogin'])) {
     <!-- end Header -->
 
     <!-- PageTitle -->
-    <section class="page-title">
+    <section class="page-title" style="padding-top:9px !important; padding-bottom:9px !important;">
       <div class="container">
         <div class="row">
           <div class="col-md-6">
-            <h3 class="heading">Login to Your Account</h3>
+            <h4 class="heading">User Login</h4>
           </div>
           <div class="col-md-6">
             <ul class="breadcrumb">
@@ -143,15 +169,13 @@ if (isset($_POST['emailLogin']) || isset($_POST['phoneLogin'])) {
     </section>
     <!-- End PageTitle -->
 
-    <section class="register login">
+    <section class="register login" style="padding-top: 9px !important;">
       <div class="container">
         <div class="row">
           <div class="col-md-12">
-            <div class="block-text center">
-              <h3 class="heading">User Login</h3>
-              <p class="desc fs-20">
-                Welcome back! Log In now to start managing your account
-              </p>
+            <div class="block-text center p-0">
+              <!-- <h3 class="heading">User Login</h3> -->
+              <p class="desc fs-20">Start managing your account</p>
               <div class="lock">
                 <div class="icon">
                   <svg

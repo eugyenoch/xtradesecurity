@@ -73,7 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['tokenResend'])) {
     // Check if the reCAPTCHA response is set
     if (isset($recaptcha_response) && !empty($recaptcha_response)) {
         // reCAPTCHA validation
-        $recaptcha_secret = '6Ld5Px8qAAAAABT4wTXKHJNpXt6-iEROX-VqoSwr';
+        $recaptcha_secret = '6LcYqkMqAAAAADF4n51X14l_kfodGjhMqEuXcj43';
         $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
         $recaptcha_data = [
             'secret' => $recaptcha_secret,
@@ -275,7 +275,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['tokenResend'])) {
                       <small>&nbsp;This must be the same email used during signup. If we find it, we will resend validation message</small>
                     </div>
 
-                    <div class="g-recaptcha" data-sitekey="6Ld5Px8qAAAAAOqOnYeBL8ELqirvPKqMAauzHrnT" data-callback='onSubmit' data-action='submit'></div>
+                    <div class="g-recaptcha" data-sitekey="6LcYqkMqAAAAAHvHe1pXU8m064xvQDN8rMjuMK7t" data-callback='onSubmit' data-action='submit'></div>
                 
                     <button type="submit" class="btn-action" name="tokenResend">Resend Token</button>
                     <div class="bottom">

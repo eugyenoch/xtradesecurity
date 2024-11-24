@@ -196,7 +196,7 @@
                       </div>
                       <div>
                       <button type="button" class="btn btn-success" data-toggle="modal" data-target="#fundAccount" tabindex="-1">Fund Account</button>
-                      <button type="button" class="btn btn-secondary position-relative top-100 start-0" data-toggle="modal" data-target="#lockFund" tabindex="-1">Earn 199% APY</button>
+                      <button type="button" class="btn btn-secondary position-relative top-100 start-0" data-toggle="modal" data-target="#lockFund" tabindex="-1">Earn 249% APY</button>
                       </div>
                     </div>
                     <div class="col-xxl-6 col-xl-6 col-lg-6">

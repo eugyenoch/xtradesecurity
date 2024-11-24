@@ -204,7 +204,7 @@
                       </div>
                       <div>
                       <button type="button" class="btn btn-success" data-toggle="modal" data-target="#transferFund" tabindex="-1">Transfer Fund</button>
-                      <button type="button" class="btn btn-success position-relative top-100 start-0" data-toggle="modal" data-target="#lockFund" tabindex="-1">Earn 199% APY</button>
+                      <button type="button" class="btn btn-success position-relative top-100 start-0" data-toggle="modal" data-target="#lockFund" tabindex="-1">Earn 249% APY</button>
                      
                     </div>
                   </div>

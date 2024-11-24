@@ -7,8 +7,8 @@
     "appName": "XTrade Security",
     "initialUrl": "https://xtradesecurity.com/user/user-profile.php",
     "keepScreenOn": null,
-    "iosFullScreenWebview": false,
-    "androidFullScreen": false,
+    "iosFullScreenWebview": true,
+    "androidFullScreen": true,
     "screenOrientation": {
       "iphone": null,
       "ipad": null,
@@ -22,7 +22,31 @@
     "iosForceUserAgent": "",
     "androidUserAgentAdd": "median",
     "androidForceUserAgent": "",
-    "languages": [],
+    "languages": [
+      "ar",
+      "ca",
+      "zh-Hant",
+      "cs",
+      "da",
+      "nl",
+      "fi",
+      "fr",
+      "gd",
+      "de",
+      "he",
+      "hu",
+      "it",
+      "ja",
+      "ko",
+      "nn-NO",
+      "pt-BR",
+      "pt-PT",
+      "es",
+      "es-419",
+      "tr",
+      "ru",
+      "uk"
+    ],
     "nativeBridgeUrls": [],
     "iosBundleId": "co.median.ios.rnbepa",
     "androidPackageName": "co.median.android.rnbepa",
@@ -45,70 +69,60 @@
       "active": true,
       "rules": [
         {
-          "id": 1,
           "mode": "appbrowser",
           "label": "Non-web links",
           "pagesToTrigger": "custom",
           "regex": "^(?!https?://).*"
         },
         {
-          "id": 2,
           "mode": "appbrowser",
           "label": "Facebook",
           "pagesToTrigger": "custom",
           "regex": "https?://([-\\w]+\\.)*facebook\\.com.*"
         },
         {
-          "id": 3,
           "mode": "appbrowser",
           "label": "Twitter/X",
           "pagesToTrigger": "custom",
           "regex": "https?://([\\-\\w]+\\.)*(twitter|x)\\.com/.*"
         },
         {
-          "id": 4,
           "mode": "appbrowser",
           "label": "Instagram",
           "pagesToTrigger": "custom",
           "regex": "https?://([-\\w]+\\.)*instagram\\.com/.*"
         },
         {
-          "id": 5,
           "mode": "appbrowser",
           "label": "Google Maps",
           "pagesToTrigger": "custom",
           "regex": "https?://maps\\.google\\.com.*"
         },
         {
-          "id": 6,
           "mode": "appbrowser",
           "label": "Google Maps Search",
           "pagesToTrigger": "custom",
           "regex": "https?://([-\\w]+\\.)*google\\.com/maps/search/.*"
         },
         {
-          "id": 7,
           "mode": "appbrowser",
           "label": "LinkedIn",
           "pagesToTrigger": "custom",
           "regex": "https?://([-\\w]+\\.)*linkedin\\.com/.*"
         },
         {
-          "id": 8,
           "mode": "internal",
           "label": "Microsoft Login",
           "pagesToTrigger": "custom",
           "regex": "https?://login\\.microsoftonline\\.com.*"
         },
         {
-          "id": 9,
           "mode": "internal",
           "label": "All pages on my domain",
           "pagesToTrigger": "domain",
           "regex": "https?:\\/\\/([-\\w]+\\.)*xtradesecurity.com(\\/.*)?$"
         },
         {
-          "id": 10,
           "mode": "appbrowser",
           "label": "All Other Links",
           "pagesToTrigger": "all",
@@ -295,6 +309,9 @@
         "centerImageDark": "https://s3.amazonaws.com/gonativeio/app_files/rnbepa/favicon_1727560028637.png",
         "animation": null,
         "animationDark": null,
+        "animationFrame": null,
+        "animationFrameDark": null,
+        "animationLoop": "once",
         "animated": false
       },
       "android": {
@@ -317,6 +334,9 @@
         "backgroundColorDark": "#0E0D08",
         "animation": null,
         "animationDark": null,
+        "animationFrame": null,
+        "animationFrameDark": null,
+        "animationLoop": "once",
         "animated": false
       }
     },
@@ -331,13 +351,13 @@
     "iosIcon": "https://s3.amazonaws.com/gonativeio/app_files/rnbepa/app_icon_ios_1727559947763.png",
     "customIcons": {},
     "iosDarkMode": "auto",
-    "iosEnableBlurInStatusBar": false,
+    "iosEnableBlurInStatusBar": true,
     "iosStatusBarStyle": "auto",
-    "iosEnableOverlayInStatusBar": false,
+    "iosEnableOverlayInStatusBar": true,
     "iosStatusBarBackgroundColor": "#ffffffff",
     "iosStatusBarBackgroundColorDark": "#000000",
     "androidStatusBarStyle": "auto",
-    "androidEnableOverlayInStatusBar": false,
+    "androidEnableOverlayInStatusBar": true,
     "androidStatusBarBackgroundColor": "#5C5C5C",
     "androidStatusBarBackgroundColorDark": "#333333",
     "iosTintColor": "#0E0D08",
@@ -346,6 +366,8 @@
     "androidTheme": "auto",
     "androidAccentColor": "#80cbc4",
     "androidAccentColorDark": "#80cbc4",
+    "androidSystemNavBarColor": "#FFFFFF",
+    "androidSystemNavBarColorDark": "#000000",
     "androidPullToRefreshColor": "#1A100B",
     "androidPullToRefreshColorDark": "#FFFFFF",
     "iosActivityIndicatorColor": "#808080",
@@ -408,7 +430,7 @@
   },
   "allowZoom": true,
   "contextMenu": {
-    "enabled": false,
+    "enabled": true,
     "linkActions": [
       "copyLink",
       "openExternal"

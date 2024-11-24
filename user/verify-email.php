@@ -21,8 +21,9 @@
                                 <form action="verify-step-2.html" class="identity-upload">
                                     <div class="identity-content">
                                         <span class="icon"><i class="icofont-email"></i></span>
-                                        <p>We sent verification email to <strong
-                                                class="text-dark">example@email.com</strong>. Click the link inside to
+                                        <p>We sent verification email to your email address
+                                            <!-- <strong class="text-dark">example@email.com</strong>.  -->
+                                            Click the link inside to
                                             get started!</p>
                                         <a href="index.html">Go to Dashboard</a>
                                     </div>

@@ -10,7 +10,7 @@
               </a>
             </li>
             <li>
-              <a href="trade.php" data-toggle="tooltip" data-placement="right" title="Xtrade Exchange">
+              <a href="trade.php" data-toggle="tooltip" data-placement="right" title="Exchange">
               <span><i class="icofont-chart-line"></i></span>
               </a>
             </li>
@@ -35,7 +35,7 @@
               </a>
             </li>
             <li class="logout">
-              <a href="logout.php" data-toggle="tooltip" data-placement="right" title="Logout of your account">
+              <a href="logout.php" data-toggle="tooltip" data-placement="right" title="Logout">
                 <span><i class="icofont-power"></i></span>
               </a>
             </li>

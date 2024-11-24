@@ -164,6 +164,24 @@
                         </div>
                     </div>
 
+                     <!-- Trade Rate -->
+                     <div class="mb-3">
+                        <!-- <label for="tradeRate" class="form-label text-white">Trader Rate</label> -->
+                        <div class="input-group">
+                        <input type="text" class="form-control" id="tradeRate" value="Trade Rate" disabled style="background:transparent; color:lightgrey;">
+                            <select class="input-group-text" name="trade_rate_final">
+                            <option value="0.01">1%</option>
+                            <option value="0.05">5%</option>
+                            <option value="0.10">10%</option>
+                            <option value="0.15">15%</option>
+                            <option value="0.25">25%</option>
+                            <option value="0.45">45%</option>
+                            <option value="0.50">50%</option>
+                            <option value="0.1">100%</option>
+                            </select>
+                        </div>
+                    </div>
+
                 <div class="order-submit-area" id="sfeOrderSubmit">
                 <button type="button" class="btn btn-primary w-100 mb-2" data-toggle="modal" data-target="#demoTradeModal">Place Trade</button>
                 <button type="reset" class="btn btn-secondary w-100 mb-2" name="clear" value="reset">Clear Data</button>

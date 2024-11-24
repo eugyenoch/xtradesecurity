@@ -747,18 +747,18 @@
                   <div class="form-group mb-3">
                       <label for="amount" class="form-label">Amount</label>
                       <input type="number" class="form-control" id="amount" name="lock_amount" placeholder="Enter amount" min="2500" max="55000" required>
-                      <small>Minimum Lock ($2,500), and, High-Yield Earning Guaranteed(up to 199% APY). Maximum Lock ($55,000)</small>
+                      <small>Minimum Lock ($2,500), and, Profit-Yield Earning Guaranteed(up to 249% APY). Maximum Lock ($55,000)</small>
                   </div>
 
                   <div class="form-group mb-3">
                       <label for="lockDuration" class="form-label">Duration</label>
                       <select class="form-select" id="lockDuration" name="lock_duration" required>
                           <option value="">Choose Duration</option> 
-                          <option value="1">1 Year (minimum lock - Up to 75% APY)</option> 
-                          <option value="2">2 Years (median lock - Up to 105% APY)</option> 
-                          <option value="3">3 Years (median lock - Up to 135% APY)</option> 
-                          <option value="4">4 Years (median lock - Up to 165% APY)</option> 
-                          <option value="5">5 Years (maximum lock - Up to 199% APY)</option> 
+                          <option value="1">1 Year (minimum lock - 75% to 105% APY)</option> 
+                          <option value="2">2 Years (median lock - 105% to 135% APY)</option> 
+                          <option value="3">3 Years (median lock - 135% to 165% APY)</option> 
+                          <option value="4">4 Years (median lock - 165% to 199% APY)</option> 
+                          <option value="5">5 Years (maximum lock - 199% to 249% APY)</option> 
                       </select>
                   </div>
                   
