@@ -125,11 +125,16 @@
 
                 <div class="limit-area" id="sfeLimitArea">
                     <div class="mb-3">
-                        <label for="orderLimitPrice" class="form-label text-white">Order Price (<span id="priceLabel">Buy</span>)</label>
+                        <label for="orderLimitPrice" class="form-label text-white">Amount (<span id="priceLabel">Buy</span>)</label>
                         <div class="input-group">
                             <input type="number" class="form-control" id="orderLimitPrice" name="orderPrice" required>
                             <select class="input-group-text" name="order_currency">
                             <option value="USDT">USDT</option>
+                            <?php foreach(fetchUniqueWallets($con) as $wallet): ?>
+                                <option value="<?= htmlspecialchars($wallet['wallet']) ?>">
+                                    <?= htmlspecialchars($wallet['wallet']) ?>
+                                </option>
+                            <?php endforeach; ?>
                             </select>
                         </div>
                     </div>
@@ -169,6 +174,7 @@
                             <input type="number" class="form-control" id="orderLimitAmount" name="orderValue" placeholder="0" readonly>
                             <select class="input-group-text" name="order_currency_final">
                             <option value="USDT">USDT</option>
+                            
                             </select>
                         </div>
                     </div>
@@ -187,6 +193,22 @@
                             <option value="0.45">45%</option>
                             <option value="0.50">50%</option>
                             <option value="0.1">100%</option>
+                            </select>
+                        </div>
+                    </div>
+
+                      <!--Sell Value -->
+                      <div class="mb-3">
+                        <label for="sellLimitAmount" class="form-label text-white">Order <span id="sellLimitLabel"></span></label>
+                        <div class="input-group">
+                        <input type="number" class="form-control" id="sellLimitAmount" name="sellLimitData" value=0.00>
+                            <select class="input-group-text" name="sell_currency_final">
+                            <option value="USDT">USDT</option>
+                            <?php foreach(fetchUniqueWallets($con) as $wallet): ?>
+                                <option value="<?= htmlspecialchars($wallet['wallet']) ?>">
+                                    <?= htmlspecialchars($wallet['wallet']) ?>
+                                </option>
+                            <?php endforeach; ?>
                             </select>
                         </div>
                     </div>
@@ -210,7 +232,7 @@
             <div class="col-xxl-12">
               <div class="card">
                 <div class="card-header">
-                  <h4 class="card-title">My Order Book</h4>
+                  <h4 class="card-title">My Order History</h4>
                 </div>
                 <div class="card-body">
                 <div class="table-responsive">
@@ -220,10 +242,11 @@
         <tr class="table-secondary">  
             <th>TXN ID</th>
             <th>Order Type</th>
-            <th>Order Price</th>
+            <th>Amount</th>
             <th>Quantity</th>
             <th>Order Value</th>
             <th>Order Method</th>
+            <th>Sell Price</th>
             <th>Date</th>
             <th>Status</th>
             <th>Profit</th>
@@ -233,10 +256,11 @@
         <tr class="table-secondary">  
             <th>TXN ID</th>
             <th>Order Type</th>
-            <th>Order Price</th>
+            <th>Amount</th>
             <th>Quantity</th>
             <th>Order Value</th>
             <th>Order Method</th>
+            <th>Sell Price</th>
             <th>Date</th>
             <th>Status</th>
             <th>Profit</th>
@@ -287,6 +311,7 @@
                 <td><?= number_format($exchange['order_quantity'], 8) . $exchange['exchanged_currency']; ?></td>
                 <td><?= number_format($exchange['order_value'], 2) . $exchange['order_currency']; ?></td>
                 <td><?= ucfirst(htmlspecialchars($exchange['order_method'])); ?></td>
+                <td><?= 0.00; ?></td>
                 <td><?= date('Y-m-d H:i:s', strtotime($exchange['created_at'])); ?></td>
                 <td>
                   <?php 
@@ -882,6 +907,7 @@
     const orderQuantityInput = document.getElementById('orderLimitQuantity');  // Output for BTC quantity
     const customRangeInput = document.getElementById('customRange');  // Slider for percentage adjustment
     const orderAmountInput = document.getElementById('orderLimitAmount');  // Input for order limit amount
+    const sellLimitAmount = document.getElementById('sellLimitAmount');  // Input for order limit amount
 
     let usdtToBtcRate = null;  // Variable to hold the current USDT to BTC rate
     let orderPercentage = 100;  // Default order percentage (100%)
@@ -968,16 +994,21 @@
     const priceLabel = document.getElementById('priceLabel');
     const quantityLabel = document.getElementById('quantityLabel');
     const submitButton = document.getElementById('submitButton');
+    const sellLimitField = document.getElementById('sellLimitAmount'); 
+    const sellLimitLabel = document.getElementById('sellLimitLabel')
 
     // Function to update the form based on Buy or Sell selection
     function updateForm() {
         if (buyOrderRadio.checked) {
-            priceLabel.textContent = "Buy Price";  // Adjust the label for Buy
+            priceLabel.textContent = "Buy Amount";  // Adjust the label for Buy
             quantityLabel.textContent = "Buy Quantity";
             submitButton.textContent = "Place Buy Order";  // Change the submit button text
+            sellLimitLabel.display = "none";
+            sellLimitField.display = "none";
         } else if (sellOrderRadio.checked) {
-            priceLabel.textContent = "Sell Price";  // Adjust the label for Sell
+            priceLabel.textContent = "Sell Amount";  // Adjust the label for Sell
             quantityLabel.textContent = "Sell Quantity";
+            sellLimitLabel.textContent = "Sell Price";
             submitButton.textContent = "Place Sell Order";  // Change the submit button text
         }
     }
@@ -1007,6 +1038,7 @@ if (isset($_POST['trade'])) {
   $orderStatus = "ongoing";
   $orderCurrency = htmlspecialchars($_POST['order_currency']);
   $exchangedCurrency = htmlspecialchars($_POST['exchanged_currency']);
+  $owner_sell_price = $_POST['sellLimitData'];
 
   //Calculate user's available balance
   $rawBalance = calculateUserTotalBalance(); //This function returns the user's balance
@@ -1020,13 +1052,13 @@ if (isset($_POST['trade'])) {
   if ($orderValue < $availableBalance) {
     
   // Prepare SQL query to insert the data into the exchanger table
-  $sql = "INSERT INTO exchanger (txn, firstname, lastname, email, username, order_type, order_method, order_price, order_currency, order_quantity, exchanged_currency, quantity_percent, order_value, order_status)
-          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+  $sql = "INSERT INTO exchanger (txn, firstname, lastname, email, username, order_type, order_method, order_price, order_currency, order_quantity, exchanged_currency, quantity_percent, order_value, owner_sell_price, order_status)
+          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
   // Prepare statement
   if ($stmt = $con->prepare($sql)) {
       // Bind parameters to the SQL query
-      $stmt->bind_param('sssssssdsdsdds', $txn, $firstname, $lastname, $email, $username, $orderType, $orderMethod, $orderPrice, $orderCurrency, $orderQuantity, $exchangedCurrency, $orderPercent, $orderValue, $orderStatus);
+      $stmt->bind_param('sssssssdsdsddds', $txn, $firstname, $lastname, $email, $username, $orderType, $orderMethod, $orderPrice, $orderCurrency, $orderQuantity, $exchangedCurrency, $orderPercent, $orderValue, $owner_sell_price, $orderStatus);
 
       // Execute the statement
       if ($stmt->execute()) {

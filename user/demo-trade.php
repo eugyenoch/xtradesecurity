@@ -128,10 +128,17 @@
 
                 <div class="limit-area" id="sfeLimitArea">
                     <div class="mb-3">
-                        <label for="orderLimitPrice" class="form-label text-white">Order Price (<span id="priceLabel">Buy</span>)</label>
+                        <label for="orderLimitPrice" class="form-label text-white">Amount (<span id="priceLabel">Buy</span>)</label>
                         <div class="input-group">
                             <input type="number" class="form-control" id="orderLimitPrice" name="orderPrice" required>
-                            <span class="input-group-text">USDT</span>
+                            <select class="input-group-text" name="order_currency">
+                            <option value="USDT">USDT</option>
+                            <?php foreach(fetchUniqueWallets($con) as $wallet): ?>
+                                <option value="<?= htmlspecialchars($wallet['wallet']) ?>">
+                                    <?= htmlspecialchars($wallet['wallet']) ?>
+                                </option>
+                            <?php endforeach; ?>
+                            </select>
                         </div>
                     </div>
 
@@ -139,7 +146,15 @@
                         <label for="orderLimitQuantity" class="form-label text-white">Qty (<span id="quantityLabel">Buy</span>)</label>
                         <div class="input-group">
                             <input type="text" class="form-control" id="orderLimitQuantity" name="orderQuantity" readonly>
-                            <span class="input-group-text">BTC</span>
+                            <select class="input-group-text" name="order_currency">
+                            <option value="USDT">USDT</option>
+                            <?php foreach(fetchUniqueWallets($con) as $wallet): ?>
+                                <option value="<?= htmlspecialchars($wallet['wallet']) ?>">
+                                    <?= htmlspecialchars($wallet['wallet']) ?>
+                                </option>
+                            <?php endforeach; ?>
+                            </select>
+                            
                         </div>
                     </div>
 

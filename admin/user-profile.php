@@ -1080,6 +1080,7 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
                         <th>Order Price</th>
                         <th>Order Quantity</th>
                         <th>Quantity Percent</th>
+                        <th>Owner Sell Price</th>
                         <th>Final Value</th>
                         <th>Status</th>
                         <th>Profit</th>
@@ -1096,6 +1097,7 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
                         <th>Order Price</th>
                         <th>Order Quantity</th>
                         <th>Quantity Percent</th>
+                        <th>Owner Sell Price</th>
                         <th>Final Value</th>
                         <th>Status</th>
                         <th>Profit</th>
@@ -1132,6 +1134,10 @@ $profilePicUrl = !empty($photoPath) ? $photoPath : '';
                         </td>
                         <td class="coin-name"> <?php if (!empty($exchanger_info['order_value'])): ?>
                             <?= number_format($exchanger_info['order_value'],2) . $exchanger_info['order_currency']; ?>
+                          <?php endif; ?>
+                        </td>
+                        <td class="coin-name"> <?php if (!empty($exchanger_info['owner_sell_price'])): ?>
+                            <?= number_format($exchanger_info['owner_sell_price'],2) . $exchanger_info['order_currency']; ?>
                           <?php endif; ?>
                         </td>
                         <td class="coin-name">
